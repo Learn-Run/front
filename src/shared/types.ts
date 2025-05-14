@@ -3,10 +3,10 @@ export type FileType = {
     contents: string;
 };
 
-export type CommonResponse<T> = {
+export interface CommonResponse<T> {
     httpStatus: string;
     isSuccess: boolean;
     message: string;
     code: number;
     result: T;
-};
+}
