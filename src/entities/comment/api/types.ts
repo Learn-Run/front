@@ -17,4 +17,4 @@ export interface ResponseBlindCommentType {
     blindStatus: boolean;
 }
 
-// issue closses test
+// issue  closed test2
