@@ -4,6 +4,9 @@ on:
     pull_request:
         types: [opened, reopened]
 
+permissions:
+    pull-requests: write
+
 jobs:
     assign-peer-reviewer:
         runs-on: ubuntu-latest
@@ -17,9 +20,9 @@ jobs:
 
                       let reviewer;
                       if (author === 'Dorabang') {
-                        reviewer = 'Sutaenghhh'; 
+                        reviewer = 'Sutaenghhh';
                       } else if (author === 'Sutaenghhh') {
-                        reviewer = 'Dorabang'; 
+                        reviewer = 'Dorabang';
                       } else {
                         console.log("리뷰어 자동 지정 대상이 아님.");
                         return;
