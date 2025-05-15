@@ -41,5 +41,3 @@ jobs:
                         pull_number: context.payload.pull_request.number,
                         reviewers: [reviewer]
                       });
-
-                      console.log(`✅ @${author} → Assignee, @${reviewer} → Reviewer 등록 완료`);
