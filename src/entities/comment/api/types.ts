@@ -16,3 +16,5 @@ export interface ResponseBlindCommentType {
     commentUuid: number;
     blindStatus: boolean;
 }
+
+// issue  closed test
