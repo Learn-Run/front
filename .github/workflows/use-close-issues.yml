@@ -1,0 +1,11 @@
+name: 📌 Close Issues on Develop Merge
+
+on:
+    pull_request:
+        types: [closed]
+
+jobs:
+    use-org-workflow:
+        uses: your-org/.github/.github/workflows/close-issues-on-develop.yml@main
+        with:
+            branch: develop
