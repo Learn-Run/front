@@ -5,6 +5,7 @@ export interface RequestCommentType {
 export interface ResponseCommentType {
     postUuid: number;
     commentUuid: number;
+    memberUuid: number;
     contents: string;
     blindStatus: boolean;
     createdAt: string;
