@@ -1,0 +1,38 @@
+name: 🤝 Peer Review Auto Assign
+
+on:
+    pull_request:
+        types: [opened, reopened]
+
+permissions:
+    pull-requests: write
+
+jobs:
+    assign-peer-reviewer:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Auto assign reviewer based on author
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const author = context.payload.pull_request.user.login;
+
+                      let reviewer;
+                      if (author === 'Dorabang') {
+                        reviewer = 'Sutaenghhh';
+                      } else if (author === 'Sutaenghhh') {
+                        reviewer = 'Dorabang';
+                      } else {
+                        console.log("리뷰어 자동 지정 대상이 아님.");
+                        return;
+                      }
+
+                      await github.rest.pulls.requestReviewers({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: context.payload.pull_request.number,
+                        reviewers: [reviewer]
+                      });
+
+                      console.log(`✅ ${reviewer}에게 리뷰 요청 완료`);
