@@ -3,7 +3,9 @@ export interface RequestCommentType {
     contents: string;
 }
 export interface ResponseCommentType {
+    postUuid: number;
     commentUuid: number;
+    contents: string;
     blindStatus: boolean;
     createdAt: string;
     updatedAt: string;
