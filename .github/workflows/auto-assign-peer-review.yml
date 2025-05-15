@@ -24,7 +24,7 @@ jobs:
                       } else if (author === 'Sutaenghhh') {
                         reviewer = 'Dorabang';
                       } else {
-                        console.log("리뷰어 자동 지정 대상이 아님.");
+                        console.log("리뷰어 조건 아님.");
                         return;
                       }
 
@@ -41,5 +41,3 @@ jobs:
                         pull_number: context.payload.pull_request.number,
                         reviewers: [reviewer]
                       });
-
-                      console.log(`✅ @${author} → Assignee, @${reviewer} → Reviewer 등록 완료`);
