@@ -8,5 +8,5 @@ jobs:
     use-org-workflow:
         uses: Learn-Run/.github/workflows/close-issues-on-develop.yml@main
         with:
-            branch: [develop, main]
+            branch: 'develop,main'
 # git issues test
