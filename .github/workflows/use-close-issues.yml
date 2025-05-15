@@ -9,3 +9,4 @@ jobs:
         uses: Learn-Run/.github/.github/workflows/close-issues-on-develop.yml@main
         with:
             branch: [develop, main]
+# git issues test
