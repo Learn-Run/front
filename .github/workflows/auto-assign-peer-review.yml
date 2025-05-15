@@ -36,3 +36,5 @@ jobs:
                       });
 
                       console.log(`✅ ${reviewer}에게 리뷰 요청 완료`);
+
+# git setting test
