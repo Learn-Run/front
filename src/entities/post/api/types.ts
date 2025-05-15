@@ -1,13 +1,13 @@
 import { FileType } from '@/shared/types';
 
-export interface RequestPost {
+export interface RequestPostType {
     categoryListId: number;
     title: string;
     contents: string;
     file: FileType[];
 }
 
-export interface ResponsePost {
+export interface ResponsePostType {
     postUuid: number;
     categoryListId: number;
     title: string;
@@ -15,7 +15,7 @@ export interface ResponsePost {
     updatedAt: string;
 }
 
-export interface ResponsePostDetail {
+export interface ResponsePostDetailType {
     postUuid: number;
     categoryListId: number;
     title: string;
