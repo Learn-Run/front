@@ -6,6 +6,6 @@ on:
 
 jobs:
     use-org-workflow:
-        uses: your-org/.github/.github/workflows/close-issues-on-develop.yml@main
+        uses: Learn-Run/.github/.github/workflows/close-issues-on-develop.yml@main
         with:
-            branch: develop
+            branch: [develop, main]
