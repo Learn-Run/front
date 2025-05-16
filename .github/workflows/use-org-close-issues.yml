@@ -1,0 +1,10 @@
+name: 🔁 Close Issues on Merged PR
+
+on:
+    pull_request:
+        types: [closed]
+
+jobs:
+    call-org-workflow:
+        if: github.event.pull_request.merged == true
+        uses: Learn-Run/.github/.github/workflows/close-issues-on-develop.yml@main
