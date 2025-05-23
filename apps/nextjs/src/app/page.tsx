@@ -29,7 +29,7 @@ const DemoCard = () => {
   return (
     <div className="flex flex-col items-center space-y-4 rounded-xl border p-6 shadow-2xl bg-background">
       <h1 className="text-2xl text-center">
-        <span className="block">Turborepo</span>
+        <span className="block text-primary-200">Turborepo</span>
         <span className="block">Shadcn/ui</span>
         <span className="block">Tailwind CSS v4</span>
       </h1>
