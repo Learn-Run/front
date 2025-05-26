@@ -1,4 +1,4 @@
-import { cn } from '../../../../../packages/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 
 export default function Label({
     children,
