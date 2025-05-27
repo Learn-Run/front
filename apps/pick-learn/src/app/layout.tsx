@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import { dmSans } from '@/shared/assets/fonts';
 import './globals.css';
+import Header from '@/widgets/layout/ui/Header';
+import BottomNavBar from '@/widgets/layout/ui/BottomNavBar';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -47,7 +49,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang='ko-KR'>
-            <body className={dmSans.className}>{children}</body>
+            <body className={dmSans.className}>
+                <Header />
+                {children}
+                <BottomNavBar />
+            </body>
         </html>
     );
 }
