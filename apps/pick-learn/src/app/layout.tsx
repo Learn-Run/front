@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { dmSans } from '@/shared/assets/fonts';
+import { ModalProvider } from '@/shared/model/modal/ModalContext';
 import './globals.css';
 import Header from '@/widgets/layout/ui/Header';
 import BottomNavBar from '@/widgets/layout/ui/BottomNavBar';
@@ -52,7 +53,7 @@ export default function RootLayout({
         <html lang='ko-KR'>
             <body className={dmSans.className}>
                 <Header />
-                {children}
+                 <ModalProvider>{children}</ModalProvider>
                 <BottomNavBar />
                 <Footer />
             </body>
