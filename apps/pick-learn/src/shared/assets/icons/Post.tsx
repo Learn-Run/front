@@ -2,7 +2,7 @@ import { cn } from '@repo/ui/lib/utils';
 
 export default function Post({ className }: { className?: string }) {
     return (
-        <div className={cn('', className)}>
+        <div className={cn(className)}>
             <svg
                 width='24'
                 height='24'
