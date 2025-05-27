@@ -1,5 +1,6 @@
-import SubMenu from '@/widgets/layout/ui/SubMenu';
 import { Suspense } from 'react';
+
+import SubMenu from '@/widgets/layout/ui/SubMenu';
 
 export default async function page() {
     return (
