@@ -17,7 +17,6 @@ export default function SubMenu() {
 
         return activeMenu ? activeMenu.id : null;
     }, [category]);
-    console.log('🚀 ~ isActiveMenu ~ isActiveMenu:', isActiveMenu);
 
     return (
         <nav className={cn('sticky container mx-auto md:static py-5 px-5')}>

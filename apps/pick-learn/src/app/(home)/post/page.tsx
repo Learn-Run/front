@@ -1,10 +1,12 @@
 import SubMenu from '@/widgets/layout/ui/SubMenu';
-import React from 'react';
+import { Suspense } from 'react';
 
-export default function page() {
+export default async function page() {
     return (
         <div>
-            <SubMenu />
+            <Suspense>
+                <SubMenu />
+            </Suspense>
         </div>
     );
 }
