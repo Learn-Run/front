@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { dmSans } from '@/shared/assets/fonts';
 import { ModalProvider } from '@/shared/model/modal/ModalContext';
 import './globals.css';
+import Header from '@/widgets/layout/ui/Header';
+import BottomNavBar from '@/widgets/layout/ui/BottomNavBar';
+import Footer from '@/widgets/layout/ui/Footer';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -49,7 +52,10 @@ export default function RootLayout({
     return (
         <html lang='ko-KR'>
             <body className={dmSans.className}>
-                <ModalProvider>{children}</ModalProvider>
+                <Header />
+                 <ModalProvider>{children}</ModalProvider>
+                <BottomNavBar />
+                <Footer />
             </body>
         </html>
     );
