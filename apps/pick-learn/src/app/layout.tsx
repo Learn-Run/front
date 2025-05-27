@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { dmSans } from '@/shared/assets/fonts';
+import { ModalProvider } from '@/shared/model/modal/ModalContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -47,7 +48,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang='ko-KR'>
-            <body className={dmSans.className}>{children}</body>
+            <body className={dmSans.className}>
+                <ModalProvider>{children}</ModalProvider>
+            </body>
         </html>
     );
 }
