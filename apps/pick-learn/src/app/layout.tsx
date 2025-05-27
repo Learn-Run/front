@@ -4,6 +4,7 @@ import { dmSans } from '@/shared/assets/fonts';
 import './globals.css';
 import Header from '@/widgets/layout/ui/Header';
 import BottomNavBar from '@/widgets/layout/ui/BottomNavBar';
+import Footer from '@/widgets/layout/ui/Footer';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -53,7 +54,7 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <BottomNavBar />
-                {/* <Footer /> */}
+                <Footer />
             </body>
         </html>
     );
