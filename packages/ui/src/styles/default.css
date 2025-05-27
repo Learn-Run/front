@@ -178,15 +178,13 @@
 @layer utilities {
     @keyframes card-slide-up {
         0% {
-            transform: translate(0, 500%);
-        }
-
-        70% {
-            transform: translate(0, -5%);
+            transform: translate3d(0, 30%, 0);
+            opacity: 0;
         }
 
         100% {
-            transform: translate(0, 0);
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
         }
     }
 
@@ -212,7 +210,6 @@
     .animate-card-slide-up {
         animation: card-slide-up 0.4s ease-in-out;
     }
-
     .animate-bottom-sheet-slide-up {
         animation: bottom-sheet-slide-up 0.4s ease-in-out;
     }
