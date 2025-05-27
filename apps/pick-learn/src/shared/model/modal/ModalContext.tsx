@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 import type { ModalContextType, ModalProviderProps } from './types';
-import { Modal } from '@repo/ui/components/base/modal';
+import { Modal } from '@repo/ui/components/base/Modal';
 
 const ModalContext = createContext<ModalContextType>({} as ModalContextType);
 
