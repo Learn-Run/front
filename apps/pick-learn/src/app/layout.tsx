@@ -53,6 +53,7 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <BottomNavBar />
+                {/* <Footer /> */}
             </body>
         </html>
     );
