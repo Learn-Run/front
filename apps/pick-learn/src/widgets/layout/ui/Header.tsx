@@ -16,7 +16,10 @@ export default function Header() {
                 <Button variant='text' className='w-fit hidden md:block'>
                     log in
                 </Button>
-                <Button variant='outline' className='w-fit hidden md:block'>
+                <Button
+                    variant='outline'
+                    className='w-fit hidden md:block border-primary-100 text-primary-100'
+                >
                     Register
                 </Button>
                 <Link href='/login'>
