@@ -50,10 +50,12 @@ export default function RootLayout({
     return (
         <html lang='ko-KR'>
             <body className={dmSans.className}>
-                <Header />
-                <ModalProvider>{children}</ModalProvider>
-                <Footer />
-                <BottomNavBar />
+                <div className='relative pb-[57px] md:pb-0 grid grid-col min-h-dvh h-full content-between'>
+                    <Header />
+                    <ModalProvider>{children}</ModalProvider>
+                    <Footer />
+                    <BottomNavBar />
+                </div>
             </body>
         </html>
     );

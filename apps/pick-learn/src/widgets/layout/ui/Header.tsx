@@ -7,12 +7,12 @@ import LogIn from '@/shared/assets/icons/LogIn';
 
 export default function Header() {
     return (
-        <header className='flex items-center container mx-auto py-5 px-5 justify-between'>
-            <Link href='/'>
+        <header className='grid grid-cols-12 items-center container mx-auto py-5 px-5 justify-between'>
+            <Link href='/' className='col-span-6 md:col-span-3 '>
                 <Logo />
             </Link>
-            <Nav className='hidden md:block' />
-            <div className='flex items-center gap-2'>
+            <Nav className='hidden md:block col-span-6 justify-self-center' />
+            <div className='col-span-6 md:col-span-3 flex justify-end items-center gap-2'>
                 <Button variant='text' className='w-fit hidden md:block'>
                     log in
                 </Button>
