@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@repo/ui/lib/utils';
-import { postSubMenu } from '../contants';
+import { postSubMenu } from '../constants';
 
 export default function SubMenu() {
     const searchParams = useSearchParams();
