@@ -7,7 +7,7 @@ export default function Heading({
 }: {
     children: React.ReactNode;
     className?: string;
-    align: 'left' | 'center' | 'right';
+    align?: 'left' | 'center' | 'right';
 }) {
     return (
         <section
@@ -32,7 +32,14 @@ const Title = ({
     className?: string;
 }) => {
     return (
-        <h1 className={cn('text-[48px] font-medium', className)}>{children}</h1>
+        <h1
+            className={cn(
+                'text-[48px] font-medium leading-[110%] tracking-[-3px]',
+                className,
+            )}
+        >
+            {children}
+        </h1>
     );
 };
 

@@ -1,8 +1,9 @@
+import StepSection from '@/views/home/ui/StepSection';
 import Heading from '@/widgets/home/ui/Heading';
 
 export default function Home() {
     return (
-        <main>
+        <main className='container mx-auto px-5'>
             <Heading align='center'>
                 <Heading.Title>
                     내가 찾는 답은 여기에
@@ -14,6 +15,7 @@ export default function Home() {
                     입니다.
                 </Heading.SubTitle>
             </Heading>
+            <StepSection />
         </main>
     );
 }
