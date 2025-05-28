@@ -7,3 +7,6 @@ export { default as Home } from './Home';
 export { default as PopularPost } from './PopularPost';
 export { default as Star } from './Star';
 export { default as Post } from './Post';
+export { default as PopularAsker } from './PopularAsker';
+export { default as StepSearch } from './StepSearch';
+export { default as StepAnswer } from './StepAnswer';
