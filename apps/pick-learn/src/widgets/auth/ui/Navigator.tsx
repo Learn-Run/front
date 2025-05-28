@@ -1,3 +1,4 @@
+'use client';
 import Back from '@/shared/assets/icons/Back';
 import Close from '@/shared/assets/icons/Close';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
