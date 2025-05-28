@@ -3,13 +3,6 @@ import { stepList } from '../model/constants';
 import Heading from '@/widgets/home/ui/Heading';
 import { Tag } from '@/shared/ui';
 import { Button } from '@repo/ui/components/base/Button';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '@repo/ui/components/base/carousel';
 
 export default function StepSection() {
     return (
@@ -39,15 +32,6 @@ export default function StepSection() {
                     </StepCard>
                 ))}
             </ul>
-            <Carousel className='w-full max-w-xs'>
-                <CarouselContent>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <CarouselItem key={index}></CarouselItem>
-                    ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
         </section>
     );
 }
