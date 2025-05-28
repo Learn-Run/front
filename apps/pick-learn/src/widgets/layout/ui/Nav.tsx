@@ -15,7 +15,7 @@ export default function Nav({ className }: { className?: string }) {
                     <li
                         key={item.id}
                         className={cn(
-                            'inline-block mr-4 text-sm font-medium text-gray-600',
+                            'inline-block mx-2 text-sm font-medium text-gray-600',
                             pathname === item.href
                                 ? 'text-primary-100 font-bold'
                                 : '',
