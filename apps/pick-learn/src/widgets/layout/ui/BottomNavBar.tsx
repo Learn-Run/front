@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import { cn } from '@repo/ui/lib/utils';
-import { navList } from '../contants';
+import { navList } from '../constants';
 
 export default function BottomNavBar() {
     const pathname = usePathname();
