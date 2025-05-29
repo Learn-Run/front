@@ -10,7 +10,7 @@ export default function Tag({
     return (
         <span
             className={cn(
-                'border border-gray-500 rounded-lg px-3 py-1.5 font-semibold text-gray-500 max-w-full',
+                'inline-block border border-gray-500 rounded-lg px-3 py-1.5 font-semibold text-gray-500 max-w-full',
                 className,
             )}
         >
