@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { cn } from '@repo/ui/lib/utils';
-import { navList } from '../contants';
+import { navList } from '../constants';
 
 export default function Nav({ className }: { className?: string }) {
     const pathname = usePathname();
@@ -15,7 +15,7 @@ export default function Nav({ className }: { className?: string }) {
                     <li
                         key={item.id}
                         className={cn(
-                            'inline-block mr-4 text-sm font-medium text-gray-600',
+                            'inline-block mx-2 text-sm font-medium text-gray-600',
                             pathname === item.href
                                 ? 'text-primary-100 font-bold'
                                 : '',
