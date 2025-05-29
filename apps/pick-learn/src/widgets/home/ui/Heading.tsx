@@ -10,17 +10,16 @@ export default function Heading({
     align?: 'left' | 'center' | 'right';
 }) {
     return (
-        <section
+        <div
             className={cn(
                 align === 'left' && 'text-left',
                 align === 'center' && 'text-center',
                 align === 'right' && 'text-right',
-                'space-y-9',
                 className,
             )}
         >
             {children}
-        </section>
+        </div>
     );
 }
 
@@ -32,14 +31,14 @@ const Title = ({
     className?: string;
 }) => {
     return (
-        <h1
+        <h2
             className={cn(
                 'text-[48px] font-medium leading-[110%] tracking-[-3px]',
                 className,
             )}
         >
             {children}
-        </h1>
+        </h2>
     );
 };
 

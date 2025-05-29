@@ -1,5 +1,5 @@
 import Star from '@/shared/assets/icons/Star';
-import Label from '@/shared/ui/Label';
+import { Label } from '@/shared/ui';
 
 export default function RankLabel() {
     return (

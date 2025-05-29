@@ -10,7 +10,7 @@ export default function StepCard({
     return (
         <li
             className={cn(
-                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[300px] p-8 grid grid-rows-2',
+                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[264px] p-8 grid grid-rows-2',
                 className,
             )}
         >
