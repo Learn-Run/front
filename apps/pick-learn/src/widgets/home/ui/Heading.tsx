@@ -34,7 +34,7 @@ const Title = ({
     return (
         <h1
             className={cn(
-                'text-[48px] font-medium leading-[110%] tracking-[-3px]',
+                'text-5xl font-medium leading-[110%] tracking-[-3px]',
                 className,
             )}
         >
