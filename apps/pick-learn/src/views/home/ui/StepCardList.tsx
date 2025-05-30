@@ -1,4 +1,3 @@
-import React from 'react';
 import { stepList } from '../model/constants';
 import StepCard from '@/widgets/home/ui/StepCard';
 
