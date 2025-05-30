@@ -1,37 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
+import { withAuthList } from '@/features/auth/model/constants';
 import { routes } from '@/shared/constants/routes';
-import { withAuthList, withOutAuthList } from '@/features/auth/constants';
 
-const FALLBACK_URL = '/';
+const authError = async (req: NextRequest) => {
+    console.log('🚀 ~ authError ~ req:', req);
+    // const url = req.nextUrl.clone();
+
+    // url.search = ``;
+
+    // return NextResponse.redirect(url);
+};
 
 const withAuth = async (req: NextRequest, token: boolean) => {
     const url = req.nextUrl.clone();
-    const { pathname } = req.nextUrl;
+    const { pathname, searchParams } = req.nextUrl;
 
     if (!token) {
-        url.pathname = routes.signIn;
-        url.search = `callbackUrl=${pathname}`;
+        // 이미 authRequired가 붙어 있으면 중복 rewrite 방지
+        if (!searchParams.has('authRequired')) {
+            url.searchParams.set('authRequired', 'true');
+            url.searchParams.set('callbackUrl', pathname);
+        }
 
-        return NextResponse.redirect(url);
-    }
-
-    return NextResponse.next();
-};
-
-const withOutAuth = async (
-    req: NextRequest,
-    token: boolean,
-    to: string | null,
-) => {
-    const url = req.nextUrl.clone();
-
-    if (token) {
-        url.pathname = to ?? FALLBACK_URL;
-        url.search = '';
-
-        return NextResponse.redirect(url);
+        return NextResponse.rewrite(url);
     }
 
     return NextResponse.next();
@@ -40,14 +33,13 @@ const withOutAuth = async (
 export default async function middleware(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const accessToken = token?.accessToken;
-    const { searchParams, pathname } = req.nextUrl;
-    const callbackUrl = searchParams.get('callbackUrl');
+    const { pathname } = req.nextUrl;
 
     const isWithAuth = withAuthList.includes(pathname);
-    const isWithOutAuth = withOutAuthList.includes(pathname);
+    const isAuthError = routes.authError.includes(pathname);
 
     if (isWithAuth) return withAuth(req, !!accessToken);
-    else if (isWithOutAuth) return withOutAuth(req, !!accessToken, callbackUrl);
+    if (isAuthError) return authError(req);
 
     return NextResponse.next();
 }

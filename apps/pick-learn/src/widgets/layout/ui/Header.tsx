@@ -4,6 +4,7 @@ import { Button } from '@repo/ui/components/base/Button';
 import Logo from '@/shared/assets/icons/Logo';
 import Nav from './Nav';
 import LogIn from '@/shared/assets/icons/LogIn';
+import RegisterButton from './RegisterButton';
 
 export default function Header() {
     return (
@@ -16,12 +17,9 @@ export default function Header() {
                 <Button variant='text' className='w-fit hidden md:block'>
                     log in
                 </Button>
-                <Button
-                    variant='outline'
-                    className='w-fit hidden md:block border-primary-100 text-primary-100'
-                >
+                <RegisterButton className='w-fit hidden md:block border-primary-100 text-primary-100'>
                     Register
-                </Button>
+                </RegisterButton>
                 <Link href='/login'>
                     <LogIn className='md:hidden' />
                 </Link>

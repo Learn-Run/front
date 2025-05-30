@@ -13,3 +13,10 @@ declare module 'next-auth' {
         memberUuid: string;
     }
 }
+
+declare module 'next-auth/jwt' {
+    interface JWT {
+        accessToken: string;
+        memberUuid: string;
+    }
+}

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, type User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 
@@ -11,23 +10,23 @@ export const options: NextAuthOptions = {
         CredentialsProvider({
             name: 'credentials',
             credentials: {
-                loginId: { label: 'loginId', type: 'text' },
+                account: { label: 'account', type: 'text' },
                 password: { label: 'password', type: 'password' },
             },
-            async authorize(credentials): Promise<any> {
-                if (!credentials?.loginId || !credentials?.password) {
+            async authorize(credentials): Promise<User | null> {
+                if (!credentials?.account || !credentials?.password) {
                     return null;
                 }
 
                 try {
                     // FIXME: 로그인 API URI 수정 필요
                     const response = await fetch(
-                        `${process.env.BASE_API_URL}/api/sign-in`,
+                        `${process.env.BASE_API_URL}/api/v1/auth/sign-in`,
                         {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                loginId: credentials.loginId,
+                                account: credentials.account,
                                 password: credentials.password,
                             }),
                         },
@@ -36,7 +35,7 @@ export const options: NextAuthOptions = {
                     const { result } =
                         (await response.json()) as CommonResponse<SignInResponseType>;
 
-                    return result;
+                    return result as User;
                 } catch (error) {
                     console.error('Error during sign-in:', error);
                     return null;
@@ -76,23 +75,29 @@ export const options: NextAuthOptions = {
                     );
                     const data =
                         (await res.json()) as CommonResponse<SignInResponseType>;
-
                     user.accessToken = data.result.accessToken;
                     user.memberUuid = data.result.memberUuid;
-
                     return true;
                 } catch (error) {
                     console.error('error', error);
-                    return '/error';
+                    return false;
                 }
             }
             return true;
         },
         async jwt({ token, user }) {
-            return { ...token, ...user };
+            if (user) {
+                token.accessToken = user.accessToken;
+            }
+            return token;
         },
         async session({ session, token }) {
-            session.user = token as any;
+            session.user = {
+                ...session.user,
+                accessToken: token.accessToken,
+                name: token.name,
+                memberUuid: token.memberUuid,
+            };
             return session;
         },
         async redirect({ url, baseUrl }) {
@@ -100,7 +105,7 @@ export const options: NextAuthOptions = {
         },
     },
     pages: {
-        signIn: '/sign-in',
-        error: '/error',
+        signIn: '/',
+        error: '/auth/error',
     },
 };
