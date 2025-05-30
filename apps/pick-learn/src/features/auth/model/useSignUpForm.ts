@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import type { SignUpStateType } from './types';
+import type { SignUpStateErrorsType, SignUpStateType } from './types';
 import { signUpSchema } from './schema';
 
 export function useSignUpForm(initialState?: SignUpStateType) {
@@ -17,7 +17,7 @@ export function useSignUpForm(initialState?: SignUpStateType) {
     const [inputValues, setInputValues] = useState<SignUpStateType>(
         initialState || defaultState,
     );
-    const [errors, setErrors] = useState<ErrorsType>({});
+    const [errors, setErrors] = useState<SignUpStateErrorsType>({});
 
     const handleChangeValues = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, type } = e.target;
