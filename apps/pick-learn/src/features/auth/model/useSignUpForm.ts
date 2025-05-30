@@ -42,7 +42,7 @@ export function useSignUpForm(initialState?: SignUpStateType) {
     const validate = () => {
         const result = signUpSchema.safeParse(inputValues);
         if (!result.success) {
-            const newErrors: ErrorsType = {};
+            const newErrors: SignUpStateErrorsType = {};
             result.error.errors.forEach((err) => {
                 const field = err.path[0] as keyof SignUpStateType;
                 newErrors[field] = err.message;
