@@ -10,7 +10,7 @@ export default function StepCard({
     return (
         <li
             className={cn(
-                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[300px] p-8 grid grid-rows-2',
+                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[264px] p-8 grid grid-rows-4',
                 className,
             )}
         >
@@ -19,7 +19,7 @@ export default function StepCard({
     );
 }
 const Icon = ({ children }: { children: React.ReactNode }) => {
-    return <div className='flex row-span-1'>{children}</div>;
+    return <div className='flex row-span-2'>{children}</div>;
 };
 
 const Contents = ({
@@ -34,7 +34,7 @@ const Contents = ({
     const index = number.toString().padStart(2, '0');
 
     return (
-        <div className='row-span-1 place-self-end'>
+        <div className='row-span-2 place-self-end'>
             <p className='flex font-medium text-lg'>/{index}</p>
             <h3 className='font-medium text-2xl pt-4 pb-2'>{title}</h3>
             <p className='text-gray-800'>{description}</p>

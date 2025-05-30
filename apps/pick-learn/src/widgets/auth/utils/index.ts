@@ -1,1 +1,3 @@
-export { default as canGoBack } from './canGoBack';
+import canGoBack from './canGoBack';
+
+export { canGoBack };

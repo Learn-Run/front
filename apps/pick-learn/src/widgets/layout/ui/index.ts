@@ -1,5 +1,7 @@
-export { default as Footer } from './Footer';
-export { default as Header } from './Header';
-export { default as Nav } from './Nav';
-export { default as BottomNavBar } from './BottomNavBar';
-export { default as SubMenu } from './SubMenu';
+import Footer from './Footer';
+import Header from './Header';
+import Nav from './Nav';
+import BottomNavBar from './BottomNavBar';
+import SubMenu from './SubMenu';
+
+export { Footer, Header, Nav, BottomNavBar, SubMenu };

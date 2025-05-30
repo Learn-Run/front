@@ -1,2 +1,5 @@
-export { default as Label } from './Label';
-export { default as Tag } from './Tag';
+import Label from './Label';
+import Tag from './Tag';
+import MainWrapper from './Wrapper/MainWrapper';
+
+export { Label, Tag, MainWrapper };
