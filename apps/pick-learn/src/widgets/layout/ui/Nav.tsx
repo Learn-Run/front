@@ -9,8 +9,8 @@ export default function Nav({ className }: { className?: string }) {
     const pathname = usePathname();
 
     return (
-        <nav className={cn('sticky md:static', className)}>
-            <ul>
+        <nav className={cn('', className)}>
+            <ul className='flex items-center justify-center gap-3 xl:gap-6'>
                 {navList.map((item) => (
                     <li
                         key={item.id}

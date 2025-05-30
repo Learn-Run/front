@@ -1,4 +1,4 @@
-import StepCard from '@/widgets/home/ui/StepCard';
+import StepCard from '@/entities/guide/ui/StepCard';
 import {
     Carousel,
     CarouselContent,
@@ -8,9 +8,9 @@ import {
 } from '@repo/ui/components/base/Carousel';
 import { stepList } from '../model/constants';
 
-export default function StepCardCarousel() {
+export default function StepCarouselList() {
     return (
-        <ul className='col-span-1 md:col-span-6 md:col-start-7 order-2 md:order-none mx-auto gap-6 max-w-[300px] md:hidden '>
+        <ul className='col-span-1 mx-auto md:hidden '>
             <Carousel className='w-full max-w-[250px]'>
                 <CarouselContent>
                     {stepList.map(({ icon: Icon, ...item }) => (
