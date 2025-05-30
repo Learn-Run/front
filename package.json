@@ -1,6 +1,7 @@
 {
     "name": "turborepo-shadcn-tailwind-v4",
     "private": true,
+    "type": "module",
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",

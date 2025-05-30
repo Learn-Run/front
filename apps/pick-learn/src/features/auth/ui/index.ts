@@ -1,1 +1,3 @@
-export { default as AuthHeading } from './AuthHeading';
+import AuthHeading from './AuthHeading';
+
+export { AuthHeading };

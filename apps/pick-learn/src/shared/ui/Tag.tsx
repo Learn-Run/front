@@ -8,13 +8,13 @@ export default function Tag({
     className?: string;
 }) {
     return (
-        <div
+        <span
             className={cn(
-                'border border-gray-500 rounded-lg w-fit px-3 py-1.5 font-semibold text-gray-500',
+                'inline-block border border-gray-500 rounded-lg px-3 py-1.5 font-semibold text-gray-500',
                 className,
             )}
         >
             {children}
-        </div>
+        </span>
     );
 }
