@@ -1,4 +1,4 @@
-import AskCard from '@/entities/guide/ui/AskCard';
+import AskItemCardList from '@/views/home/ui/AskItemCardList';
 import Heading from '@/widgets/home/ui/Heading';
 import MotionSection from '@repo/ui/components/wrapper/MotionSection';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
@@ -18,7 +18,7 @@ export default function TopAskSection() {
                 </Heading.SubTitle>
             </Heading>
             {/* <AskatCategoryLsit /> */}
-            <AskCard></AskCard>
+            <AskItemCardList />
         </MotionSection>
     );
 }

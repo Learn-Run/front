@@ -1,7 +1,7 @@
 import CategoryNameItem from './CategoryNameItem';
 import { getMainCategories } from '../api';
 
-export default async function AskatMainCategoryName() {
+export default async function AskAtCategoryList() {
     const categoryList = await getMainCategories();
 
     return (
