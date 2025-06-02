@@ -5,7 +5,7 @@ import TopAskerSection from '@/views/home/ui/TopAskerSection';
 
 export default function Home() {
     return (
-        <MainWrapper className='min-h-screen py-[10rem] space-y-10'>
+        <MainWrapper className='min-h-screen space-y-10'>
             <HeroSection />
             <StepSection />
             <TopAskerSection />
