@@ -3,8 +3,6 @@ import Heading from '@/widgets/home/ui/Heading';
 import MotionSection from '@repo/ui/components/wrapper/MotionSection';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 
-import React from 'react';
-
 export default function TopAskSection() {
     return (
         <MotionSection className='min-h-screen py-[10rem] space-y-10'>
@@ -19,6 +17,7 @@ export default function TopAskSection() {
                     지금 가장 핫한 질문들을 모았습니다.
                 </Heading.SubTitle>
             </Heading>
+            {/* <AskatCategoryLsit /> */}
             <AskCard></AskCard>
         </MotionSection>
     );
