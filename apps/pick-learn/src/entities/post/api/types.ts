@@ -19,7 +19,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '닉네임입니다',
             alt: '프로필 이미지',
         },
@@ -32,7 +32,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
@@ -45,8 +45,8 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
-            nickname: '1',
+            profileImage: 'https://picsum.photos/400/400',
+            nickname: '3번 닉네임',
             alt: '프로필 이미지',
         },
     },
@@ -58,7 +58,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
@@ -71,7 +71,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
@@ -84,7 +84,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
@@ -97,7 +97,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
@@ -110,7 +110,7 @@ export const askItemList: AskItem[] = [
         blindStatus: false,
         author: {
             memberUuid: '1',
-            profileImage: 'https://placehold.co/600x400',
+            profileImage: 'https://picsum.photos/400/400',
             nickname: '1',
             alt: '프로필 이미지',
         },
