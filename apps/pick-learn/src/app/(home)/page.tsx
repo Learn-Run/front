@@ -1,14 +1,16 @@
 import { MainWrapper } from '@/shared/ui';
 import HeroSection from '@/views/home/ui/HeroSection';
 import StepSection from '@/views/home/ui/StepSection';
-import TopAskerSection from '@/views/home/ui/TopAskerSection';
+import TopAnswererSection from '@/views/home/ui/TopAnswererSection';
+import TopAskSection from '@/views/home/ui/TopAskSection';
 
 export default function Home() {
     return (
-        <MainWrapper className='min-h-screen space-y-10'>
+        <MainWrapper className='min-h-screen '>
             <HeroSection />
             <StepSection />
-            <TopAskerSection />
+            <TopAskSection />
+            <TopAnswererSection />
         </MainWrapper>
     );
 }
