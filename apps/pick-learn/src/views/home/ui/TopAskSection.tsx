@@ -5,7 +5,7 @@ import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 
 export default function TopAskSection() {
     return (
-        <MotionSection className='min-h-screen py-[10rem] space-y-10'>
+        <MotionSection className='min-h-screen space-y-10 my-25'>
             <Heading align='center'>
                 <Heading.Title>
                     <TypingWrapper
