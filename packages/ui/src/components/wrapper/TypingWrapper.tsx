@@ -4,16 +4,19 @@ import { ReactTyped } from 'react-typed';
 export default function TypingWrapper({
     text,
     className,
+    typeSpeed,
 }: {
     text: string;
     className?: string;
+    typeSpeed?: number;
 }) {
     const textData: string[] = text.split(',');
+
     return (
         <ReactTyped
             strings={textData}
-            typeSpeed={50}
-            backSpeed={10}
+            typeSpeed={typeSpeed || 50}
+            backSpeed={30}
             loop
             className={`text-primary font-bold ${className}`}
             smartBackspace
