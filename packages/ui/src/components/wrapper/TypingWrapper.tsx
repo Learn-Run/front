@@ -5,10 +5,12 @@ export default function TypingWrapper({
     text,
     className,
     typeSpeed,
+    backSpeed,
 }: {
     text: string;
     className?: string;
     typeSpeed?: number;
+    backSpeed?: number;
 }) {
     const textData: string[] = text.split(',');
 
@@ -16,7 +18,7 @@ export default function TypingWrapper({
         <ReactTyped
             strings={textData}
             typeSpeed={typeSpeed || 50}
-            backSpeed={30}
+            backSpeed={backSpeed || 30}
             loop
             className={`text-primary font-bold ${className}`}
             smartBackspace
