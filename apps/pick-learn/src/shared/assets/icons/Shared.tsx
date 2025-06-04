@@ -26,7 +26,7 @@ export default function Shared({ className }: { className?: string }) {
                     rx='6'
                     stroke='#D9D9D9'
                 />
-                <g clip-path='url(#clip0_433_742)'>
+                <g clipPath='url(#clip0_433_742)'>
                     <path
                         d='M11 16.5C12.1046 16.5 13 15.6046 13 14.5C13 13.3954 12.1046 12.5 11 12.5C9.89543 12.5 9 13.3954 9 14.5C9 15.6046 9.89543 16.5 11 16.5Z'
                         stroke='#4B4B4B'

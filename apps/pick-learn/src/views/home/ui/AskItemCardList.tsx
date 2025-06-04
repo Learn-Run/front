@@ -19,9 +19,7 @@ export default function AskItemCardList() {
                             <Shared />
                         </div>
                     </div>
-
                     <TopAskSubCategory item={item.category} />
-
                     <h3 className='text-lg font-medium'>{item.title}</h3>
                     <p className='text-sm text-gray-700'>{item.contents}</p>
                 </li>
