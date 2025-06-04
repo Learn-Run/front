@@ -1,4 +1,5 @@
 import { MainWrapper } from '@/shared/ui';
+import CategorySection from '@/views/home/ui/CategorySection';
 import HeroSection from '@/views/home/ui/HeroSection';
 import StepSection from '@/views/home/ui/StepSection';
 import TopAnswererSection from '@/views/home/ui/TopAnswererSection';
@@ -14,6 +15,7 @@ export default async function Home({
     return (
         <MainWrapper className='min-h-screen '>
             <HeroSection />
+            <CategorySection />
             <StepSection />
             <TopAskSection category={category} />
             <TopAnswererSection />
