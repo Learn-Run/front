@@ -10,6 +10,12 @@ import Post from './Post';
 import PopularAsker from './PopularAsker';
 import StepSearch from './StepSearch';
 import StepAnswer from './StepAnswer';
+import Arts from './Arts';
+import IT from './IT';
+import Jobs from './Jobs';
+import Cook from './Cook';
+import Interior from './Interior';
+import Fashion from './Fashion';
 
 export {
     Chat,
@@ -24,4 +30,10 @@ export {
     PopularAsker,
     StepSearch,
     StepAnswer,
+    Arts,
+    IT,
+    Jobs,
+    Cook,
+    Interior,
+    Fashion,
 };
