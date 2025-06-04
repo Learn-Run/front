@@ -2,7 +2,7 @@ import { Logo } from '@/shared/assets/icons';
 
 export default function Footer() {
     return (
-        <footer className=' w-full bg-black'>
+        <footer className=' w-full bg-black mb-[57px] md:mb-0'>
             <div className='flex items-start container mx-auto py-6 px-5 '>
                 <Logo className='max-w-[100px]' />
             </div>
