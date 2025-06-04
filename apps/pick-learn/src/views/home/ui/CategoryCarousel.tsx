@@ -8,7 +8,7 @@ import {
     CarouselPrevious,
 } from '@repo/ui/components/base/Carousel';
 import { MainCategoryType } from '@/entities/category/api/types';
-import { iconMapById } from './CategorySection';
+import { iconMapById } from '../model/constants';
 
 export default function CategoryCarousel({
     categories,
