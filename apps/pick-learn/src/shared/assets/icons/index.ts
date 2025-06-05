@@ -18,6 +18,7 @@ import Interior from './Interior';
 import Fashion from './Fashion';
 import Eye from './Eye';
 import EyeOff from './EyeOff';
+import IconCalendar from './IconCalendar';
 
 export {
     Chat,
@@ -40,4 +41,5 @@ export {
     Fashion,
     Eye,
     EyeOff,
+    IconCalendar
 };
