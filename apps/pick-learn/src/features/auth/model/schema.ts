@@ -57,10 +57,6 @@ export const signUpSchema = z
             errorMap: () => ({ message: '성별을 선택해주세요' }),
         }),
 
-        categories: z
-            .array(z.string())
-            .min(1, '카테고리는 최소 1개 이상 선택해야 합니다'),
-
         email: z.string().email('올바른 이메일 형식이 아닙니다'),
 
         verificationCode: z

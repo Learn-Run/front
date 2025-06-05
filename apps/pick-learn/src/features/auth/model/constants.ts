@@ -48,18 +48,17 @@ export const signUpSteps: SignUpStepsType[] = [
 
 export const DEFAULT_FORM_VALUES: SignUpSchemaType = {
     nickname: '',
-    nicknameVerified: true,
+    nicknameVerified: false,
     loginId: '',
-    loginIdVerified: true,
+    loginIdVerified: false,
     password: '',
     passwordConfirm: '',
     email: '',
     verificationCode: '',
-    isEmailVerified: true,
+    isEmailVerified: false,
     gender: '남성',
     birthDate: new Date(),
     agreementCheckList: [],
-    categories: ['test'],
 };
 
 export const genderOptions = [
