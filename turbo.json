@@ -22,6 +22,11 @@
         "BASE_API_URL",
         "BASE_FRONT_URL",
         "KAKAO_CLIENT_ID",
-        "KAKAO_CLIENT_SECRET"
+        "KAKAO_CLIENT_SECRET",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_REGION",
+        "AWS_S3_BUCKET_NAME",
+        "NEXT_PUBLIC_S3_BASE_URL"
     ]
 }

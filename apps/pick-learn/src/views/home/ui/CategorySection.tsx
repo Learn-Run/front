@@ -25,7 +25,7 @@ export default async function CategorySection() {
                                 className='flex flex-col items-center space-y-2'
                             >
                                 {Icon ? (
-                                    <Icon className='w-full h-full' />
+                                    <Icon className='w-full h-full max-w-[100px] max-h-[100px]' />
                                 ) : (
                                     <div className='w-full h-full bg-gray-200' />
                                 )}
