@@ -1,11 +1,9 @@
-import Link from 'next/link';
-
-import { Button } from '@repo/ui/components/base/Button';
 import { S3_BASE_URL } from '@/shared/model/constants';
 import { videoUrlList } from '../model/constants';
 import Heading from '@/widgets/home/ui/Heading';
 import Video from '@repo/ui/components/base/Video';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
+import SearchButton from '@/features/search/ui/SearchButton';
 
 export default function HeroSection() {
     const randomIndex = Math.floor(Math.random() * videoUrlList.length);
@@ -23,12 +21,7 @@ export default function HeroSection() {
                     입니다.
                 </Heading.SubTitle>
             </Heading>
-            <Button
-                className='max-w-[176px] font-semibold text-xl mt-10 min-h-[60px] z-10'
-                asChild
-            >
-                <Link href='/post'>Get Started</Link>
-            </Button>
+            <SearchButton />
             <Video
                 sourceSrc={videoUrl}
                 className='absolute w-full h-full lg:h-[900px] xl:h-[1000px] z-[0] opacity-80 top-0 left-0 object-cover blur-[10px] pointer-events-none'
