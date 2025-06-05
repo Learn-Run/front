@@ -1,6 +1,6 @@
 import { cn } from '@repo/ui/lib/utils';
 
-export default function ({ className }: { className?: string }) {
+export default function Jobs({ className }: { className?: string }) {
     return (
         <div className={cn(className)}>
             <svg
