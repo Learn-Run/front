@@ -23,7 +23,8 @@ export default function TypingWrapper({
             className={`text-primary font-bold ${className}`}
             smartBackspace
             showCursor
-            cursorChar='<span class="text-primary font-thin pl-1">|</span>'
+            contentType='text'
+            cursorChar='<span class="text-primary font-thin pl-1 text-white">|</span>'
         />
     );
 }
