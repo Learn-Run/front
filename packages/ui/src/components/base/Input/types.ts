@@ -4,6 +4,6 @@ export interface InputProps
     name: string;
     required?: boolean;
     className?: string;
-    error?: boolean;
+    error?: string;
     children?: React.ReactNode;
 }
