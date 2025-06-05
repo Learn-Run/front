@@ -8,6 +8,7 @@ import SearchModal from './SearchModal';
 
 export default function SearchButton() {
     const { openModal } = useModalContext();
+
     return (
         <button
             className='relative w-full max-w-[636px] z-10 h-full mt-10'
