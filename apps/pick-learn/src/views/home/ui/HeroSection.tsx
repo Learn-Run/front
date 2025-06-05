@@ -1,12 +1,11 @@
 import Link from 'next/link';
 
 import { Button } from '@repo/ui/components/base/Button';
+import { S3_BASE_URL } from '@/shared/model/constants';
+import { videoUrlList } from '../model/constants';
 import Heading from '@/widgets/home/ui/Heading';
 import Video from '@repo/ui/components/base/Video';
-import { videoUrlList } from '../model/constants';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
-
-const S3_BASE_URL = process.env.NEXT_PUBLIC_S3_BASE_URL!;
 
 export default function HeroSection() {
     const randomIndex = Math.floor(Math.random() * videoUrlList.length);
