@@ -16,6 +16,8 @@ import Jobs from './Jobs';
 import Cook from './Cook';
 import Interior from './Interior';
 import Fashion from './Fashion';
+import Eye from './Eye';
+import EyeOff from './EyeOff';
 import IconCalendar from './IconCalendar';
 
 export {
@@ -37,5 +39,7 @@ export {
     Cook,
     Interior,
     Fashion,
-    IconCalendar,
+    Eye,
+    EyeOff,
+    IconCalendar
 };
