@@ -5,6 +5,7 @@ import Logo from '@/shared/assets/icons/Logo';
 import Nav from './Nav';
 import LogIn from '@/shared/assets/icons/LogIn';
 import { cn } from '@repo/ui/lib/utils';
+import { routes } from '@/shared/constants/routes';
 
 export default function Header() {
     return (
@@ -26,10 +27,12 @@ export default function Header() {
                         log in
                     </Button>
                     <Button
+                        type='button'
                         variant='outline'
                         className='w-fit hidden md:block border-primary-100 text-primary-100'
+                        asChild
                     >
-                        Register
+                        <Link href={routes.signUp}>Register</Link>
                     </Button>
                     <Link href='/login' className='w-fit md:hidden'>
                         <LogIn />
