@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { signUpSchema, SignUpSchemaType } from '../model/schema';
 import { SignUpStateType, SignUpStepsType } from '../model/types';
-import { getCurrentStepValidation } from '../utils/isCurrentStepValid';
+import { getCurrentStepValidation } from '../utils/getCurrentStepValidation';
 import { DEFAULT_FORM_VALUES } from '../model/constants';
 import { SignUpStepRenderer, SignUpButton } from '../ui';
 
