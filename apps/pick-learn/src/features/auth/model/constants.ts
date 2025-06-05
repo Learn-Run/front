@@ -6,13 +6,6 @@ import { SignUpSchemaType } from './schema';
 export const withAuthList: string[] = [routes.chat];
 export const withOutAuthList = [routes.signIn];
 
-export const agreeTerms = [
-    {
-        id: 1,
-        name: 'agreeServiceTerms',
-    },
-];
-
 export const signUpSteps: SignUpStepsType[] = [
     {
         id: 1,
