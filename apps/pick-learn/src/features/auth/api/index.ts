@@ -1,6 +1,6 @@
 'use server';
 import { fetchData } from '@/shared/api/instance';
-import type { AgreeTermType } from './types';
+import type { AgreeTermType, AgreeTermUuidType } from './types';
 
 export const checkEmailDuplicate = async (email: string) => {
     const result = await fetchData.post(
@@ -34,19 +34,14 @@ export const sendEmailCode = async (email: string) => {
 };
 
 export const getAllAgreeTermsUuid = async () => {
-    // const { result } = await fetchData.get<AgreeTermUuidType[]>(
-    //     '/member-service/api/v1/agreement/uuid/all', {
-    //     cache: 'reload',
-    // },
-    // );
+    const { result } = await fetchData.get<AgreeTermUuidType[]>(
+        '/member-service/api/v1/agreement/uuid/all',
+        {
+            cache: 'reload',
+        },
+    );
 
-    // return result;
-    return [
-        { agreementUuid: '2299559449066622633' },
-        { agreementUuid: '6576846395270018630' },
-        { agreementUuid: '8555921237459422262' },
-        { agreementUuid: '156108840155564981' },
-    ] as AgreeTermType[];
+    return result;
 };
 
 export const getAgreeTermsByUuid = async (uuid: string) => {
