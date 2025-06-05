@@ -2,12 +2,11 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { Checkbox } from '@repo/ui/components/base/Checkbox';
+import type { AgreeAllTermsCheckboxProps } from './types';
 
-interface Props {
-    onChange: (checked: boolean) => void;
-}
-
-export function AgreeAllTermsCheckbox({ onChange }: Props) {
+export function AgreeAllTermsCheckbox({
+    onChange,
+}: AgreeAllTermsCheckboxProps) {
     const { control } = useFormContext();
 
     return (

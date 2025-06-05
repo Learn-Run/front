@@ -1,11 +1,9 @@
-import type { SignUpStepsType } from '../model/types';
+import type { SignUpStepRendererProps } from './types';
 
-interface Props {
-    currentStep: SignUpStepsType[];
-    step: number;
-}
-
-export default function SignUpStepRenderer({ currentStep, step }: Props) {
+export default function SignUpStepRenderer({
+    currentStep,
+    step,
+}: SignUpStepRendererProps) {
     return (
         <>
             {currentStep.map(({ id, component: Component }) => (

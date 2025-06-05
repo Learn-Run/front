@@ -20,7 +20,6 @@ export interface SignUpStateType {
     gender: GenderType;
     birthDate: Date;
     agreementCheckList: string[];
-    categories: string[];
 }
 
 export type GenderType = '여성' | '남성';

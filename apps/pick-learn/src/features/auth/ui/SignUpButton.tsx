@@ -1,14 +1,11 @@
 import { Button } from '@repo/ui/components/base/Button';
+import type { SignUpButtonProps } from './types';
 
 export const SignUpButton = ({
     isLastStep,
     isStepValid,
     handleNextStep,
-}: {
-    isLastStep: boolean;
-    isStepValid: boolean;
-    handleNextStep: () => Promise<void>;
-}) => {
+}: SignUpButtonProps) => {
     return (
         <Button
             type={isLastStep ? 'submit' : 'button'}

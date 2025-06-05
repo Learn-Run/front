@@ -3,17 +3,11 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { signUpSchema, SignUpSchemaType } from '../model/schema';
-import { SignUpStateType, SignUpStepsType } from '../model/types';
+import { SignUpStateType } from '../model/types';
 import { getCurrentStepValidation } from '../utils/getCurrentStepValidation';
 import { DEFAULT_FORM_VALUES } from '../model/constants';
 import { SignUpStepRenderer, SignUpButton } from '../ui';
-
-interface SignUpFormProps {
-    step: number;
-    currentStep: SignUpStepsType[];
-    handleChangeStep: () => void;
-    totalStep: number;
-}
+import type { SignUpFormProps } from './types';
 
 export default function SignUpForm({
     step,

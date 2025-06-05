@@ -4,20 +4,14 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { Checkbox } from '@repo/ui/components/base/Checkbox';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import Close from '@/shared/assets/icons/Close';
-
-interface Props {
-    agreementName: string;
-    required?: boolean;
-    agreementUuid: string;
-    agreementContent: string;
-}
+import type { AgreeTermCheckboxProps } from './types';
 
 export function AgreeTermCheckbox({
     agreementName,
     agreementUuid,
     required,
     agreementContent,
-}: Props) {
+}: AgreeTermCheckboxProps) {
     const { control } = useFormContext();
     const { openModal, closeModal } = useModalContext();
 
