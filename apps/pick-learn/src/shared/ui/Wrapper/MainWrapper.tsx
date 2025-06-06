@@ -9,7 +9,7 @@ export default function MainWrapper({
     className?: string;
 }) {
     return (
-        <main className={cn('min-h-[calc(100vh-104px)]', className)}>
+        <main className={cn('min-h-[calc(100vh-104px)] pt-[5rem]', className)}>
             {children}
         </main>
     );

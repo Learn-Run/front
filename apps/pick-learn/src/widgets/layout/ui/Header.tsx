@@ -11,7 +11,7 @@ export default function Header() {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 z-50 w-full bg-white/10 backdrop-blur-xs',
+                'fixed top-0 left-0 z-50 w-full bg-white backdrop-blur-xs',
             )}
         >
             <div className='grid grid-cols-12 items-center container mx-auto px-4 2xl:px-0 h-[5rem]'>
