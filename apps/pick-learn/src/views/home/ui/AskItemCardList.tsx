@@ -13,7 +13,7 @@ export default function AskItemCardList() {
                     className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
                 >
                     <div className='flex justify-between w-full'>
-                        <Profile item={item.author} />
+                        <Profile item={item.memberUuid} />
                         <div className='flex gap-x-2.5 items-center'>
                             <BookMark />
                             <Shared />
