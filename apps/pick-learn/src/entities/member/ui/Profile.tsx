@@ -4,17 +4,17 @@ import { memberList, ProfileType, topAnswererList } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
 
 export default function Profile({
-    item,
+    memberUuid,
     className,
 }: {
-    item: string;
+    memberUuid: string;
     className?: string;
 }) {
     //FIXME: api 연동 후 수정 필요
     const member =
-        memberList.find((member) => member.memberUuid === item) ||
+        memberList.find((member) => member.memberUuid === memberUuid) ||
         (topAnswererList.find(
-            (member) => member.memberUuid === item,
+            (member) => member.memberUuid === memberUuid,
         ) as ProfileType);
 
     return (
@@ -26,7 +26,7 @@ export default function Profile({
                 width={28}
                 height={28}
             />
-            <p>{member?.nickname}</p>
+            <p>{member.nickname}</p>
         </div>
     );
 }

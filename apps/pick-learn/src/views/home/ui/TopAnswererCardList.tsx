@@ -28,7 +28,7 @@ export default function TopAnswererCardList() {
                             </p>
                             <hr className='border-white' />
                             <Profile
-                                item={item.memberUuid}
+                                memberUuid={item.memberUuid}
                                 className='text-white'
                             />
                         </div>
