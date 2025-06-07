@@ -17,16 +17,18 @@ export default function Profile({
             (member) => member.memberUuid === memberUuid,
         ) as ProfileType);
 
+    if (!member) return;
+
     return (
         <div className={cn('flex gap-x-2.5 items-center w-full', className)}>
             <Image
                 className='w-7 h-7 rounded-full bg-gray-600/20'
-                src={member.profileImage}
-                alt={member.alt}
+                src={member?.profileImage}
+                alt={member?.alt}
                 width={28}
                 height={28}
             />
-            <p>{member.nickname}</p>
+            <p>{member?.nickname}</p>
         </div>
     );
 }
