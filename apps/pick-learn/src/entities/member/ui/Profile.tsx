@@ -3,13 +3,12 @@ import Image from 'next/image';
 import { memberList, ProfileType, topAnswererList } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
 
-export default function Profile({
-    memberUuid,
-    className,
-}: {
+interface ProfileProps {
     memberUuid: string;
     className?: string;
-}) {
+}
+
+export default function Profile({ memberUuid, className }: ProfileProps) {
     //FIXME: api 연동 후 수정 필요
     const member =
         memberList.find((member) => member.memberUuid === memberUuid) ||
