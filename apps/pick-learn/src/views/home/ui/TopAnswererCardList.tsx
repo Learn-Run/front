@@ -27,7 +27,10 @@ export default function TopAnswererCardList() {
                                 {item.selfintroduction}
                             </p>
                             <hr className='border-white' />
-                            <Profile item={item} className='text-white' />
+                            <Profile
+                                memberUuid={item.memberUuid}
+                                className='text-white'
+                            />
                         </div>
                     </div>
                 </li>

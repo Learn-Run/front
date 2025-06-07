@@ -13,6 +13,64 @@ export interface TopAnswererType {
     selfintroduction: string;
 }
 
+export const memberList: ProfileType[] = [
+    {
+        memberUuid: 'user_1',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_2',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_3',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_4',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_5',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_6',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_7',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+    {
+        memberUuid: 'user_8',
+        profileImage:
+            'https://cdn.pixabay.com/photo/2023/09/21/11/30/cat-8266486_1280.jpg',
+        nickname: '닉네임입니다',
+        alt: '프로필 이미지',
+    },
+];
 export const topAnswererList: TopAnswererType[] = [
     {
         memberUuid: '1',
