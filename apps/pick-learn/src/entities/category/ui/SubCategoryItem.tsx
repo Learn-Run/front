@@ -15,6 +15,7 @@ export default async function SubCategoryItem({
         ? await getSubCategories(Number(mainCategoryId))
         : [];
     const categoryAll = [{ id: 0, name: '전체' }, ...selectedSubCategories];
+
     return (
         <AccordionContent>
             <ul className='w-full'>

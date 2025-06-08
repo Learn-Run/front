@@ -11,10 +11,10 @@ export const getMainCategories = async (): Promise<MainCategoryType[]> => {
 };
 
 export const getSubCategories = async (
-    id: number,
+    mainCategoryId: number,
 ): Promise<SubCategoryType[]> => {
     const response = await fetchData.get<SubCategoryType[]>(
-        `/community-service/api/v1/category/main/${id}`,
+        `/community-service/api/v1/category/main/${mainCategoryId}`,
     );
     return response.result;
 };
