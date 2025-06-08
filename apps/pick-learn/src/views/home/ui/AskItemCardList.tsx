@@ -3,10 +3,16 @@ import Profile from '@/entities/member/ui/Profile';
 import { askItemList } from '@/entities/post/api/types';
 import BookMark from '@/shared/assets/icons/BookMark';
 import Shared from '@/shared/assets/icons/Shared';
+import { cn } from '@repo/ui/lib/utils';
 
-export default function AskItemCardList() {
+export default function AskItemCardList({ className }: { className?: string }) {
     return (
-        <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 container mx-auto px-4 md:px-0 items-center justify-center md:max-w-[80%] xl:max-w-[1262px]'>
+        <ul
+            className={cn(
+                'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 container mx-auto px-4 md:px-0 items-center justify-center md:max-w-[80%] xl:max-w-[1262px]',
+                className,
+            )}
+        >
             {askItemList.map((item) => (
                 <li
                     key={item.postUuid}
