@@ -1,6 +1,7 @@
 'use client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect } from 'next/navigation';
 
 import { signUpSchema, SignUpSchemaType } from '../model/schema';
 import { SignUpStateType } from '../model/types';
@@ -10,7 +11,6 @@ import { SignUpStepRenderer, SignUpButton } from '../ui';
 import type { SignUpFormProps } from './types';
 import { signUp } from '../api';
 import { RequestSignUpDataType } from '../api/types';
-import { redirect } from 'next/navigation';
 import { routes } from '@/shared/constants/routes';
 
 export default function SignUpForm({
