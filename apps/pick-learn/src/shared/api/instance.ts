@@ -33,9 +33,11 @@ const fetchInstance = async <T = undefined>(
                 const session = await getServerSession();
 
                 const accessToken = session?.user?.accessToken;
+                const memberUuid = session?.user.memberUuid;
 
-                if (accessToken) {
+                if (accessToken && memberUuid) {
                     headers.Authorization = `Bearer ${accessToken}`;
+                    headers['X-member-uuid'] = memberUuid;
                 } else {
                     throw new Error('인증이 필요합니다');
                 }
