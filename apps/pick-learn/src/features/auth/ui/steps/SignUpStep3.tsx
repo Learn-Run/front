@@ -224,15 +224,17 @@ export default function SignUpStep3() {
                                     <IconCalendar />
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent className='w-auto p-0'>
+                            <PopoverContent
+                                align='start'
+                                className=' w-auto p-0'
+                            >
                                 <Calendar
                                     mode='single'
+                                    captionLayout='dropdown-buttons'
                                     selected={field.value}
                                     onSelect={field.onChange}
-                                    captionLayout='dropdown'
-                                    fromYear={1900}
-                                    toYear={new Date().getFullYear()}
-                                    initialFocus
+                                    fromYear={1960}
+                                    toYear={2030}
                                 />
                             </PopoverContent>
                         </Popover>
