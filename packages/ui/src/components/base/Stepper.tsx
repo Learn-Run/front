@@ -10,7 +10,7 @@ export default function Stepper({
     const steps = Array.from({ length: totalSteps }, (_, index) => index + 1);
 
     return (
-        <ul className='flex items-center gap-4 max-w-[148px] w-full'>
+        <ul className='flex justify-center items-center gap-4 max-w-[148px] w-full'>
             {steps.map((step) => (
                 <StepperItem key={step} isActive={step === currentStep} />
             ))}
