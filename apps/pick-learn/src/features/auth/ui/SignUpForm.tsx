@@ -1,6 +1,7 @@
 'use client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect } from 'next/navigation';
 
 import { signUpSchema, SignUpSchemaType } from '../model/schema';
 import { SignUpStateType } from '../model/types';
@@ -8,6 +9,9 @@ import { getCurrentStepValidation } from '../utils/getCurrentStepValidation';
 import { DEFAULT_FORM_VALUES } from '../model/constants';
 import { SignUpStepRenderer, SignUpButton } from '../ui';
 import type { SignUpFormProps } from './types';
+import { signUp } from '../api';
+import { RequestSignUpDataType } from '../api/types';
+import { routes } from '@/shared/constants/routes';
 
 export default function SignUpForm({
     step,
@@ -24,7 +28,30 @@ export default function SignUpForm({
     const isLastStep = step === totalStep;
 
     const handleSubmit = async (data: SignUpStateType) => {
-        console.log('🚀 ~ onSubmit ~ data:', data);
+        const agreementCheckList = data.agreementCheckList.map((item) => ({
+            agreementUuid: item,
+            agreementStatus: true,
+        }));
+
+        const signUpData: RequestSignUpDataType = {
+            name: data.nickname,
+            loginId: data.loginId,
+            password: data.password,
+            email: data.email,
+            birthDate: data.birthDate.toISOString(),
+            gender: data.gender,
+            nickname: data.nickname,
+            agreementCheckList: agreementCheckList,
+            userRole: '일반회원',
+        };
+
+        try {
+            await signUp(signUpData);
+            redirect(routes.signIn);
+        } catch (error) {
+            console.log('🚀 ~ handleSubmit ~ error:', error);
+            throw error;
+        }
     };
 
     const { isValid: isStepValid } = getCurrentStepValidation<SignUpSchemaType>(

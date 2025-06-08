@@ -5,19 +5,58 @@ import PasswordInput from '@/shared/ui/PasswordInput';
 import { Button } from '@repo/ui/components/base/Button';
 import Input from '@repo/ui/components/base/Input/index';
 import { StatusCheckIcon } from '@/shared/ui';
+import { checkLoginIdDuplicate, checkNicknameDuplicate } from '../../api';
 
 export default function SignUpStep2() {
     const {
         setValue,
         control,
+        setError,
         formState: { errors },
     } = useFormContext();
 
+    const nickname = useWatch({ control, name: 'nickname' });
     const nicknameVerified = useWatch({ control, name: 'nicknameVerified' });
     const loginIdVerified = useWatch({ control, name: 'loginIdVerified' });
+    const loginId = useWatch({ control, name: 'loginId' });
+
+    const handleCheckNicknameDuplicate = async (nickname: string) => {
+        const result = await checkNicknameDuplicate(nickname);
+
+        if (!result)
+            setError('nickname', {
+                message: '이미 사용 중인 닉네임입니다',
+            });
+
+        setValue('nicknameVerified', result);
+    };
+
+    const handleCheckLoginIdDuplicate = async (loginId: string) => {
+        const result = await checkLoginIdDuplicate(loginId);
+
+        if (!result)
+            setError('loginId', {
+                message: '이미 사용 중인 아이디입니다',
+            });
+
+        setValue('loginIdVerified', result);
+    };
 
     return (
         <div className='space-y-4'>
+            <Controller
+                name='name'
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        label='이름'
+                        required
+                        error={errors.name?.message as string}
+                        {...field}
+                    />
+                )}
+            />
+
             <div className='flex items-start gap-x-2'>
                 <Controller
                     name='nickname'
@@ -31,7 +70,8 @@ export default function SignUpStep2() {
                         >
                             <StatusCheckIcon
                                 status={
-                                    !nicknameVerified &&
+                                    nickname !== '' &&
+                                    nicknameVerified &&
                                     !errors.nickname?.message
                                 }
                             />
@@ -40,9 +80,8 @@ export default function SignUpStep2() {
                 />
                 <Button
                     type='button'
-                    disabled={!!errors.nickname?.message}
                     className='w-fit h-[62px]'
-                    onClick={() => setValue('nicknameVerified', true)}
+                    onClick={() => handleCheckNicknameDuplicate(nickname)}
                 >
                     중복검사
                 </Button>
@@ -61,7 +100,9 @@ export default function SignUpStep2() {
                         >
                             <StatusCheckIcon
                                 status={
-                                    !loginIdVerified && !errors.loginId?.message
+                                    loginId !== '' &&
+                                    loginIdVerified &&
+                                    !errors.loginId?.message
                                 }
                             />
                         </Input>
@@ -69,9 +110,8 @@ export default function SignUpStep2() {
                 />
                 <Button
                     type='button'
-                    disabled={!!errors.loginId?.message}
                     className='w-fit h-[62px]'
-                    onClick={() => setValue('loginIdVerified', true)}
+                    onClick={() => handleCheckLoginIdDuplicate(loginId)}
                 >
                     중복검사
                 </Button>

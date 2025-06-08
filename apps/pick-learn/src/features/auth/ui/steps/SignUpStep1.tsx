@@ -25,7 +25,7 @@ export default function SignUpStep1() {
                         await getAgreeTermsByUuid(agreementUuid),
                 ),
             );
-            setAllAgreeTerms(result.reverse());
+            setAllAgreeTerms(result);
             setLoading(false);
         };
 
