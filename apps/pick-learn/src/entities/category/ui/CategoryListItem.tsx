@@ -51,7 +51,7 @@ export default async function CategoryListItem({
                         <SubCategoryItem
                             mainCategoryId={item.id}
                             detailCategoryId={detailCategoryId}
-                            item={item}
+                            subCategoryitem={item}
                         />
                     </AccordionItem>
                 ))}

@@ -1,15 +1,15 @@
+import Link from 'next/link';
+
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
-import React from 'react';
 import { CategorySearchParams, MainCategoryType } from '../api/types';
 import { getSubCategories } from '../api';
 import { cn } from '@repo/ui/lib/utils';
-import Link from 'next/link';
 
 export default async function SubCategoryItem({
     mainCategoryId,
     detailCategoryId,
-    item,
-}: CategorySearchParams & { item: MainCategoryType }) {
+    subCategoryitem,
+}: CategorySearchParams & { subCategoryitem: MainCategoryType }) {
     const detailCategory = detailCategoryId || '';
     const selectedSubCategories = mainCategoryId
         ? await getSubCategories(Number(mainCategoryId))
@@ -18,7 +18,7 @@ export default async function SubCategoryItem({
     return (
         <AccordionContent>
             <ul className='w-full'>
-                {(item.id.toString() === mainCategoryId?.toString()
+                {(subCategoryitem.id.toString() === mainCategoryId?.toString()
                     ? categoryAll
                     : []
                 )?.map((detailItem) => (
@@ -32,7 +32,7 @@ export default async function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${item.id}&detailCategoryId=${detailItem.id}`}
+                            href={`/post?mainCategoryId=${subCategoryitem.id}&detailCategoryId=${detailItem.id}`}
                             className='block w-full text-left'
                             scroll={false}
                         >
