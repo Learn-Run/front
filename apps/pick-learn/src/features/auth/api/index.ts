@@ -26,7 +26,6 @@ export const checkNicknameDuplicate = async (nickname: string) => {
             body: JSON.stringify({ nickname }),
         },
     );
-    console.log('🚀 ~ checkNicknameDuplicate ~ result:', result);
 
     if (result.httpStatus === 'CONFLICT') return false;
 
@@ -104,5 +103,6 @@ export const signUp = async (data: RequestSignUpDataType) => {
     const result = await fetchData.post('/member-service/api/v1/auth/sign-up', {
         body: JSON.stringify(data),
     });
-    console.log('🚀 ~ signUp ~ result:', result);
+
+    return result;
 };

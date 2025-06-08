@@ -22,7 +22,6 @@ export default function SignUpStep2() {
 
     const handleCheckNicknameDuplicate = async (nickname: string) => {
         const result = await checkNicknameDuplicate(nickname);
-        console.log('🚀 ~ handleCheckNicknameDuplicate ~ result:', result);
 
         if (!result)
             setError('nickname', {
