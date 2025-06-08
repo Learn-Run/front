@@ -8,3 +8,8 @@ export interface SubCategoryType {
     name: string;
     color: string;
 }
+
+export interface CategorySearchParams {
+    mainCategoryId: number;
+    detailCategoryId: number;
+}
