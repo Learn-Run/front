@@ -1,9 +1,10 @@
+import { MainWrapper } from '@/shared/ui';
 import SignUpContainer from '@/views/auth/ui/SignUpContainer';
 
 export default function SignUpPage() {
     return (
-        <main className='mt-20'>
+        <MainWrapper>
             <SignUpContainer />
-        </main>
+        </MainWrapper>
     );
 }
