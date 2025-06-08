@@ -23,8 +23,13 @@ import {
 } from '@repo/ui/components/base/Select';
 import { cn } from '@repo/ui/lib/utils';
 import { genderOptions } from '../../model/constants';
-import { useDebounce } from '@/shared/model/useDebounce';
-import { checkEmailDuplicate, sendEmailCode } from '../../api';
+import { useDebounce } from '@/shared/model/hooks/useDebounce';
+import { useTimer } from '@/shared/model/hooks/useTimer';
+import {
+    checkEmailDuplicate,
+    checkVerificationCode,
+    sendEmailCode,
+} from '../../api';
 import { StatusCheckIcon } from '@/shared/ui';
 
 export default function SignUpStep3() {
@@ -32,11 +37,27 @@ export default function SignUpStep3() {
         control,
         formState: { errors },
         setError,
+        setValue,
         clearErrors,
     } = useFormContext();
 
     const email = useWatch({ control, name: 'email' });
+    const isEmailVerified = useWatch({ control, name: 'isEmailVerified' });
+
     const debouncedEmail = useDebounce(email, 200);
+
+    const {
+        formatTime,
+        start: startTimer,
+        isRunning,
+    } = useTimer({
+        initialTime: 300,
+        onTimeEnd: () => {
+            setError('verificationCode', {
+                message: '인증 시간이 만료되었습니다. 다시 인증해주세요.',
+            });
+        },
+    });
 
     useEffect(() => {
         if (!debouncedEmail) return;
@@ -47,14 +68,14 @@ export default function SignUpStep3() {
 
                 if (!result) {
                     setError('email', {
-                        message: '이미 사용 중인 이메일입니다.',
+                        message: '이미 사용 중인 이메일입니다',
                     });
                 } else {
                     clearErrors('email');
                 }
             } catch {
                 setError('email', {
-                    message: '이메일 확인 중 오류가 발생했습니다.',
+                    message: '이메일 확인 중 오류가 발생했습니다',
                 });
             }
         };
@@ -62,30 +83,62 @@ export default function SignUpStep3() {
         handleCheckEmailDuplicate();
     }, [debouncedEmail, setError, clearErrors]);
 
-    const _handleRequestEmailVerification = async () => {
+    const handleSendEmail = async () => {
         const currentEmail = control._formValues.email;
         if (!currentEmail) {
-            setError('email', { message: '이메일을 입력해주세요.' });
+            setError('email', { message: '이메일을 입력해주세요' });
             return;
         }
 
         try {
-            const response = await sendEmailCode(currentEmail);
+            const result = await sendEmailCode(currentEmail);
 
-            if (!response) {
+            if (!result) {
                 setError('email', {
-                    message: '인증 메일 전송에 실패했습니다.',
+                    message: '인증 메일 전송에 실패했습니다',
                 });
                 return;
             }
 
             clearErrors('email');
+            startTimer();
         } catch (error) {
             setError('email', {
-                message: '인증 메일 전송 중 오류가 발생했습니다.',
+                message: '인증 메일 전송 중 오류가 발생했습니다',
             });
 
             throw error;
+        }
+    };
+
+    const handleClickEmailVerification = async () => {
+        const currentVerificationCode = control._formValues.verificationCode;
+        if (!currentVerificationCode) {
+            setError('verificationCode', {
+                message: '인증 번호를 입력해주세요',
+            });
+            return;
+        }
+        try {
+            const result = await checkVerificationCode(
+                email,
+                currentVerificationCode,
+            );
+
+            if (!result) {
+                setError('verificationCode', {
+                    message: '이메일 인증에 실패했습니다',
+                });
+                return;
+            }
+
+            clearErrors('verificationCode');
+            setValue('isEmailVerified', true);
+        } catch (error) {
+            console.log('🚀 ~ handleClickEmailVerification ~ error:', error);
+            setError('verificationCode', {
+                message: '인증 번호 검증 중 오류가 발생했습니다',
+            });
         }
     };
 
@@ -109,6 +162,7 @@ export default function SignUpStep3() {
                 />
                 <Button
                     type='button'
+                    onClick={handleSendEmail}
                     disabled={!!errors.email?.message}
                     className='w-fit h-[62px]'
                 >
@@ -127,11 +181,23 @@ export default function SignUpStep3() {
                             required
                             {...field}
                         >
-                            <p>04:53</p>
+                            {isRunning && !isEmailVerified && (
+                                <p className='text-gray-600 text-sm'>
+                                    {formatTime()}
+                                </p>
+                            )}
+                            {isEmailVerified && (
+                                <StatusCheckIcon status={isEmailVerified} />
+                            )}
                         </Input>
                     )}
                 />
-                <Button type='button' className='w-fit h-[62px]'>
+                <Button
+                    type='button'
+                    disabled={isEmailVerified}
+                    className='w-fit h-[62px]'
+                    onClick={handleClickEmailVerification}
+                >
                     인증 확인
                 </Button>
             </div>
@@ -163,6 +229,9 @@ export default function SignUpStep3() {
                                     mode='single'
                                     selected={field.value}
                                     onSelect={field.onChange}
+                                    captionLayout='dropdown'
+                                    fromYear={1900}
+                                    toYear={new Date().getFullYear()}
                                     initialFocus
                                 />
                             </PopoverContent>
