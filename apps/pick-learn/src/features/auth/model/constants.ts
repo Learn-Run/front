@@ -1,6 +1,6 @@
 import { routes } from '@/shared/constants/routes';
 import type { SignUpStepsType } from './types';
-import { SignUpStep1, SignUpStep2, SignUpStep3, SignUpStep4 } from '../ui';
+import { SignUpStep1, SignUpStep2, SignUpStep3 } from '../ui';
 import { SignUpSchemaType } from './schema';
 
 export const withAuthList: string[] = [routes.chat];
@@ -38,15 +38,10 @@ export const signUpSteps: SignUpStepsType[] = [
         ],
         component: SignUpStep3,
     },
-    {
-        id: 4,
-        isEnable: false,
-        requiredFields: ['categories'],
-        component: SignUpStep4,
-    },
 ];
 
 export const DEFAULT_FORM_VALUES: SignUpSchemaType = {
+    name: '',
     nickname: '',
     nicknameVerified: false,
     loginId: '',
