@@ -22,7 +22,7 @@ export const options: NextAuthOptions = {
                 try {
                     // FIXME: 로그인 API URI 수정 필요
                     const response = await fetch(
-                        `${process.env.BASE_API_URL}/api/sign-in`,
+                        `${process.env.BASE_API_URL}/member-service/api/v1/auth/sign-in`,
                         {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -60,7 +60,7 @@ export const options: NextAuthOptions = {
                 try {
                     // FIXME: kakao provider 연결하는 API URI 및 body 수정 필요
                     const res = await fetch(
-                        `${process.env.BASE_API_URL}/api/v1/auth/oauth-sign-in`,
+                        `${process.env.BASE_API_URL}/member-service/api/v1/oauth/sign-in`,
                         {
                             method: 'POST',
                             headers: {
