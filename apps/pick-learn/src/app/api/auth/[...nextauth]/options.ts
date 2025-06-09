@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextAuthOptions, User } from 'next-auth';
+
+import type { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 
 import { fetchData } from '@/shared/api/instance';
+import { routes } from '@/shared/model/constants/routes';
 import { services } from '@/shared/api/constants';
 
 export const options: NextAuthOptions = {
@@ -44,16 +45,10 @@ export const options: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async signIn({
-            user,
-            account,
-            profile,
-            email,
-            credentials: _credentials,
-        }) {
+        async signIn({ user, account, profile }) {
             if (profile && account) {
                 try {
-                    const { result } = await fetchData.post<User>(
+                    const res = await fetchData.post<User>(
                         `${services.member}/api/v1/oauth/sign-in`,
                         {
                             headers: {
@@ -68,22 +63,35 @@ export const options: NextAuthOptions = {
                         },
                     );
 
-                    user.accessToken = result.accessToken;
-                    user.memberUuid = result.memberUuid;
+                    if (!res.isSuccess) {
+                        return (
+                            routes.signUp +
+                            `?provider=${account.provider}&providerId=${account.providerAccountId}`
+                        );
+                    }
+
+                    user.accessToken = res.result.accessToken;
+                    user.memberUuid = res.result.memberUuid;
 
                     return true;
                 } catch (error) {
                     console.error('error', error);
-                    return '/error';
+                    return `?error=${error}`;
                 }
             }
             return true;
         },
         async jwt({ token, user }) {
-            return { ...token, ...user };
+            if (user) {
+                token.accessToken = user.accessToken;
+            }
+            return token;
         },
         async session({ session, token }) {
-            session.user = token as any;
+            session.user = {
+                ...session.user,
+                accessToken: token.accessToken,
+            };
             return session;
         },
         async redirect({ url, baseUrl }) {

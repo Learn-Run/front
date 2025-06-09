@@ -1,4 +1,4 @@
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 import type { SignUpStepsType } from './types';
 import { SignUpStep1, SignUpStep2, SignUpStep3 } from '../ui';
 import { SignUpSchemaType } from './schema';
@@ -17,6 +17,7 @@ export const signUpSteps: SignUpStepsType[] = [
         id: 2,
         isEnable: false,
         requiredFields: [
+            'name',
             'nickname',
             'nicknameVerified',
             'loginId',

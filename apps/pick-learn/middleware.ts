@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 import { withAuthList, withOutAuthList } from '@/features/auth/model/constants';
 
 const FALLBACK_URL = '/';
