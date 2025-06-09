@@ -21,7 +21,7 @@ export default async function CategorySection() {
                             className='col-span-1 justify-self-center'
                         >
                             <Link
-                                href={`/post?category=${cat.name}`}
+                                href={`/post?category=${cat.id}`}
                                 className='flex flex-col items-center space-y-2'
                             >
                                 {Icon ? (

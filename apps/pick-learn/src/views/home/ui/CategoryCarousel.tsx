@@ -24,19 +24,19 @@ export default function CategoryCarousel({
                         return (
                             <CarouselItem key={cat.id}>
                                 <li className='list-none  w-full max-w-[200px] flex flex-col items-center justify-center space-y-2'>
-                                    {Icon ? (
-                                        <Icon />
-                                    ) : (
-                                        <div className='w-full h-full bg-gray-200' />
-                                    )}
-
                                     <Link
-                                        href={`/post?category=${cat.name}`}
-                                        className=''
+                                        href={`/post?category=${cat.id}`}
+                                        className='flex flex-col items-center space-y-2'
                                     >
-                                        <h3 className='font-medium text-lg'>
+                                        {Icon ? (
+                                            <Icon className='w-full h-full max-w-[100px] max-h-[100px]' />
+                                        ) : (
+                                            <div className='w-full h-full bg-gray-200' />
+                                        )}
+
+                                        <span className='text-sm text-gray-700 text-center'>
                                             {cat.name}
-                                        </h3>
+                                        </span>
                                     </Link>
                                 </li>
                             </CarouselItem>
