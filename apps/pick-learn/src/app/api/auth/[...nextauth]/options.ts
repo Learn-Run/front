@@ -1,3 +1,4 @@
+
 import type { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
@@ -47,19 +48,20 @@ export const options: NextAuthOptions = {
         async signIn({ user, account, profile }) {
             if (profile && account) {
                 try {
-                    const res = await fetchData.post<{
-                        accessToken: string;
-                        memberUuid: string;
-                    }>(`${services.member}/api/v1/oauth/sign-in`, {
-                        headers: {
-                            'Content-Type': 'application/json',
+                    const res = await fetchData.post<User>(
+                        `${services.member}/api/v1/oauth/sign-in`,
+                        {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                provider: account.provider,
+                                providerId: account.providerAccountId,
+                                providerEmail: email,
+                            }),
+                            cache: 'no-cache',
                         },
-                        body: JSON.stringify({
-                            provider: account.provider,
-                            providerId: account.providerAccountId,
-                        }),
-                        cache: 'no-cache',
-                    });
+                    );
 
                     if (!res.isSuccess) {
                         return (
