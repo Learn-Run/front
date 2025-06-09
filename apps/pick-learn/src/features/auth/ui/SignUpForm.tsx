@@ -11,7 +11,7 @@ import { SignUpStepRenderer, SignUpButton } from '../ui';
 import type { SignUpFormProps } from './types';
 import { signUp } from '../api';
 import { RequestSignUpDataType } from '../api/types';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function SignUpForm({
     step,

@@ -5,7 +5,7 @@ import Logo from '@/shared/assets/icons/Logo';
 import Nav from './Nav';
 import LogIn from '@/shared/assets/icons/LogIn';
 import { cn } from '@repo/ui/lib/utils';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function Header() {
     return (
@@ -23,8 +23,12 @@ export default function Header() {
                 </Link>
                 <Nav className='hidden md:block col-span-6 md:col-span-8 xl:col-span-6' />
                 <div className='col-span-6 md:col-span-2 xl:col-span-3 flex justify-end items-center gap-2'>
-                    <Button variant='text' className='w-fit hidden md:block'>
-                        log in
+                    <Button
+                        variant='text'
+                        className='w-fit hidden md:block'
+                        asChild
+                    >
+                        <Link href={routes.signIn}>log in</Link>
                     </Button>
                     <Button
                         type='button'
@@ -34,7 +38,7 @@ export default function Header() {
                     >
                         <Link href={routes.signUp}>Register</Link>
                     </Button>
-                    <Link href='/login' className='w-fit md:hidden'>
+                    <Link href={routes.signIn} className='w-fit md:hidden'>
                         <LogIn />
                     </Link>
                 </div>

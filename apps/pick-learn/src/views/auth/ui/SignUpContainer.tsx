@@ -7,7 +7,7 @@ import AuthHeading from '@/features/auth/ui/AuthHeading';
 import Navigator from '@/widgets/auth/ui/Navigator';
 import type { SignUpStepsType } from '@/features/auth/model/types';
 import SignUpForm from '@/features/auth/ui/SignUpForm';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 import { getAgreeTermsByUuid, getAllAgreeTermsUuid } from '@/features/auth/api';
 import { applyServerFields } from '@/features/auth/model/applyServerFields';
 
