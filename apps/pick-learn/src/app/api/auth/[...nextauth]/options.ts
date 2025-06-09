@@ -1,4 +1,3 @@
-
 import type { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
@@ -57,7 +56,6 @@ export const options: NextAuthOptions = {
                             body: JSON.stringify({
                                 provider: account.provider,
                                 providerId: account.providerAccountId,
-                                providerEmail: email,
                             }),
                             cache: 'no-cache',
                         },
