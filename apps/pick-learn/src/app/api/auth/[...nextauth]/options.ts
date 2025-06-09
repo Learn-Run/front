@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextAuthOptions } from 'next-auth';
+import type { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-import { CommonResponse } from '@/shared/api/types';
-import { SignInResponseType } from '@/features/auth/api/types';
+import { fetchData } from '@/shared/api/instance';
+import { routes } from '@/shared/model/constants/routes';
+import { services } from '@/shared/api/constants';
 
 export const options: NextAuthOptions = {
     providers: [
@@ -14,17 +14,15 @@ export const options: NextAuthOptions = {
                 loginId: { label: 'loginId', type: 'text' },
                 password: { label: 'password', type: 'password' },
             },
-            async authorize(credentials): Promise<any> {
+            async authorize(credentials): Promise<User | null> {
                 if (!credentials?.loginId || !credentials?.password) {
                     return null;
                 }
 
                 try {
-                    // FIXME: 로그인 API URI 수정 필요
-                    const response = await fetch(
-                        `${process.env.BASE_API_URL}/member-service/api/v1/auth/sign-in`,
+                    const { result } = await fetchData.post<User>(
+                        `${services.member}/api/v1/auth/sign-in`,
                         {
-                            method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 loginId: credentials.loginId,
@@ -32,9 +30,6 @@ export const options: NextAuthOptions = {
                             }),
                         },
                     );
-
-                    const { result } =
-                        (await response.json()) as CommonResponse<SignInResponseType>;
 
                     return result;
                 } catch (error) {
@@ -49,50 +44,52 @@ export const options: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async signIn({
-            user,
-            account,
-            profile,
-            email,
-            credentials: _credentials,
-        }) {
+        async signIn({ user, account, profile }) {
             if (profile && account) {
                 try {
-                    // FIXME: kakao provider 연결하는 API URI 및 body 수정 필요
-                    const res = await fetch(
-                        `${process.env.BASE_API_URL}/member-service/api/v1/oauth/sign-in`,
-                        {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                provider: account.provider,
-                                providerId: account.providerAccountId,
-                                providerEmail: email,
-                            }),
-                            cache: 'no-cache',
+                    const res = await fetchData.post<{
+                        accessToken: string;
+                        memberUuid: string;
+                    }>(`${services.member}/api/v1/oauth/sign-in`, {
+                        headers: {
+                            'Content-Type': 'application/json',
                         },
-                    );
-                    const data =
-                        (await res.json()) as CommonResponse<SignInResponseType>;
+                        body: JSON.stringify({
+                            provider: account.provider,
+                            providerId: account.providerAccountId,
+                        }),
+                        cache: 'no-cache',
+                    });
 
-                    user.accessToken = data.result.accessToken;
-                    user.memberUuid = data.result.memberUuid;
+                    if (!res.isSuccess) {
+                        return (
+                            routes.signUp +
+                            `?provider=${account.provider}&providerId=${account.providerAccountId}`
+                        );
+                    }
+
+                    user.accessToken = res.result.accessToken;
+                    user.memberUuid = res.result.memberUuid;
 
                     return true;
                 } catch (error) {
                     console.error('error', error);
-                    return '/error';
+                    return `?error=${error}`;
                 }
             }
             return true;
         },
         async jwt({ token, user }) {
-            return { ...token, ...user };
+            if (user) {
+                token.accessToken = user.accessToken;
+            }
+            return token;
         },
         async session({ session, token }) {
-            session.user = token as any;
+            session.user = {
+                ...session.user,
+                accessToken: token.accessToken,
+            };
             return session;
         },
         async redirect({ url, baseUrl }) {
@@ -101,6 +98,5 @@ export const options: NextAuthOptions = {
     },
     pages: {
         signIn: '/sign-in',
-        error: '/error',
     },
 };

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { AuthHeading } from '@/features/auth/ui';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 import SignInForm from '@/features/auth/ui/SignInForm';
 import OAuthSignIn from '@/features/auth/ui/OAuthSignIn';
 

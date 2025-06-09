@@ -2,7 +2,7 @@
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 import { Button } from '@repo/ui/components/base/Button';
 import Input from '@repo/ui/components/base/Input/index';
 

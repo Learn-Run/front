@@ -1,5 +1,5 @@
 import { Home, PopularPost, Post, Search } from '@/shared/assets/icons';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 
 export const navList = [
     { id: 1, name: 'Home', href: routes.home, isAuth: false, icon: Home },

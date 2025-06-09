@@ -5,7 +5,7 @@ import Logo from '@/shared/assets/icons/Logo';
 import Nav from './Nav';
 import LogIn from '@/shared/assets/icons/LogIn';
 import { cn } from '@repo/ui/lib/utils';
-import { routes } from '@/shared/constants/routes';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function Header() {
     return (
