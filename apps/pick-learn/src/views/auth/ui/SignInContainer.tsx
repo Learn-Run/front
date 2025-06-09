@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { AuthHeading } from '@/features/auth/ui';
@@ -15,7 +16,9 @@ export default function SignInContainer() {
                 </AuthHeading.Desc>
             </AuthHeading>
 
-            <SignInForm />
+            <Suspense>
+                <SignInForm />
+            </Suspense>
 
             <OAuthSignIn />
 
