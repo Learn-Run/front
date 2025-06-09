@@ -1,4 +1,7 @@
 import { PopularAsker, StepAnswer, StepSearch } from '@/shared/assets/icons';
+import monster from '../../../../public/images/monster.png';
+import monster2 from '../../../../public/images/SearchMonster.png';
+import monster3 from '../../../../public/images/StepAnswererMonster.png';
 
 export const stepList = [
     {
@@ -7,6 +10,7 @@ export const stepList = [
         description:
             'Upload your resume, fill in your skills, and set job preferences',
         icon: PopularAsker,
+        monster: monster,
     },
     {
         id: 2,
@@ -14,6 +18,7 @@ export const stepList = [
         description:
             'Explore thousands of job listings and apply with one click',
         icon: StepSearch,
+        monster: monster2,
     },
     {
         id: 3,
@@ -21,5 +26,6 @@ export const stepList = [
         description:
             'Schedule interviews, negotiate offers, and start your new job',
         icon: StepAnswer,
+        monster: monster3,
     },
 ];

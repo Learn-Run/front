@@ -15,7 +15,7 @@ export default function StepCarouselList() {
                 <CarouselContent>
                     {stepList.map(({ icon: Icon, ...item }) => (
                         <CarouselItem key={item.id}>
-                            <StepCard key={item.id}>
+                            <StepCard key={item.id} monster={item.monster}>
                                 <StepCard.Icon>
                                     <Icon />
                                 </StepCard.Icon>
