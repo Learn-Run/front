@@ -19,13 +19,13 @@ export default function CategoryCarousel({
         <ul className='flex items-center justify-center md:hidden'>
             <Carousel className='w-full max-w-[200px]'>
                 <CarouselContent>
-                    {categories.map((cat) => {
-                        const Icon = iconMapById[cat.id];
+                    {categories.map((category) => {
+                        const Icon = iconMapById[category.id];
                         return (
-                            <CarouselItem key={cat.id}>
+                            <CarouselItem key={category.id}>
                                 <li className='list-none  w-full max-w-[200px] flex flex-col items-center justify-center space-y-2'>
                                     <Link
-                                        href={`/post?category=${cat.id}`}
+                                        href={`/post?category=${category.id}`}
                                         className='flex flex-col items-center space-y-2'
                                     >
                                         {Icon ? (
@@ -35,7 +35,7 @@ export default function CategoryCarousel({
                                         )}
 
                                         <span className='text-sm text-gray-700 text-center'>
-                                            {cat.name}
+                                            {category.name}
                                         </span>
                                     </Link>
                                 </li>
