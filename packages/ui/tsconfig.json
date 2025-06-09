@@ -4,7 +4,9 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "module": "CommonJS",
+        "moduleResolution": "node"
     },
     "include": ["src", "src/components/wrapper/.tsx"],
     "exclude": ["node_modules"]
