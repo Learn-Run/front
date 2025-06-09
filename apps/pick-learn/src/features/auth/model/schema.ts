@@ -37,6 +37,7 @@ export const signUpSchema = z
                 (verified) => verified === true,
                 '아이디 중복 검사를 해주세요',
             ),
+
         password: z
             .string()
             .min(8, '비밀번호는 8자 이상이어야 합니다')
@@ -81,3 +82,22 @@ export const signUpSchema = z
     });
 
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;
+
+export const signInSchema = z.object({
+    loginId: z
+        .string()
+        .min(4, '아이디는 4자 이상이어야 합니다')
+        .max(20, '아이디는 20자 이하여야 합니다')
+        .regex(/^[a-zA-Z0-9]+$/, '아이디는 특수문자, 공백 없이 입력해주세요'),
+
+    password: z
+        .string()
+        .min(8, '비밀번호는 8자 이상이어야 합니다')
+        .max(20, '비밀번호는 20자 이하여야 합니다')
+        .regex(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+            '비밀번호는 영문 대소문자와 특수문자를 포함해야 합니다',
+        ),
+});
+
+export type SignInSchemaType = z.infer<typeof signInSchema>;
