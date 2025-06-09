@@ -13,7 +13,7 @@ export default async function Home({
     const { category } = await searchParams;
 
     return (
-        <MainWrapper className='min-h-screen '>
+        <MainWrapper className='pt-[5rem] md:pt-0 '>
             <HeroSection />
             <CategorySection />
             <StepSection />
