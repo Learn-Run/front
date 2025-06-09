@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-import { CommonResponse } from '@/shared/api/types';
-import { SignInResponseType } from '@/features/auth/api/types';
+import { fetchData } from '@/shared/api/instance';
+import { services } from '@/shared/api/constants';
 
 export const options: NextAuthOptions = {
     providers: [
@@ -14,17 +14,15 @@ export const options: NextAuthOptions = {
                 loginId: { label: 'loginId', type: 'text' },
                 password: { label: 'password', type: 'password' },
             },
-            async authorize(credentials): Promise<any> {
+            async authorize(credentials): Promise<User | null> {
                 if (!credentials?.loginId || !credentials?.password) {
                     return null;
                 }
 
                 try {
-                    // FIXME: 로그인 API URI 수정 필요
-                    const response = await fetch(
-                        `${process.env.BASE_API_URL}/member-service/api/v1/auth/sign-in`,
+                    const { result } = await fetchData.post<User>(
+                        `${services.member}/api/v1/auth/sign-in`,
                         {
-                            method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 loginId: credentials.loginId,
@@ -32,9 +30,6 @@ export const options: NextAuthOptions = {
                             }),
                         },
                     );
-
-                    const { result } =
-                        (await response.json()) as CommonResponse<SignInResponseType>;
 
                     return result;
                 } catch (error) {
@@ -58,11 +53,9 @@ export const options: NextAuthOptions = {
         }) {
             if (profile && account) {
                 try {
-                    // FIXME: kakao provider 연결하는 API URI 및 body 수정 필요
-                    const res = await fetch(
-                        `${process.env.BASE_API_URL}/member-service/api/v1/oauth/sign-in`,
+                    const { result } = await fetchData.post<User>(
+                        `${services.member}/api/v1/oauth/sign-in`,
                         {
-                            method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
@@ -74,11 +67,9 @@ export const options: NextAuthOptions = {
                             cache: 'no-cache',
                         },
                     );
-                    const data =
-                        (await res.json()) as CommonResponse<SignInResponseType>;
 
-                    user.accessToken = data.result.accessToken;
-                    user.memberUuid = data.result.memberUuid;
+                    user.accessToken = result.accessToken;
+                    user.memberUuid = result.memberUuid;
 
                     return true;
                 } catch (error) {
@@ -101,6 +92,5 @@ export const options: NextAuthOptions = {
     },
     pages: {
         signIn: '/sign-in',
-        error: '/error',
     },
 };

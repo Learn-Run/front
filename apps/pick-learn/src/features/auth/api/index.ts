@@ -5,10 +5,11 @@ import type {
     AgreeTermUuidType,
     RequestSignUpDataType,
 } from './types';
+import { services } from '@/shared/api/constants';
 
 export const checkLoginIdDuplicate = async (loginId: string) => {
     const result = await fetchData.post(
-        '/member-service/api/v1/auth/login-id/check-duplicate',
+        `${services.member}/api/v1/auth/login-id/check-duplicate`,
         {
             body: JSON.stringify({ loginId }),
         },
@@ -21,7 +22,7 @@ export const checkLoginIdDuplicate = async (loginId: string) => {
 
 export const checkNicknameDuplicate = async (nickname: string) => {
     const result = await fetchData.post(
-        '/profile-service/api/v1/profile/nickname/check-duplicate',
+        `${services.profile}/api/v1/profile/nickname/check-duplicate`,
         {
             body: JSON.stringify({ nickname }),
         },
@@ -34,7 +35,7 @@ export const checkNicknameDuplicate = async (nickname: string) => {
 
 export const checkEmailDuplicate = async (email: string) => {
     const result = await fetchData.post(
-        '/member-service/api/v1/auth/email/check-duplicate',
+        `${services.member}/api/v1/auth/email/check-duplicate`,
         {
             body: JSON.stringify({ email }),
         },
@@ -47,7 +48,7 @@ export const checkEmailDuplicate = async (email: string) => {
 
 export const sendEmailCode = async (email: string) => {
     const result = await fetchData.post(
-        '/member-service/api/v1/email/send-code',
+        `${services.member}/api/v1/email/send-code`,
         {
             body: JSON.stringify({ email }),
         },
@@ -68,7 +69,7 @@ export const checkVerificationCode = async (
     verificationCode: string,
 ) => {
     const result = await fetchData.post(
-        '/member-service/api/v1/email/verify-code',
+        `${services.member}/api/v1/email/verify-code`,
         {
             body: JSON.stringify({ email, verificationCode }),
         },
@@ -79,7 +80,7 @@ export const checkVerificationCode = async (
 
 export const getAllAgreeTermsUuid = async () => {
     const { result } = await fetchData.get<AgreeTermUuidType[]>(
-        '/member-service/api/v1/agreement/uuid/all',
+        `${services.member}/api/v1/agreement/uuid/all`,
         {
             cache: 'reload',
         },
@@ -90,7 +91,7 @@ export const getAllAgreeTermsUuid = async () => {
 
 export const getAgreeTermsByUuid = async (uuid: string) => {
     const { result } = await fetchData.get<AgreeTermType>(
-        `/member-service/api/v1/agreement/${uuid}`,
+        `${services.member}/api/v1/agreement/${uuid}`,
         {
             cache: 'reload',
         },
@@ -100,9 +101,12 @@ export const getAgreeTermsByUuid = async (uuid: string) => {
 };
 
 export const signUp = async (data: RequestSignUpDataType) => {
-    const result = await fetchData.post('/member-service/api/v1/auth/sign-up', {
-        body: JSON.stringify(data),
-    });
+    const { result } = await fetchData.post(
+        `${services.member}/api/v1/auth/sign-up`,
+        {
+            body: JSON.stringify(data),
+        },
+    );
 
     return result;
 };
