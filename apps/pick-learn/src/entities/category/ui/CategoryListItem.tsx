@@ -14,7 +14,6 @@ export default async function CategoryListItem({
     mainCategoryId,
     detailCategoryId,
 }: CategorySearchParams) {
-    const category = mainCategoryId || 'all';
     const mainCategories = await getMainCategories();
 
     return (
@@ -26,6 +25,18 @@ export default async function CategoryListItem({
             <h3 className='text-xl font-bold mx-2 text-primary-100 mb-4'>
                 카테고리
             </h3>
+            <Link
+                href={`/post?mainCategoryId=${0}`}
+                scroll={false}
+                className={cn(
+                    'text-sm w-full border-b py-4 hover:underline font-medium',
+                    mainCategoryId?.toString() === '0' || !mainCategoryId
+                        ? 'text-primary-100 font-bold'
+                        : '',
+                )}
+            >
+                전체
+            </Link>
             <Accordion
                 type='single'
                 collapsible
@@ -33,20 +44,9 @@ export default async function CategoryListItem({
             >
                 {mainCategories.map((item) => (
                     <AccordionItem key={item.id} value={String(item.id)}>
-                        <div className='flex flex-col'>
-                            <Link
-                                href={`/post?mainCategoryId=${item.id}`}
-                                className={cn(
-                                    'block w-full text-left px-2',
-                                    item.id.toString() === category
-                                        ? 'text-primary-100 font-bold'
-                                        : '',
-                                )}
-                                scroll={false}
-                            >
-                                <AccordionTrigger>{item.name}</AccordionTrigger>
-                            </Link>
-                        </div>
+                        <AccordionTrigger className='cursor-pointer'>
+                            {item.name}
+                        </AccordionTrigger>
 
                         <SubCategoryItem
                             mainCategoryId={item.id}

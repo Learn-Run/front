@@ -33,7 +33,7 @@ export default async function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${subCategoryitem.id}&detailCategoryId=${detailItem.id}`}
+                            href={`/post?mainCategoryId=${mainCategoryId}&detailCategoryId=${detailItem.id}`}
                             className='block w-full text-left'
                             scroll={false}
                         >

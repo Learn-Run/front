@@ -15,7 +15,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_1',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 1, name: 'benefit', color: '#00FF00' },
+        category: { id: 1, name: '운동', color: '#00FF00' },
         blindStatus: false,
     },
     {
@@ -23,7 +23,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_2',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 2, name: 'benefit', color: '#00FF00' },
+        category: { id: 2, name: '운동', color: '#00FF00' },
         blindStatus: false,
     },
     {
@@ -31,7 +31,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_3',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 3, name: 'benefit', color: '#00FF00' },
+        category: { id: 3, name: '운동', color: '#00FF00' },
         blindStatus: false,
     },
     {
@@ -39,7 +39,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_4',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 4, name: 'benefit', color: '#00FF00' },
+        category: { id: 4, name: '한식', color: '#00FF00' },
         blindStatus: false,
     },
     {
@@ -47,7 +47,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_5',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 5, name: 'benefit', color: '#00FF00' },
+        category: { id: 5, name: '한식', color: '#00FF00' },
         blindStatus: false,
     },
     {
@@ -55,7 +55,7 @@ export const askItemList: AskItem[] = [
         memberUuid: 'user_6',
         title: '요즘 UI툴 뭐가 좋아요 ?',
         contents: '현업자들만 답해 주셨으면 좋겠습니다',
-        category: { id: 6, name: 'benefit', color: '#00FF00' },
+        category: { id: 6, name: '한식', color: '#00FF00' },
         blindStatus: false,
     },
     {
