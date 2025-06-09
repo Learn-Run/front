@@ -10,7 +10,7 @@ export default function HeroSection() {
     const videoUrl = S3_BASE_URL + videoUrlList[randomIndex];
 
     return (
-        <section className='w-full min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden'>
+        <section className='w-full min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden px-5'>
             <Heading align='center' className='z-10'>
                 <Heading.Title>
                     <TypingWrapper text='Pick & Learn' className='text-white' />
