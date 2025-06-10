@@ -30,7 +30,7 @@ export default async function SubCategoryItem({
                     전체
                 </Link>
 
-                {(mainCategoryItem.toString() === mainCategoryId?.toString()
+                {(mainCategoryItem === mainCategoryId
                     ? selectedSubCategories
                     : []
                 )?.map((detailItem) => (
@@ -38,8 +38,7 @@ export default async function SubCategoryItem({
                         key={detailItem.id}
                         className={cn(
                             'font-medium text-gray-600 w-full mx-2 mb-2',
-                            detailItem.subCategoryId.toString() ===
-                                detailCategory.toString()
+                            detailItem.subCategoryId === detailCategory
                                 ? 'text-primary-100 font-bold'
                                 : '',
                         )}
