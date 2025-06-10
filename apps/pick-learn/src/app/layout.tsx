@@ -57,10 +57,12 @@ export default async function RootLayout({
         <html lang='ko-KR'>
             <body className={dmSans.className}>
                 <AuthContextProvider isAuth={isAuth}>
-                    <Header />
-                    <ModalProvider>{children}</ModalProvider>
-                    <Footer />
-                    <BottomNavBar />
+                    <ModalProvider>
+                        <Header />
+                        {children}
+                        <Footer />
+                        <BottomNavBar />
+                    </ModalProvider>
                 </AuthContextProvider>
             </body>
         </html>
