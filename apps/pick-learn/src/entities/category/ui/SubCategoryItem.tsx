@@ -11,7 +11,6 @@ export default async function SubCategoryItem({
     mainCategoryItem,
 }: CategorySearchParams & { mainCategoryItem: number }) {
     const detailCategory = subCategoryId || '';
-    console.log('detailCategory', detailCategory);
     const selectedSubCategories = mainCategoryId
         ? await getSubCategoryListByMainCategoryId(Number(mainCategoryId))
         : [];
