@@ -11,14 +11,14 @@ export default function SearchButton() {
 
     return (
         <button
-            className='relative w-full max-w-[636px] z-10 h-full mt-10'
+            className='relative w-full max-w-[636px] z-10 mt-10'
             onClick={() => openModal(<SearchModal />)}
         >
-            <p className='w-full border-5 border-primary-100 rounded-full z-10 bg-white text-gray-700 py-6 '>
+            <p className=' w-full border-5 border-primary-100 rounded-full z-10 bg-white text-gray-700 py-6'>
                 질문 혹은 답변을 검색해 보세요.
             </p>
-            <div className='absolute -top-13 left-5 z-20 '>
-                <Jobs className='scale-x-[-1] w-[175px] h-[175px]' />
+            <div className='absolute top-1/2 -translate-y-1/2 left-3 z-10'>
+                <Jobs className='scale-x-[-1] w-[80px] xs:w-[100px] sm:w-[120px] md:w-[175px] aspect-square' />
             </div>
             <div
                 className={cn(
