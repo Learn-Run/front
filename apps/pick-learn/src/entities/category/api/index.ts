@@ -1,12 +1,12 @@
 'use server';
 
 import { fetchData } from '@/shared/api/instance';
-import { MainCategoryType, SubCategoryType } from './types';
+import { CategoryListType, MainCategoryType, SubCategoryType } from './types';
 import { services } from '@/shared/api/constants';
 
 export const getMainCategories = async (): Promise<MainCategoryType[]> => {
     const response = await fetchData.get<MainCategoryType[]>(
-        `${services.community}/api/v1/category/main`,
+        `${services.post}/api/v1/category/main`,
     );
     return response.result;
 };
@@ -15,7 +15,16 @@ export const getSubCategories = async (
     mainCategoryId: number,
 ): Promise<SubCategoryType[]> => {
     const response = await fetchData.get<SubCategoryType[]>(
-        `${services.community}/api/v1/category/main/${mainCategoryId}`,
+        `${services.post}/api/v1/category/main/${mainCategoryId}`,
+    );
+    return response.result;
+};
+
+export const getSubCategoryListByMainCategoryId = async (
+    mainCategoryId: number,
+): Promise<CategoryListType[]> => {
+    const response = await fetchData.get<CategoryListType[]>(
+        `${services.post}/api/v1/category-list/main/${mainCategoryId}`,
     );
     return response.result;
 };

@@ -9,6 +9,15 @@ export interface SubCategoryType {
     color: string;
 }
 
+export interface CategoryListType {
+    id: number;
+    mainCategoryId: number;
+    mainCategoryName: string;
+    subCategoryId: number;
+    subCategoryName: string;
+    subCategoryColor: string;
+}
+
 export interface CategorySearchParams {
     mainCategoryId: number;
     detailCategoryId: number;
