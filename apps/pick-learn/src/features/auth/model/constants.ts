@@ -4,7 +4,7 @@ import { SignUpStep1, SignUpStep2, SignUpStep3 } from '../ui';
 import { SignUpSchemaType } from './schema';
 
 export const withAuthList: string[] = [routes.chat];
-export const withOutAuthList = [routes.signIn];
+export const withOutAuthList = [routes.signIn, routes.signUp];
 
 export const signUpSteps: SignUpStepsType[] = [
     {
