@@ -60,7 +60,13 @@ export default function SignUpStep3() {
     });
 
     useEffect(() => {
-        if (!debouncedEmail) return;
+        if (email === '') {
+            clearErrors(['email', 'verificationCode']);
+        }
+    }, [email]);
+
+    useEffect(() => {
+        if (email === '' || !debouncedEmail) return;
 
         const handleCheckEmailDuplicate = async () => {
             try {
@@ -81,7 +87,7 @@ export default function SignUpStep3() {
         };
 
         handleCheckEmailDuplicate();
-    }, [debouncedEmail, setError, clearErrors]);
+    }, [email, debouncedEmail, setError, clearErrors]);
 
     const handleSendEmail = async () => {
         const currentEmail = control._formValues.email;
@@ -177,6 +183,7 @@ export default function SignUpStep3() {
                     render={({ field }) => (
                         <Input
                             label='인증 코드'
+                            disabled={!isRunning}
                             error={errors.verificationCode?.message as string}
                             required
                             {...field}
@@ -194,7 +201,7 @@ export default function SignUpStep3() {
                 />
                 <Button
                     type='button'
-                    disabled={isEmailVerified}
+                    disabled={!isRunning || isEmailVerified}
                     className='w-fit h-[62px]'
                     onClick={handleClickEmailVerification}
                 >
