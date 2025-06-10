@@ -3,7 +3,7 @@ import SignUpContainer from '@/views/auth/ui/SignUpContainer';
 
 export default function SignUpPage() {
     return (
-        <MainWrapper className='pt-20'>
+        <MainWrapper className='pt-40'>
             <SignUpContainer />
         </MainWrapper>
     );
