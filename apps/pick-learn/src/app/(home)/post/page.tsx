@@ -8,13 +8,13 @@ export default async function page({
 }: {
     searchParams: Promise<CategorySearchParams>;
 }) {
-    const { mainCategoryId, detailCategoryId } = await searchParams;
+    const { mainCategoryId, subCategoryId } = await searchParams;
     return (
         <MainWrapper>
             <PostTopSection />
             <PostListSection
                 mainCategoryId={mainCategoryId}
-                detailCategoryId={detailCategoryId}
+                subCategoryId={subCategoryId}
             />
         </MainWrapper>
     );

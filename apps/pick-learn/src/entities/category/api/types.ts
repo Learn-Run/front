@@ -20,5 +20,5 @@ export interface CategoryListType {
 
 export interface CategorySearchParams {
     mainCategoryId: number;
-    detailCategoryId: number;
+    subCategoryId: number;
 }

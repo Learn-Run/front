@@ -1,51 +1,53 @@
 import Link from 'next/link';
 
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
-import { CategorySearchParams, MainCategoryType } from '../api/types';
+import { CategorySearchParams } from '../api/types';
 import { getSubCategoryListByMainCategoryId } from '../api';
 import { cn } from '@repo/ui/lib/utils';
 
 export default async function SubCategoryItem({
     mainCategoryId,
-    detailCategoryId,
-    subCategoryitem,
-}: CategorySearchParams & { subCategoryitem: MainCategoryType }) {
-    const detailCategory = detailCategoryId || '';
+    subCategoryId,
+    mainCategoryItem,
+}: CategorySearchParams & { mainCategoryItem: number }) {
+    const detailCategory = subCategoryId || '';
     const selectedSubCategories = mainCategoryId
         ? await getSubCategoryListByMainCategoryId(Number(mainCategoryId))
         : [];
-    const categoryAll = [
-        {
-            id: 0,
-            name: '전체',
-            mainCategoryId: 0,
-            subCategoryId: 0,
-            subCategoryName: '전체',
-            subCategoryColor: '',
-        },
-        ...selectedSubCategories,
-    ];
 
     return (
         <AccordionContent>
             <ul className='w-full'>
-                {(subCategoryitem.id.toString() === mainCategoryId?.toString()
-                    ? categoryAll
+                <Link
+                    href={`/post?mainCategoryId=${mainCategoryId}`}
+                    scroll={false}
+                    replace
+                    className={cn(
+                        'font-medium text-gray-600 w-full mx-2 mb-2',
+                        !subCategoryId ? 'text-primary-100 font-bold' : '',
+                    )}
+                >
+                    전체
+                </Link>
+
+                {(mainCategoryItem === mainCategoryId
+                    ? selectedSubCategories
                     : []
                 )?.map((detailItem) => (
                     <li
                         key={detailItem.id}
                         className={cn(
                             'font-medium text-gray-600 w-full mx-2 mb-2',
-                            detailItem.id.toString() === detailCategory
+                            detailItem.subCategoryId === detailCategory
                                 ? 'text-primary-100 font-bold'
                                 : '',
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${mainCategoryId}&detailCategoryId=${detailItem.id}`}
-                            className='block w-full text-left'
+                            href={`/post?mainCategoryId=${mainCategoryId}&subCategoryId=${detailItem.subCategoryId}&categoryListId=${detailItem.id}`}
                             scroll={false}
+                            replace={true}
+                            className='block w-full text-left'
                         >
                             {detailItem.subCategoryName}
                         </Link>

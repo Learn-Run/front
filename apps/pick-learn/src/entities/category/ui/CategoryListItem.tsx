@@ -12,7 +12,7 @@ import SubCategoryItem from './SubCategoryItem';
 
 export default async function CategoryListItem({
     mainCategoryId,
-    detailCategoryId,
+    subCategoryId,
 }: CategorySearchParams) {
     const mainCategories = await getMainCategories();
 
@@ -26,13 +26,12 @@ export default async function CategoryListItem({
                 카테고리
             </h3>
             <Link
-                href={`/post?mainCategoryId=${0}`}
+                href={`/post`}
+                replace
                 scroll={false}
                 className={cn(
                     'text-sm w-full border-b py-4 hover:underline font-medium',
-                    mainCategoryId?.toString() === '0' || !mainCategoryId
-                        ? 'text-primary-100 font-bold'
-                        : '',
+                    !mainCategoryId ? 'text-primary-100 font-bold' : '',
                 )}
             >
                 전체
@@ -50,8 +49,8 @@ export default async function CategoryListItem({
 
                         <SubCategoryItem
                             mainCategoryId={item.id}
-                            detailCategoryId={detailCategoryId}
-                            subCategoryitem={item}
+                            subCategoryId={subCategoryId}
+                            mainCategoryItem={item.id}
                         />
                     </AccordionItem>
                 ))}
