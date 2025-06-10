@@ -41,6 +41,7 @@
     --radius-xl: calc(var(--radius) + 4px);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
+    --color-primary-50: #f4eaf6;
     --color-primary-100: #a856fa;
     --color-primary-200: #8645c8;
     --color-secondary-100: #dfebff;
@@ -62,6 +63,7 @@
     --color-point-green-200: #34c759;
     --color-point-blue-100: #e6f2ff;
     --color-point-blue-200: #007aff;
+    --color-point-skyblue-100: #ddf2ff;
     --color-point-yellow-100: #fffae6;
     --color-point-yellow-200: #ffcc00;
     --color-error: #eb5757;
@@ -103,6 +105,7 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --color-primary-50: #f4eaf6;
     --color-primary-100: #a856fa;
     --color-primary-200: #8645c8;
     --color-secondary-100: #dfebff;
@@ -124,6 +127,7 @@
     --color-point-green-200: #34c759;
     --color-point-blue-100: #e6f2ff;
     --color-point-blue-200: #007aff;
+    --color-point-skyblue-100: #ddf2ff;
     --color-point-yellow-100: #fffae6;
     --color-point-yellow-200: #ffcc00;
     --color-error: #eb5757;
