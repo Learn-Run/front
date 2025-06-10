@@ -10,7 +10,6 @@ import LogOutButton from './LogOutButton';
 export default async function SignButton() {
     const session = await getServerSession(options);
     const isSignedIn = !!session?.user as boolean;
-    console.log(session);
 
     return (
         <div className='col-span-6 md:col-span-2 xl:col-span-3 flex justify-end items-center gap-2'>
