@@ -18,7 +18,6 @@ export default function StepSection() {
                         지금 바로 질문해보기
                     </Button>
                 </Heading>
-
                 <StepCardList />
                 <StepCarouselList />
             </div>
