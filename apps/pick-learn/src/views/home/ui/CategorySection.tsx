@@ -13,15 +13,15 @@ export default async function CategorySection() {
                 Categories
             </h3>
             <ul className='hidden md:grid grid-cols-6'>
-                {categories.map((cat) => {
-                    const Icon = iconMapById[cat.id];
+                {categories.map((category) => {
+                    const Icon = iconMapById[category.id];
                     return (
                         <li
-                            key={cat.id}
+                            key={category.id}
                             className='col-span-1 justify-self-center'
                         >
                             <Link
-                                href={`/post?category=${cat.name}`}
+                                href={`/post?category=${category.id}`}
                                 className='flex flex-col items-center space-y-2'
                             >
                                 {Icon ? (
@@ -31,7 +31,7 @@ export default async function CategorySection() {
                                 )}
 
                                 <span className='text-sm text-gray-700 text-center'>
-                                    {cat.name}
+                                    {category.name}
                                 </span>
                             </Link>
                         </li>

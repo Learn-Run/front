@@ -9,7 +9,7 @@ export default function StepWrapper({
 }) {
     return (
         <section
-            className={cn('w-full py-[5rem] bg-gray-100 md:px-0', className)}
+            className={cn('w-full py-[5rem] bg-primary-50 md:px-0', className)}
         >
             {children}
         </section>

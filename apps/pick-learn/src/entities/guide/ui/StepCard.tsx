@@ -1,25 +1,35 @@
+import { StaticImageData } from 'next/image';
+
 import { cn } from '@repo/ui/lib/utils';
 
 export default function StepCard({
     children,
     className,
+    monster,
 }: {
     children?: React.ReactNode;
     className?: string;
+    monster?: StaticImageData;
 }) {
     return (
         <li
             className={cn(
-                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[264px] p-8 grid grid-rows-2',
+                'border border-gray-400 rounded-2xl list-none h-[364px] w-full max-w-[264px] p-6 grid grid-rows-2',
                 className,
             )}
+            style={{
+                backgroundImage: `url(${monster?.src})`,
+                backgroundSize: '80%',
+                backgroundPosition: 'center 0',
+                backgroundRepeat: 'no-repeat',
+            }}
         >
             {children}
         </li>
     );
 }
 const Icon = ({ children }: { children: React.ReactNode }) => {
-    return <div className='flex row-span-1'>{children}</div>;
+    return <div className='flex row-span-1 z-10'>{children}</div>;
 };
 
 const Contents = ({

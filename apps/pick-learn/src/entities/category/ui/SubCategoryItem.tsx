@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
 import { CategorySearchParams, MainCategoryType } from '../api/types';
-import { getSubCategories } from '../api';
+import { getSubCategoryListByMainCategoryId } from '../api';
 import { cn } from '@repo/ui/lib/utils';
 
 export default async function SubCategoryItem({
@@ -12,9 +12,19 @@ export default async function SubCategoryItem({
 }: CategorySearchParams & { subCategoryitem: MainCategoryType }) {
     const detailCategory = detailCategoryId || '';
     const selectedSubCategories = mainCategoryId
-        ? await getSubCategories(Number(mainCategoryId))
+        ? await getSubCategoryListByMainCategoryId(Number(mainCategoryId))
         : [];
-    const categoryAll = [{ id: 0, name: '전체' }, ...selectedSubCategories];
+    const categoryAll = [
+        {
+            id: 0,
+            name: '전체',
+            mainCategoryId: 0,
+            subCategoryId: 0,
+            subCategoryName: '전체',
+            subCategoryColor: '',
+        },
+        ...selectedSubCategories,
+    ];
 
     return (
         <AccordionContent>
@@ -37,7 +47,7 @@ export default async function SubCategoryItem({
                             className='block w-full text-left'
                             scroll={false}
                         >
-                            {detailItem.name}
+                            {detailItem.subCategoryName}
                         </Link>
                     </li>
                 ))}

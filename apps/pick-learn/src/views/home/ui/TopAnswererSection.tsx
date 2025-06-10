@@ -4,7 +4,7 @@ import StepWrapper from '@/shared/ui/Wrapper/StepWrapper';
 
 export default function TopAnswererSection() {
     return (
-        <StepWrapper>
+        <StepWrapper className='bg-point-skyblue-100'>
             <Heading align='center' className='space-y-4'>
                 <Heading.Title>
                     Top Answerer <br />

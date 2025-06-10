@@ -25,12 +25,17 @@ export default function BottomNavBar() {
                                 activeClass,
                             )}
                         >
-                            {Icon && (
-                                <Icon
-                                    className={cn('w-5 h-5 mb-1', activeClass)}
-                                />
-                            )}
-                            <Link href={item.href}>{item.name}</Link>
+                            <Link href={item.href}>
+                                {Icon && (
+                                    <Icon
+                                        className={cn(
+                                            'w-5 h-5 mb-1 flex items-center justify-center mx-auto',
+                                            activeClass,
+                                        )}
+                                    />
+                                )}
+                                {item.name}
+                            </Link>
                         </li>
                     );
                 })}

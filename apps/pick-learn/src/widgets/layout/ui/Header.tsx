@@ -11,10 +11,10 @@ export default function Header() {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 z-50 w-full bg-white backdrop-blur-xs',
+                'fixed  md:top-10 z-50 w-full md:w-[calc(100%-80px)] max-w-[1440px] md:rounded-full bg-white md:shadow-md md:mx-10 ',
             )}
         >
-            <div className='grid grid-cols-12 items-center container mx-auto px-4 2xl:px-0 h-[5rem]'>
+            <div className='grid grid-cols-12 items-center container mx-auto px-5 sm:px-10 2xl:px-0 h-[5rem]'>
                 <Link
                     href='/'
                     className='col-span-6 md:col-span-2 xl:col-span-3'
