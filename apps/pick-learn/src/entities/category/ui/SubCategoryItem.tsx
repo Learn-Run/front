@@ -21,11 +21,12 @@ export default async function SubCategoryItem({
             <ul className='w-full'>
                 <Link
                     href={`/post?mainCategoryId=${mainCategoryId}`}
+                    scroll={false}
+                    replace
                     className={cn(
                         'font-medium text-gray-600 w-full mx-2 mb-2',
                         !subCategoryId ? 'text-primary-100 font-bold' : '',
                     )}
-                    scroll={false}
                 >
                     전체
                 </Link>
@@ -46,8 +47,9 @@ export default async function SubCategoryItem({
                     >
                         <Link
                             href={`/post?mainCategoryId=${mainCategoryId}&subCategoryId=${detailItem.subCategoryId}&categoryListId=${detailItem.id}`}
-                            className='block w-full text-left'
                             scroll={false}
+                            replace={true}
+                            className='block w-full text-left'
                         >
                             {detailItem.subCategoryName}
                         </Link>

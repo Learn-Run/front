@@ -27,6 +27,7 @@ export default async function CategoryListItem({
             </h3>
             <Link
                 href={`/post`}
+                replace
                 scroll={false}
                 className={cn(
                     'text-sm w-full border-b py-4 hover:underline font-medium',
