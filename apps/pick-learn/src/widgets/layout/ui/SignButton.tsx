@@ -18,6 +18,13 @@ export default async function SignButton() {
             ) : (
                 <>
                     <Button
+                        variant='text'
+                        className='w-fit hidden md:block'
+                        asChild
+                    >
+                        <Link href={routes.signIn}>log in</Link>
+                    </Button>
+                    <Button
                         type='button'
                         variant='outline'
                         className='w-fit hidden md:block border-primary-100 text-primary-100'
