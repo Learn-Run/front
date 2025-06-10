@@ -1,25 +1,36 @@
 'use client';
-import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { routes } from '@/shared/model/constants/routes';
 import { Button } from '@repo/ui/components/base/Button';
 import Input from '@repo/ui/components/base/Input/index';
+import { signInSchema, SignInSchemaType } from '../model/schema';
 
 export default function SignInForm() {
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<SignInSchemaType>({
+        resolver: zodResolver(signInSchema),
+        mode: 'onChange',
+        defaultValues: {
+            loginId: '',
+            password: '',
+        },
+    });
+
     const searchParams = useSearchParams();
     const error = searchParams.get('error');
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const loginId = formData.get('loginId');
-        const password = formData.get('password');
-
+    const onSubmit = async (data: { loginId: string; password: string }) => {
         try {
             await signIn('credentials', {
-                loginId,
-                password,
+                loginId: data.loginId,
+                password: data.password,
                 callbackUrl: routes.home,
                 redirect: true,
             });
@@ -29,14 +40,34 @@ export default function SignInForm() {
     };
 
     return (
-        <form onSubmit={onSubmit} className='space-y-4 my-10'>
-            <Input name='loginId' label='아이디' required autoComplete='on' />
-            <Input
-                type='password'
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 my-10'>
+            <Controller
+                name='loginId'
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        label='아이디'
+                        required
+                        autoComplete='on'
+                        error={errors?.loginId?.message}
+                        {...field}
+                    />
+                )}
+            />
+
+            <Controller
                 name='password'
-                label='비밀번호'
-                required
-                autoComplete='on'
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        type='password'
+                        label='비밀번호'
+                        required
+                        autoComplete='on'
+                        error={errors?.password?.message}
+                        {...field}
+                    />
+                )}
             />
 
             {error ? (

@@ -82,6 +82,7 @@ export const options: NextAuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 token.accessToken = user.accessToken;
+                token.memberUuid = user.memberUuid;
             }
             return token;
         },
@@ -89,6 +90,7 @@ export const options: NextAuthOptions = {
             session.user = {
                 ...session.user,
                 accessToken: token.accessToken,
+                memberUuid: token.memberUuid,
             };
             return session;
         },
@@ -97,6 +99,6 @@ export const options: NextAuthOptions = {
         },
     },
     pages: {
-        signIn: '/sign-in',
+        signIn: routes.signIn,
     },
 };

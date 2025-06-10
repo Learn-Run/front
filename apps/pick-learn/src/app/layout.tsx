@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
 
 import { dmSans } from '@/shared/assets/fonts';
 import { ModalProvider } from '@/shared/model/modal/ModalContext';
 import './globals.css';
 import { BottomNavBar, Footer, Header } from '@/widgets/layout/ui';
+import { options } from './api/auth/[...nextauth]/options';
+import AuthContextProvider from '@/shared/ui/AuthContextProvider';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -42,18 +45,23 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const session = await getServerSession(options);
+    const isAuth = !!session?.user as boolean;
+
     return (
         <html lang='ko-KR'>
             <body className={dmSans.className}>
-                <Header />
-                <ModalProvider>{children}</ModalProvider>
-                <Footer />
-                <BottomNavBar />
+                <AuthContextProvider isAuth={isAuth}>
+                    <Header />
+                    <ModalProvider>{children}</ModalProvider>
+                    <Footer />
+                    <BottomNavBar />
+                </AuthContextProvider>
             </body>
         </html>
     );
