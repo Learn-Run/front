@@ -110,3 +110,13 @@ export const signUp = async (data: RequestSignUpDataType) => {
 
     return result;
 };
+
+export const createAgreement = async (agreement: {
+    agreementName: string;
+    agreementContent: string;
+    required: boolean;
+}) => {
+    await fetchData.post(`${services.member}/api/v1/agreement`, {
+        body: JSON.stringify(agreement),
+    });
+};
