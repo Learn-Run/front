@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getMainCategories } from '@/entities/category/api';
 import CategoryCarousel from './CategoryCarousel';
 import { iconMapById } from '../model/constants';
+// import CreateCategoryButton from './CreateCategoryButton';
 
 export default async function CategorySection() {
     const categories = await getMainCategories();
@@ -12,6 +13,7 @@ export default async function CategorySection() {
             <h3 className='text-center text-primary-100 font-medium text-2xl mt-[50px] mb-8'>
                 Categories
             </h3>
+            {/* <CreateCategoryButton /> */}
             <ul className='hidden md:grid grid-cols-6'>
                 {categories.map((category) => {
                     const Icon = iconMapById[category.id];

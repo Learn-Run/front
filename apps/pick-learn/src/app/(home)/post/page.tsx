@@ -9,6 +9,7 @@ export default async function page({
     searchParams: Promise<CategorySearchParams>;
 }) {
     const { mainCategoryId, subCategoryId } = await searchParams;
+
     return (
         <MainWrapper>
             <PostTopSection />
