@@ -61,7 +61,6 @@ export default function SignInForm() {
                 control={control}
                 render={({ field }) => (
                     <PasswordInput
-                        type='password'
                         label='비밀번호'
                         required
                         autoComplete='on'
