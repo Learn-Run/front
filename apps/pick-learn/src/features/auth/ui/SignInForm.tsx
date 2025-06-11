@@ -8,6 +8,7 @@ import { routes } from '@/shared/model/constants/routes';
 import { Button } from '@repo/ui/components/base/Button';
 import Input from '@repo/ui/components/base/Input/index';
 import { signInSchema, SignInSchemaType } from '../model/schema';
+import { PasswordInput } from '@/shared/ui';
 
 export default function SignInForm() {
     const {
@@ -59,7 +60,7 @@ export default function SignInForm() {
                 name='password'
                 control={control}
                 render={({ field }) => (
-                    <Input
+                    <PasswordInput
                         type='password'
                         label='비밀번호'
                         required
