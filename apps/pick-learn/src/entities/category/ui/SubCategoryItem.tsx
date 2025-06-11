@@ -10,35 +10,40 @@ export default async function SubCategoryItem({
     subCategoryId,
     mainCategoryItem,
 }: CategorySearchParams & { mainCategoryItem: number }) {
+    if (!mainCategoryItem) return;
+
     const detailCategory = subCategoryId || '';
-    const selectedSubCategories = mainCategoryId
-        ? await getSubCategoryListByMainCategoryId(Number(mainCategoryId))
-        : [];
+    const selectedSubCategories = await getSubCategoryListByMainCategoryId(
+        Number(mainCategoryItem),
+    );
 
     return (
         <AccordionContent>
             <ul className='w-full'>
-                <Link
-                    href={`/post?mainCategoryId=${mainCategoryId}`}
-                    scroll={false}
-                    replace
+                <li
                     className={cn(
                         'font-medium text-gray-600 w-full mx-2 mb-2',
-                        !subCategoryId ? 'text-primary-100 font-bold' : '',
+                        Number(mainCategoryId) === mainCategoryItem &&
+                            !subCategoryId
+                            ? 'text-primary-100 font-bold'
+                            : '',
                     )}
                 >
-                    전체
-                </Link>
+                    <Link
+                        href={`/post?mainCategoryId=${mainCategoryItem}`}
+                        scroll={false}
+                        replace
+                    >
+                        전체
+                    </Link>
+                </li>
 
-                {(mainCategoryItem === mainCategoryId
-                    ? selectedSubCategories
-                    : []
-                )?.map((detailItem) => (
+                {selectedSubCategories?.map((detailItem) => (
                     <li
                         key={detailItem.id}
                         className={cn(
                             'font-medium text-gray-600 w-full mx-2 mb-2',
-                            detailItem.subCategoryId === detailCategory
+                            detailItem.subCategoryId === Number(detailCategory)
                                 ? 'text-primary-100 font-bold'
                                 : '',
                         )}
