@@ -48,7 +48,7 @@ export default async function CategoryListItem({
                         </AccordionTrigger>
 
                         <SubCategoryItem
-                            mainCategoryId={item.id}
+                            mainCategoryId={mainCategoryId}
                             subCategoryId={subCategoryId}
                             mainCategoryItem={item.id}
                         />
