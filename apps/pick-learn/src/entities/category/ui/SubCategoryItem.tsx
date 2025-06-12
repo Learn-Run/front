@@ -1,12 +1,12 @@
 'use client';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
 import { CategoryProps } from '../api/types';
 
 import { cn } from '@repo/ui/lib/utils';
 import { categorySearchParams } from '../utils/categorySearchParams';
-import { useSearchParams } from 'next/navigation';
 
 type SubCategoryItemProps = Omit<CategoryProps, 'mainCategories'> & {
     mainCategories: number;
