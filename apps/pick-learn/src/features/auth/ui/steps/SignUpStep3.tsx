@@ -57,10 +57,10 @@ export default function SignUpStep3() {
         if (email === '') {
             clearErrors(['email', 'verificationCode']);
         }
-    }, [email]);
+    }, [email, clearErrors]);
 
     useEffect(() => {
-        if (email === '' || !debouncedEmail) return;
+        if (!debouncedEmail) return;
 
         const handleCheckEmailDuplicate = async () => {
             try {
@@ -82,7 +82,7 @@ export default function SignUpStep3() {
         };
 
         handleCheckEmailDuplicate();
-    }, [email, debouncedEmail, setError, clearErrors]);
+    }, [debouncedEmail, setError, clearErrors]);
 
     const handleSendEmail = async () => {
         const currentEmail = control._formValues.email;

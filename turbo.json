@@ -21,6 +21,8 @@
     "globalEnv": [
         "BASE_API_URL",
         "BASE_FRONT_URL",
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
         "KAKAO_CLIENT_ID",
         "KAKAO_CLIENT_SECRET",
         "AWS_ACCESS_KEY_ID",
