@@ -53,9 +53,11 @@ export default function SignUpStep3() {
     } = useTimer({
         initialTime: 300,
         onTimeEnd: () => {
-            setError('verificationCode', {
-                message: '인증 시간이 만료되었습니다. 다시 인증해주세요.',
-            });
+            if (!isEmailVerified) {
+                setError('verificationCode', {
+                    message: '인증 시간이 만료되었습니다. 다시 인증해주세요.',
+                });
+            }
         },
     });
 
@@ -72,9 +74,10 @@ export default function SignUpStep3() {
             try {
                 const result = await checkEmailDuplicate(debouncedEmail);
 
-                if (!result) {
+                if (!result.isSuccess) {
                     setError('email', {
-                        message: '이미 사용 중인 이메일입니다',
+                        message:
+                            result.message || '이미 사용 중인 이메일입니다',
                     });
                 } else {
                     clearErrors('email');
@@ -139,7 +142,7 @@ export default function SignUpStep3() {
             }
 
             clearErrors('verificationCode');
-            setValue('isEmailVerified', true);
+            setValue('isEmailVerified', result.isSuccess);
         } catch (error) {
             console.log('🚀 ~ handleClickEmailVerification ~ error:', error);
             setError('verificationCode', {
@@ -158,6 +161,7 @@ export default function SignUpStep3() {
                         <Input
                             label='이메일'
                             error={errors.email?.message as string}
+                            required
                             {...field}
                         >
                             <StatusCheckIcon
@@ -193,15 +197,14 @@ export default function SignUpStep3() {
                                     {formatTime()}
                                 </p>
                             )}
-                            {isEmailVerified && (
-                                <StatusCheckIcon status={isEmailVerified} />
-                            )}
+
+                            <StatusCheckIcon status={isEmailVerified} />
                         </Input>
                     )}
                 />
                 <Button
                     type='button'
-                    disabled={!isRunning || isEmailVerified}
+                    disabled={isEmailVerified}
                     className='w-fit h-[62px]'
                     onClick={handleClickEmailVerification}
                 >
