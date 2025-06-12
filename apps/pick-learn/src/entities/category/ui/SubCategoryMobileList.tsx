@@ -14,13 +14,13 @@ export default function SubCategoryMobileList({
 }: SubCategoryItemProps) {
     return (
         <ul className='absolute left-0 flex items-start justify-start overflow-x-auto'>
-            {categoryList[mainCategories - 1]?.map((detailItem, index) => {
+            {categoryList[mainCategories - 1]?.map((detailItem) => {
                 if (detailItem.mainCategoryId !== Number(mainCategoryId))
                     return;
 
                 return (
                     <li
-                        key={index}
+                        key={detailItem.subCategoryId}
                         className={cn(
                             'inline-block font-medium text-gray-600',
                             detailItem.subCategoryId === Number(subCategoryId)

@@ -40,9 +40,9 @@ export default function SubCategoryItem({
                     </Link>
                 </li>
 
-                {categoryList[mainCategories - 1]?.map((detailItem, index) => (
+                {categoryList[mainCategories - 1]?.map((detailItem) => (
                     <li
-                        key={index}
+                        key={detailItem.subCategoryId}
                         className={cn(
                             'font-medium text-gray-600 w-full mx-2 mb-2',
                             detailItem.subCategoryId === Number(detailCategory)
