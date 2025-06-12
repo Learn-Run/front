@@ -8,7 +8,7 @@ import OAuthSignIn from '@/features/auth/ui/OAuthSignIn';
 
 export default function SignInContainer() {
     return (
-        <div className='px-8 py-6 max-w-2xl mx-auto'>
+        <>
             <AuthHeading className='pt-2 pb-6'>
                 <AuthHeading.Title>LOGIN</AuthHeading.Title>
                 <AuthHeading.Desc>
@@ -28,6 +28,6 @@ export default function SignInContainer() {
                     회원가입하기
                 </Link>
             </p>
-        </div>
+        </>
     );
 }

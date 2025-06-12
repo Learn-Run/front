@@ -1,7 +1,5 @@
 'use client';
 import Back from '@/shared/assets/icons/Back';
-import Close from '@/shared/assets/icons/Close';
-import { useModalContext } from '@/shared/model/modal/ModalContext';
 import Stepper from '@repo/ui/components/base/Stepper';
 import { cn } from '@repo/ui/lib/utils';
 import { canGoBack } from '../utils';
@@ -19,8 +17,6 @@ export default function Navigator({
     totalStepCount,
     initStep = 1,
 }: NavigationProps) {
-    const { closeModal } = useModalContext();
-
     function handleBack(
         step: number,
         setStep: React.Dispatch<React.SetStateAction<number>>,
@@ -32,33 +28,31 @@ export default function Navigator({
     }
 
     return (
-        <section
-            className={cn(
-                'flex items-center',
-                !canGoBack(step, initStep) ? 'justify-end' : 'justify-between',
-            )}
-        >
+        <section className='grid grid-cols-12 items-center'>
             <button
                 type='button'
                 disabled={!canGoBack(step, initStep)}
                 className={cn(
-                    !canGoBack(step, initStep) ? 'hidden disabled:point-' : '',
+                    'w-12 h-12 flex items-center justify-center col-span-2',
+                    !canGoBack(step, initStep)
+                        ? 'hidden disabled:point-events-none'
+                        : 'cursor-pointer',
                 )}
                 onClick={() => handleBack(step, setStep, initStep)}
             >
                 <Back />
             </button>
 
-            {step > initStep && (
-                <Stepper
-                    currentStep={step - 1}
-                    totalSteps={totalStepCount - 1}
-                />
-            )}
+            <div className='col-span-8 justify-items-center'>
+                {step > initStep && (
+                    <Stepper
+                        currentStep={step - 1}
+                        totalSteps={totalStepCount - 1}
+                    />
+                )}
+            </div>
 
-            <button type='button' onClick={() => closeModal()}>
-                <Close />
-            </button>
+            <div className='col-span-2' />
         </section>
     );
 }

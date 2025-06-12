@@ -9,7 +9,7 @@ export default async function SignUpPage({
     const { provider } = await searchParams;
 
     return (
-        <MainWrapper className='pt-40'>
+        <MainWrapper className='px-8 py-6 max-w-2xl mx-auto pt-40'>
             <SignUpContainer provider={provider} />
         </MainWrapper>
     );
