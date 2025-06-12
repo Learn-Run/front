@@ -2,16 +2,8 @@
 import { useEffect } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
-import IconCalendar from '@/shared/assets/icons/IconCalendar';
-import { dateFormat } from '@/shared/utils/dateFormat';
 import { Button } from '@repo/ui/components/base/Button';
-import { Calendar } from '@repo/ui/components/base/Calendar';
 import Input from '@repo/ui/components/base/Input/index';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@repo/ui/components/base/Popover';
 import {
     Select,
     SelectContent,
@@ -21,7 +13,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@repo/ui/components/base/Select';
-import { cn } from '@repo/ui/lib/utils';
 import { genderOptions } from '../../model/constants';
 import { useDebounce } from '@/shared/model/hooks/useDebounce';
 import { useTimer } from '@/shared/model/hooks/useTimer';
@@ -31,6 +22,7 @@ import {
     sendEmailCode,
 } from '../../api';
 import { StatusCheckIcon } from '@/shared/ui';
+import DatePicker from '@/shared/ui/DatePicker';
 
 export default function SignUpStep3() {
     const {
@@ -217,37 +209,10 @@ export default function SignUpStep3() {
                 control={control}
                 render={({ field }) => (
                     <>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    variant='outline'
-                                    className={cn(
-                                        'w-full justify-between text-left font-normal border-gray-300 py-3',
-                                        !field.value && 'text-muted-foreground',
-                                    )}
-                                >
-                                    {field.value ? (
-                                        <span>{dateFormat(field.value)}</span>
-                                    ) : (
-                                        <span>Pick a date</span>
-                                    )}
-                                    <IconCalendar />
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent
-                                align='start'
-                                className=' w-auto p-0'
-                            >
-                                <Calendar
-                                    mode='single'
-                                    captionLayout='dropdown-buttons'
-                                    selected={field.value}
-                                    onSelect={field.onChange}
-                                    fromYear={1960}
-                                    toYear={2030}
-                                />
-                            </PopoverContent>
-                        </Popover>
+                        <DatePicker
+                            date={field.value}
+                            setDate={field.onChange}
+                        />
                         {errors.birthDate?.message ? (
                             <p className='text-sm text-error-200 pt-1 pl-3'>
                                 {errors.birthDate?.message as string}
