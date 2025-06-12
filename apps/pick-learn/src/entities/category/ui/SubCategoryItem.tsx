@@ -57,12 +57,12 @@ export default function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`/post?${categorySearchParams(
-                                Number(mainCategoryId),
-                                detailItem.subCategoryId,
-                                detailItem.id,
+                            href={`/post?${categorySearchParams({
+                                mainCategoryId: Number(mainCategoryId),
+                                subCategoryId: detailItem.subCategoryId,
+                                categoryListId: detailItem.id,
                                 sort,
-                            )}`}
+                            })}`}
                             scroll={false}
                             replace={true}
                             className='block w-full text-left'

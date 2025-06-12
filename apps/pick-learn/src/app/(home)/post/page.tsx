@@ -4,7 +4,7 @@ import PostFilterSection from '@/views/post/ui/PostFilterSection';
 import PostListSection from '@/views/post/ui/PostListSection';
 import PostTopSection from '@/views/post/ui/PostTopSection';
 
-export type SearchParams = {
+type SearchParams = {
     mainCategoryId: number;
     subCategoryId: number;
     categoryListId: number;

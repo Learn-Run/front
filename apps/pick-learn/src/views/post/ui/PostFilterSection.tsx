@@ -1,8 +1,9 @@
+import Link from 'next/link';
+
 import { categorySearchParams } from '@/entities/category/utils/categorySearchParams';
-import Filter from '@/shared/assets/icons/Filter';
 import { Button } from '@repo/ui/components/base/Button';
 import { cn } from '@repo/ui/lib/utils';
-import Link from 'next/link';
+import Filter from '@/shared/assets/icons/Filter';
 
 export default function PostFilterSection({
     mainCategoryId,
@@ -32,12 +33,12 @@ export default function PostFilterSection({
                     asChild
                 >
                     <Link
-                        href={`/post?${categorySearchParams(
+                        href={`/post?${categorySearchParams({
                             mainCategoryId,
                             subCategoryId,
                             categoryListId,
-                            'recent',
-                        )}`}
+                            sort: 'recent',
+                        })}`}
                     >
                         최신순
                     </Link>
@@ -52,12 +53,12 @@ export default function PostFilterSection({
                     asChild
                 >
                     <Link
-                        href={`/post?${categorySearchParams(
+                        href={`/post?${categorySearchParams({
                             mainCategoryId,
                             subCategoryId,
                             categoryListId,
-                            'popular',
-                        )}`}
+                            sort: 'popular',
+                        })}`}
                     >
                         인기순
                     </Link>

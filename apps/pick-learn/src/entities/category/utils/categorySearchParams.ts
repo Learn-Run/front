@@ -1,21 +1,28 @@
-export function categorySearchParams(
-    mainCategoryId: number,
-    subCategoryId: number,
-    categoryListId: number,
-    sort: string,
-) {
+interface CategorySearchParamsProps {
+    mainCategoryId?: number;
+    subCategoryId?: number;
+    categoryListId?: number;
+    sort?: string;
+}
+
+export function categorySearchParams(params: CategorySearchParamsProps) {
     const searchParams = new URLSearchParams();
 
-    if (mainCategoryId)
-        searchParams.set('mainCategoryId', mainCategoryId.toString());
+    if (params.mainCategoryId) {
+        searchParams.set('mainCategoryId', params.mainCategoryId.toString());
+    }
 
-    if (subCategoryId)
-        searchParams.set('subCategoryId', subCategoryId.toString());
+    if (params.subCategoryId) {
+        searchParams.set('subCategoryId', params.subCategoryId.toString());
+    }
 
-    if (categoryListId)
-        searchParams.set('categoryListId', categoryListId.toString());
+    if (params.categoryListId) {
+        searchParams.set('categoryListId', params.categoryListId.toString());
+    }
 
-    if (sort) searchParams.set('sort', sort);
+    if (params.sort) {
+        searchParams.set('sort', params.sort);
+    }
 
     return searchParams.toString();
 }
