@@ -6,20 +6,19 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
-import { getMainCategories } from '@/entities/category/api';
-import { CategorySearchParams } from '@/entities/category/api/types';
+import { CategoryProps } from '@/entities/category/api/types';
 import SubCategoryItem from './SubCategoryItem';
 
 export default async function CategoryListItem({
     mainCategoryId,
     subCategoryId,
-}: CategorySearchParams) {
-    const mainCategories = await getMainCategories();
-
+    categoryList,
+    mainCategories,
+}: CategoryProps) {
     return (
         <nav
             className={cn(
-                'bg-white shadow-md w-full max-w-[200px] h-full min-h-[388px] flex flex-col p-4',
+                'bg-white shadow-md w-full max-w-[200px] h-full min-h-[388px] flex-col p-4 hidden md:flex',
             )}
         >
             <h3 className='text-xl font-bold mx-2 text-primary-100 mb-4'>
@@ -50,7 +49,8 @@ export default async function CategoryListItem({
                         <SubCategoryItem
                             mainCategoryId={mainCategoryId}
                             subCategoryId={subCategoryId}
-                            mainCategoryItem={item.id}
+                            mainCategories={item.id}
+                            categoryList={categoryList}
                         />
                     </AccordionItem>
                 ))}

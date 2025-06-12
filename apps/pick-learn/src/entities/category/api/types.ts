@@ -18,7 +18,9 @@ export interface CategoryListType {
     subCategoryColor: string;
 }
 
-export interface CategorySearchParams {
+export interface CategoryProps {
     mainCategoryId: number;
     subCategoryId: number;
+    categoryList: CategoryListType[][];
+    mainCategories: MainCategoryType[];
 }
