@@ -14,7 +14,7 @@ export const getMainCategories = async (): Promise<MainCategoryType[]> => {
     return response.result;
 };
 
-export const getSubCategoryListByMainCategoryId = async (
+export const getCategoryList = async (
     mainCategoryId: number,
 ): Promise<CategoryListType[]> => {
     const response = await fetchData.get<CategoryListType[]>(

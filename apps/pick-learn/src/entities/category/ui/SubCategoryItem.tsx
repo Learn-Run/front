@@ -1,21 +1,23 @@
 import Link from 'next/link';
 
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
-import { CategorySearchParams } from '../api/types';
-import { getSubCategoryListByMainCategoryId } from '../api';
+import { CategoryProps } from '../api/types';
+
 import { cn } from '@repo/ui/lib/utils';
 
-export default async function SubCategoryItem({
+type SubCategoryItemProps = Omit<CategoryProps, 'mainCategories'> & {
+    mainCategories: number;
+};
+
+export default function SubCategoryItem({
     mainCategoryId,
     subCategoryId,
-    mainCategoryItem,
-}: CategorySearchParams & { mainCategoryItem: number }) {
-    if (!mainCategoryItem) return;
+    mainCategories,
+    categoryList,
+}: SubCategoryItemProps) {
+    if (!mainCategories) return;
 
     const detailCategory = subCategoryId || '';
-    const selectedSubCategories = await getSubCategoryListByMainCategoryId(
-        Number(mainCategoryItem),
-    );
 
     return (
         <AccordionContent>
@@ -23,14 +25,14 @@ export default async function SubCategoryItem({
                 <li
                     className={cn(
                         'font-medium text-gray-600 w-full mx-2 mb-2',
-                        Number(mainCategoryId) === mainCategoryItem &&
+                        Number(mainCategoryId) === mainCategories &&
                             !subCategoryId
                             ? 'text-primary-100 font-bold'
                             : '',
                     )}
                 >
                     <Link
-                        href={`/post?mainCategoryId=${mainCategoryItem}`}
+                        href={`/post?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                     >
@@ -38,9 +40,9 @@ export default async function SubCategoryItem({
                     </Link>
                 </li>
 
-                {selectedSubCategories?.map((detailItem) => (
+                {categoryList[mainCategories - 1]?.map((detailItem, index) => (
                     <li
-                        key={detailItem.id}
+                        key={index}
                         className={cn(
                             'font-medium text-gray-600 w-full mx-2 mb-2',
                             detailItem.subCategoryId === Number(detailCategory)
@@ -49,7 +51,7 @@ export default async function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${mainCategoryId}&subCategoryId=${detailItem.subCategoryId}&categoryListId=${detailItem.id}`}
+                            href={`/post?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}&categoryListId=${detailItem.id}`}
                             scroll={false}
                             replace={true}
                             className='block w-full text-left'
