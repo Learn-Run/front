@@ -54,8 +54,8 @@ export const options: NextAuthOptions = {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                provider: account.provider,
-                                providerId: account.providerAccountId,
+                                provider: account.provider.toUpperCase(),
+                                providerAccountId: account.providerAccountId,
                             }),
                             cache: 'no-cache',
                         },

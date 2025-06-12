@@ -28,3 +28,10 @@ export interface SignUpStepRendererProps {
     currentStep: SignUpStepsType[];
     step: number;
 }
+
+export interface OAuthSignUpFormProps {
+    step: number;
+    currentStep: SignUpStepsType[];
+    handleChangeStep: () => void;
+    totalStep: number;
+}

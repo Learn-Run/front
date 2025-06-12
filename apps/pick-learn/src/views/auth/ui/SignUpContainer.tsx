@@ -2,23 +2,26 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import { signUpSteps } from '@/features/auth/model/constants';
+import { oauthSignUpSteps, signUpSteps } from '@/features/auth/model/constants';
 import AuthHeading from '@/features/auth/ui/AuthHeading';
 import Navigator from '@/widgets/auth/ui/Navigator';
 import type { SignUpStepsType } from '@/features/auth/model/types';
-import SignUpForm from '@/features/auth/ui/SignUpForm';
+import SignUpForm from '@/features/auth/ui/CredentialsSignUpForm';
 import { routes } from '@/shared/model/constants/routes';
 import { getAgreeTermsByUuid, getAllAgreeTermsUuid } from '@/features/auth/api';
 import { applyServerFields } from '@/features/auth/model/applyServerFields';
+import OAuthSignUpForm from '@/features/auth/ui/OAuthSignUpForm';
 
-export default function SignUpContainer() {
-    const [allSteps, setAllSteps] = useState(signUpSteps);
-    const [step, setStep] = useState<number>(signUpSteps[0]?.id || 1);
+export default function SignUpContainer({ provider }: { provider?: string }) {
+    const [allSteps, setAllSteps] = useState(
+        provider ? oauthSignUpSteps : signUpSteps,
+    );
+    const [step, setStep] = useState<number>(allSteps[0]?.id || 1);
     const [currentStep, setCurrentStep] = useState<SignUpStepsType[]>([]);
 
     const handleChangeStep = () => {
         setStep((prev) => {
-            if (step >= signUpSteps.length) {
+            if (step >= allSteps.length) {
                 return prev;
             }
             return prev + 1;
@@ -32,7 +35,7 @@ export default function SignUpContainer() {
                     getAgreeTermsByUuid(agreementUuid),
                 ),
             );
-            setAllSteps(applyServerFields(signUpSteps, termDetails));
+            setAllSteps(applyServerFields(allSteps, termDetails));
         });
     }, []);
 
@@ -58,12 +61,21 @@ export default function SignUpContainer() {
                 </AuthHeading.Desc>
             </AuthHeading>
 
-            <SignUpForm
-                step={step}
-                handleChangeStep={handleChangeStep}
-                currentStep={currentStep}
-                totalStep={allSteps.length}
-            />
+            {provider ? (
+                <OAuthSignUpForm
+                    step={step}
+                    handleChangeStep={handleChangeStep}
+                    currentStep={currentStep}
+                    totalStep={allSteps.length}
+                />
+            ) : (
+                <SignUpForm
+                    step={step}
+                    handleChangeStep={handleChangeStep}
+                    currentStep={currentStep}
+                    totalStep={allSteps.length}
+                />
+            )}
 
             {step === allSteps[0]?.id ? (
                 <>

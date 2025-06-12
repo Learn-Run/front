@@ -5,6 +5,7 @@ import type { AgreeTermType } from '../../api/types';
 import { useAgreeTerms } from '../../model/hooks/useAgreeTerms';
 import { getAgreeTermsByUuid, getAllAgreeTermsUuid } from '../../api';
 import { AgreeAllTermsCheckbox, AgreeTermCheckbox } from '../../ui';
+// import CreateAgreementButton from '../CreateAgreementButton';
 
 export default function SignUpStep1() {
     const [allAgreeTerms, setAllAgreeTerms] = useState<AgreeTermType[]>([]);
@@ -45,6 +46,7 @@ export default function SignUpStep1() {
 
     return (
         <div className='space-y-4'>
+            {/* <CreateAgreementButton /> */}
             <AgreeAllTermsCheckbox onChange={handleAllTermsChange} />
             <hr />
             {allAgreeTerms.map(

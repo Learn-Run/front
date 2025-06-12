@@ -4,13 +4,14 @@ import { signIn } from 'next-auth/react';
 import { Button } from '@repo/ui/components/base/Button';
 
 export default function OAuthSignIn() {
-    const handleOauthSignIn = async (provider: 'kakao') => {
+    const handleOauthSignIn = async (provider: string) => {
         try {
             await signIn(provider);
         } catch (error) {
             console.log('🚀 ~ handleOauthSignIn ~ error:', error);
         }
     };
+
     return (
         <>
             <hr />
