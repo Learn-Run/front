@@ -47,7 +47,7 @@ export default function SignUpContainer({ provider }: { provider?: string }) {
     if (currentStep.length === 0) return null;
 
     return (
-        <div className='px-8 py-6 max-w-2xl mx-auto'>
+        <>
             <Navigator
                 step={step}
                 setStep={setStep}
@@ -91,6 +91,6 @@ export default function SignUpContainer({ provider }: { provider?: string }) {
                     </p>
                 </>
             ) : null}
-        </div>
+        </>
     );
 }
