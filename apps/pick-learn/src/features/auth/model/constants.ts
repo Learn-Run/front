@@ -1,7 +1,8 @@
 import { routes } from '@/shared/model/constants/routes';
 import type { SignUpStepsType } from './types';
 import { SignUpStep1, SignUpStep2, SignUpStep3 } from '../ui';
-import { SignUpSchemaType } from './schema';
+import { OAuthSignUpSchemaType, SignUpSchemaType } from './schema';
+import OAuthSignUpStep2 from '../ui/steps/OAuthSignUpStep2';
 
 export const withAuthList: string[] = [routes.chat];
 export const withOutAuthList = [routes.signIn, routes.signUp];
@@ -9,13 +10,11 @@ export const withOutAuthList = [routes.signIn, routes.signUp];
 export const signUpSteps: SignUpStepsType[] = [
     {
         id: 1,
-        isEnable: false,
         requiredFields: [],
         component: SignUpStep1,
     },
     {
         id: 2,
-        isEnable: false,
         requiredFields: [
             'name',
             'nickname',
@@ -29,7 +28,6 @@ export const signUpSteps: SignUpStepsType[] = [
     },
     {
         id: 3,
-        isEnable: false,
         requiredFields: [
             'email',
             'verificationCode',
@@ -49,6 +47,42 @@ export const DEFAULT_FORM_VALUES: SignUpSchemaType = {
     loginIdVerified: false,
     password: '',
     passwordConfirm: '',
+    email: '',
+    verificationCode: '',
+    isEmailVerified: false,
+    gender: '남성',
+    birthDate: new Date(),
+    agreementCheckList: [],
+};
+
+export const oauthSignUpSteps = [
+    {
+        id: 1,
+        requiredFields: [],
+        component: SignUpStep1,
+    },
+    {
+        id: 2,
+        requiredFields: ['name', 'nickname', 'nicknameVerified'],
+        component: OAuthSignUpStep2,
+    },
+    {
+        id: 3,
+        requiredFields: [
+            'email',
+            'verificationCode',
+            'isEmailVerified',
+            'gender',
+            'birthDate',
+        ],
+        component: SignUpStep3,
+    },
+];
+
+export const OAUTH_DEFAULT_FORM_VALUES: OAuthSignUpSchemaType = {
+    name: '',
+    nickname: '',
+    nicknameVerified: false,
     email: '',
     verificationCode: '',
     isEmailVerified: false,

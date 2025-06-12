@@ -28,5 +28,17 @@ export interface RequestSignUpDataType {
         agreementUuid: string;
         agreementStatus: boolean;
     }[];
-    userRole: '일반회원';
+}
+
+export interface RequestOAuthSignUpDataType
+    extends Omit<
+        RequestSignUpDataType,
+        'loginId' | 'password' | 'agreementCheckList'
+    > {
+    provider: string;
+    providerAccountId: string;
+    agreementCheckList: {
+        agreementUuid: string;
+        agreementStatus: boolean;
+    }[];
 }

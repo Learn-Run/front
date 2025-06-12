@@ -3,6 +3,7 @@ import { fetchData } from '@/shared/api/instance';
 import type {
     AgreeTermType,
     AgreeTermUuidType,
+    RequestOAuthSignUpDataType,
     RequestSignUpDataType,
 } from './types';
 import { services } from '@/shared/api/constants';
@@ -12,6 +13,7 @@ export const checkLoginIdDuplicate = async (loginId: string) => {
         `${services.member}/api/v1/auth/login-id/check-duplicate`,
         {
             body: JSON.stringify({ loginId }),
+            cache: 'no-cache',
         },
     );
 
@@ -25,6 +27,7 @@ export const checkNicknameDuplicate = async (nickname: string) => {
         `${services.profile}/api/v1/profile/nickname/check-duplicate`,
         {
             body: JSON.stringify({ nickname }),
+            cache: 'no-cache',
         },
     );
 
@@ -35,15 +38,16 @@ export const checkNicknameDuplicate = async (nickname: string) => {
 
 export const checkEmailDuplicate = async (email: string) => {
     const result = await fetchData.post(
-        `${services.member}/api/v1/auth/email/check-duplicate`,
+        `${services.member}/api/v1/member/email/check-duplicate`,
         {
             body: JSON.stringify({ email }),
+            cache: 'no-cache',
         },
     );
 
-    if (result.httpStatus === 'CONFLICT') return false;
+    if (result.httpStatus === 'CONFLICT') return result;
 
-    return result.isSuccess;
+    return result;
 };
 
 export const sendEmailCode = async (email: string) => {
@@ -82,7 +86,7 @@ export const getAllAgreeTermsUuid = async () => {
     const { result } = await fetchData.get<AgreeTermUuidType[]>(
         `${services.member}/api/v1/agreement/uuid/all`,
         {
-            cache: 'reload',
+            cache: 'no-cache',
         },
     );
 
@@ -93,7 +97,7 @@ export const getAgreeTermsByUuid = async (uuid: string) => {
     const { result } = await fetchData.get<AgreeTermType>(
         `${services.member}/api/v1/agreement/${uuid}`,
         {
-            cache: 'reload',
+            cache: 'no-cache',
         },
     );
 
@@ -101,12 +105,25 @@ export const getAgreeTermsByUuid = async (uuid: string) => {
 };
 
 export const signUp = async (data: RequestSignUpDataType) => {
+    console.log('🚀 ~ signUp ~ data:', data);
     const { result } = await fetchData.post(
         `${services.member}/api/v1/auth/sign-up`,
         {
             body: JSON.stringify(data),
         },
     );
+
+    return result;
+};
+
+export const oauthSignUp = async (data: RequestOAuthSignUpDataType) => {
+    const { result } = await fetchData.post(
+        `${services.member}/api/v1/oauth/sign-up`,
+        {
+            body: JSON.stringify(data),
+        },
+    );
+    console.log('🚀 ~ oauthSignUp ~ result:', result);
 
     return result;
 };
