@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 import { oauthSignUpSchema, type OAuthSignUpSchemaType } from '../model/schema';
 import { getCurrentStepValidation } from '../utils/getCurrentStepValidation';
@@ -10,7 +11,6 @@ import { OAUTH_DEFAULT_FORM_VALUES } from '../model/constants';
 import { SignUpStepRenderer, SignUpButton } from '.';
 import type { SignUpFormProps } from './types';
 import { oauthSignUp } from '../api';
-import { routes } from '@/shared/model/constants/routes';
 import { toOAuthSignUpData } from '../utils/convertSignUpData';
 
 export default function OAuthSignUpForm({
@@ -22,7 +22,6 @@ export default function OAuthSignUpForm({
     const searchParams = useSearchParams();
     const provider = searchParams.get('provider');
     const providerId = searchParams.get('providerId');
-    const router = useRouter();
 
     const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +42,8 @@ export default function OAuthSignUpForm({
                     providerId,
                 );
                 await oauthSignUp(oauthSignUpData);
-                router.push(routes.signIn);
+
+                await signIn(provider);
             }
         } catch (error) {
             setError('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
