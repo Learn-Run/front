@@ -15,6 +15,12 @@ export function Modal({ children }: { children: React.ReactNode }) {
         if (!dialogRef.current?.open) {
             dialogRef.current?.showModal();
         }
+
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
     }, []);
 
     function onDismiss() {
@@ -25,7 +31,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
     return createPortal(
         <div
-            className='fixed inset-0 bg-black/70 flex justify-center items-center z-[1000] px-5 md:px-0'
+            className='fixed inset-0 bg-black/70 flex justify-center items-center z-50 px-5 md:px-0'
             onClick={onDismiss}
         >
             <dialog

@@ -35,7 +35,7 @@ export default function SignUpContainer({ provider }: { provider?: string }) {
                     getAgreeTermsByUuid(agreementUuid),
                 ),
             );
-            setAllSteps(applyServerFields(allSteps, termDetails));
+            setAllSteps((prev) => applyServerFields(prev, termDetails));
         });
     }, []);
 
