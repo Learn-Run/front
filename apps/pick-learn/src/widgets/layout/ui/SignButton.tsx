@@ -6,6 +6,7 @@ import { routes } from '@/shared/model/constants/routes';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import LogIn from '@/shared/assets/icons/LogIn';
 import LogOutButton from './LogOutButton';
+import ProfileButton from './ProfileButton';
 
 export default async function SignButton() {
     const session = await getServerSession(options);
@@ -14,7 +15,10 @@ export default async function SignButton() {
     return (
         <div className='col-span-6 md:col-span-2 xl:col-span-3 flex justify-end items-center gap-2'>
             {isSignedIn ? (
-                <LogOutButton />
+                <>
+                    <ProfileButton />
+                    <LogOutButton />
+                </>
             ) : (
                 <>
                     <Button
