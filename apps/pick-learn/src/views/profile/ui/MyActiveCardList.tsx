@@ -1,6 +1,6 @@
 import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
-import { askItemList } from '@/entities/post/api/types';
+import { myActivePostList } from '@/entities/post/api/types';
 import BookMark from '@/shared/assets/icons/BookMark';
 import Shared from '@/shared/assets/icons/Shared';
 import { cn } from '@repo/ui/lib/utils';
@@ -13,7 +13,7 @@ export default function MyAskCardList({ className }: { className?: string }) {
                 className,
             )}
         >
-            {askItemList.map((item) => (
+            {myActivePostList.map((item) => (
                 <li
                     key={item.postUuid}
                     className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6 bg-white'

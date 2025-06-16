@@ -4,9 +4,9 @@ export interface ProfileImageType {
     alt: string;
 }
 export interface ProfileType {
-    gradName: string;
+    gradeName: string;
     nickName: string;
-    ProfileImage: ProfileImageType;
+    profileImage: ProfileImageType;
     selfIntroduction: string;
     categoryListIds: number[];
 }
