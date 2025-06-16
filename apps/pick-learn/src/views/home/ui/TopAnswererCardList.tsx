@@ -6,7 +6,7 @@ import Profile from '@/entities/member/ui/Profile';
 
 export default function TopAnswererCardList() {
     return (
-        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-5 container mx-auto px-4 md:px-0 items-center justify-items-center'>
+        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-5 container mx-auto px-4 md:px-0 items-center justify-items-center max-w-[1240px]'>
             {topAnswererList.map((item) => (
                 <li
                     className='overflow-hidden col-span-1 h-[418px] w-full max-w-[390px]'
