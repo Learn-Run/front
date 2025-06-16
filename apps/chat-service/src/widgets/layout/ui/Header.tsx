@@ -1,24 +1,24 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { cn } from '@repo/ui/src/lib/utils';
 import LogOutButton from './LogOutButton';
 import Nav from './Nav';
 import { routes } from '@/shared/model/routes';
 import Logo from '@/shared/assets/icons/logo.png';
-import Image from 'next/image';
 
 export default function Header({ className }: { className?: string }) {
     return (
         <header
             className={cn(
-                'w-full h-20 sm:h-full flex justify-between sm:flex-col items-center sm:items-start gap-6 sm:py-6',
+                'w-full h-14 sm:h-full flex justify-between sm:flex-col items-center sm:items-start gap-6 sm:py-6',
                 'border-b sm:border-b-0 sm:border-r border-gray-300',
                 'bg-white',
                 className,
             )}
         >
             <Link href={routes.home}>
-                <h1 className='max-w-[150px] w-full min-w-[100px] px-4 py-6'>
+                <h1 className='max-w-[180px] w-full min-w-[100px] px-4 py-6'>
                     <Image src={Logo} alt='Pick & Learn' />
                 </h1>
             </Link>
