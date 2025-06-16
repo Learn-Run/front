@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
     Accordion,
     AccordionContent,
@@ -5,8 +7,6 @@ import {
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
 import { cn } from '@repo/ui/lib/utils';
-import Link from 'next/link';
-import React from 'react';
 
 export default function ProfileMenu() {
     return (
@@ -19,6 +19,7 @@ export default function ProfileMenu() {
                 활동내역
             </h3>
             <Link
+                //merge후에 수정가능
                 href={`/post`}
                 replace
                 scroll={false}
