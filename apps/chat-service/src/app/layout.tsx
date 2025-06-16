@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 import { dmSans } from '@/shared/assets/fonts';
+import Header from '@/widgets/layout/ui/Header';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -48,7 +49,12 @@ export default function RootLayout({
     return (
         <html lang='ko-KR'>
             <body className={`${dmSans.className} antialiased`}>
-                {children}
+                <div className='grid grid-rows-[auto_1fr] sm:grid-rows-1 sm:grid-cols-12 h-dvh w-full min-w-svw'>
+                    <Header className='col-span-1 sm:col-span-4 md:col-span-3 lg:col-span-2' />
+                    <div className='row-span-1 sm:col-span-8 md:col-span-9 lg:col-span-10'>
+                        {children}
+                    </div>
+                </div>
             </body>
         </html>
     );
