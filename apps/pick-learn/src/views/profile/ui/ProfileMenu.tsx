@@ -7,6 +7,7 @@ import {
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
 import { cn } from '@repo/ui/lib/utils';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function ProfileMenu() {
     return (
@@ -20,7 +21,7 @@ export default function ProfileMenu() {
             </h3>
             <Link
                 //merge후에 수정가능
-                href={`/post`}
+                href={routes.profile}
                 replace
                 scroll={false}
                 className='text-sm w-full border-b py-4 hover:underline font-medium'
