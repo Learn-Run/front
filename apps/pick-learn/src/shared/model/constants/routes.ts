@@ -5,6 +5,7 @@ export const routes = {
     post: '/post',
     popularPosts: '/popular-posts',
     searchPosts: '/search-posts',
+    profile: '/profile',
     chat: '/chat',
     categoryAll: '/post?category=all',
     categoryArticle: '/post?category=article',
