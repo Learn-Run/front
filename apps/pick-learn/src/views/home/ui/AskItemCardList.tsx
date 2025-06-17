@@ -1,6 +1,6 @@
 import { PostListType } from '@/entities/post/api/types';
 import { cn } from '@repo/ui/lib/utils';
-// import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
+import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
 import BookMark from '@/shared/assets/icons/BookMark';
 import Shared from '@/shared/assets/icons/Shared';
@@ -35,7 +35,7 @@ export default async function AskItemCardList({
                                 <Shared />
                             </div>
                         </div>
-                        {/* <TopAskSubCategory item={item.categoryListId} /> */}
+                        <TopAskSubCategory item={item.subCategoryId} />
                         <h3 className='text-lg font-medium truncate w-full'>
                             {item.title}
                         </h3>
