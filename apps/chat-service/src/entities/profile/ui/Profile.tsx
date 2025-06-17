@@ -6,9 +6,11 @@ import { ProfileType } from '../model/types';
 export default function Profile({
     profile,
     className,
+    children,
 }: {
     profile?: ProfileType;
     className?: string;
+    children?: React.ReactNode;
 }) {
     if (!profile) return;
 
@@ -42,6 +44,7 @@ export default function Profile({
                     {profile.gradeName}
                 </p>
             </div>
+            {children}
         </div>
     );
 }
