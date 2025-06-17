@@ -51,3 +51,12 @@ export const createCategoryList = async (
         body: JSON.stringify({ mainCategoryId, subCategoryId }),
     });
 };
+
+export const getCategoryListByCategoryListId = async (
+    categoryListId: number,
+) => {
+    const response = await fetchData.get<CategoryListType>(
+        `${services.post}/api/v1/category-list/${categoryListId}`,
+    );
+    return response.result;
+};
