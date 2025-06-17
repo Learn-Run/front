@@ -105,7 +105,6 @@ export const getAgreeTermsByUuid = async (uuid: string) => {
 };
 
 export const signUp = async (data: RequestSignUpDataType) => {
-    console.log('🚀 ~ signUp ~ data:', data);
     const { result } = await fetchData.post(
         `${services.member}/api/v1/auth/sign-up`,
         {
@@ -123,7 +122,6 @@ export const oauthSignUp = async (data: RequestOAuthSignUpDataType) => {
             body: JSON.stringify(data),
         },
     );
-    console.log('🚀 ~ oauthSignUp ~ result:', result);
 
     return result;
 };
