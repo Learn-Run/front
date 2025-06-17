@@ -1,14 +1,19 @@
 import { getCategoryList, getMainCategories } from '@/entities/category/api';
-import { MainWrapper } from '@/shared/ui';
-import PostFilterSection from '@/views/post/ui/PostFilterSection';
-import PostListSection from '@/views/post/ui/PostListSection';
-import PostTopSection from '@/views/post/ui/PostTopSection';
+import { getPostList } from '@/entities/post/api';
+import { MainWrapper, Pagination } from '@/shared/ui';
+import {
+    PostFilterSection,
+    PostListSection,
+    PostTopSection,
+} from '@/views/post/ui';
 
 type SearchParams = {
     mainCategoryId: number;
     subCategoryId: number;
     categoryListId: number;
-    sort: string;
+    sort?: string;
+    page?: number;
+    size?: number;
 };
 
 export default async function page({
@@ -16,30 +21,31 @@ export default async function page({
 }: {
     searchParams: Promise<SearchParams>;
 }) {
-    const { mainCategoryId, subCategoryId, categoryListId, sort } =
-        await searchParams;
+    const params = await searchParams;
+
+    const zeroPage = params.page ? Math.floor(params.page - 1) : 0;
     const mainCategories = await getMainCategories();
     const categoryList = await Promise.all(
         mainCategories.map(async (mainCategory) => {
             return await getCategoryList(mainCategory.id);
         }),
     );
+    const postList = await getPostList({
+        ...params,
+        page: zeroPage,
+    });
 
     return (
         <MainWrapper>
             <PostTopSection />
-            <PostFilterSection
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
-                categoryListId={categoryListId}
-                sort={sort}
-            />
+            <PostFilterSection searchParams={params} />
             <PostListSection
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
+                searchParams={params}
                 categoryList={categoryList}
                 mainCategories={mainCategories}
+                postList={postList}
             />
+            <Pagination totalPage={postList.totalPage} />
         </MainWrapper>
     );
 }

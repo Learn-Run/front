@@ -1,4 +1,4 @@
-import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
+// import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
 import { myActivePostList } from '@/entities/post/api/types';
 import BookMark from '@/shared/assets/icons/BookMark';
@@ -25,7 +25,7 @@ export default function MyAskCardList({ className }: { className?: string }) {
                             <Shared />
                         </div>
                     </div>
-                    <TopAskSubCategory item={item.category} />
+                    {/* <TopAskSubCategory item={item.category} /> */}
                     <h3 className='text-lg font-medium'>{item.title}</h3>
                     <p className='text-sm text-gray-700'>{item.contents}</p>
                 </li>

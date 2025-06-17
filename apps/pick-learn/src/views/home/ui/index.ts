@@ -1,5 +1,19 @@
 import StepSection from './StepSection';
-import StepCardList from '../../../entities/guide/ui/StepCardList';
-import StepCardCarousel from '../../../entities/guide/ui/StepCarouseList';
+import TopAskSection from './TopAskSection';
+import TopAnswererCardList from './TopAnswererCardList';
+import TopAnswererSection from './TopAnswererSection';
+import HeroSection from './HeroSection';
+import CreateCategoryButton from './CreateCategoryButton';
+import CategorySection from './CategorySection';
+import CategoryCarousel from './CategoryCarousel';
 
-export { StepSection, StepCardList, StepCardCarousel };
+export {
+    StepSection,
+    TopAskSection,
+    TopAnswererCardList,
+    TopAnswererSection,
+    HeroSection,
+    CreateCategoryButton,
+    CategorySection,
+    CategoryCarousel,
+};

@@ -2,11 +2,10 @@ import Image from 'next/image';
 
 import RankLabel from '@/entities/post/ui/RankLabel';
 import { topAnswererList } from '@/entities/member/api/types';
-import Profile from '@/entities/member/ui/Profile';
 
 export default function TopAnswererCardList() {
     return (
-        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-5 container mx-auto px-4 md:px-0 items-center justify-items-center'>
+        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-5 container mx-auto px-4 md:px-0 items-center justify-items-center max-w-[1240px]'>
             {topAnswererList.map((item) => (
                 <li
                     className='overflow-hidden col-span-1 h-[418px] w-full max-w-[390px]'
@@ -27,10 +26,10 @@ export default function TopAnswererCardList() {
                                 {item.selfintroduction}
                             </p>
                             <hr className='border-white' />
-                            <Profile
+                            {/* <Profile
                                 memberUuid={item.memberUuid}
                                 className='text-white'
-                            />
+                            /> */}
                         </div>
                     </div>
                 </li>

@@ -4,11 +4,13 @@ import { Button } from '@repo/ui/components/base/Button';
 import { cn } from '@repo/ui/lib/utils';
 
 export default function CategoryNameItem({
-    text = 'all',
+    mainCategoryId,
+    categoryName,
     className,
 }: {
-    text: string;
+    mainCategoryId: number;
     className?: string;
+    categoryName: string;
 }) {
     return (
         <li>
@@ -20,8 +22,12 @@ export default function CategoryNameItem({
                 )}
                 asChild
             >
-                <Link href={`?category=${text}`} replace scroll={false}>
-                    {text}
+                <Link
+                    href={`/?mainCategoryId=${mainCategoryId}`}
+                    replace
+                    scroll={false}
+                >
+                    {categoryName}
                 </Link>
             </Button>
         </li>

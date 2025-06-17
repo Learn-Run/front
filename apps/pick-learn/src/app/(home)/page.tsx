@@ -8,16 +8,26 @@ import TopAskSection from '@/views/home/ui/TopAskSection';
 export default async function Home({
     searchParams,
 }: {
-    searchParams: Promise<{ category: string }>;
+    searchParams: Promise<{
+        mainCategoryId: number;
+        page?: number;
+        size?: number;
+        categoryListId?: number;
+    }>;
 }) {
-    const { category } = await searchParams;
+    const { mainCategoryId, page, size, categoryListId } = await searchParams;
 
     return (
         <MainWrapper>
             <HeroSection />
             <CategorySection />
             <StepSection />
-            <TopAskSection category={category} />
+            <TopAskSection
+                mainCategoryId={mainCategoryId}
+                page={page}
+                size={size}
+                categoryListId={categoryListId}
+            />
             <TopAnswererSection />
         </MainWrapper>
     );

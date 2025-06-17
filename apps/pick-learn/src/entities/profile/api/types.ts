@@ -10,3 +10,9 @@ export interface ProfileType {
     selfIntroduction: string;
     categoryListIds: number[];
 }
+
+export interface WriterProfileType {
+    memberUuid: string;
+    nickname: string;
+    profileImage: ProfileImageType;
+}

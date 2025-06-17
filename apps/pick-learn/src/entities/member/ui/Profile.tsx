@@ -1,29 +1,28 @@
 import Image from 'next/image';
 
-import { memberList, ProfileType, topAnswererList } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
+import { getWrtierProfileByMemberUuid } from '@/entities/profile/api';
+import { S3_BASE_URL } from '@/shared/model/constants';
 
 interface ProfileProps {
     memberUuid: string;
     className?: string;
 }
 
-export default function Profile({ memberUuid, className }: ProfileProps) {
-    //FIXME: api 연동 후 수정 필요
-    const member =
-        memberList.find((member) => member.memberUuid === memberUuid) ||
-        (topAnswererList.find(
-            (member) => member.memberUuid === memberUuid,
-        ) as ProfileType);
+export default async function Profile({ memberUuid, className }: ProfileProps) {
+    if (!memberUuid) return;
+    const member = await getWrtierProfileByMemberUuid(memberUuid);
+    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
+    const alt = member?.profileImage?.alt || member?.nickname;
 
     if (!member) return;
-
     return (
         <div className={cn('flex gap-x-2.5 items-center w-full', className)}>
             <Image
                 className='w-7 h-7 rounded-full bg-gray-600/20'
-                src={member?.profileImage}
-                alt={member?.alt}
+                src={imageUrl}
+                alt={alt || ''}
                 width={28}
                 height={28}
             />

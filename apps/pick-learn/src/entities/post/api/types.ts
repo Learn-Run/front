@@ -9,6 +9,23 @@ export interface AskItem {
     blindStatus: boolean;
 }
 
+export interface PostListType {
+    posts: {
+        postUuid: string;
+        memberUuid: string;
+        categoryListId: number;
+        title: string;
+        contents: string;
+        blindStatus: boolean;
+        deletedStatus: boolean;
+    }[];
+    page: number;
+    size: number;
+    hasNext: boolean;
+    totalElements: number;
+    totalPage: number;
+}
+
 export const askItemList: AskItem[] = [
     {
         postUuid: '1',
