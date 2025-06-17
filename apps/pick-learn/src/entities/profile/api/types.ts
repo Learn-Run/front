@@ -14,5 +14,6 @@ export interface ProfileType {
 export interface WriterProfileType {
     memberUuid: string;
     nickname: string;
+    gradeName: string;
     profileImage: ProfileImageType;
 }
