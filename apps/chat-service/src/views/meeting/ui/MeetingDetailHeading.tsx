@@ -1,10 +1,10 @@
-import { MEETING_DATA } from '@/app/(home)/meeting/page';
 import Heading from '@/shared/ui/Heading';
 import { dateFormat } from '@/shared/utils/dateFormat';
 import MeetingParticipants from './MeetingParticipants';
 import { Profile } from '@/entities/profile/ui';
 import VerticalEllipsis from '@/shared/assets/icons/VerticalEllipsis';
 import { PROFILE } from '@/entities/profile/model/constants';
+import { MEETING_DATA } from '@/entities/meeting/model/constants';
 
 export default function MeetingDetailHeading({
     meetingData,

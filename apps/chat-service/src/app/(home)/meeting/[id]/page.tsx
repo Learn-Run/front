@@ -1,5 +1,5 @@
+import { MEETING_DATA } from '@/entities/meeting/model/constants';
 import Heading from '@/shared/ui/Heading';
-import { MEETING_DATA } from '../page';
 import MeetingDetailHeading from '@/views/meeting/ui/MeetingDetailHeading';
 
 export default async function MeetingDetailPage({
