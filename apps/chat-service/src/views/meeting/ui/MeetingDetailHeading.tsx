@@ -3,8 +3,8 @@ import Heading from '@/shared/ui/Heading';
 import { dateFormat } from '@/shared/utils/dateFormat';
 import MeetingParticipants from './MeetingParticipants';
 import { Profile } from '@/entities/profile/ui';
-import { PROFILE } from '@/app/(home)/meeting/[id]/page';
 import VerticalEllipsis from '@/shared/assets/icons/VerticalEllipsis';
+import { PROFILE } from '@/entities/profile/model/constants';
 
 export default function MeetingDetailHeading({
     meetingData,

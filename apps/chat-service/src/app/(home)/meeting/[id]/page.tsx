@@ -2,19 +2,6 @@ import Heading from '@/shared/ui/Heading';
 import { MEETING_DATA } from '../page';
 import MeetingDetailHeading from '@/views/meeting/ui/MeetingDetailHeading';
 
-export const PROFILE = {
-    memberUuid: 'user1',
-    nickname: 'User One',
-    profileImage: {
-        type: 'image',
-        imageUrl: 'https://picsum.photos/id/30/200/300',
-        alt: 'User One Profile Image',
-    },
-    gradeName: 'White',
-    selfIntroduction: 'Hello, I am User One.',
-    categoryListIds: [1, 2, 3],
-};
-
 export default async function MeetingDetailPage({
     params,
 }: {
