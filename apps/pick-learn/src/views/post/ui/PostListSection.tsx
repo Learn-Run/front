@@ -8,20 +8,19 @@ import { PostListType } from '@/entities/post/api/types';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
 
 export interface postListSectionProps {
-    mainCategoryId: number;
-    subCategoryId: number;
+    searchParams: {
+        mainCategoryId: number;
+        subCategoryId: number;
+        categoryListId: number;
+        sort?: string;
+    };
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
-    page?: number;
-    size?: number;
-    categoryListId?: number;
-    sort?: string;
     postList: PostListType;
 }
 
 export default async function PostListSection({
-    mainCategoryId,
-    subCategoryId,
+    searchParams,
     categoryList,
     mainCategories,
     postList,
@@ -29,14 +28,12 @@ export default async function PostListSection({
     return (
         <section className='flex flex-col md:flex-row md:justify-between md:items-start container mx-auto m-5 gap-5 px-4 md:px-0 2xl:px-0 max-w-[1240px]'>
             <CategoryListItem
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
+                searchParams={searchParams}
                 categoryList={categoryList}
                 mainCategories={mainCategories}
             />
             <CategoryMobileList
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
+                searchParams={searchParams}
                 categoryList={categoryList}
                 mainCategories={mainCategories}
             />

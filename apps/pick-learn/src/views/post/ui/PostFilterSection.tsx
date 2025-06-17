@@ -6,15 +6,14 @@ import { cn } from '@repo/ui/lib/utils';
 import Filter from '@/shared/assets/icons/Filter';
 
 export default function PostFilterSection({
-    mainCategoryId,
-    subCategoryId,
-    categoryListId,
-    sort,
+    searchParams,
 }: {
-    mainCategoryId?: number;
-    subCategoryId: number;
-    categoryListId: number;
-    sort?: string;
+    searchParams: {
+        mainCategoryId?: number;
+        subCategoryId: number;
+        categoryListId: number;
+        sort?: string;
+    };
 }) {
     return (
         <section className='flex justify-between container mx-auto gap-5 px-4 md:px-0 2xl:px-0 pt-15 pb-5 max-w-[1240px]'>
@@ -27,16 +26,14 @@ export default function PostFilterSection({
                     variant='outline'
                     className={cn(
                         'px-4 py-2 text-regular',
-                        sort === 'recent' &&
+                        searchParams.sort === 'recent' &&
                             'bg-primary-100 text-white font-semibold hover:bg-primary-100',
                     )}
                     asChild
                 >
                     <Link
                         href={`/post?${categorySearchParams({
-                            mainCategoryId,
-                            subCategoryId,
-                            categoryListId,
+                            ...searchParams,
                             sort: 'recent',
                         })}`}
                     >
@@ -47,16 +44,14 @@ export default function PostFilterSection({
                     variant='outline'
                     className={cn(
                         'px-4 py-2 text-regular',
-                        sort === 'popular' &&
+                        searchParams.sort === 'popular' &&
                             'bg-primary-100 text-white font-semibold hover:bg-primary-100',
                     )}
                     asChild
                 >
                     <Link
                         href={`/post?${categorySearchParams({
-                            mainCategoryId,
-                            subCategoryId,
-                            categoryListId,
+                            ...searchParams,
                             sort: 'popular',
                         })}`}
                     >

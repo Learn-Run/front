@@ -2,6 +2,7 @@
 import { Button } from '@repo/ui/components/base/Button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import LeftChevron from '../assets/icons/LeftChevron';
+import { getPageGroup } from '../utils/getPageGroup';
 
 export default function PostPagination({ totalPage }: { totalPage: number }) {
     const router = useRouter();
@@ -10,21 +11,13 @@ export default function PostPagination({ totalPage }: { totalPage: number }) {
     const rawPage = Number(searchParams.get('page'));
     const currentPage = isNaN(rawPage) || rawPage < 1 ? 1 : rawPage;
 
-    const groupSize = 4;
-    const getPageGroup = () => {
-        const currentGroup = Math.floor((currentPage - 1) / groupSize);
-        const start = currentGroup * groupSize + 1;
-        const end = Math.min(start + groupSize - 1, totalPage);
-        const pages = [];
-        for (let i = start; i <= end; i++) {
-            pages.push(i);
-        }
-        return pages;
-    };
-    const currentGroup = Math.floor((currentPage - 1) / groupSize);
+    const GROUP_SIZE = 4;
 
-    const pageNumbers = totalPage === 0 ? [] : getPageGroup();
-    const hasNextGroup = (currentGroup + 1) * groupSize < totalPage;
+    const currentGroup = Math.floor((currentPage - 1) / GROUP_SIZE);
+
+    const pageNumbers =
+        totalPage === 0 ? [] : getPageGroup(currentPage, totalPage, GROUP_SIZE);
+    const hasNextGroup = (currentGroup + 1) * GROUP_SIZE < totalPage;
     const hasPrevGroup = currentGroup > 0;
 
     const handleChangePage = (newPage: number) => {
@@ -46,7 +39,7 @@ export default function PostPagination({ totalPage }: { totalPage: number }) {
                             disabled={currentPage === 1}
                             onClick={() =>
                                 handleChangePage(
-                                    Math.max(1, currentGroup * groupSize),
+                                    Math.max(1, currentGroup * GROUP_SIZE),
                                 )
                             }
                         >
@@ -96,8 +89,8 @@ export default function PostPagination({ totalPage }: { totalPage: number }) {
                             onClick={() => {
                                 if (hasNextGroup) {
                                     handleChangePage(
-                                        Math.ceil(currentPage / groupSize) *
-                                            groupSize +
+                                        Math.ceil(currentPage / GROUP_SIZE) *
+                                            GROUP_SIZE +
                                             1,
                                     );
                                 } else {

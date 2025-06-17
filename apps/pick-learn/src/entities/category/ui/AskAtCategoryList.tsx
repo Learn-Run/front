@@ -1,8 +1,10 @@
-import { cn } from '@repo/ui/lib/utils';
-import { getMainCategories } from '../api';
-import CategoryNameItem from './CategoryNameItem';
 import Link from 'next/link';
+
+import { getMainCategories } from '../api';
 import { Button } from '@repo/ui/components/base/Button';
+import { routes } from '@/shared/model/constants/routes';
+import { cn } from '@repo/ui/lib/utils';
+import CategoryNameItem from './CategoryNameItem';
 
 export default async function AskAtCategoryList({
     mainCategoryId,
@@ -23,7 +25,7 @@ export default async function AskAtCategoryList({
                             : '',
                     )}
                 >
-                    <Link href={`/`} replace scroll={false}>
+                    <Link href={routes.home} replace scroll={false}>
                         전체
                     </Link>
                 </Button>

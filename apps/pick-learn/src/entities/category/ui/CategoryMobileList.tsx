@@ -1,15 +1,25 @@
 import Link from 'next/link';
 
 import { cn } from '@repo/ui/lib/utils';
-import { CategoryProps } from '../api/types';
+import { CategoryListType, MainCategoryType } from '../api/types';
 import SubCategoryMobileList from './SubCategoryMobileList';
 
+type CategoryMobileListProps = {
+    searchParams: {
+        mainCategoryId: number;
+        subCategoryId: number;
+        categoryListId: number;
+        sort?: string;
+    };
+    categoryList: CategoryListType[][];
+    mainCategories: MainCategoryType[];
+};
+
 export default function CategoryMobileList({
-    mainCategoryId,
-    subCategoryId,
+    searchParams,
     categoryList,
     mainCategories,
-}: CategoryProps) {
+}: CategoryMobileListProps) {
     return (
         <nav
             className={cn(
@@ -26,7 +36,8 @@ export default function CategoryMobileList({
                                 scroll={false}
                                 className={cn(
                                     '',
-                                    Number(mainCategoryId) === item.id
+                                    Number(searchParams.mainCategoryId) ===
+                                        item.id
                                         ? 'text-primary-100 font-bold'
                                         : '',
                                 )}
@@ -37,8 +48,8 @@ export default function CategoryMobileList({
 
                         <SubCategoryMobileList
                             categoryList={categoryList}
-                            mainCategoryId={mainCategoryId}
-                            subCategoryId={subCategoryId}
+                            mainCategoryId={searchParams.mainCategoryId}
+                            subCategoryId={searchParams.subCategoryId}
                             mainCategories={item.id}
                         />
                     </li>

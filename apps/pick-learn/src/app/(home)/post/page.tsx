@@ -1,10 +1,11 @@
 import { getCategoryList, getMainCategories } from '@/entities/category/api';
 import { getPostList } from '@/entities/post/api';
-import { MainWrapper } from '@/shared/ui';
-import Pagination from '@/shared/ui/Pagination';
-import PostFilterSection from '@/views/post/ui/PostFilterSection';
-import PostListSection from '@/views/post/ui/PostListSection';
-import PostTopSection from '@/views/post/ui/PostTopSection';
+import { MainWrapper, Pagination } from '@/shared/ui';
+import {
+    PostFilterSection,
+    PostListSection,
+    PostTopSection,
+} from '@/views/post/ui';
 
 type SearchParams = {
     mainCategoryId: number;
@@ -20,9 +21,9 @@ export default async function page({
 }: {
     searchParams: Promise<SearchParams>;
 }) {
-    const { mainCategoryId, subCategoryId, categoryListId, sort, page, size } =
-        await searchParams;
-    const zeroPage = page ? Math.floor(page - 1) : 0;
+    const params = await searchParams;
+
+    const zeroPage = params.page ? Math.floor(params.page - 1) : 0;
     const mainCategories = await getMainCategories();
     const categoryList = await Promise.all(
         mainCategories.map(async (mainCategory) => {
@@ -30,29 +31,18 @@ export default async function page({
         }),
     );
     const postList = await getPostList({
-        sort,
+        ...params,
         page: zeroPage,
-        size,
-        categoryListId,
     });
 
     return (
         <MainWrapper>
             <PostTopSection />
-            <PostFilterSection
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
-                categoryListId={categoryListId}
-                sort={sort}
-            />
+            <PostFilterSection searchParams={params} />
             <PostListSection
-                mainCategoryId={mainCategoryId}
-                subCategoryId={subCategoryId}
+                searchParams={params}
                 categoryList={categoryList}
                 mainCategories={mainCategories}
-                page={page}
-                size={size}
-                categoryListId={categoryListId}
                 postList={postList}
             />
             <Pagination totalPage={postList.totalPage} />

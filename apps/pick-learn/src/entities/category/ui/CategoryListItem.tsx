@@ -6,15 +6,28 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
-import { CategoryProps } from '@/entities/category/api/types';
+import {
+    CategoryListType,
+    MainCategoryType,
+} from '@/entities/category/api/types';
 import SubCategoryItem from './SubCategoryItem';
 
+type CategoryListItemProps = {
+    searchParams: {
+        mainCategoryId: number;
+        subCategoryId: number;
+        categoryListId: number;
+        sort?: string;
+    };
+    categoryList: CategoryListType[][];
+    mainCategories: MainCategoryType[];
+};
+
 export default async function CategoryListItem({
-    mainCategoryId,
-    subCategoryId,
+    searchParams,
     categoryList,
     mainCategories,
-}: CategoryProps) {
+}: CategoryListItemProps) {
     return (
         <nav
             className={cn(
@@ -30,7 +43,9 @@ export default async function CategoryListItem({
                 scroll={false}
                 className={cn(
                     'text-sm w-full border-b py-4 hover:underline font-medium',
-                    !mainCategoryId ? 'text-primary-100 font-bold' : '',
+                    !searchParams.mainCategoryId
+                        ? 'text-primary-100 font-bold'
+                        : '',
                 )}
             >
                 전체
@@ -38,7 +53,7 @@ export default async function CategoryListItem({
             <Accordion
                 type='single'
                 collapsible
-                defaultValue={mainCategoryId?.toString()}
+                defaultValue={searchParams.mainCategoryId?.toString()}
             >
                 {mainCategories.map((item) => (
                     <AccordionItem key={item.id} value={String(item.id)}>
@@ -47,8 +62,8 @@ export default async function CategoryListItem({
                         </AccordionTrigger>
 
                         <SubCategoryItem
-                            mainCategoryId={mainCategoryId}
-                            subCategoryId={subCategoryId}
+                            mainCategoryId={searchParams.mainCategoryId}
+                            subCategoryId={searchParams.subCategoryId}
                             mainCategories={item.id}
                             categoryList={categoryList}
                         />
