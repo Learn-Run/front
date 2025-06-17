@@ -13,7 +13,8 @@ export interface PostListType {
     posts: {
         postUuid: string;
         memberUuid: string;
-        categoryListId: number;
+        mainCategoryId: number;
+        subCategoryId: number;
         title: string;
         contents: string;
         blindStatus: boolean;
