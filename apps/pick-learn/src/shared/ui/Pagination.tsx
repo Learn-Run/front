@@ -1,6 +1,7 @@
 'use client';
-import { Button } from '@repo/ui/components/base/Button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+import { Button } from '@repo/ui/components/base/Button';
 import LeftChevron from '../assets/icons/LeftChevron';
 import { getPageGroup } from '../utils/getPageGroup';
 
