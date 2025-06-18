@@ -7,8 +7,9 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from '@repo/ui/components/base/Carousel';
-import { MainCategoryType } from '@/entities/category/api/types';
+import { routes } from '@/shared/model/constants/routes';
 import { iconMapById } from '../model/constants';
+import { MainCategoryType } from '@/entities/category/api/types';
 
 export default function CategoryCarousel({
     categories,
@@ -25,7 +26,7 @@ export default function CategoryCarousel({
                             <CarouselItem key={category.id}>
                                 <li className='list-none  w-full max-w-[200px] flex flex-col items-center justify-center space-y-2'>
                                     <Link
-                                        href={`/post?category=${category.id}`}
+                                        href={`${routes.post}?category=${category.id}`}
                                         className='flex flex-col items-center space-y-2'
                                     >
                                         {Icon ? (

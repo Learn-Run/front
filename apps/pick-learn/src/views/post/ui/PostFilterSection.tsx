@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
-import { categorySearchParams } from '@/entities/category/utils/categorySearchParams';
-import { Button } from '@repo/ui/components/base/Button';
 import { cn } from '@repo/ui/lib/utils';
+import { Button } from '@repo/ui/components/base/Button';
+import { routes } from '@/shared/model/constants/routes';
+import { categorySearchParams } from '@/entities/category/utils/categorySearchParams';
 import Filter from '@/shared/assets/icons/Filter';
 
 export default function PostFilterSection({
@@ -32,7 +33,7 @@ export default function PostFilterSection({
                     asChild
                 >
                     <Link
-                        href={`/post?${categorySearchParams({
+                        href={`${routes.post}?${categorySearchParams({
                             ...searchParams,
                             sort: 'recent',
                         })}`}
@@ -52,7 +53,7 @@ export default function PostFilterSection({
                     asChild
                 >
                     <Link
-                        href={`/post?${categorySearchParams({
+                        href={`${routes.post}?${categorySearchParams({
                             ...searchParams,
                             sort: 'popular',
                         })}`}

@@ -34,7 +34,7 @@ export default function CategoryMobileList({
                     <li key={item.id}>
                         <div>
                             <Link
-                                href={`/post?mainCategoryId=${item.id}`}
+                                href={`${routes.post}?mainCategoryId=${item.id}`}
                                 replace
                                 scroll={false}
                                 className={cn(

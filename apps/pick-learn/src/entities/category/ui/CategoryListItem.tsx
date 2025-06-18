@@ -8,6 +8,7 @@ import {
 } from '@repo/ui/components/base/Accordion';
 import { CategoryItemProps } from '@/entities/category/api/types';
 import SubCategoryItem from './SubCategoryItem';
+import { routes } from '@/shared/model/constants/routes';
 
 export default async function CategoryListItem({
     searchParams,
@@ -24,7 +25,7 @@ export default async function CategoryListItem({
                 카테고리
             </h3>
             <Link
-                href={`/post`}
+                href={routes.post}
                 replace
                 scroll={false}
                 className={cn(

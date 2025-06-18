@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { SubCategoryItemProps } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function SubCategoryMobileList({
     searchParams,
@@ -20,7 +21,7 @@ export default function SubCategoryMobileList({
                     )}
                 >
                     <Link
-                        href={`/post?mainCategoryId=${mainCategories}`}
+                        href={`${routes.post}?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                         className='whitespace-nowrap block px-2'
@@ -47,7 +48,7 @@ export default function SubCategoryMobileList({
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}`}
+                            href={`${routes.post}?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}`}
                             scroll={false}
                             replace={true}
                             className='whitespace-nowrap block px-2'
