@@ -6,27 +6,14 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
-import {
-    CategoryListType,
-    MainCategoryType,
-} from '@/entities/category/api/types';
+import { CategoryItemProps } from '@/entities/category/api/types';
 import SubCategoryItem from './SubCategoryItem';
-
-type CategoryListItemProps = {
-    searchParams: {
-        mainCategoryId: number;
-        subCategoryId: number;
-        sort?: string;
-    };
-    categoryList: CategoryListType[][];
-    mainCategories: MainCategoryType[];
-};
 
 export default async function CategoryListItem({
     searchParams,
     categoryList,
     mainCategories,
-}: CategoryListItemProps) {
+}: CategoryItemProps) {
     return (
         <nav
             className={cn(
@@ -61,8 +48,7 @@ export default async function CategoryListItem({
                         </AccordionTrigger>
 
                         <SubCategoryItem
-                            mainCategoryId={searchParams.mainCategoryId}
-                            subCategoryId={searchParams.subCategoryId}
+                            searchParams={searchParams}
                             mainCategories={item.id}
                             categoryList={categoryList}
                         />
