@@ -1,11 +1,13 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "extends": "@repo/typescript-config/react-library.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "module": "CommonJS",
+        "moduleResolution": "node"
+    },
+    "include": ["src", "src/components/wrapper/.tsx"],
+    "exclude": ["node_modules"]
 }
