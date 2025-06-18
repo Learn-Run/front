@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
+import { routes } from '@/shared/model/constants/routes';
+import { iconMapById } from '../model/constants';
 import { getMainCategories } from '@/entities/category/api';
 import CategoryCarousel from './CategoryCarousel';
-import { iconMapById } from '../model/constants';
 // import CreateCategoryButton from './CreateCategoryButton';
 
 export default async function CategorySection() {
@@ -23,7 +24,7 @@ export default async function CategorySection() {
                             className='col-span-1 justify-self-center'
                         >
                             <Link
-                                href={`/post?category=${category.id}`}
+                                href={`${routes.post}?category=${category.id}`}
                                 className='flex flex-col items-center space-y-2'
                             >
                                 {Icon ? (

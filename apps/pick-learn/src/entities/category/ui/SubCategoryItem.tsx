@@ -1,29 +1,20 @@
 'use client';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-
-import { AccordionContent } from '@repo/ui/components/base/Accordion';
-import { CategoryProps } from '../api/types';
 
 import { cn } from '@repo/ui/lib/utils';
+import { SubCategoryItemProps } from '../api/types';
+import { AccordionContent } from '@repo/ui/components/base/Accordion';
 import { categorySearchParams } from '../utils/categorySearchParams';
-
-type SubCategoryItemProps = Omit<CategoryProps, 'mainCategories'> & {
-    mainCategories: number;
-};
+import { routes } from '@/shared/model/constants/routes';
 
 export default function SubCategoryItem({
-    mainCategories,
+    searchParams,
     categoryList,
+    mainCategories,
 }: SubCategoryItemProps) {
-    const searchParams = useSearchParams();
-    const mainCategoryId = searchParams.get('mainCategoryId');
-    const subCategoryId = searchParams.get('subCategoryId');
-    const sort = searchParams.get('sort') || 'recent';
-
     if (!mainCategories) return;
 
-    const detailCategory = subCategoryId || '';
+    const detailCategory = searchParams.subCategoryId || '';
 
     return (
         <AccordionContent>
@@ -31,14 +22,14 @@ export default function SubCategoryItem({
                 <li
                     className={cn(
                         'font-medium text-gray-600 w-full mx-2 mb-2',
-                        Number(mainCategoryId) === mainCategories &&
-                            !subCategoryId
+                        Number(searchParams.mainCategoryId) ===
+                            mainCategories && !searchParams.subCategoryId
                             ? 'text-primary-100 font-bold'
                             : '',
                     )}
                 >
                     <Link
-                        href={`/post?mainCategoryId=${mainCategories}`}
+                        href={`${routes.post}?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                     >
@@ -57,11 +48,10 @@ export default function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`/post?${categorySearchParams({
-                                mainCategoryId: Number(mainCategoryId),
+                            href={`${routes.post}?${categorySearchParams({
+                                mainCategoryId: mainCategories,
                                 subCategoryId: detailItem.subCategoryId,
-                                categoryListId: detailItem.id,
-                                sort,
+                                sort: searchParams.sort,
                             })}`}
                             scroll={false}
                             replace={true}
