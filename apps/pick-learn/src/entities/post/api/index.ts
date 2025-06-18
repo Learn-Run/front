@@ -18,10 +18,6 @@ export const getPostList = async ({
 }) => {
     const params = new URLSearchParams();
 
-    // if (categoryListId) {
-    //     params.set('categoryListId', categoryListId.toString());
-    // }
-
     if (mainCategoryId) {
         params.set('mainCategoryId', mainCategoryId.toString());
     }

@@ -11,7 +11,6 @@ export interface postListSectionProps {
     searchParams: {
         mainCategoryId: number;
         subCategoryId: number;
-        categoryListId: number;
         sort?: string;
     };
     categoryList: CategoryListType[][];
