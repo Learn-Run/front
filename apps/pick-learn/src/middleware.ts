@@ -5,6 +5,7 @@ import { routes } from '@/shared/model/constants/routes';
 import { withAuthList, withOutAuthList } from '@/features/auth/model/constants';
 
 const FALLBACK_URL = '/';
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
 
 const withAuth = async (req: NextRequest, token: boolean) => {
     const url = req.nextUrl.clone();
@@ -38,7 +39,7 @@ const withOutAuth = async (
 };
 
 export default async function middleware(req: NextRequest) {
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const token = await getToken({ req, secret: NEXTAUTH_SECRET });
     const accessToken = token?.accessToken;
     const { searchParams, pathname } = req.nextUrl;
     const callbackUrl = searchParams.get('callbackUrl');
