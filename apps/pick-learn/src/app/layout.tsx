@@ -54,7 +54,7 @@ export default async function RootLayout({
 }) {
     const session = await getServerSession(options);
     const isAuth = !!session?.user as boolean;
-    console.log('token', session?.user?.accessToken);
+
     return (
         <html lang='ko-KR'>
             <body className={dmSans.className}>
