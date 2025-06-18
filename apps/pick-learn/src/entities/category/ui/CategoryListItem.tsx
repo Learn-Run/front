@@ -16,7 +16,6 @@ type CategoryListItemProps = {
     searchParams: {
         mainCategoryId: number;
         subCategoryId: number;
-        categoryListId: number;
         sort?: string;
     };
     categoryList: CategoryListType[][];

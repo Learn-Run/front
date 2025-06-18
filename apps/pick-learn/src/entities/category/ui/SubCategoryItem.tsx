@@ -58,9 +58,8 @@ export default function SubCategoryItem({
                     >
                         <Link
                             href={`/post?${categorySearchParams({
-                                mainCategoryId: Number(mainCategoryId),
+                                mainCategoryId: mainCategories,
                                 subCategoryId: detailItem.subCategoryId,
-                                categoryListId: detailItem.id,
                                 sort,
                             })}`}
                             scroll={false}

@@ -36,6 +36,8 @@ export default function PostFilterSection({
                             ...searchParams,
                             sort: 'recent',
                         })}`}
+                        replace
+                        scroll={false}
                     >
                         최신순
                     </Link>

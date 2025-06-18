@@ -8,7 +8,6 @@ type CategoryMobileListProps = {
     searchParams: {
         mainCategoryId: number;
         subCategoryId: number;
-        categoryListId: number;
         sort?: string;
     };
     categoryList: CategoryListType[][];
@@ -22,11 +21,25 @@ export default function CategoryMobileList({
 }: CategoryMobileListProps) {
     return (
         <nav
-            className={cn(
-                'sticky container mx-auto md:static py-5 px-5 md:hidden',
-            )}
+            className={cn('sticky container mx-auto md:static py-5 md:hidden')}
         >
-            <ul className='flex justify-center items-center w-full gap-x-4 relative'>
+            <ul className='flex justify-center items-center w-full gap-x-3 relative'>
+                <li>
+                    {' '}
+                    <Link
+                        href={`/post`}
+                        replace
+                        scroll={false}
+                        className={cn(
+                            ' w-full font-medium',
+                            !searchParams.mainCategoryId
+                                ? 'text-primary-100 font-bold'
+                                : '',
+                        )}
+                    >
+                        전체
+                    </Link>
+                </li>
                 {mainCategories.map((item) => (
                     <li key={item.id}>
                         <div>
@@ -35,7 +48,7 @@ export default function CategoryMobileList({
                                 replace
                                 scroll={false}
                                 className={cn(
-                                    '',
+                                    'font-medium',
                                     Number(searchParams.mainCategoryId) ===
                                         item.id
                                         ? 'text-primary-100 font-bold'
