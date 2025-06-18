@@ -7,19 +7,23 @@ export const getPostList = async ({
     sort = 'recent',
     page = 0,
     size = 8,
-    categoryListId,
+    mainCategoryId,
+    subCategoryId,
 }: {
     sort?: string;
     page?: number;
     size?: number;
-    categoryListId?: number;
+    mainCategoryId?: number;
+    subCategoryId?: number;
 }) => {
     const params = new URLSearchParams();
 
-    if (categoryListId) {
-        params.set('categoryListId', categoryListId.toString());
+    if (mainCategoryId) {
+        params.set('mainCategoryId', mainCategoryId.toString());
     }
-
+    if (subCategoryId) {
+        params.set('subCategoryId', subCategoryId.toString());
+    }
     params.set('sort', sort);
     params.set('page', page.toString());
     params.set('size', size.toString());

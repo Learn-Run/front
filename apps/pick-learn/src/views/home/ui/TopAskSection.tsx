@@ -6,21 +6,20 @@ import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 import AskItemCardList from './AskItemCardList';
 
 export default async function TopAskSection({
-    mainCategoryId,
     page,
     size,
-    categoryListId,
+    mainCategoryId,
 }: {
-    mainCategoryId?: number;
     page?: number;
     size?: number;
-    categoryListId?: number;
+    mainCategoryId?: number;
 }) {
     const zeroPage = page ? Math.floor(page - 1) : 0;
     const popularPostList = await getPostList({
         page: zeroPage,
         size,
-        categoryListId,
+        mainCategoryId,
+
         sort: 'popular',
     });
 
