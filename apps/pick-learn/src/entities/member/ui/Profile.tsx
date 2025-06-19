@@ -16,11 +16,9 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
     const member = await getWrtierProfileByMemberUuid(memberUuid);
     const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
     const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
-    const alt = member?.profileImage?.alt || member?.nickname;
+    const alt = member?.profileImage?.alt || member?.nickname + '프로필 이미지';
 
     if (!member) return;
-    console.log('gradename', member?.grade.name);
-    console.log('gradeColor', member?.grade.color);
 
     return (
         <div className={cn('flex items-center gap-x-2.5 w-full', className)}>
