@@ -5,6 +5,5 @@ export { default as InputTag } from './InputTag';
 export { default as SearchBox } from './SearchBox';
 export { default as TextArea } from './TextArea';
 export { default as InputCheckbox } from './InputCheckbox';
-export { DatePickerRange } from './DatePickerRange';
 export { default as InputFile } from './InputFile';
 export { default as InputImageMulti } from './InputImageMulti';
