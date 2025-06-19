@@ -1,7 +1,8 @@
 'use server';
-import { fetchData } from '@/shared/api/instance';
-import { PostListType } from './types';
 import { services } from '@/shared/api/constants';
+import { fetchData } from '@/shared/api/instance';
+import { getServerSession } from 'next-auth';
+import { AskDetailType, AskListType } from './types';
 
 export const getPostList = async ({
     sort = 'recent',
@@ -28,8 +29,22 @@ export const getPostList = async ({
     params.set('page', page.toString());
     params.set('size', size.toString());
 
-    const response = await fetchData.get<PostListType>(
+    const response = await fetchData.get<AskListType>(
         `${services.postRead}/api/v1/post-read?${params.toString()}`,
+    );
+
+    return response.result;
+};
+
+export const getPostDetail = async ({ postUuid }: { postUuid: string }) => {
+    const memberUuid = await getServerSession();
+    const response = await fetchData.get<AskDetailType>(
+        `${services.postRead}/api/v1/post-read/${postUuid}`,
+        {
+            headers: {
+                'X-Member-UUID': (memberUuid?.user.memberUuid as string) || '',
+            },
+        },
     );
 
     return response.result;
