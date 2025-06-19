@@ -1,5 +1,4 @@
 import { cn } from '@repo/ui/lib/utils';
-import React from 'react';
 
 export default function MainWrapper({
     children,
