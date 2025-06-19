@@ -5,7 +5,7 @@ import {
     PostDetailContentSection,
     PostDetailTitleSection,
     PostDetailTopsection,
-} from '@/views/PostDetail/ui';
+} from '@/views/postDetail/ui';
 
 export default async function page({
     params,
