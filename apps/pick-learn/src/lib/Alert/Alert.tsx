@@ -32,10 +32,10 @@ const Alert = ({ alert, ...props }: AlertProps) => {
     const config = alertTypeConfig[alert.type] || alertTypeConfig.basic;
 
     return (
-        <div className={`fixed z-[9999] animate-fadeOut  ${config.position}`}>
+        <div className={`fixed z-[9999] animate-fadeOut  ${config?.position}`}>
             <div
                 role='alert'
-                className={`flex items-center ${config.className}`}
+                className={`flex items-center ${config?.className}`}
                 {...props}
             >
                 <span className={`mx-auto text-[0.875rem] font-bold `}>
