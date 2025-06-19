@@ -6,6 +6,7 @@ import { BookMark, Shared } from '@/shared/assets/icons';
 import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
 import PostEmptySection from '@/shared/ui/PostEmptySection';
+import { routes } from '@/shared/model/constants/routes';
 
 export default async function AskItemCardList({
     className,
@@ -27,7 +28,7 @@ export default async function AskItemCardList({
                 {postList.posts.map((item) => (
                     <li key={item.postUuid}>
                         <Link
-                            href={`/post/${item.postUuid}`}
+                            href={`${routes.post}/${item.postUuid}`}
                             className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
                         >
                             <div className='flex justify-between w-full'>
