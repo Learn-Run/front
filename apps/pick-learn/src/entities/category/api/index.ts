@@ -52,6 +52,16 @@ export const createCategoryList = async (
     });
 };
 
+export const getSubCategoryByMainCategoryId = async (
+    mainCategoryId: number,
+): Promise<CategoryListType[]> => {
+    const response = await fetchData.get<CategoryListType[]>(
+        `${services.post}/api/v1/category-list/main/${mainCategoryId}`,
+    );
+    console.log(response.result);
+    return response.result;
+};
+
 export const getSubCategory = async (subCategoryId: number) => {
     const response = await fetchData.get<SubCategoryType>(
         `${services.post}/api/v1/category/sub/${subCategoryId}`,
