@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { cn } from '@repo/ui/lib/utils';
 import { getWrtierProfileByMemberUuid } from '@/entities/profile/api';
 import { S3_BASE_URL } from '@/shared/model/constants';
+import { jost } from '@/shared/assets/fonts';
 
 interface ProfileProps {
     memberUuid: string;
@@ -15,22 +16,28 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
     const member = await getWrtierProfileByMemberUuid(memberUuid);
     const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
     const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
-    const alt = member?.profileImage?.alt || member?.nickname;
+    const alt = member?.profileImage?.alt || member?.nickname + '프로필 이미지';
 
     if (!member) return;
 
     return (
-        <div className={cn('flex gap-x-2.5 items-center w-full', className)}>
+        <div className={cn('flex items-center gap-x-2.5 w-full', className)}>
             <Image
-                className='w-7 h-7 rounded-full bg-gray-600/20 object-cover'
+                className='w-7 h-7 rounded-full bg-gray-600/20 object-cover '
                 src={imageUrl}
                 alt={alt || ''}
                 width={28}
                 height={28}
             />
             <p className='font-medium'>{member?.nickname}</p>
-            <p className='text-xs font-medium text-gray-500'>
-                {member?.gradeName}
+            <p
+                className={cn(
+                    jost.className,
+                    'text-xs font-medium leading-none place-items-end-safe',
+                )}
+                style={{ color: member.grade.color }}
+            >
+                {member.grade.name}
             </p>
         </div>
     );

@@ -4,16 +4,22 @@ export interface ProfileImageType {
     alt: string;
 }
 export interface ProfileType {
-    gradeName: string;
+    grade: GradeType;
     nickName: string;
     profileImage: ProfileImageType;
     selfIntroduction: string;
     categoryListIds: number[];
 }
 
+export interface GradeType {
+    id: number;
+    name: string;
+    color: string;
+}
+
 export interface WriterProfileType {
     memberUuid: string;
     nickname: string;
-    gradeName: string;
+    grade: GradeType;
     profileImage: ProfileImageType;
 }
