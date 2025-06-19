@@ -18,6 +18,7 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
     const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
     const alt = member?.profileImage?.alt || member?.nickname + '프로필 이미지';
 
+    if (!member?.grade?.color) return;
     if (!member) return;
 
     return (
@@ -35,7 +36,7 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
                     jost.className,
                     'text-xs font-medium leading-none place-items-end-safe',
                 )}
-                style={{ color: member.grade.color }}
+                style={{ color: member?.grade?.color }}
             >
                 {member.grade.name}
             </p>
