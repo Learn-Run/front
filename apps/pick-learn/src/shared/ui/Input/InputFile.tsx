@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import { File, X, Loader2, Paperclip } from 'lucide-react';
 
 import { useAlert } from '@/hooks/useAlert';
-import { uuidConverter } from '@/lib/uuidConverter';
-import { deleteFileFromS3, uploadFileToS3 } from '@/apis/fetchAws.api';
+import { uuidConverter } from '@/lib/Alert/uuidConverter';
+import { deleteFileFromS3, uploadFileToS3 } from '@/actions/common/s3-service';
 
 interface FileItem {
     url: string;
@@ -85,7 +85,7 @@ export default function InputFile({
 
                 // 최대 용량 체크
                 const maxSizeBytes = maxSizeMB * 1024 * 1024;
-                if (file.size > maxSizeBytes) {
+                if (file && file.size > maxSizeBytes) {
                     alert.error(
                         `${file.name}(${(file.size / (1024 * 1024)).toFixed(
                             2,
@@ -94,23 +94,24 @@ export default function InputFile({
                     continue;
                 }
 
-                const originalFileName = file.name;
-                const fileExtension = originalFileName.split('.').pop() || '';
+                const originalFileName = file?.name;
+                const fileExtension = originalFileName?.split('.').pop() || '';
                 const uniqueUuid = uuidConverter();
                 const uniqueFileName = `${uniqueUuid}.${fileExtension}`;
 
                 try {
-                    console.log('파일 업로드 시작:', file.name, file.type);
+                    console.log('파일 업로드 시작:', file?.name, file?.type);
+                    if (!file) throw new Error('File is undefined');
                     const s3Url = await uploadFileToS3(file, uniqueFileName);
                     console.log('파일 업로드 완료:', s3Url);
 
                     newFiles.push({
                         url: s3Url,
-                        name: originalFileName,
+                        name: originalFileName || '',
                     });
                 } catch (error) {
                     console.error('파일 업로드 실패:', error);
-                    alert.error(`${file.name} 업로드에 실패했습니다.`);
+                    alert.error(`${file?.name} 업로드에 실패했습니다.`);
                 }
             }
 
