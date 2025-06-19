@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { CrossIcon, Image as ImageIcon } from 'lucide-react';
 import { useAlert } from '@/hooks/useAlert';
-import { uuidConverter } from '@/lib/uuidConverter';
-import { deleteFileFromS3, uploadFileToS3 } from '@/apis/fetchAws.api';
+import { uuidConverter } from '@/lib/Alert/uuidConverter';
+import { deleteFileFromS3, uploadFileToS3 } from '@/actions/common/s3-service';
 
 interface InputImageProps {
     imageUrl?: string | null;
@@ -57,14 +57,15 @@ export default function InputImage({
             return;
         }
 
-        const originalName = file.name;
-        const fileExtension = file.name.split('.').pop();
+        const originalName = file?.name;
+        const fileExtension = file?.name?.split('.').pop();
         const uniqueUuid = uuidConverter();
         const uniqueFileName = `${uniqueUuid}.${fileExtension}`;
 
+        if (!file) throw new Error('File is undefined');
         const s3Url = await uploadFileToS3(file, uniqueFileName);
         setImage(s3Url);
-        setImageOriginName?.(originalName);
+        setImageOriginName?.(originalName || '');
 
         // onChange 콜백 호출
         if (onChange) {

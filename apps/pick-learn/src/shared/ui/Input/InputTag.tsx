@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 
 import Input from './Input';
-import { Button } from '../Button';
 import { useAlert } from '@/hooks/useAlert';
-import FlexBox from '@/components/template/wrappers/FlexBox';
+import FlexBox from '../wrapper/FlexBox';
+import { Button } from '@repo/ui/components/base/Button';
 
 interface InputTagProps {
     limit?: number;
@@ -101,18 +101,14 @@ function InputTag({
                     }}
                 />
                 <Button
-                    variant='primary'
                     className='h-[50px] w-fit bg-faikerz-green text-faikerz-white rounded-md'
                     onClick={() => {
                         if (!isComposing) {
                             handleAddTag(tagValue);
                         }
                     }}
-                    size='lg'
                 >
-                    <Button.Text className='!text-md font-semibold'>
-                        {buttonText}
-                    </Button.Text>
+                    {buttonText}
                 </Button>
             </FlexBox>
 

@@ -60,7 +60,8 @@ export default function MultiSelectBox<T extends Record<string, any>>({
         const isSame =
             defaultSelected?.length === selectedItems.length &&
             defaultSelected.every(
-                (item, idx) => item[valueKey] === selectedItems[idx][valueKey],
+                (item, idx) =>
+                    item[valueKey] === selectedItems[idx]?.[valueKey],
             );
 
         if (!isSame) {
