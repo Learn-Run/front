@@ -4,7 +4,7 @@ import {
 } from '@/entities/category/api/types';
 import CategoryListItem from '@/entities/category/ui/CategoryListItem';
 import CategoryMobileList from '@/entities/category/ui/CategoryMobileList';
-import { PostListType } from '@/entities/post/api/types';
+import { AskListType } from '@/entities/post/api/types';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
 
 export interface postListSectionProps {
@@ -15,7 +15,7 @@ export interface postListSectionProps {
     };
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
-    postList: PostListType;
+    postList: AskListType;
 }
 
 export default async function PostListSection({

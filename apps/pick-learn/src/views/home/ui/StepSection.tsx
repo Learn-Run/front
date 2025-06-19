@@ -1,7 +1,6 @@
-import { Tag } from '@/shared/ui';
 import { Button } from '@repo/ui/components/base/Button';
+import { StepWrapper, Tag } from '@/shared/ui';
 import Heading from '@/widgets/home/ui/Heading';
-import StepWrapper from '@/shared/ui/Wrapper/StepWrapper';
 import StepCardList from '@/entities/guide/ui/StepCardList';
 import StepCarouselList from '@/entities/guide/ui/StepCarouseList';
 

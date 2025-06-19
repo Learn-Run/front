@@ -19,6 +19,11 @@ import Fashion from './Fashion';
 import Eye from './Eye';
 import EyeOff from './EyeOff';
 import IconCalendar from './IconCalendar';
+import Like from './Like';
+import BookMark from './BookMark';
+import Shared from './Shared';
+import BreadCrumb from './BreadCrumb';
+import Clock from './Clock';
 
 export {
     Chat,
@@ -41,5 +46,10 @@ export {
     Fashion,
     Eye,
     EyeOff,
-    IconCalendar
+    IconCalendar,
+    Like,
+    BookMark,
+    Shared,
+    BreadCrumb,
+    Clock,
 };
