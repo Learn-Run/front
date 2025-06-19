@@ -12,14 +12,20 @@ export default function PostDetailTopsection({
     return (
         <SectionWrapper className='pt-11 flex items-center justify-between'>
             <Profile memberUuid={postDetail.memberUuid} />
-            <div className='flex items-center gap-x-2 whitespace-nowrap text-gray-600 text-sm'>
-                <Clock />
-                <p>{dateFormat(postDetail.createdAt)}</p>
-                <Eye />
-                <p>{postDetail.viewCount}</p>
-                <Like />
-                <p>{postDetail.likeCount}</p>
-            </div>
+            <ul className='flex items-center gap-x-4 whitespace-nowrap text-gray-600 text-sm'>
+                <li className='flex items-center gap-x-1'>
+                    <Clock />
+                    <p>{dateFormat(postDetail.createdAt)}</p>
+                </li>
+                <li className='flex items-center gap-x-1'>
+                    <Eye />
+                    <p>{postDetail.viewCount}</p>
+                </li>
+                <li className='flex items-center gap-x-1'>
+                    <Like />
+                    <p>{postDetail.likeCount}</p>
+                </li>
+            </ul>
         </SectionWrapper>
     );
 }
