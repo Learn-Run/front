@@ -38,7 +38,9 @@ export default async function AskItemCardList({
                                     <Shared />
                                 </div>
                             </div>
-                            <TopAskSubCategory item={item.subCategoryId} />
+                            <TopAskSubCategory
+                                subCategoryId={item.subCategoryId}
+                            />
                             <h3 className='text-lg font-medium truncate w-full'>
                                 {item.title}
                             </h3>

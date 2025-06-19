@@ -1,7 +1,11 @@
 import { getSubCategory } from '@/entities/category/api';
 
-export default async function TopAskSubCategory({ item }: { item: number }) {
-    const subCategory = await getSubCategory(item);
+export default async function TopAskSubCategory({
+    subCategoryId,
+}: {
+    subCategoryId: number;
+}) {
+    const subCategory = await getSubCategory(subCategoryId);
 
     if (!subCategory) return;
 
