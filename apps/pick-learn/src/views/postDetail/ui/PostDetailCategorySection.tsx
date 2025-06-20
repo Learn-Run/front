@@ -10,6 +10,7 @@ export default async function PostDetailCategorySection({
 }) {
     const mainCategory = await getOneMainCategory(category.mainCategoryId);
     const subCategory = await getSubCategory(category.subCategoryId);
+
     return (
         <SectionWrapper>
             <div className='flex items-center gap-x-2 border border-primary-100 rounded-full w-fit p-2 '>
