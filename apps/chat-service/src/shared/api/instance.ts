@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 
 import { CommonResponse } from './types';
+import { options as authOptions } from '@/app/api/auth/[...nextauth]/options';
 
 interface NextFetchRequestConfig {
     tags?: string[];
@@ -30,14 +31,14 @@ const fetchInstance = async <T = undefined>(
 
         if (options.requireAuth !== false) {
             try {
-                const session = await getServerSession();
+                const session = await getServerSession(authOptions);
 
                 const accessToken = session?.user?.accessToken;
                 const memberUuid = session?.user.memberUuid;
 
                 if (accessToken && memberUuid) {
                     headers.Authorization = `Bearer ${accessToken}`;
-                    headers['X-member-uuid'] = memberUuid;
+                    headers['X-Member-UUID'] = memberUuid;
                 } else {
                     throw new Error('인증이 필요합니다');
                 }
