@@ -4,4 +4,6 @@ export const routes = {
     messages: '/messages',
     askers: '/askers',
     settings: '/settings',
+    signIn: '/sign-in',
+    signUp: '/sign-up',
 };

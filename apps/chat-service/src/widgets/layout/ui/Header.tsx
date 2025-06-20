@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { cn } from '@repo/ui/src/lib/utils';
 import LogOutButton from './LogOutButton';
 import Nav from './Nav';
-import { routes } from '@/shared/model/routes';
+import { routes } from '@/shared/model/constants/routes';
 import Logo from '@/shared/assets/icons/logo.png';
 
 export default function Header({ className }: { className?: string }) {
