@@ -3,7 +3,7 @@ import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 
 export default function BreadCrumbSection({ title }: { title: string }) {
     return (
-        <SectionWrapper>
+        <SectionWrapper className='w-full max-w-[1240px]'>
             <div className='flex items-center gap-x-2'>
                 <p className='font-medium text-gray-600'>Home</p>
                 <BreadCrumb />
