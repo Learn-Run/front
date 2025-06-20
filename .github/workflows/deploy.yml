@@ -26,7 +26,8 @@ jobs:
     - name: Detect changed apps
       id: changed
       run: |
-        changed_apps=$(npx turbo run build --filter=...[HEAD^] --dry=json | jq -r '.pipeline.build.inputs[]' | grep apps/)
+        json=$(npx turbo run build --filter=...[HEAD^] --dry=json || echo '{}')
+        changed_apps=$(echo "$json" | jq -r '.pipeline.build.inputs // [] | .[]' | grep apps/ || true)
         echo "changed=$changed_apps" >> $GITHUB_OUTPUT
 
     - name: Build Docker images for changed apps
