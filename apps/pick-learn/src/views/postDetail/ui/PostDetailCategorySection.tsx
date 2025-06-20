@@ -1,8 +1,7 @@
-import { getOneMainCategory, getSubCategory } from '@/entities/category/api';
-import { AskDetailType } from '@/entities/post/api/types';
 import { BreadCrumb } from '@/shared/assets/icons';
+import { AskDetailType } from '@/entities/post/api/types';
+import { getOneMainCategory, getSubCategory } from '@/entities/category/api';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
-import React from 'react';
 
 export default async function PostDetailCategorySection({
     category,
