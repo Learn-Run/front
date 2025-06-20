@@ -1,8 +1,8 @@
 'use client';
+import { redirect } from 'next/navigation';
+
 import { routes } from '@/shared/model/constants/routes';
 import { Button } from '@repo/ui/components/base/Button';
-import { redirect } from 'next/navigation';
-import React from 'react';
 
 export default function PostWriteButton() {
     return (
