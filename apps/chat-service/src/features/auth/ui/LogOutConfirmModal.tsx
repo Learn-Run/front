@@ -1,7 +1,7 @@
 'use client';
 import { signOut } from 'next-auth/react';
 
-import Close from '@/shared/assets/icons/Close';
+import { Close } from '@/shared/assets/icons';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import { Button } from '@repo/ui/components/base/Button';
 

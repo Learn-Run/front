@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { routes } from '@/shared/model/routes';
+import { routes } from '@/shared/model/constants/routes';
 import { MEETING_DATA } from '@/entities/meeting/model/constants';
 
 export default async function MeetingPage() {

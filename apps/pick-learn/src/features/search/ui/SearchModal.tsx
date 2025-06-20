@@ -1,5 +1,5 @@
 import { useModalContext } from '@/shared/model/modal/ModalContext';
-import Close from '@/shared/assets/icons/Close';
+import { Close } from '@/shared/assets/icons';
 
 export default function SearchModal() {
     const { closeModal } = useModalContext();

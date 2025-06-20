@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 
-import Close from '@/shared/assets/icons/Close';
+import { Close } from '@/shared/assets/icons';
 
 export function Modal({ children }: { children: React.ReactNode }) {
     const router = useRouter();

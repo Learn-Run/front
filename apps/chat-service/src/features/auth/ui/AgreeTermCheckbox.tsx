@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { Checkbox } from '@repo/ui/components/base/Checkbox';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
-import Close from '@/shared/assets/icons/Close';
+import { Close } from '@/shared/assets/icons';
 import type { AgreeTermCheckboxProps } from './types';
 
 export function AgreeTermCheckbox({

@@ -3,7 +3,7 @@ import Meeting from '@/shared/assets/icons/Meeting';
 import Message from '@/shared/assets/icons/Message';
 import Overview from '@/shared/assets/icons/Overview';
 import Setting from '@/shared/assets/icons/Setting';
-import { routes } from '@/shared/model/routes';
+import { routes } from '@/shared/model/constants/routes';
 
 export const NAVIGATION_ITEMS = [
     {
