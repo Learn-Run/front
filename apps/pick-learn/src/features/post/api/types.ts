@@ -1,4 +1,4 @@
-export type postFormData = {
+export type PostFormData = {
     mainCategoryId: number;
     subCategoryId: number;
     title: string;
