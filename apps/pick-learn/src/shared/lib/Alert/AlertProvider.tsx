@@ -16,9 +16,6 @@ const AlertProvider = ({ children }: { children: React.ReactNode }) => {
 
     const showAlert = (type: AlertItem['type'], message: string) => {
         const id = Math.random().toString(36).substring(2, 9);
-        // 전체 누적
-        // setAlerts((prev) => [...prev, { id, type, message }]);
-        // 마지막 하나만 노출
         setAlerts([{ id, type, message }]);
 
         setTimeout(() => {

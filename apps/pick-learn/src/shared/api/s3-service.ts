@@ -37,21 +37,4 @@ async function uploadFileToS3(file: File, folder: string) {
     return data.imageUrl; // S3에 업로드된 파일의 URL 반환
 }
 
-async function deleteFileFromS3(fileUrl: string) {
-    const res = await fetch('/api/s3/client', {
-        method: 'DELETE',
-        body: JSON.stringify({
-            fileUrl,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (!res.ok) {
-        throw new Error('Failed to delete file');
-    }
-    return true;
-}
-
-export { uploadFileToS3, deleteFileFromS3 };
+export { uploadFileToS3 };

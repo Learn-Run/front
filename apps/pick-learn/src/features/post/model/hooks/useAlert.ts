@@ -1,7 +1,7 @@
 'use client';
+import { useContext } from 'react';
 
 import { AlertContext } from '@/shared/lib/Alert';
-import { useContext } from 'react';
 
 export const useAlert = () => {
     const context = useContext(AlertContext);
