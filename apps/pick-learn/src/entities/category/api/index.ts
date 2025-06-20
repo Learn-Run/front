@@ -27,6 +27,13 @@ export const getCategoryList = async (
     return response.result;
 };
 
+export const getOneMainCategory = async (mainCategoryId: number) => {
+    const response = await fetchData.get<MainCategoryType>(
+        `${services.post}/api/v1/category/main/${mainCategoryId}`,
+    );
+    return response.result;
+};
+
 export const createMainCategory = async (
     name: string,
     iconUrl: string,
