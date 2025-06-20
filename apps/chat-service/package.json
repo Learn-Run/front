@@ -4,7 +4,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
         "lint": "next lint --max-warnings 0",
@@ -18,7 +18,8 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-hook-form": "^7.56.4",
-        "zod": "^3.25.42"
+        "zod": "^3.25.42",
+        "openvidu-browser": "^2.31.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
@@ -29,7 +30,6 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "eslint": "^9",
-        "eslint-config-next": "15.3.3",
         "tailwindcss": "^4",
         "typescript": "^5"
     }
