@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 import LogOutButton from './LogOutButton';
 import Nav from './Nav';
 import { routes } from '@/shared/model/constants/routes';

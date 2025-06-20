@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 import { NAVIGATION_ITEMS } from '../model/constants';
 
 export default function Nav({ className }: { className?: string }) {

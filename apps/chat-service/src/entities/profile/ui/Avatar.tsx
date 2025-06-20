@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 
 export default function Avatar({
     className,
