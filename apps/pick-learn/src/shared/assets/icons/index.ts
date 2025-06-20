@@ -5,6 +5,7 @@ import BreadCrumb from './BreadCrumb';
 import Chat from './Chat';
 import Check from './Check';
 import Clock from './Clock';
+import Close from './Close';
 import Cook from './Cook';
 import Eye from './Eye';
 import EyeOff from './EyeOff';
@@ -40,6 +41,7 @@ export {
     Chat,
     Check,
     Clock,
+    Close,
     Cook,
     Eye,
     EyeOff,
