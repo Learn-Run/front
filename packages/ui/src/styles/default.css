@@ -59,8 +59,8 @@
     --color-gray-700: #666666;
     --color-gray-800: #1f2937;
     --color-gray-900: #292929;
-    --color-point-green-100: #ebfaef;
-    --color-point-green-200: #34c759;
+    --color-point-100-100: #ebfaef;
+    --color-point-100-200: #34c759;
     --color-point-blue-100: #e6f2ff;
     --color-point-blue-200: #007aff;
     --color-point-skyblue-100: #ddf2ff;
@@ -123,8 +123,8 @@
     --color-gray-700: #666666;
     --color-gray-800: #1f2937;
     --color-gray-900: #292929;
-    --color-point-green-100: #ebfaef;
-    --color-point-green-200: #34c759;
+    --color-point-100-100: #ebfaef;
+    --color-point-100-200: #34c759;
     --color-point-blue-100: #e6f2ff;
     --color-point-blue-200: #007aff;
     --color-point-skyblue-100: #ddf2ff;
@@ -215,6 +215,15 @@
         }
     }
 
+    @keyframes fade-out {
+        0% {
+            opacity: 100%;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
     .animate-card-slide-up {
         animation: card-slide-up 0.4s ease-in-out;
     }
@@ -222,7 +231,11 @@
         animation: bottom-sheet-slide-up 0.4s ease-in-out;
     }
 
-    .animate-fade-in {
+    .animate-fadeIn {
         animation: fade-in 0.4s ease-in-out;
+    }
+
+    .animate-fadeOut {
+        animation: fade-out 0.4s ease-in-out;
     }
 }
