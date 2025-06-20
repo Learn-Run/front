@@ -7,6 +7,7 @@ import './globals.css';
 import { BottomNavBar, Footer, Header } from '@/widgets/layout/ui';
 import { options } from './api/auth/[...nextauth]/options';
 import AuthContextProvider from '@/shared/ui/AuthContextProvider';
+import { AlertProvider } from '@/shared/lib/Alert';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -59,14 +60,16 @@ export default async function RootLayout({
         <html lang='ko-KR'>
             <body className={dmSans.className}>
                 <AuthContextProvider isAuth={isAuth}>
-                    <ModalProvider>
-                        <Header />
-                        <div id='modal-root' />
-                        {modal}
-                        {children}
-                        <Footer />
-                        <BottomNavBar />
-                    </ModalProvider>
+                    <AlertProvider>
+                        <ModalProvider>
+                            <Header />
+                            <div id='modal-root' />
+                            {modal}
+                            {children}
+                            <Footer />
+                            <BottomNavBar />
+                        </ModalProvider>
+                    </AlertProvider>
                 </AuthContextProvider>
             </body>
         </html>

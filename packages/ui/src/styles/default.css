@@ -215,6 +215,15 @@
         }
     }
 
+    @keyframes fade-out {
+        0% {
+            opacity: 100%;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
     .animate-card-slide-up {
         animation: card-slide-up 0.4s ease-in-out;
     }
@@ -222,7 +231,11 @@
         animation: bottom-sheet-slide-up 0.4s ease-in-out;
     }
 
-    .animate-fade-in {
+    .animate-fadeIn {
         animation: fade-in 0.4s ease-in-out;
+    }
+
+    .animate-fadeOut {
+        animation: fade-out 0.4s ease-in-out;
     }
 }
