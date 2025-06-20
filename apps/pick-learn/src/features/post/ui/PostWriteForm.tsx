@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { getMainCategories, getCategoryList } from '@/entities/category/api';
 import {
@@ -11,7 +12,6 @@ import { SelectBox } from '@/shared/ui/SelectBox';
 import { InputType } from '@/shared/ui/wrapper/InputWrap';
 import { Button } from '@repo/ui/components/base/Button';
 import { postWriteSchema, PostWriteSchemaType } from '../model/schema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { createPost } from '../api';
 import { useAlert } from '../model/hooks/useAlert';
 
