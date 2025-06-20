@@ -1,30 +1,14 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 import LeftChevron from '@/shared/assets/icons/LeftChevron';
 import { cn } from '@repo/ui/lib/utils';
-import { useEffect, useRef, useState } from 'react';
 
 export const variantStyleMap = {
     primary: '',
     secondary: 'text-secondary',
 } as const;
-
-// interface BaseProps<T extends HTMLElement> {
-//   id: string;
-//   name: string;
-//   title: string;
-//   defaultValue?: string;
-//   value?: string;
-//   required?: boolean;
-//   readonly?: boolean;
-//   onChange?: (e: React.ChangeEvent<T>) => void;
-//   className?: string;
-//   errorMessage?: string;
-//   maxLength?: number;
-//   maxHeight?: string; // Tiptap 전용
-//   disabled?: boolean;
-//   placeholder?: string;
-// }
 
 const BaseInputWrapper = ({
     id,
