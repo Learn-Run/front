@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -32,17 +29,28 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build & Push Front - Main
+      - name: Build and Push Multi-App
         run: |
-          docker build -t front-main:latest ./apps/pick-learn
-          docker tag front-main:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/front-main:latest
-          docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/front-main:latest
+          docker build -t turbo-multi-app:latest .
+          docker tag turbo-multi-app:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
 
-      - name: Build & Push Front - Chat
+      - name: Generate .env.front File
         run: |
-          docker build -t chat:latest ./apps/chat-service
-          docker tag front-chat:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/front-chat:latest
-          docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/front-chat:latest
+          mkdir -p env
+          cat <<EOF > env/.env.front
+          BASE_API_URL=${{ secrets.BASE_API_URL }}
+          BASE_FRONT_URL=${{ secrets.BASE_FRONT_URL }}
+          NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
+          NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+          KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}
+          KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION=${{ secrets.AWS_REGION }}
+          AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}
+          NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}
+          EOF
 
       - name: Copy docker-compose.yml to EC2
         uses: appleboy/scp-action@v0.1.4
@@ -50,7 +58,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          source: "docker-compose-front.yml"
+          source: |
+            docker-compose-front.yml
+            env/.env.front
           target: "~/"
 
       - name: Deploy on EC2 via SSH
@@ -60,9 +70,23 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/front-main:latest
-            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/front-chat:latest
-      
+            mkdir -p ~/env
+            cat <<EOF > ~/env/.env.front
+            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
+            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+            BASE_API_URL=${{ secrets.BASE_API_URL }}
+            BASE_FRONT_URL=${{ secrets.BASE_FRONT_URL }}
+            KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}
+            KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION=ap-northeast-2
+            AWS_S3_BUCKET_NAME=pick-learn
+            NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}
+            EOF
+
+            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
+            
             docker-compose -f docker-compose-front.yml down
             docker-compose -f docker-compose-front.yml up -d
             docker image prune -f
