@@ -11,9 +11,7 @@ export default function CategoryMobileList({
     mainCategories,
 }: CategoryItemProps) {
     return (
-        <nav
-            className={cn('sticky container mx-auto md:static py-5 md:hidden')}
-        >
+        <nav className={cn('sticky md:static py-5 md:hidden')}>
             <ul className='flex justify-center items-center w-full gap-x-3 relative'>
                 <li>
                     <Link
