@@ -1,7 +1,8 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { getMainCategories, getCategoryList } from '@/entities/category/api';
 import {
@@ -14,6 +15,7 @@ import { Button } from '@repo/ui/components/base/Button';
 import { postWriteSchema, PostWriteSchemaType } from '../model/schema';
 import { createPost } from '../api';
 import { useAlert } from '../model/hooks/useAlert';
+import { routes } from '@/shared/model/constants/routes';
 
 export interface PostFormDataType {
     mainCategoryId: number;
@@ -36,7 +38,7 @@ function PostWriteForm() {
     });
 
     const alert = useAlert();
-
+    const router = useRouter();
     const fields = useWatch<PostWriteSchemaType>({
         control,
         name: ['mainCategoryId', 'subCategoryId', 'title', 'contents'],
@@ -94,6 +96,7 @@ function PostWriteForm() {
             console.log('data:', data);
             await createPost(data);
             setIsLoading(false);
+            router.push(`${routes.post}`);
         } catch (error) {
             console.log('🚀 ~ onSubmit ~ error:', error);
             setIsLoading(false);
@@ -104,7 +107,7 @@ function PostWriteForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col gap-5 pt-10 pb-40'
+            className='flex flex-col gap-5 pt-10 pb-40 container mx-auto max-w-[1240px] px-4 lg:px-0'
         >
             <div className='grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-5 '>
                 <Controller
