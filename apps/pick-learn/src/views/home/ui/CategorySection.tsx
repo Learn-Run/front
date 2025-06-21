@@ -4,13 +4,14 @@ import { routes } from '@/shared/model/constants/routes';
 import { iconMapById } from '../model/constants';
 import { getMainCategories } from '@/entities/category/api';
 import CategoryCarousel from './CategoryCarousel';
+import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 // import CreateCategoryButton from './CreateCategoryButton';
 
 export default async function CategorySection() {
     const categories = await getMainCategories();
 
     return (
-        <section className='container mx-auto max-w-[968px] mb-[50px]'>
+        <SectionWrapper className='max-w-[968px] mb-[50px]'>
             <h3 className='text-center text-primary-100 font-medium text-2xl mt-[50px] mb-8'>
                 Categories
             </h3>
@@ -42,6 +43,6 @@ export default async function CategorySection() {
                 })}
             </ul>
             <CategoryCarousel categories={categories} />
-        </section>
+        </SectionWrapper>
     );
 }

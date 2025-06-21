@@ -5,6 +5,7 @@ import { Button } from '@repo/ui/components/base/Button';
 import { routes } from '@/shared/model/constants/routes';
 import { categorySearchParams } from '@/entities/category/utils/categorySearchParams';
 import Filter from '@/shared/assets/icons/Filter';
+import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 
 export default function PostFilterSection({
     searchParams,
@@ -17,7 +18,7 @@ export default function PostFilterSection({
     };
 }) {
     return (
-        <section className='flex justify-between container mx-auto gap-5 px-4 md:px-0 2xl:px-0 pt-15 pb-5 max-w-[1240px]'>
+        <SectionWrapper className='flex justify-between gap-5 pt-15 pb-10'>
             <div className='flex items-center justify-center gap-x-2  border border-[#E5E4E9] rounded-full px-4 py-2'>
                 <Filter />
                 <span>Filter</span>
@@ -62,6 +63,6 @@ export default function PostFilterSection({
                     </Link>
                 </Button>
             </div>
-        </section>
+        </SectionWrapper>
     );
 }

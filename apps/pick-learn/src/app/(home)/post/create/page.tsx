@@ -4,7 +4,7 @@ import { MainWrapper } from '@/shared/ui';
 
 export default function page() {
     return (
-        <MainWrapper className='pt-40 container mx-auto px-4 lg:px-0'>
+        <MainWrapper className='pt-40'>
             <PostWriteTopSection />
             <PostWriteForm />
         </MainWrapper>
