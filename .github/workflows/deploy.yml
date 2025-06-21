@@ -86,7 +86,6 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           source: |
             docker-compose-front.yml
-            env/.env.front
           target: "~/"
 
       - name: Deploy on EC2 via SSH
