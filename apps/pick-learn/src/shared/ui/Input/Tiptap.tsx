@@ -243,10 +243,15 @@ const Tiptap = ({
             // document: false, // 문서 구조  (거의 사용 안함)
             // text: false, // 텍스트 노드  (거의 사용 안함)
         }),
-        ResizableImage.configure({
-            inline: false,
-            allowBase64: false,
-        }),
+        readOnly
+            ? Image.configure({
+                  inline: false,
+                  allowBase64: false,
+              })
+            : ResizableImage.configure({
+                  inline: false,
+                  allowBase64: false,
+              }),
     ];
 
     const editor = useEditor({
@@ -364,7 +369,7 @@ const Tiptap = ({
                 className={cn(
                     'campus_editor',
                     computedClasses,
-                    'peer w-full outline-none text-[1.1rem] pt-5 pb-3 px-4 font-semibold rounded-md',
+                    'peer w-full outline-none text-[1.1rem] p-0 font-semibold rounded-md',
                     'bg-primary-black/5 text-primary-black placeholder:text-primary-100/70',
                     'focus:ring-2 focus:ring-primary-100/20 focus:border-primary-100 focus:bg-primary-white focus:text-primary-black',
                 )}
@@ -382,7 +387,7 @@ const Tiptap = ({
                 className={cn(
                     'campus_editor',
                     computedClasses,
-                    'peer w-full border-[1px] border-primary-100 outline-none text-[1.1rem] pt-5 pb-3 px-4 font-semibold rounded-md',
+                    'peer w-full border-[1px] border-primary-100 outline-none text-[1.1rem] pt-5 pb-3 font-semibold rounded-md',
                     'bg-primary-black/5 text-primary-black placeholder:text-primary-100/70',
                     'focus:ring-2 focus:ring-primary-100/20 focus:border-primary-100 focus:bg-primary-white focus:text-primary-black',
                 )}
