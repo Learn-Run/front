@@ -9,7 +9,10 @@ export default function SectionWrapper({
 }) {
     return (
         <section
-            className={cn('container mx-auto w-full max-w-[1240px]', className)}
+            className={cn(
+                'container mx-auto px-4 lg:px-0 w-full max-w-[1240px]',
+                className,
+            )}
         >
             {children}
         </section>
