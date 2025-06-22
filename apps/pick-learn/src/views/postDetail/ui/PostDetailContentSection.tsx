@@ -8,11 +8,7 @@ export default function PostDetailContentSection({
 }) {
     return (
         <SectionWrapper className='pt-11'>
-            <Tiptap
-                value={contents}
-                readOnly
-                className='flex justify-center items-center'
-            />
+            <Tiptap value={contents} readOnly />
         </SectionWrapper>
     );
 }
