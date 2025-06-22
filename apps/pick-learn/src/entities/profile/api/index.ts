@@ -3,15 +3,15 @@ import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
 import { ProfileType, WriterProfileType } from './types';
 
-//FIXME: api연동 수정필요
-export const getProfile = async () => {
+export const getMyProfile = async () => {
     const response = await fetchData.get<ProfileType>(
-        `${services.post}/api/v1/profile/my-info`,
+        `${services.profile}/api/v1/profile/my-info`,
         {
             requireAuth: true,
         },
     );
 
+    console.log('🚀 ~ getMyProfile ~ response:', response);
     return response.result;
 };
 
