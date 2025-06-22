@@ -5,7 +5,7 @@ export interface ProfileImageType {
 }
 export interface ProfileType {
     grade: GradeType;
-    nickName: string;
+    nickname: string;
     profileImage: ProfileImageType;
     selfIntroduction: string;
     categoryListIds: number[];
