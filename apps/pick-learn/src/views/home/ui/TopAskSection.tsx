@@ -4,6 +4,7 @@ import Pagination from '@/shared/ui/Pagination';
 import Heading from '@/widgets/home/ui/Heading';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 import AskItemCardList from './AskItemCardList';
+import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 
 export default async function TopAskSection({
     page,
@@ -24,7 +25,7 @@ export default async function TopAskSection({
     });
 
     return (
-        <section className='space-y-10 my-25'>
+        <SectionWrapper className='space-y-10 my-25'>
             <Heading align='center'>
                 <Heading.Title>
                     <TypingWrapper
@@ -39,6 +40,6 @@ export default async function TopAskSection({
             <AskAtCategoryList mainCategoryId={mainCategoryId} />
             <AskItemCardList postList={popularPostList} />
             <Pagination totalPage={popularPostList.totalPage} />
-        </section>
+        </SectionWrapper>
     );
 }

@@ -8,7 +8,12 @@ export default function SectionWrapper({
     className?: string;
 }) {
     return (
-        <section className={cn('container mx-auto', className)}>
+        <section
+            className={cn(
+                'container mx-auto px-4 lg:px-0 w-full max-w-[1240px]',
+                className,
+            )}
+        >
             {children}
         </section>
     );

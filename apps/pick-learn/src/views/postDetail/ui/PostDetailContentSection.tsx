@@ -1,3 +1,4 @@
+import Tiptap from '@/shared/ui/Input/Tiptap';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 
 export default function PostDetailContentSection({
@@ -5,5 +6,9 @@ export default function PostDetailContentSection({
 }: {
     contents: string;
 }) {
-    return <SectionWrapper className='pt-11'>{contents}</SectionWrapper>;
+    return (
+        <SectionWrapper className='pt-11'>
+            <Tiptap value={contents} readOnly />
+        </SectionWrapper>
+    );
 }
