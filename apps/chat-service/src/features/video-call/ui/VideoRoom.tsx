@@ -1,8 +1,7 @@
 'use client';
-
 import { VideoCallProvider } from '../model/context';
 import PublisherVideo from './PublisherVideo';
-import SessionToggleButton from './SessionToggleButton';
+import StartVideoButton from './StartVideoButton';
 
 export default function VideoRoom({ sessionId }: { sessionId: string }) {
     return (
@@ -10,7 +9,7 @@ export default function VideoRoom({ sessionId }: { sessionId: string }) {
             <div className='flex flex-col gap-4 p-6'>
                 <PublisherVideo />
 
-                <SessionToggleButton sessionId={sessionId} />
+                <StartVideoButton sessionId={sessionId} />
             </div>
         </VideoCallProvider>
     );
