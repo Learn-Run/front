@@ -4,4 +4,5 @@ export const services = {
     community: '/community-service',
     post: '/post-service',
     postRead: '/post-read-service',
+    chat: '/chat-service',
 };

@@ -1,5 +1,5 @@
 import Avatar from '@/entities/profile/ui/Avatar';
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 
 export default function MeetingParticipants({
     participants,
