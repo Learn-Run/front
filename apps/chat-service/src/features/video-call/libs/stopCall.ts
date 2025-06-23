@@ -1,4 +1,5 @@
 import { Session } from 'openvidu-browser';
+
 import { VideoCallStateType } from '../model/types';
 
 export function stopCall(
