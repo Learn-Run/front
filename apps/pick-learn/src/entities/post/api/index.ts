@@ -1,7 +1,6 @@
 'use server';
 import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
-import { getServerSession } from 'next-auth';
 import { AskDetailType, AskListType } from './types';
 
 export const getPostList = async ({
@@ -37,13 +36,10 @@ export const getPostList = async ({
 };
 
 export const getPostDetail = async ({ postUuid }: { postUuid: string }) => {
-    const memberUuid = await getServerSession();
     const response = await fetchData.get<AskDetailType>(
         `${services.postRead}/api/v1/post-read/${postUuid}`,
         {
-            headers: {
-                'X-Member-UUID': (memberUuid?.user.memberUuid as string) || '',
-            },
+            requireAuth: true,
         },
     );
 

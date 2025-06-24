@@ -45,7 +45,7 @@ export default async function page({
                 mainCategories={mainCategories}
                 postList={postList}
             />
-            <Pagination totalPage={postList.totalPage} />
+            <Pagination totalPage={postList.totalPages} />
         </MainWrapper>
     );
 }

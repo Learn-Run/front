@@ -17,9 +17,9 @@ export default function ProfileImage({
             <Image
                 src={imageUrl}
                 alt={alt}
-                width={330}
-                height={440}
-                className='rounded-2xl w-[330px] h-[440px] object-cover mt-15'
+                width={130}
+                height={230}
+                className='rounded-2xl w-[230px] h-[230px] object-cover'
             />
         </div>
     );

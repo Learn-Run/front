@@ -39,7 +39,7 @@ export default async function TopAskSection({
             </Heading>
             <AskAtCategoryList mainCategoryId={mainCategoryId} />
             <AskItemCardList postList={popularPostList} />
-            <Pagination totalPage={popularPostList.totalPage} />
+            <Pagination totalPage={popularPostList.totalPages} />
         </SectionWrapper>
     );
 }

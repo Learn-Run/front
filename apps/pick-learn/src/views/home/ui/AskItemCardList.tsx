@@ -22,7 +22,7 @@ export default async function AskItemCardList({
         <div className='flex flex-col items-center justify-center w-full'>
             <ul
                 className={cn(
-                    'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:px-0 items-center justify-center px-4 xl:max-w-[1262px]',
+                    'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:px-0 items-center justify-center px-4 xl:max-w-[1262px] w-full',
                     className,
                 )}
             >
