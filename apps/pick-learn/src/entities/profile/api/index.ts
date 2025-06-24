@@ -11,7 +11,6 @@ export const getMyProfile = async () => {
         },
     );
 
-    console.log('🚀 ~ getMyProfile ~ response:', response);
     return response.result;
 };
 
@@ -20,6 +19,14 @@ export const getWrtierProfileByMemberUuid = async (memberUuid?: string) => {
 
     const response = await fetchData.get<WriterProfileType>(
         `${services.profile}/api/v1/profile/author/${memberUuid}`,
+    );
+
+    return response.result;
+};
+
+export const getProfile = async (memberUuid: string) => {
+    const response = await fetchData.get<ProfileType>(
+        `${services.profile}/api/v1/profile/member/${memberUuid}`,
     );
 
     return response.result;

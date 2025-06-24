@@ -24,7 +24,7 @@ export interface AskListType {
     size: number;
     hasNext: boolean;
     totalElements: number;
-    totalPage: number;
+    totalPages: number;
 }
 
 export interface AskDetailType {
