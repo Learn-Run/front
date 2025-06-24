@@ -1,4 +1,4 @@
-export function dateFormat(initDate: Date | string): string {
+function formatDateLong(initDate: Date | string): string {
     const date = new Date(initDate);
 
     const months = [
@@ -27,4 +27,24 @@ export function dateFormat(initDate: Date | string): string {
     const pad = (n: number) => (n < 10 ? `0${n}` : n);
 
     return `${month} ${day}th, ${year} | ${hours}:${pad(minutes)} ${ampm}`;
+}
+
+function formatDateYMD(initDate: Date | string): string {
+    const date = new Date(initDate);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+export type DateFormatType = 'long' | 'ymd';
+
+export function formatDateByType(
+    initDate: Date | string,
+    type: DateFormatType = 'long',
+): string {
+    if (type === 'ymd') {
+        return formatDateYMD(initDate);
+    }
+    return formatDateLong(initDate);
 }

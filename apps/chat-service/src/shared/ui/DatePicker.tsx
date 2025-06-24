@@ -5,7 +5,7 @@ import {
     PopoverTrigger,
 } from '@repo/ui/components/base/Popover';
 import { cn } from '@repo/ui/lib/utils';
-import { dateFormat } from '../utils/dateFormat';
+import { formatDateByType } from '../utils/dateFormat';
 import { IconCalendar } from '../assets/icons';
 import { Calendar } from '@repo/ui/components/base/Calendar';
 
@@ -31,7 +31,7 @@ export default function DatePicker({
                     )}
                 >
                     {date ? (
-                        <span>{dateFormat(date)}</span>
+                        <span>{formatDateByType(date, 'ymd')}</span>
                     ) : (
                         <span>Pick a date</span>
                     )}
