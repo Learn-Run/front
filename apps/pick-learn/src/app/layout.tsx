@@ -48,10 +48,8 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
     children,
-    modal,
 }: {
     children: React.ReactNode;
-    modal: React.ReactNode;
 }) {
     const session = await getServerSession(options);
     const isAuth = !!session?.user as boolean;
@@ -64,7 +62,6 @@ export default async function RootLayout({
                         <ModalProvider>
                             <Header />
                             <div id='modal-root' />
-                            {modal}
                             {children}
                             <Footer />
                             <BottomNavBar />

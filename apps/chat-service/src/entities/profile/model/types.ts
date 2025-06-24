@@ -1,5 +1,10 @@
 export interface ProfileType {
-    gradeName: string;
+    memberUuid: string;
+    grade: {
+        id: number;
+        name: string;
+        color: string;
+    };
     nickname: string;
     profileImage: {
         type: string;
@@ -7,5 +12,8 @@ export interface ProfileType {
         alt: string;
     };
     selfIntroduction: string;
-    categoryListIds: number[];
+    categoryList: {
+        mainCategoryId: number;
+        subCategoryId: number;
+    }[];
 }

@@ -15,7 +15,7 @@ export const getVideoToken = async (sessionId: string) => {
     return result.sessionToken;
 };
 
-export const getToken = async (sessionId: string) => {
+export const getToken = async (sessionId: number) => {
     await fetch('http://localhost:4443/api/sessions', {
         method: 'POST',
         headers: {
