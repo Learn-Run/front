@@ -27,7 +27,7 @@ export default function MenuItem({
             )}
         >
             <span>{title}</span>
-            <span className='text-xs text-gray-500'>{count}</span>
+            <span className='text-xs font-medium text-gray-500'>{count}</span>
         </Link>
     );
 }
