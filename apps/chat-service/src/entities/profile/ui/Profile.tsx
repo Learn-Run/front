@@ -41,7 +41,7 @@ export default function Profile({
                         'text-gray-500 font-medium text-xs',
                     )}
                 >
-                    {profile.gradeName}
+                    {profile.grade.name}
                 </p>
             </div>
             {children}
