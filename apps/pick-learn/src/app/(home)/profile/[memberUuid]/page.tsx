@@ -11,7 +11,7 @@ export type MyActivePageProps = {
     params: Promise<{ memberUuid: string }>;
 };
 
-export default async function page({
+export default async function ProfilePage({
     searchParams,
     params,
 }: MyActivePageProps) {

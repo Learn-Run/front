@@ -16,9 +16,11 @@ export const getMyActivePostList = async ({
 }) => {
     const params = new URLSearchParams();
 
-    params.set('type', type);
-    params.set('page', page.toString());
-    params.set('size', size.toString());
+    if (type) params.set('type', type);
+
+    if (page) params.set('page', page.toString());
+
+    if (size) params.set('size', size.toString());
 
     const response = await fetchData.get<MyActivePostListType>(
         `${services.activeHistory}/api/v1/active-history/${memberUuid}?${params.toString()}`,
@@ -34,7 +36,6 @@ export const getActiveHistoryCount = async ({
     memberUuid: string;
     period: string;
 }) => {
-    console.log('🚀 ~ memberUuid:', memberUuid);
     const response = await fetchData.get<ActiveHistoryCountType>(
         `${services.activeHistory}/api/v1/active-history/${memberUuid}/count?period=${period}`,
     );

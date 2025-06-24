@@ -16,7 +16,7 @@ export default async function MyReviewList({
 }) {
     const MyReviewList = await Promise.all(
         myActiveHistoryList.posts.map(
-            async (item) => await getReviewList({ reviewId: item.uuid }),
+            async (item) => await getReviewList(item.uuid),
         ),
     );
 
@@ -38,14 +38,9 @@ export default async function MyReviewList({
                             </h3>
                         </Link>
                     </div>
-                    <div className='flex justify-between w-full'>
-                        {/* <div className='flex gap-x-2.5 items-center'>
-                            <BookMark />
-                            <Shared />
-                            </div> */}
-                    </div>
+                    <div className='flex justify-between w-full'></div>
                     <ShowMoreText text={item.contents} />
-                    <ul>
+                    <ul className='flex gap-x-4'>
                         {item.imageList.map((image) => (
                             <li key={image.imageUrl}>
                                 <Image

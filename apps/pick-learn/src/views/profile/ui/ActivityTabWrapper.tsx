@@ -20,16 +20,19 @@ export default function ActivityTabWrapper({
     if (paginationParams.type === 'POST') {
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
     }
-    if (paginationParams.type === 'COMMENT') {
+    if (paginationParams.type === 'COMMENT' && !myActiveHistoryList) {
         return <div>comment</div>;
     }
-    if (paginationParams.type === 'REVIEW') {
+    if (
+        paginationParams.type === 'REVIEW_RECEIVED' ||
+        paginationParams.type === 'REVIEW_WRITE'
+    ) {
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
     }
 
     return (
         <SectionWrapper className='flex items-center justify-center '>
-            게시물이 없습니다
+            <p className='text-gray-700'>게시물이 없습니다</p>
         </SectionWrapper>
     );
 }

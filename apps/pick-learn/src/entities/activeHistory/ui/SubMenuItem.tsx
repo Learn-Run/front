@@ -16,14 +16,15 @@ export default function SubMenuItem({
     count,
 }: SubMenuItemProps) {
     return (
-        <li className={cn('cursor-pointer text-sm w-full py-2 font-medium')}>
+        <li>
             <Link
                 href={href}
                 replace
                 scroll={false}
                 className={cn(
+                    'text-sm w-full py-2 font-medium',
+                    'flex items-center justify-between',
                     isActive ? 'text-primary-100 font-bold' : 'text-gray-700',
-                    'flex items-center justify-between w-full',
                 )}
             >
                 <span>{title}</span>

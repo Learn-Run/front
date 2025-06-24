@@ -54,6 +54,7 @@ export default async function RootLayout({
     modal: React.ReactNode;
 }) {
     const session = await getServerSession(options);
+    console.log('🚀 ~ session:', session);
     const isAuth = !!session?.user as boolean;
 
     return (

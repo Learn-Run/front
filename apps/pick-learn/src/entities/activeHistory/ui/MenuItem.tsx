@@ -16,23 +16,18 @@ export default function MenuItem({
     count,
 }: MenuItemProps) {
     return (
-        <div
+        <Link
+            href={href}
+            replace
+            scroll={false}
             className={cn(
-                'cursor-pointer text-sm w-full border-b py-4 font-medium',
+                'text-sm w-full border-b py-4 font-medium',
+                'flex items-center justify-between',
+                isActive ? 'text-primary-100 font-bold' : 'text-gray-700',
             )}
         >
-            <Link
-                href={href}
-                replace
-                scroll={false}
-                className={cn(
-                    isActive ? 'text-primary-100 font-bold' : 'text-gray-700',
-                    'flex items-center justify-between w-full',
-                )}
-            >
-                <span>{title}</span>
-                <span className='text-xs text-gray-500'>{count}</span>
-            </Link>
-        </div>
+            <span>{title}</span>
+            <span className='text-xs text-gray-500'>{count}</span>
+        </Link>
     );
 }
