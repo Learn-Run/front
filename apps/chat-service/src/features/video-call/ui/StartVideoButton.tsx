@@ -6,7 +6,7 @@ import { startCall } from '../libs/startCall';
 import { cn } from '@repo/ui/lib/utils';
 import Video from '@/shared/assets/icons/Video';
 
-export default function StartVideoButton({ sessionId }: { sessionId: string }) {
+export default function StartVideoButton({ sessionId }: { sessionId: number }) {
     const { openModal } = useModalContext();
 
     const { updateVideoCallState, subscribers } = useVideoCallContext();
