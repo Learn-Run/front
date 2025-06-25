@@ -1,11 +1,12 @@
 'use client';
-import { checkNicknameDuplicate } from '@/features/auth/api';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+
+import { Button } from '@repo/ui/components/base/Button';
+import { updateNickname } from '../api';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import { StatusCheckIcon } from '@/shared/ui';
-import { Button } from '@repo/ui/components/base/Button';
+import { checkNicknameDuplicate } from '@/features/auth/api';
 import Input from '@repo/ui/components/base/Input/index';
-import { Controller, useForm, useWatch } from 'react-hook-form';
-import { updateNickname } from '../api';
 
 export default function NickNameEditModal() {
     const {

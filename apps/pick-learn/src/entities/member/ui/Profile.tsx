@@ -1,11 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@repo/ui/lib/utils';
-import { getWrtierProfileByMemberUuid } from '@/entities/profile/api';
-import { S3_BASE_URL } from '@/shared/model/constants';
 import { jost } from '@/shared/assets/fonts';
-import Link from 'next/link';
 import { routes } from '@/shared/model/constants/routes';
+import { S3_BASE_URL } from '@/shared/model/constants';
+import { getWrtierProfileByMemberUuid } from '@/entities/profile/api';
 
 interface ProfileProps {
     memberUuid: string;

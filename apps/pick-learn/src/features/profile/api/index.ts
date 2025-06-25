@@ -1,14 +1,14 @@
 'use server';
+import { revalidateTag } from 'next/cache';
 
+import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
+import { PROFILE_TAG } from '../../../entities/profile/api/constants';
 import {
     ProfileUploadImageType,
     UpdateCategoryListType,
     UpdateSelfIntroductionType,
 } from './types';
-import { revalidateTag } from 'next/cache';
-import { PROFILE_TAG } from '../../../entities/profile/api/constants';
-import { services } from '@/shared/api/constants';
 
 export const uploadImageFile = async (formData: ProfileUploadImageType) => {
     const response = await fetchData.put(

@@ -5,6 +5,7 @@ import NickNameEditModal from './NickNameEditModal';
 
 export default function ProfileNickNameChangeButton() {
     const { openModal } = useModalContext();
+
     return (
         <Button
             variant='outline'

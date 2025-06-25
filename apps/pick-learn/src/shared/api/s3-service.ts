@@ -1,5 +1,4 @@
 async function uploadFileToS3(file: File, fileName: string, directory: string) {
-    console.log('Uploading file to S3:', file.name, 'in folder:', fileName);
     const formData = new FormData();
     formData.append('fileName', file.name);
     formData.append('fileType', file.type);
