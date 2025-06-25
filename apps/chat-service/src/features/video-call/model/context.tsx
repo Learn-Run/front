@@ -42,7 +42,7 @@ export function VideoCallProvider({
                 isScreenSharing: false,
             });
         }
-    }, [sessionId]);
+    }, [sessionId, state.session]);
 
     const updateVideoCallState = useCallback(
         (partial: Partial<VideoCallStateType>) =>
