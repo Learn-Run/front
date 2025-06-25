@@ -4,6 +4,8 @@ import { cn } from '@repo/ui/lib/utils';
 import { getWrtierProfileByMemberUuid } from '@/entities/profile/api';
 import { S3_BASE_URL } from '@/shared/model/constants';
 import { jost } from '@/shared/assets/fonts';
+import Link from 'next/link';
+import { routes } from '@/shared/model/constants/routes';
 
 interface ProfileProps {
     memberUuid: string;
@@ -23,14 +25,19 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
 
     return (
         <div className={cn('flex items-center gap-x-2.5 w-full', className)}>
-            <Image
-                className='w-7 h-7 rounded-full bg-gray-600/20 object-cover '
-                src={imageUrl}
-                alt={alt || ''}
-                width={28}
-                height={28}
-            />
-            <p className='font-medium'>{member?.nickname}</p>
+            <Link
+                href={`${routes.profile}/${memberUuid}`}
+                className='flex items-center gap-x-2.5'
+            >
+                <Image
+                    className='w-7 h-7 rounded-full bg-gray-600/20 object-cover '
+                    src={imageUrl}
+                    alt={alt || ''}
+                    width={28}
+                    height={28}
+                />
+                <span className='font-medium'>{member?.nickname}</span>
+            </Link>
             <p
                 className={cn(
                     jost.className,

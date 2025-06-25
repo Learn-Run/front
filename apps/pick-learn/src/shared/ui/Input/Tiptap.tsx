@@ -312,7 +312,7 @@ const Tiptap = ({
         // S3 업로드
         let s3Url: string;
         try {
-            s3Url = await uploadFileToS3(file, key);
+            s3Url = await uploadFileToS3(file, key, 'post');
         } catch {
             alert.error('업로드에 실패했습니다.');
             return;
