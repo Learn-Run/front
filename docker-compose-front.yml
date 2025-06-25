@@ -14,5 +14,5 @@ services:
 #    env_file:
 #      - ./env/.env.front
     ports:
-      - "3001:3000"
+      - "3001:3001"
     restart: always
