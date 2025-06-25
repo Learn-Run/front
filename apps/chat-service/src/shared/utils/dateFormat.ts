@@ -1,3 +1,38 @@
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import utc from 'dayjs/plugin/utc';
+import 'dayjs/locale/ko';
+
+dayjs.extend(utc);
+dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
+dayjs.locale('ko');
+
+export const formatRelative = (date: string | Date | number) => {
+    return dayjs(date).fromNow();
+};
+
+export const formatSmartDate = (date: string | Date | number): string => {
+    const now = dayjs();
+    const target = dayjs(date);
+
+    const diffInDays = now.diff(target, 'day');
+
+    if (diffInDays <= 3) {
+        return target.fromNow();
+    } else {
+        return target.format('YYYY년 M월 D일');
+    }
+};
+
+export const formatDate = (
+    date: string | Date | number,
+    formatStr = 'YYYY년 M월 D일',
+) => {
+    return dayjs(date).format(formatStr);
+};
+
 function formatDateLong(initDate: Date | string): string {
     const date = new Date(initDate);
 
