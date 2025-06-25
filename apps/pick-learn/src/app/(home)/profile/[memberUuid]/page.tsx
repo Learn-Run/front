@@ -1,6 +1,7 @@
 import { options } from '@/app/api/auth/[...nextauth]/options';
-import { getProfile } from '@/entities/profile/api';
 import { getServerSession } from 'next-auth';
+
+import { getProfile } from '@/entities/profile/api';
 import { getMyActivePostList } from '@/entities/activeHistory/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import ProfileInfoSection from '@/views/profile/ui/ProfileInfoSection';

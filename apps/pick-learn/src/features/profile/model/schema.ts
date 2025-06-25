@@ -1,10 +1,6 @@
 import z from 'zod';
 
 export const nickNameEditSchema = z.object({
-    name: z.string({
-        required_error: '이름을 입력해주세요',
-    }),
-
     nickname: z
         .string()
         .min(2, '닉네임은 2자 이상이어야 합니다')

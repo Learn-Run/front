@@ -6,8 +6,6 @@ export default async function MyCategoryList({
 }: {
     categoryList: CategoryListType[];
 }) {
-    console.log('🚀 ~ catgegory:', categoryList);
-
     const subCategory = await Promise.all(
         categoryList.map((subCategory) =>
             getSubCategory(subCategory.subCategoryId),
