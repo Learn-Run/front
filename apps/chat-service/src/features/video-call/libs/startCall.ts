@@ -5,7 +5,7 @@ import { VideoCallStateType } from '../model/types';
 import { getToken } from '../api';
 
 export const startCall = async (
-    id: number,
+    id: string,
     getSubscribers: () => StreamManager[],
     updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
 ) => {

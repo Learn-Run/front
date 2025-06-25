@@ -1,16 +1,18 @@
 'use client';
-import { VideoCallProvider } from '../model/context';
+import { useVideoCallContext } from '../model/context';
 import PublisherVideo from './PublisherVideo';
-import StartVideoButton from './StartVideoButton';
+import StopVideoButton from './StopVideoButton';
 
-export default function VideoRoom({ sessionId }: { sessionId: number }) {
+export default function VideoRoom() {
+    const { session } = useVideoCallContext();
+
+    if (!session) return;
+
     return (
-        <VideoCallProvider>
-            <div className='flex flex-col gap-4 p-6'>
-                <PublisherVideo />
+        <div className='flex flex-col gap-4 h-full'>
+            <PublisherVideo />
 
-                <StartVideoButton sessionId={sessionId} />
-            </div>
-        </VideoCallProvider>
+            <StopVideoButton />
+        </div>
     );
 }

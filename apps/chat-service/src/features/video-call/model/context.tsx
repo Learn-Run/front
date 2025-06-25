@@ -1,5 +1,11 @@
 'use client';
-import { createContext, useContext, useState, useCallback } from 'react';
+import {
+    createContext,
+    useContext,
+    useState,
+    useCallback,
+    useEffect,
+} from 'react';
 
 import type { VideoCallStateType } from './types';
 
@@ -7,7 +13,13 @@ export const VideoCallContext = createContext<VideoCallStateType | undefined>(
     undefined,
 );
 
-export function VideoCallProvider({ children }: { children: React.ReactNode }) {
+export function VideoCallProvider({
+    children,
+    sessionId,
+}: {
+    children: React.ReactNode;
+    sessionId: string;
+}) {
     const [state, setState] = useState<
         Omit<VideoCallStateType, 'updateVideoCallState'>
     >({
@@ -17,6 +29,20 @@ export function VideoCallProvider({ children }: { children: React.ReactNode }) {
         subscribers: [],
         isScreenSharing: false,
     });
+
+    useEffect(() => {
+        if (state.session) {
+            state.session.disconnect();
+
+            setState({
+                OV: null,
+                session: null,
+                publisher: null,
+                subscribers: [],
+                isScreenSharing: false,
+            });
+        }
+    }, [sessionId]);
 
     const updateVideoCallState = useCallback(
         (partial: Partial<VideoCallStateType>) =>
