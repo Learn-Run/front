@@ -8,6 +8,8 @@ export default async function MyQuestionList({
 }: {
     myActiveHistoryList: MyActivePostListType;
 }) {
+    if (!myActiveHistoryList) return;
+
     const myActiveQeustionList = await Promise.all(
         myActiveHistoryList.posts.map((item) =>
             getPostDetail({ postUuid: item.uuid }),

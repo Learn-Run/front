@@ -29,7 +29,7 @@ export default async function MyReviewList({
             {MyReviewList.map((item) => (
                 <li
                     key={item.reviewId}
-                    className='flex flex-col items-start justify-between border gap-4 border-gray-400 rounded-2xl  w-full px-5 py-6 bg-white overflow-hidden'
+                    className='flex flex-col items-start justify-between border gap-4 border-gray-400 rounded-2xl  w-full px-5 py-6 bg-white '
                 >
                     <div className='flex justify-between w-full'>
                         <Link href={`${routes.post}/${item.post.postUuid}`}>
@@ -53,7 +53,6 @@ export default async function MyReviewList({
                             </li>
                         ))}
                     </ul>
-
                     <hr className='w-full border-gray-400' />
                     <div className='flex justify-between w-full whitespace-nowrap'>
                         <Profile memberUuid={item.reviewerUuid} />

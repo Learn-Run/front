@@ -1,3 +1,6 @@
+import { getServerSession } from 'next-auth';
+
+import { options } from '@/app/api/auth/[...nextauth]/options';
 import { getProfile } from '@/entities/profile/api';
 import { getMyActivePostList } from '@/entities/activeHistory/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
@@ -29,10 +32,16 @@ export default async function ProfilePage({
         page: zeroPage,
         memberUuid,
     });
+    const session = await getServerSession(options);
+    const myMemberUuid = session?.user?.memberUuid;
+    const isMyProfile = myMemberUuid === memberUuid;
 
     return (
         <MainWrapper className='bg-gradient-to-b from-secondary-100 to-[#f7f2f3] pt-40'>
-            <ProfileInfoSection myProfile={myProfile} />
+            <ProfileInfoSection
+                myProfile={myProfile}
+                isMyProfile={isMyProfile}
+            />
             <SectionWrapper className='flex flex-col md:flex-row gap-x-5 border-t-2 border-gray-400 pt-10'>
                 <MyActiveMenu
                     paginationParams={paginationParams}

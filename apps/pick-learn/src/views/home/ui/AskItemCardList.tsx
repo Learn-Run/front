@@ -27,18 +27,18 @@ export default async function AskItemCardList({
                 )}
             >
                 {postList.posts.map((item) => (
-                    <li key={item.postUuid}>
-                        <Link
-                            href={`${routes.post}/${item.postUuid}`}
-                            className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
-                        >
-                            <div className='flex justify-between w-full'>
-                                <Profile memberUuid={item.memberUuid} />
-                                <div className='flex gap-x-2.5 items-center'>
-                                    <BookMark />
-                                    <Shared />
-                                </div>
+                    <li
+                        key={item.postUuid}
+                        className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
+                    >
+                        <div className='flex justify-between w-full'>
+                            <Profile memberUuid={item.memberUuid} />
+                            <div className='flex gap-x-2.5 items-center'>
+                                <BookMark />
+                                <Shared />
                             </div>
+                        </div>
+                        <Link href={`${routes.post}/${item.postUuid}`}>
                             <TopAskSubCategory
                                 subCategoryId={item.subCategoryId}
                             />

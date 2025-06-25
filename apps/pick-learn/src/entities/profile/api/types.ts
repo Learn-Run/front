@@ -8,8 +8,13 @@ export interface ProfileType {
     nickname: string;
     profileImage: ProfileImageType;
     selfIntroduction: string;
-    categoryListIds: number[];
+    categoryList: CategoryListType[];
 }
+
+export type CategoryListType = {
+    mainCategoryId: number;
+    subCategoryId: number;
+};
 
 export interface GradeType {
     id: number;
