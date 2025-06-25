@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
-import { NodeViewWrapper, NodeViewProps } from '@tiptap/react';
 import Image from 'next/image';
+import { NodeViewWrapper, NodeViewProps } from '@tiptap/react';
 
-export const ResizableImageComponent: React.FC<NodeViewProps> = ({
+export const ResizableImageComponent = ({
     node,
     updateAttributes,
-}) => {
+}: NodeViewProps) => {
     const container = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
