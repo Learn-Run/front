@@ -10,41 +10,40 @@ export default function ProfileNickNameGrade({
     myProfile: ProfileType;
     isMyProfile: boolean;
 }) {
-    return (
-        <>
-            {isMyProfile ? (
-                <div className='flex items-center justify-between text-2xl font-extrabold mt-3 mb-8 w-full md:max-w-[230px]'>
-                    <p className='flex items-center gap-x-2'>
-                        @{myProfile.nickname}{' '}
-                        <span
-                            className={cn(
-                                jost.className,
-                                'text-xs font-medium leading-none place-items-end-safe',
-                            )}
-                            style={{ color: myProfile.grade?.color }}
-                        >
-                            {myProfile.grade.name}
-                        </span>
-                    </p>
+    if (isMyProfile)
+        return (
+            <div className='flex items-center justify-between text-2xl font-extrabold mt-3 mb-8 w-full md:max-w-[230px]'>
+                <p className='flex items-center gap-x-2'>
+                    @{myProfile.nickname}{' '}
+                    <span
+                        className={cn(
+                            jost.className,
+                            'text-xs font-medium leading-none place-items-end-safe',
+                        )}
+                        style={{ color: myProfile.grade?.color }}
+                    >
+                        {myProfile.grade.name}
+                    </span>
+                </p>
 
-                    <ProfileNickNameChangeButton />
-                </div>
-            ) : (
-                <div className='flex items-center justify-between text-2xl font-extrabold mt-3 mb-8 w-full md:max-w-[230px]'>
-                    <p className='flex items-center gap-x-2'>
-                        @{myProfile.nickname}{' '}
-                        <span
-                            className={cn(
-                                jost.className,
-                                'text-xs font-medium leading-none place-items-end-safe',
-                            )}
-                            style={{ color: myProfile.grade?.color }}
-                        >
-                            {myProfile.grade.name}
-                        </span>
-                    </p>
-                </div>
-            )}
-        </>
+                <ProfileNickNameChangeButton />
+            </div>
+        );
+
+    return (
+        <div className='flex items-center justify-between text-2xl font-extrabold mt-3 mb-8 w-full md:max-w-[230px]'>
+            <p className='flex items-center gap-x-2'>
+                @{myProfile.nickname}{' '}
+                <span
+                    className={cn(
+                        jost.className,
+                        'text-xs font-medium leading-none place-items-end-safe',
+                    )}
+                    style={{ color: myProfile.grade?.color }}
+                >
+                    {myProfile.grade.name}
+                </span>
+            </p>
+        </div>
     );
 }
