@@ -7,8 +7,8 @@ export const CHAT_LIST_MOCK: ChatRoomType[] = [
         chatRoomUuid: '1',
         title: '아이돌 취업을 위한 모든 질문 받습니다.',
         participantUuid: '1',
-        createdAt: '2023-10-01T12:00:00Z',
-        updatedAt: '2023-10-01T12:00:00Z',
+        createdAt: '2025-06-23T10:00:00Z',
+        updatedAt: '2025-06-23T12:00:00Z',
         lastMessage: '안녕하세요! 궁금한 점 있으신가요?',
     },
     {
@@ -16,8 +16,8 @@ export const CHAT_LIST_MOCK: ChatRoomType[] = [
         chatRoomUuid: '2',
         title: '프론트엔드 개발자 취업 Q&A',
         participantUuid: '3',
-        createdAt: '2023-11-05T15:30:00Z',
-        updatedAt: '2023-11-05T15:30:00Z',
+        createdAt: '2025-06-21T15:30:00Z',
+        updatedAt: '2025-06-22T15:30:00Z',
         lastMessage: 'React로 포트폴리오 만들고 있어요!',
     },
     {
