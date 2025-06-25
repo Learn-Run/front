@@ -4,11 +4,7 @@ import { revalidateTag } from 'next/cache';
 import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
 import { PROFILE_TAG } from '../../../entities/profile/api/constants';
-import {
-    ProfileUploadImageType,
-    UpdateCategoryListType,
-    UpdateSelfIntroductionType,
-} from './types';
+import { ProfileUploadImageType, UpdateMyInfoType } from './types';
 
 export const uploadImageFile = async (formData: ProfileUploadImageType) => {
     const response = await fetchData.put(
@@ -40,28 +36,11 @@ export const updateNickname = async (nickname: string) => {
     return response.isSuccess;
 };
 
-export const updateSelfIntroduction = async (
-    data: UpdateSelfIntroductionType,
-) => {
+export const updateMyInfo = async (data: UpdateMyInfoType) => {
     const response = await fetchData.put(
         `${services.profile}/api/v1/profile/info`,
         {
             body: JSON.stringify(data),
-            requireAuth: true,
-        },
-    );
-
-    revalidateTag(PROFILE_TAG.profile);
-    revalidateTag(PROFILE_TAG.writerProfile);
-
-    return response.isSuccess;
-};
-
-export const updateCategoryList = async (data: UpdateCategoryListType) => {
-    const response = await fetchData.put(
-        `${services.profile}/api/v1/profile/info`,
-        {
-            body: JSON.stringify({ data }),
             requireAuth: true,
         },
     );
