@@ -17,7 +17,10 @@ export default function ActivityTabWrapper({
     myActiveHistoryList,
     paginationParams,
 }: ActivityTabWrapperProps) {
-    if (paginationParams.type === 'POST') {
+    //     if (!paginationParams.type)
+    //         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
+
+    if (paginationParams.type === 'POST' && !myActiveHistoryList) {
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
     }
     if (paginationParams.type === 'COMMENT' && !myActiveHistoryList) {
