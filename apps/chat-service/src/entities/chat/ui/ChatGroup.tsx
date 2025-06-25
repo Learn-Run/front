@@ -1,4 +1,3 @@
-import React from 'react';
 import { CHAT_MOCK_DATA_1 } from '../model/constants';
 import ChatItem from './ChatItem';
 import { cn } from '@repo/ui/lib/utils';

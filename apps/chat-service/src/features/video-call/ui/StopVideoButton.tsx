@@ -1,9 +1,10 @@
 'use client';
+import { useRouter } from 'next/navigation';
+
 import { useVideoCallContext } from '../model/context';
 import { stopCall } from '../libs/stopCall';
 import { cn } from '@repo/ui/lib/utils';
 import StopCall from '@/shared/assets/icons/StopCall';
-import { useRouter } from 'next/navigation';
 import { routes } from '@/shared/model/constants/routes';
 
 export default function StopVideoButton() {
