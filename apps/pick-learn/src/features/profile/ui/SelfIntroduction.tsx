@@ -2,9 +2,10 @@
 import { useState } from 'react';
 
 import { cn } from '@repo/ui/lib/utils';
-import { Button } from '@repo/ui/components/base/Button';
 import { updateSelfIntroduction } from '../api';
 import { useAlert } from '@/features/post/model/hooks/useAlert';
+import EditButton from '@/shared/ui/EditButton';
+import SelfIntroductionEditor from './SelfIntroductionEditor';
 
 export default function SelfIntroduction({
     selfIntroduction,
@@ -48,39 +49,17 @@ export default function SelfIntroduction({
             <div className='flex items-center justify-between'>
                 <p className='font-semibold text-xl'>My Introduction</p>
                 {isMyProfile && !isEditing && (
-                    <Button
-                        onClick={handleEdit}
-                        variant='outline'
-                        className='text-sm font-medium w-fit'
-                    >
-                        Edit
-                    </Button>
+                    <EditButton onClick={handleEdit} />
                 )}
             </div>
 
             {isEditing ? (
-                <div className='flex flex-col gap-2'>
-                    <textarea
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                        className='text-gray-700 border border-gray-700 rounded-xl p-4 bg-white  resize-none focus:outline-none focus:ring-2 focus:ring-primary-100'
-                        placeholder='자기소개를 입력해주세요.'
-                    />
-                    <div className='flex gap-2 justify-end'>
-                        <button
-                            onClick={handleCancel}
-                            className='px-4 py-2 text-sm text-gray-600 hover:text-gray-800 font-medium'
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={handleSave}
-                            className='px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-lg font-medium'
-                        >
-                            Save
-                        </button>
-                    </div>
-                </div>
+                <SelfIntroductionEditor
+                    value={editValue}
+                    onChange={setEditValue}
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                />
             ) : (
                 <p className='text-gray-700 border border-gray-700 rounded-xl w-full p-4 bg-white min-h-[100px]'>
                     {selfIntroduction || '자기소개를 입력해주세요.'}
