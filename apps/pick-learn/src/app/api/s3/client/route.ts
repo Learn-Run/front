@@ -11,11 +11,11 @@ const s3Client = new S3Client({
 
 export async function POST(req: NextRequest) {
     try {
-        const { fileName, fileType, fileContent } = await req.json();
+        const { fileName, fileType, fileContent, directory } = await req.json();
         console.log('Received fileName:', fileName);
         const params = {
             Bucket: process.env.AWS_BUCKET_NAME!,
-            Key: `post/${Date.now()}-${fileName}`,
+            Key: `${directory}/${Date.now()}-${fileName}`,
             Body: Buffer.from(fileContent, 'base64'),
             ContentType: fileType,
         };

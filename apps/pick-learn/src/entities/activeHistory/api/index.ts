@@ -2,6 +2,7 @@
 import { fetchData } from '@/shared/api/instance';
 import { ActiveHistoryCountType, MyActivePostListType } from './types';
 import { services } from '@/shared/api/constants';
+import { PROFILE_TAG } from '@/entities/profile/api/constants';
 
 export const getMyActivePostList = async ({
     type = 'REVIEW_RECEIVED',
@@ -38,6 +39,9 @@ export const getActiveHistoryCount = async ({
 }) => {
     const response = await fetchData.get<ActiveHistoryCountType>(
         `${services.activeHistory}/api/v1/active-history/${memberUuid}/count?period=${period}`,
+        {
+            tags: [PROFILE_TAG.profile],
+        },
     );
 
     return response.result;
