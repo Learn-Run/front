@@ -2,6 +2,12 @@ import Image from 'next/image';
 
 import { cn } from '@repo/ui/lib/utils';
 
+const SIZE_VARIANTS = {
+    sm: 32,
+    md: 40,
+    lg: 48,
+};
+
 export default function Avatar({
     className,
     size = 'md',
@@ -9,22 +15,22 @@ export default function Avatar({
     src,
     alt,
 }: {
-    size?: 'sm' | 'md' | 'lg';
+    size?: keyof typeof SIZE_VARIANTS;
     className?: string;
     border?: boolean;
     src?: string;
     alt: string;
 }) {
+    const imageSize = SIZE_VARIANTS[size];
+
     if (!src) {
         return (
             <div
                 className={cn(
-                    'rounded-full bg-gray-300',
-                    { 'w-8 h-8': size === 'sm' },
-                    { 'w-10 h-10': size === 'md' },
-                    { 'w-12 h-12': size === 'lg' },
+                    'rounded-full bg-gray-300 aspect-square',
                     className,
                 )}
+                style={{ width: imageSize, height: imageSize }}
             />
         );
     }
@@ -32,20 +38,18 @@ export default function Avatar({
     return (
         <div
             className={cn(
-                'rounded-full overflow-hidden relative bg-gray-300',
+                'rounded-full overflow-hidden bg-gray-300 aspect-square',
                 { 'border-[3px] border-white': border },
-                { 'w-8 h-8': size === 'sm' },
-                { 'w-10 h-10': size === 'md' },
-                { 'w-12 h-12': size === 'lg' },
                 className,
             )}
+            style={{ width: imageSize, height: imageSize }}
         >
             <Image
                 src={src}
                 alt={alt}
-                fill
-                sizes='100%'
-                className='rounded-full'
+                width={imageSize}
+                height={imageSize}
+                className='rounded-full object-cover w-full h-full'
             />
         </div>
     );
