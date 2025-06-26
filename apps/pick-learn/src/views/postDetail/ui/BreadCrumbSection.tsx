@@ -13,19 +13,19 @@ export default async function BreadCrumbSection({
 
     return (
         <SectionWrapper className='w-full max-w-[1240px]'>
-            <ul className='flex items-center gap-x-2'>
+            <ul className='flex items-center gap-x-2 text-sm md:text-base overflow-hidden whitespace-nowrap'>
                 <li className='font-medium text-gray-600'>Home</li>
                 <BreadCrumb />
                 <li className='font-medium text-gray-600'>질문하기</li>
                 <BreadCrumb />
-                <li className='font-medium text-gray-600'>
+                <li className='font-medium text-gray-600 hidden md:block'>
                     {mainCategory?.name}
                 </li>
-                <BreadCrumb />
-                <li className='font-medium text-gray-600'>
+                <BreadCrumb className='hidden md:block' />
+                <li className='font-medium text-gray-600 hidden md:block'>
                     {subCategory?.name}
                 </li>
-                <BreadCrumb />
+                <BreadCrumb className='hidden md:block' />
                 <li className='font-bold text-primary-100'>
                     {postDetail.title}
                 </li>

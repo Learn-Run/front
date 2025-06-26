@@ -2,6 +2,7 @@ import Arts from './Arts';
 import Back from './Back';
 import BookMark from './BookMark';
 import BreadCrumb from './BreadCrumb';
+import BookMarkFill from './BookMarkFill';
 import Chat from './Chat';
 import Check from './Check';
 import Clock from './Clock';
@@ -25,6 +26,7 @@ import MainSearch from './MainSearch';
 import NoBoxShared from './NoBoxShared';
 import PopularAsker from './PopularAsker';
 import PopularPost from './PopularPost';
+import PostDetailBookMark from './PostDetailBookMark';
 import Post from './Post';
 import Profile from './Profile';
 import Search from './Search';
@@ -38,6 +40,7 @@ export {
     Back,
     BookMark,
     BreadCrumb,
+    BookMarkFill,
     Chat,
     Check,
     Clock,
@@ -61,6 +64,7 @@ export {
     NoBoxShared,
     PopularAsker,
     PopularPost,
+    PostDetailBookMark,
     Post,
     Profile,
     Search,
