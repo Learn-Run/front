@@ -1,9 +1,9 @@
 'use server';
+import { revalidateTag } from 'next/cache';
 
 import { POST_TAG } from '@/entities/post/api/constants';
 import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
-import { revalidateTag } from 'next/cache';
 import { BookMarkType } from './types';
 
 export const BookMarkStatus = async (
@@ -16,6 +16,7 @@ export const BookMarkStatus = async (
             tags: [POST_TAG.bookMark],
         },
     );
+
     return response.result;
 };
 
@@ -26,7 +27,9 @@ export const createBookMark = async (postUuid: string) => {
             requireAuth: true,
         },
     );
+
     revalidateTag(POST_TAG.bookMark);
+
     return response;
 };
 
@@ -37,6 +40,8 @@ export const cancelBookMark = async (postUuid: string) => {
             requireAuth: true,
         },
     );
+
     revalidateTag(POST_TAG.bookMark);
+
     return response;
 };

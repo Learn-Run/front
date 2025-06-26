@@ -3,6 +3,7 @@ import { BookMark, BookMarkFill } from '@/shared/assets/icons';
 import { useAlert } from '@/features/post/model/hooks/useAlert';
 import { BookMarkType } from '../api/types';
 import { cancelBookMark, createBookMark } from '../api';
+import { useMemo } from 'react';
 
 export default function PostListBookMarkButton({
     postUuid,
@@ -11,7 +12,6 @@ export default function PostListBookMarkButton({
     postUuid: string;
     bookMarkStatus: BookMarkType[];
 }) {
-    console.log('🚀 ~ bookMarkStatus:', bookMarkStatus);
     const alert = useAlert();
 
     const handleBookMark = async () => {
@@ -23,10 +23,13 @@ export default function PostListBookMarkButton({
         await cancelBookMark(postUuid);
         alert.basic('북마크에서 제거 되었습니다 ');
     };
-    const currentBookMark = bookMarkStatus?.find(
-        (item) => item.postUuid === postUuid,
+
+    const isBookmarked = useMemo(
+        () =>
+            bookMarkStatus?.find((item) => item.postUuid === postUuid)
+                ?.bookmarked === true,
+        [bookMarkStatus, postUuid],
     );
-    const isBookmarked = currentBookMark?.bookmarked === true;
 
     if (isBookmarked) {
         return (
@@ -35,6 +38,7 @@ export default function PostListBookMarkButton({
             </button>
         );
     }
+
     return (
         <button onClick={handleBookMark} className='cursor-pointer'>
             <BookMark />
