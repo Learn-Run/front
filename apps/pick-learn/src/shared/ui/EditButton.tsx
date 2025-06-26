@@ -1,24 +1,32 @@
 'use client';
 import { Button } from '@repo/ui/components/base/Button';
-
-interface EditButtonProps {
-    onClick: () => void;
-    className?: string;
-    children?: React.ReactNode;
-}
+import { useModalContext } from '../model/modal/ModalContext';
+import { ProfilInfoEditModal } from '@/features/profile/ui';
+import { ProfileCategoryListType } from '@/entities/profile/api/types';
 
 export default function EditButton({
-    onClick,
-    className,
-    children = 'Edit',
-}: EditButtonProps) {
+    selfintroduction: value,
+    categoryList,
+}: {
+    selfintroduction: string | null;
+    categoryList: ProfileCategoryListType[];
+}) {
+    const { openModal } = useModalContext();
+
     return (
         <Button
-            onClick={onClick}
+            onClick={() =>
+                openModal(
+                    <ProfilInfoEditModal
+                        value={value ?? ''}
+                        categoryList={categoryList}
+                    />,
+                )
+            }
             variant='outline'
-            className={`text-sm font-medium w-fit ${className || ''}`}
+            className={`text-sm font-medium w-fit`}
         >
-            {children}
+            Edit
         </Button>
     );
 }
