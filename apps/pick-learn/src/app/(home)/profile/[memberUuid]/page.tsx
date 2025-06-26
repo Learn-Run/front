@@ -5,9 +5,7 @@ import { getProfile } from '@/entities/profile/api';
 import { getMyActivePostList } from '@/entities/activeHistory/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import ProfileInfoSection from '@/views/profile/ui/ProfileInfoSection';
-import ActivityTabWrapper from '@/views/profile/ui/ActivityTabWrapper';
-import MyActiveMenu from '@/views/profile/ui/MyActiveMenu';
-import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
+import ActiveHistorySection from '@/views/profile/ui/ActiveHistorySection';
 
 export type MyActivePageProps = {
     searchParams: Promise<{ type?: string; page?: number; size?: number }>;
@@ -42,17 +40,11 @@ export default async function ProfilePage({
                 myProfile={myProfile}
                 isMyProfile={isMyProfile}
             />
-            <SectionWrapper className='flex flex-col md:flex-row gap-x-5 border-t-2 border-gray-400 pt-10'>
-                <MyActiveMenu
-                    paginationParams={paginationParams}
-                    memberUuid={memberUuid}
-                />
-                <ActivityTabWrapper
-                    myActiveHistoryList={myActiveList}
-                    paginationParams={paginationParams}
-                    memberUuid={memberUuid}
-                />
-            </SectionWrapper>
+            <ActiveHistorySection
+                paginationParams={paginationParams}
+                memberUuid={memberUuid}
+                myActiveList={myActiveList}
+            />
 
             <Pagination totalPage={myActiveList.totalPages} />
         </MainWrapper>

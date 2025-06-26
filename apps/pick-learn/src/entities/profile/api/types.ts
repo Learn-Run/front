@@ -8,10 +8,10 @@ export interface ProfileType {
     nickname: string;
     profileImage: ProfileImageType;
     selfIntroduction: string;
-    categoryList: CategoryListType[];
+    categoryList: ProfileCategoryListType[];
 }
 
-export type CategoryListType = {
+export type ProfileCategoryListType = {
     mainCategoryId: number;
     subCategoryId: number;
 };
