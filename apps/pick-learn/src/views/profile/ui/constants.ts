@@ -11,11 +11,34 @@ export const menuItems = (memberUuid: string) => [
                 type: 'REVIEW_RECEIVED',
             },
             {
-                title: '내가 쓴 리뷰',
+                title: '작성한 리뷰',
                 href: `${routes.profile}/${memberUuid}?type=REVIEW_WRITE`,
                 type: 'REVIEW_WRITE',
             },
         ],
+    },
+    {
+        title: '질문 내역',
+        href: `${routes.profile}/${memberUuid}?type=POST`,
+        type: 'POST',
+    },
+    {
+        title: '답변 내역',
+        href: `${routes.profile}/${memberUuid}?type=COMMENT`,
+        type: 'COMMENT',
+    },
+];
+
+export const mobileMenuItems = (memberUuid: string) => [
+    {
+        title: '받은 리뷰',
+        href: `${routes.profile}/${memberUuid}?type=REVIEW_RECEIVED`,
+        type: 'REVIEW_RECEIVED',
+    },
+    {
+        title: '작성한 리뷰',
+        href: `${routes.profile}/${memberUuid}?type=REVIEW_WRITE`,
+        type: 'REVIEW_WRITE',
     },
     {
         title: '질문 내역',

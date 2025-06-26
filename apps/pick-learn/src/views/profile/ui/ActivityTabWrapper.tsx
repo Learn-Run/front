@@ -1,6 +1,5 @@
 import { MyActivePostListType } from '@/entities/activeHistory/api/types';
-import MyQuestionList from '@/entities/activeHistory/ui/MyQuestionList';
-import MyReviewList from '@/entities/activeHistory/ui/MyReviewList';
+import { MyQuestionList, MyReviewList } from '@/entities/activeHistory/ui';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 
 type ActivityTabWrapperProps = {
@@ -20,7 +19,7 @@ export default function ActivityTabWrapper({
     if (!paginationParams.type)
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
 
-    if (paginationParams.type === 'POST' && !myActiveHistoryList) {
+    if (paginationParams.type === 'POST') {
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
     }
 

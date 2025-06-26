@@ -8,6 +8,7 @@ import { MyActivePostListType } from '../api/types';
 import Profile from '@/entities/member/ui/Profile';
 import StarFilled from '@/shared/assets/icons/StarFilled';
 import ShowMoreText from '@/shared/ui/ShowMoreText';
+import EmptySection from '@/features/profile/ui/EmptySection';
 
 export default async function MyReviewList({
     myActiveHistoryList,
@@ -19,6 +20,9 @@ export default async function MyReviewList({
             async (item) => await getReviewList(item.uuid),
         ),
     );
+    if (MyReviewList.length === 0) {
+        return <EmptySection />;
+    }
 
     return (
         <ul
