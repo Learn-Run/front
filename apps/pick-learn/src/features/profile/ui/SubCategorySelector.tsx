@@ -23,7 +23,7 @@ export default function SubCategorySelector({
 
     return (
         <>
-            <p className='text-sm font-semibold mt-3'>서브 카테고리</p>
+            <h3 className='text-sm font-semibold mt-3'>서브 카테고리</h3>
             <ul className='flex flex-wrap gap-2'>
                 {subCategoryData.map((category) => {
                     const isSelected = selectedSubCategories.some(
@@ -45,6 +45,7 @@ export default function SubCategorySelector({
                                           ? 'opacity-50 cursor-not-allowed'
                                           : 'hover:bg-primary-100/10'
                                 }`}
+                                type='button'
                                 onClick={(e) =>
                                     handleSubCategoryClick(e, category)
                                 }

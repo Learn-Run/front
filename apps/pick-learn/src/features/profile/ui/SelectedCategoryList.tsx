@@ -17,26 +17,24 @@ export default function SelectedCategoryList({
                 선택된 카테고리 ({selectedSubCategories.length}/3)
             </p>
 
-            <div>
-                <div className='flex flex-wrap gap-2'>
-                    {selectedSubCategories.map((category) => (
-                        <div
-                            key={category.subCategoryId}
-                            className='flex items-center justify-center gap-1 px-2 py-1 border-gray-500 rounded-sm relative'
+            <div className='flex flex-wrap gap-2'>
+                {selectedSubCategories.map((category) => (
+                    <div
+                        key={category.subCategoryId}
+                        className='flex items-center justify-center gap-1 px-2 py-1 border-gray-500 rounded-sm relative'
+                    >
+                        <span className='px-1 flex items-center justify-center'>
+                            {category.subCategoryName}
+                        </span>
+                        <button
+                            onClick={() =>
+                                onRemoveCategory(category.subCategoryId)
+                            }
                         >
-                            <span className='px-1 flex items-center justify-center'>
-                                {category.subCategoryName}
-                            </span>
-                            <button
-                                onClick={() =>
-                                    onRemoveCategory(category.subCategoryId)
-                                }
-                            >
-                                <XIcon className='absolute top-0 right-0 w-3 h-3 text-gray-700' />
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                            <XIcon className='absolute top-0 right-0 w-3 h-3 text-gray-700' />
+                        </button>
+                    </div>
+                ))}
             </div>
         </div>
     );

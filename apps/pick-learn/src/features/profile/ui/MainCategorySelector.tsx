@@ -23,7 +23,7 @@ export default function MainCategorySelector({
 
     return (
         <>
-            <p className='text-sm font-semibold mt-3'>메인 카테고리</p>
+            <h3 className='text-sm font-semibold mt-3'>메인 카테고리</h3>
             <ul className='flex flex-wrap gap-2'>
                 {mainCategories.map((category) => (
                     <li key={category.id} className='flex items-center gap-2'>

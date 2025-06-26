@@ -23,22 +23,22 @@ export default function CategorySelector({
     categoryList = [],
     onCategoryChange,
 }: CategorySelectorProps) {
-    useEffect(() => {
-        const fetchMainCategories = async () => {
-            const mainCategories = await getMainCategories();
-            setMainCategories(mainCategories);
-        };
-        fetchMainCategories();
-    }, []);
-
     const alert = useAlert();
 
-    const [mainCategories, setMainCategories] = useState<MainCategoryType[]>(
-        [],
-    );
+    const [mainCategoryData, setMainCategoryData] = useState<
+        MainCategoryType[]
+    >([]);
     const [subCategoryData, setSubCategoryData] = useState<CategoryListType[]>(
         [],
     );
+
+    useEffect(() => {
+        const fetchMainCategories = async () => {
+            const mainCategories = await getMainCategories();
+            setMainCategoryData(mainCategories);
+        };
+        fetchMainCategories();
+    }, []);
 
     const [selectedMainCategory, setSelectedMainCategory] =
         useState<MainCategoryType | null>(null);
@@ -57,7 +57,7 @@ export default function CategorySelector({
 
             for (const profileCategory of categoryList) {
                 try {
-                    const mainCategory = mainCategories.find(
+                    const mainCategory = mainCategoryData.find(
                         (cat) => cat.id === profileCategory.mainCategoryId,
                     );
                     if (!mainCategory) continue;
@@ -82,10 +82,10 @@ export default function CategorySelector({
             setSelectedSubCategories(convertedCategories);
         };
 
-        if (mainCategories.length > 0) {
+        if (mainCategoryData.length > 0) {
             convertProfileCategories();
         }
-    }, [categoryList, mainCategories, alert]);
+    }, [categoryList, mainCategoryData, alert]);
 
     useEffect(() => {
         if (onCategoryChange) {
@@ -134,7 +134,7 @@ export default function CategorySelector({
     return (
         <>
             <MainCategorySelector
-                mainCategories={mainCategories}
+                mainCategories={mainCategoryData}
                 selectedMainCategory={selectedMainCategory}
                 onCategorySelect={handleMainCategorySelect}
             />
