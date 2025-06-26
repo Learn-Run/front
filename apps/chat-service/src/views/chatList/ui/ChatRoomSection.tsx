@@ -20,7 +20,10 @@ export default function ChatRoomSection({
     if (!chatRoom) return;
 
     return (
-        <VideoCallProvider sessionId={chatRoom.chatRoomUuid}>
+        <VideoCallProvider
+            sessionId={chatRoom.chatRoomUuid}
+            isOnSession={!!isOnSession}
+        >
             <section
                 className={cn(
                     'h-full',
