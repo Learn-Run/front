@@ -2,22 +2,25 @@ import Link from 'next/link';
 import { htmlToText } from 'html-to-text';
 
 import { cn } from '@repo/ui/lib/utils';
+import { Shared } from '@/shared/assets/icons';
 import { routes } from '@/shared/model/constants/routes';
 import { AskListType } from '@/entities/post/api/types';
-import { BookMark, Shared } from '@/shared/assets/icons';
+import { BookMarkType } from '@/features/BookMark/api/types';
 import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
 import PostEmptySection from '@/shared/ui/PostEmptySection';
+import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
 
 export default async function AskItemCardList({
     className,
     postList,
+    bookMarkStatus,
 }: {
     className?: string;
     postList?: AskListType;
+    bookMarkStatus: BookMarkType[];
 }) {
     if (!postList || postList.posts.length === 0) return <PostEmptySection />;
-
     return (
         <div className='flex flex-col items-center justify-center w-full'>
             <ul
@@ -34,11 +37,17 @@ export default async function AskItemCardList({
                         <div className='flex justify-between w-full'>
                             <Profile memberUuid={item.memberUuid} />
                             <div className='flex gap-x-2.5 items-center'>
-                                <BookMark />
+                                <PostListBookMarkButton
+                                    postUuid={item.postUuid}
+                                    bookMarkStatus={bookMarkStatus}
+                                />
                                 <Shared />
                             </div>
                         </div>
-                        <Link href={`${routes.post}/${item.postUuid}`}>
+                        <Link
+                            href={`${routes.post}/${item.postUuid}`}
+                            className='w-full'
+                        >
                             <TopAskSubCategory
                                 subCategoryId={item.subCategoryId}
                             />
@@ -46,11 +55,11 @@ export default async function AskItemCardList({
                                 {item.title}
                             </h3>
 
-                            <p className='text-sm text-gray-700 truncate w-full'>
+                            <p className='text-sm text-gray-700 w-full truncate'>
                                 {htmlToText(item.contents, {
                                     wordwrap: false,
                                     selectors: [
-                                        { selector: 'img', format: 'skip' }, // 이미지 무시
+                                        { selector: 'img', format: 'skip' },
                                     ],
                                 })}
                             </p>
