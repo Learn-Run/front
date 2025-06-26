@@ -1,9 +1,10 @@
 'use client';
+import { useMemo } from 'react';
+
 import { BookMark, BookMarkFill } from '@/shared/assets/icons';
 import { useAlert } from '@/features/post/model/hooks/useAlert';
 import { BookMarkType } from '../api/types';
 import { cancelBookMark, createBookMark } from '../api';
-import { useMemo } from 'react';
 
 export default function PostListBookMarkButton({
     postUuid,
