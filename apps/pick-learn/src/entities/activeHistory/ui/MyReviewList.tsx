@@ -13,16 +13,17 @@ import EmptySection from '@/features/profile/ui/EmptySection';
 export default async function MyReviewList({
     myActiveHistoryList,
 }: {
-    myActiveHistoryList: MyActivePostListType;
+    myActiveHistoryList?: MyActivePostListType;
 }) {
+    if (!myActiveHistoryList) {
+        return <EmptySection />;
+    }
+
     const MyReviewList = await Promise.all(
         myActiveHistoryList.posts.map(
             async (item) => await getReviewList(item.uuid),
         ),
     );
-    if (MyReviewList.length === 0) {
-        return <EmptySection />;
-    }
 
     return (
         <ul

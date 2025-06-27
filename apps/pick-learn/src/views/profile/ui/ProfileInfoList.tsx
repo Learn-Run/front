@@ -16,7 +16,7 @@ export default function ProfileInfoList({
     return (
         <div
             className={cn(
-                'flex flex-col w-full border-2 rounded-xl bg-white p-5 gap-5',
+                'flex flex-col w-full border-2 rounded-xl bg-white p-5 gap-x-5 space-y-4',
                 className,
             )}
         >

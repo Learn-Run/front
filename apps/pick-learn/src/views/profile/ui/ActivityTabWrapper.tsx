@@ -1,20 +1,24 @@
 import { MyActivePostListType } from '@/entities/activeHistory/api/types';
 import { MyQuestionList, MyReviewList } from '@/entities/activeHistory/ui';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
+import MyBookmarkList from './MyBookmarkList';
+import { BookMarkListType } from '@/entities/bookMark/api/types';
 
 type ActivityTabWrapperProps = {
-    myActiveHistoryList: MyActivePostListType;
+    myActiveHistoryList?: MyActivePostListType;
     paginationParams: {
         type?: string;
         page?: number;
         size?: number;
     };
     memberUuid: string;
+    bookMarkList?: BookMarkListType;
 };
 
 export default function ActivityTabWrapper({
     myActiveHistoryList,
     paginationParams,
+    bookMarkList,
 }: ActivityTabWrapperProps) {
     if (!paginationParams.type)
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
@@ -32,6 +36,10 @@ export default function ActivityTabWrapper({
         paginationParams.type === 'REVIEW_WRITE'
     ) {
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
+    }
+
+    if (paginationParams.type === 'BOOKMARK') {
+        return <MyBookmarkList bookMarkList={bookMarkList} />;
     }
 
     return (
