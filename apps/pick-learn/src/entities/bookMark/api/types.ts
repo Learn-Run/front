@@ -3,6 +3,6 @@ export interface BookMarkListType {
     page: number;
     size: number;
     hasNext: boolean;
-    totalPage: number;
+    totalPages: number;
     totalElements: number;
 }

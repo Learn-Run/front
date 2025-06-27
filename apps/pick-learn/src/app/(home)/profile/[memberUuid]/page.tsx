@@ -56,11 +56,12 @@ export default async function ProfilePage({
                 memberUuid={memberUuid}
                 myActiveList={myActiveList}
                 bookMarkList={bookMarkList}
+                isMyProfile={isMyProfile}
             />
 
             <Pagination
                 totalPage={
-                    myActiveList?.totalPages || bookMarkList?.totalPage || 0
+                    myActiveList?.totalPages || bookMarkList?.totalPages || 0
                 }
             />
         </MainWrapper>
