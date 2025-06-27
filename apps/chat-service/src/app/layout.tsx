@@ -51,6 +51,7 @@ export default async function RootLayout({
         <html lang='ko-KR'>
             <body className={`${dmSans.className} antialiased`}>
                 <ModalProvider>
+                    <div id='modal-root' />
                     <div className='grid grid-rows-[auto_1fr] sm:grid-rows-1 sm:grid-cols-12 h-dvh w-full min-w-svw'>
                         <Header className='col-span-1 xl:col-span-2' />
                         <div className='row-span-1 sm:col-span-11 xl:col-span-10'>
