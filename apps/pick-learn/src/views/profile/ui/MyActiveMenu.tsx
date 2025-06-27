@@ -1,7 +1,10 @@
+import Link from 'next/link';
+
 import { cn } from '@repo/ui/lib/utils';
+import { routes } from '@/shared/model/constants/routes';
 import { menuItems } from './constants';
-import { getActiveHistoryCount } from '@/entities/activeHistory/api';
 import { getCountForType } from '@/entities/activeHistory/utils/countUtils';
+import { getActiveHistoryCount } from '@/entities/activeHistory/api';
 import { AccordionMenu, MenuItem } from '@/entities/activeHistory/ui';
 import MobileActiveMenu from './MobileActiveMenu';
 
@@ -12,14 +15,17 @@ type MyActiveMenuProps = {
         size?: number;
     };
     memberUuid: string;
+    isMyProfile: boolean;
 };
 
 export default async function MyActiveMenu({
     paginationParams,
     memberUuid,
+    isMyProfile,
 }: MyActiveMenuProps) {
     const currentType = paginationParams.type || 'REVIEW_RECEIVED';
     const menuItemList = menuItems(memberUuid);
+
     const activeHistoryCount = await getActiveHistoryCount({
         memberUuid,
         period: 'TOTAL',
@@ -69,6 +75,20 @@ export default async function MyActiveMenu({
                             />
                         );
                     })}
+                    {isMyProfile && (
+                        <Link
+                            href={`${routes.profile}/${memberUuid}?type=BOOKMARK`}
+                            className={cn(
+                                'text-sm w-full border-b py-4 font-medium',
+                                'flex items-center justify-between',
+                                currentType === 'BOOKMARK'
+                                    ? 'text-primary-100 font-bold'
+                                    : 'text-gray-700',
+                            )}
+                        >
+                            <p>북마크 내역</p>
+                        </Link>
+                    )}
                 </div>
             </nav>
             <MobileActiveMenu
