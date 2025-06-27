@@ -3,7 +3,8 @@ import { AlertItem } from './AlertProvider';
 const alertTypeConfig: Record<string, { className: string; position: string }> =
     {
         basic: {
-            className: 'toast-basic animate-fadeIn',
+            className:
+                'toast-basic animate-fadeIn bg-white p-3 rounded-lg shadow-lg',
             position: 'bottom-[3vh] left-1/2 translate-x-[-50%]',
         },
         wiggle: {
@@ -11,7 +12,8 @@ const alertTypeConfig: Record<string, { className: string; position: string }> =
             position: 'bottom-[3vh] left-1/2 translate-x-[-50%]',
         },
         error: {
-            className: 'toast-error animate-headShake',
+            className:
+                'toast-error animate-headShake text-error bg-white p-3 rounded-lg shadow-lg',
             position: 'bottom-[3vh] left-1/2 translate-x-[-50%]',
         },
         heartBeat: {

@@ -4,11 +4,8 @@ export interface ProfileUploadImageType {
     alt: string;
 }
 
-export interface UpdateSelfIntroductionType {
+export interface UpdateMyInfoType {
     selfIntroduction: string;
-}
-
-export interface UpdateCategoryListType {
     categoryList: {
         mainCategoryId: number;
         subCategoryId: number;

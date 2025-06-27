@@ -1,10 +1,10 @@
 import { getSubCategory } from '@/entities/category/api';
-import { CategoryListType } from '@/entities/profile/api/types';
+import { ProfileCategoryListType } from '@/entities/profile/api/types';
 
 export default async function MyCategoryList({
     categoryList,
 }: {
-    categoryList: CategoryListType[];
+    categoryList: ProfileCategoryListType[];
 }) {
     const subCategory = await Promise.all(
         categoryList.map((subCategory) =>
@@ -13,8 +13,7 @@ export default async function MyCategoryList({
     );
     return (
         <>
-            <h3 className='text-xl font-bold'>카테고리</h3>
-            <ul className='flex  gap-2 '>
+            <ul className='flex gap-2 '>
                 {subCategory.map((category) => (
                     <li key={category.id}>
                         <p

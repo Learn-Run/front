@@ -1,24 +1,24 @@
 import { cn } from '@repo/ui/lib/utils';
 import { getPostDetail } from '@/entities/post/api';
-import { MyActivePostListType } from '../api/types';
-import PostCard from '@/entities/post/ui/PostCard';
 import { BookMarkStatus } from '@/features/BookMark/api';
+import { BookMarkListType } from '@/entities/bookMark/api/types';
+import PostCard from '@/entities/post/ui/PostCard';
 
-export default async function MyQuestionList({
-    myActiveHistoryList,
+export default async function MyBookmarkList({
+    bookMarkList,
 }: {
-    myActiveHistoryList?: MyActivePostListType;
+    bookMarkList?: BookMarkListType;
 }) {
-    if (!myActiveHistoryList) return;
+    if (!bookMarkList) return;
 
-    const myActiveQeustionList = await Promise.all(
-        myActiveHistoryList.posts.map((item) =>
-            getPostDetail({ postUuid: item.uuid }),
+    const myBookMarkList = await Promise.all(
+        bookMarkList.postUuid.map(
+            async (item) => await getPostDetail({ postUuid: item }),
         ),
     );
 
     const bookMarkStatus = await Promise.all(
-        myActiveQeustionList.map(async (item) => BookMarkStatus(item.postUuid)),
+        myBookMarkList.map(async (item) => await BookMarkStatus(item.postUuid)),
     );
 
     return (
@@ -27,7 +27,7 @@ export default async function MyQuestionList({
                 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 container mx-auto md:px-0 items-center justify-center xl:max-w-[1262px] mb-10 w-full',
             )}
         >
-            {myActiveQeustionList.map((item) => (
+            {myBookMarkList.map((item) => (
                 <PostCard
                     key={item.postUuid}
                     item={item}
