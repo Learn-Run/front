@@ -1,3 +1,4 @@
+'use server';
 import { fetchData } from '@/shared/api/instance';
 import { BookMarkListType } from './types';
 import { services } from '@/shared/api/constants';

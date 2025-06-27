@@ -11,14 +11,14 @@ export default async function MyBookmarkList({
 }) {
     if (!bookMarkList) return;
 
-    const MyBookMarkList = await Promise.all(
+    const myBookMarkList = await Promise.all(
         bookMarkList.postUuid.map(
             async (item) => await getPostDetail({ postUuid: item }),
         ),
     );
 
     const bookMarkStatus = await Promise.all(
-        MyBookMarkList.map(async (item) => await BookMarkStatus(item.postUuid)),
+        myBookMarkList.map(async (item) => await BookMarkStatus(item.postUuid)),
     );
 
     return (
@@ -27,7 +27,7 @@ export default async function MyBookmarkList({
                 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 container mx-auto md:px-0 items-center justify-center xl:max-w-[1262px] mb-10 w-full',
             )}
         >
-            {MyBookMarkList.map((item) => (
+            {myBookMarkList.map((item) => (
                 <PostCard
                     key={item.postUuid}
                     item={item}

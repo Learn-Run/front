@@ -20,8 +20,6 @@ export default function ActivityTabWrapper({
     paginationParams,
     bookMarkList,
 }: ActivityTabWrapperProps) {
-    if (!paginationParams.type) return;
-
     if (!paginationParams.type)
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
 
