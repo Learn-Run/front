@@ -6,6 +6,9 @@ import { getMyActivePostList } from '@/entities/activeHistory/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import ProfileInfoSection from '@/views/profile/ui/ProfileInfoSection';
 import ActiveHistorySection from '@/views/profile/ui/ActiveHistorySection';
+import { getBookMarkList } from '@/entities/bookMark/api';
+import { MyActivePostListType } from '@/entities/activeHistory/api/types';
+import { BookMarkListType } from '@/entities/bookMark/api/types';
 
 export type MyActivePageProps = {
     searchParams: Promise<{ type?: string; page?: number; size?: number }>;
@@ -25,11 +28,19 @@ export default async function ProfilePage({
 
     const myProfile = await getProfile(memberUuid);
 
-    const myActiveList = await getMyActivePostList({
-        ...paginationParams,
-        page: zeroPage,
-        memberUuid,
-    });
+    let myActiveList: MyActivePostListType | undefined;
+    let bookMarkList: BookMarkListType | undefined;
+
+    if (paginationParams.type === 'BOOKMARK') {
+        bookMarkList = await getBookMarkList(zeroPage);
+    } else {
+        myActiveList = await getMyActivePostList({
+            ...paginationParams,
+            page: zeroPage,
+            memberUuid,
+        });
+    }
+
     const session = await getServerSession(options);
     const myMemberUuid = session?.user?.memberUuid;
     const isMyProfile = myMemberUuid === memberUuid;
@@ -44,9 +55,14 @@ export default async function ProfilePage({
                 paginationParams={paginationParams}
                 memberUuid={memberUuid}
                 myActiveList={myActiveList}
+                bookMarkList={bookMarkList}
             />
 
-            <Pagination totalPage={myActiveList.totalPages} />
+            <Pagination
+                totalPage={
+                    myActiveList?.totalPages || bookMarkList?.totalPage || 0
+                }
+            />
         </MainWrapper>
     );
 }
