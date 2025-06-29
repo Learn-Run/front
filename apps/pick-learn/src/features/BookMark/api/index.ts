@@ -6,7 +6,7 @@ import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
 import { BookMarkType } from './types';
 
-export const BookMarkStatus = async (
+export const getBookMarkStatus = async (
     postUuid: string,
 ): Promise<BookMarkType> => {
     const response = await fetchData.get<BookMarkType>(
