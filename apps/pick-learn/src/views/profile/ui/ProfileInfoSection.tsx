@@ -1,14 +1,17 @@
 import { ProfileType } from '@/entities/profile/api/types';
-import { ProfileInfoList, ProfileNickNameGrade } from '.';
 import ProfileImage from './ProfileImage';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
+import ProfileNickNameGrade from './ProfileNickNameGrade';
+import ProfileInfoList from './ProfileInfoList';
 
 export default function ProfileInfoSection({
     myProfile,
     isMyProfile,
+    reviewAverage,
 }: {
     myProfile: ProfileType;
     isMyProfile: boolean;
+    reviewAverage: number;
 }) {
     if (!myProfile) return;
     return (
@@ -23,7 +26,11 @@ export default function ProfileInfoSection({
                     isMyProfile={isMyProfile}
                 />
             </div>
-            <ProfileInfoList myProfile={myProfile} isMyProfile={isMyProfile} />
+            <ProfileInfoList
+                myProfile={myProfile}
+                isMyProfile={isMyProfile}
+                reviewAverage={reviewAverage}
+            />
         </SectionWrapper>
     );
 }

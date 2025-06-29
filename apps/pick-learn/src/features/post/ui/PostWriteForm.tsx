@@ -13,7 +13,7 @@ import { SelectBox } from '@/shared/ui/SelectBox';
 import { InputType } from '@/shared/ui/wrapper/InputWrap';
 import { Button } from '@repo/ui/components/base/Button';
 import { postWriteSchema, PostWriteSchemaType } from '../model/schema';
-import { createPost } from '../api';
+import { createPost, updatePost } from '../api';
 import { useAlert } from '../model/hooks/useAlert';
 import { routes } from '@/shared/model/constants/routes';
 
@@ -24,7 +24,17 @@ export interface PostFormDataType {
     contents: string;
 }
 
-function PostWriteForm() {
+interface PostWriteFormProps {
+    mode?: 'create' | 'edit';
+    postId?: string;
+    initialData?: PostFormDataType;
+}
+
+function PostWriteForm({
+    mode = 'create',
+    postId,
+    initialData,
+}: PostWriteFormProps) {
     const [isLoading, setIsLoading] = useState(false);
     const {
         control,
@@ -35,6 +45,12 @@ function PostWriteForm() {
     } = useForm<PostWriteSchemaType>({
         resolver: zodResolver(postWriteSchema),
         mode: 'onChange',
+        defaultValues: initialData || {
+            mainCategoryId: 0,
+            subCategoryId: 0,
+            title: '',
+            contents: '',
+        },
     });
 
     const alert = useAlert();
@@ -66,6 +82,14 @@ function PostWriteForm() {
         },
     ]);
 
+    // 선택된 메인카테고리와 서브카테고리 아이템
+    const [selectedMainCategory, setSelectedMainCategory] = useState<
+        MainCategoryType | undefined
+    >();
+    const [selectedSubCategory, setSelectedSubCategory] = useState<
+        CategoryListType | undefined
+    >();
+
     useEffect(() => {
         const fetchMainCategoryData = async () => {
             const response = await getMainCategories();
@@ -73,6 +97,33 @@ function PostWriteForm() {
         };
         fetchMainCategoryData();
     }, []);
+
+    // 수정 모드일 때 초기 데이터 설정
+    useEffect(() => {
+        if (mode === 'edit' && initialData && mainCategoryData.length > 0) {
+            // 메인카테고리 찾기
+            const mainCategory = mainCategoryData.find(
+                (cat) => cat.id === initialData.mainCategoryId,
+            );
+            if (mainCategory) {
+                setSelectedMainCategory(mainCategory);
+                // 서브카테고리 데이터 로드
+                handleMainCategorySelectBox(mainCategory);
+            }
+        }
+    }, [mode, initialData, mainCategoryData]);
+
+    // 서브카테고리 데이터가 로드되면 선택된 서브카테고리 설정
+    useEffect(() => {
+        if (mode === 'edit' && initialData && subCategoryData.length > 1) {
+            const subCategory = subCategoryData.find(
+                (cat) => cat.subCategoryId === initialData.subCategoryId,
+            );
+            if (subCategory) {
+                setSelectedSubCategory(subCategory);
+            }
+        }
+    }, [mode, initialData, subCategoryData]);
 
     useEffect(() => {
         const contents = watch('contents');
@@ -94,13 +145,25 @@ function PostWriteForm() {
         setIsLoading(true);
         try {
             console.log('data:', data);
-            await createPost(data);
+
+            if (mode === 'edit' && postId) {
+                await updatePost(postId, data);
+                alert.basic('질문이 성공적으로 수정되었습니다.');
+            } else {
+                await createPost(data);
+                alert.basic('질문이 성공적으로 작성되었습니다.');
+            }
+
             setIsLoading(false);
             router.push(`${routes.post}`);
         } catch (error) {
-            console.log('🚀 ~ onSubmit ~ error:', error);
+            console.log(' ~ onSubmit ~ error:', error);
             setIsLoading(false);
-            alert.error('질문 작성에 실패했습니다.');
+            const errorMessage =
+                mode === 'edit'
+                    ? '질문 수정에 실패했습니다.'
+                    : '질문 작성에 실패했습니다.';
+            alert.error(errorMessage);
         }
     };
 
@@ -123,14 +186,19 @@ function PostWriteForm() {
                                 className='w-full'
                                 onSelect={(item) => {
                                     field.onChange(item.id);
+                                    setSelectedMainCategory(item);
                                     handleMainCategorySelectBox(item);
+                                    // 서브카테고리 초기화
+                                    setSelectedSubCategory(undefined);
+                                    setValue('subCategoryId', 0);
                                 }}
                                 items={mainCategoryData}
                                 valueKey='id'
                                 labelKey='name'
                                 placeholder={'카테고리를 선택하세요.'}
                                 selectWidth='100%'
-                                {...field}
+                                selectedValue={selectedMainCategory}
+                                setSelectedValue={setSelectedMainCategory}
                             />
                             {errors.mainCategoryId && (
                                 <p className='text-red-500 text-sm pt-2 pl-4'>
@@ -156,7 +224,8 @@ function PostWriteForm() {
                                 labelKey='subCategoryName'
                                 placeholder={'서브 카테고리를 선택하세요.'}
                                 selectWidth='100%'
-                                {...field}
+                                selectedValue={selectedSubCategory}
+                                setSelectedValue={setSelectedSubCategory}
                                 onSelect={(item) => {
                                     field.onChange(item.subCategoryId);
                                 }}
@@ -178,12 +247,13 @@ function PostWriteForm() {
                     <div>
                         <InputType.FormInput
                             id={'title'}
+                            name={'title'}
                             title={'제목'}
                             required
                             maxLength={200}
                             type='text'
                             errorMessage={''}
-                            {...field}
+                            defaultValue={field.value || ''}
                             onChange={(e) => {
                                 field.onChange(e);
                             }}
@@ -204,11 +274,15 @@ function PostWriteForm() {
                     <div>
                         <InputType.TextAreaInputWithEditor
                             id={'contents'}
+                            name={'contents'}
                             placeholder='질문 내용을 입력하세요.'
                             errorMessage={''}
                             maxHeight='600px'
                             className='h-[400px] md:h-[600px]'
-                            {...field}
+                            defaultValue={field.value || ''}
+                            onChange={(e) => {
+                                field.onChange(e);
+                            }}
                         />
                         {errors.contents && (
                             <p className='text-red-500 text-sm pt-2 pl-4'>
@@ -227,7 +301,9 @@ function PostWriteForm() {
             >
                 {isLoading ? (
                     <>
-                        질문 작성 중...
+                        {mode === 'edit'
+                            ? '질문 수정 중...'
+                            : '질문 작성 중...'}
                         <svg
                             className='animate-spin h-5 w-5 text-white'
                             viewBox='0 0 24 24'
@@ -248,6 +324,8 @@ function PostWriteForm() {
                             ></path>
                         </svg>
                     </>
+                ) : mode === 'edit' ? (
+                    '질문 수정하기'
                 ) : (
                     '질문 작성하기'
                 )}

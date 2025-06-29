@@ -43,7 +43,7 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
                     jost.className,
                     'text-xs font-medium leading-none place-items-end-safe',
                 )}
-                style={{ color: member?.grade?.color }}
+                style={{ color: member?.grade?.color || '#ffffff' }}
             >
                 {member.grade.name}
             </p>
