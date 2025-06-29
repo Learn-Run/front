@@ -1,6 +1,6 @@
 import { getCategoryList, getMainCategories } from '@/entities/category/api';
 import { getPostList } from '@/entities/post/api';
-import { BookMarkStatus } from '@/features/BookMark/api';
+import { getBookMarkStatus } from '@/features/BookMark/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import {
     PostFilterSection,
@@ -37,7 +37,9 @@ export default async function page({
     });
 
     const bookMarkStatus = await Promise.all(
-        postList.posts.map(async (item) => await BookMarkStatus(item.postUuid)),
+        postList.posts.map(
+            async (item) => await getBookMarkStatus(item.postUuid),
+        ),
     );
 
     return (

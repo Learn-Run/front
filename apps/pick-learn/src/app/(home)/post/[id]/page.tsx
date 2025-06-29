@@ -1,4 +1,4 @@
-import { MainWrapper } from '@/shared/ui';
+import { MainWrapper, Pagination } from '@/shared/ui';
 import { getPostDetail } from '@/entities/post/api';
 import {
     BreadCrumbSection,
@@ -6,17 +6,24 @@ import {
     PostDetailTitleSection,
     PostDetailTopsection,
 } from '@/views/postDetail/ui';
-import { BookMarkStatus } from '@/features/BookMark/api';
+import { getBookMarkStatus } from '@/features/BookMark/api';
+import PostDetailCommentSection from '@/views/commemt/ui/PostDetailCommentSection';
+import { getCommetList } from '@/entities/comment/api';
+import CommenttWriteSection from '@/features/comment/ui/CommenttWriteSection';
 
 export default async function page({
     params,
+    searchParams,
 }: {
     params: Promise<{ id: string }>;
+    searchParams: Promise<{ page: number }>;
 }) {
     const { id } = await params;
     const postDetail = await getPostDetail({ postUuid: id });
-    const bookMarkStatus = await BookMarkStatus(id);
-
+    const bookMarkStatus = await getBookMarkStatus(id);
+    const { page } = await searchParams;
+    const zeroPage = page ? Math.floor(page - 1) : 0;
+    const commentList = await getCommetList(id, zeroPage);
     return (
         <MainWrapper className='pt-40 bg-gradient-to-b to-gray-100 from-[#E8EFFE]'>
             <BreadCrumbSection postDetail={postDetail} />
@@ -26,6 +33,9 @@ export default async function page({
             />
             <PostDetailTitleSection title={postDetail.title} />
             <PostDetailContentSection contents={postDetail.contents} />
+            <CommenttWriteSection postUuid={id} />
+            <PostDetailCommentSection commentList={commentList} />
+            <Pagination totalPage={commentList.totalPages} />
         </MainWrapper>
     );
 }

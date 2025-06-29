@@ -5,7 +5,7 @@ import Heading from '@/widgets/home/ui/Heading';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 import AskItemCardList from './AskItemCardList';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
-import { BookMarkStatus } from '@/features/BookMark/api';
+import { getBookMarkStatus } from '@/features/BookMark/api';
 
 export default async function TopAskSection({
     page,
@@ -27,7 +27,7 @@ export default async function TopAskSection({
 
     const bookMarkStatus = await Promise.all(
         popularPostList.posts.map(
-            async (item) => await BookMarkStatus(item.postUuid),
+            async (item) => await getBookMarkStatus(item.postUuid),
         ),
     );
 

@@ -2,7 +2,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { getPostDetail } from '@/entities/post/api';
 import { MyActivePostListType } from '../api/types';
 import PostCard from '@/entities/post/ui/PostCard';
-import { BookMarkStatus } from '@/features/BookMark/api';
+import { getBookMarkStatus } from '@/features/BookMark/api';
 
 export default async function MyQuestionList({
     myActiveHistoryList,
@@ -18,7 +18,9 @@ export default async function MyQuestionList({
     );
 
     const bookMarkStatus = await Promise.all(
-        myActiveQeustionList.map(async (item) => BookMarkStatus(item.postUuid)),
+        myActiveQeustionList.map(async (item) =>
+            getBookMarkStatus(item.postUuid),
+        ),
     );
 
     return (

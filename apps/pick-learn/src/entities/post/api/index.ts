@@ -7,7 +7,7 @@ import { POST_TAG } from './constants';
 export const getPostList = async ({
     sort = 'recent',
     page = 0,
-    size = 8,
+    size = 9,
     mainCategoryId,
     subCategoryId,
 }: {

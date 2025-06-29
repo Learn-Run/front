@@ -7,7 +7,7 @@ export default function PostDetailContentSection({
     contents: string;
 }) {
     return (
-        <SectionWrapper className='pt-11'>
+        <SectionWrapper className='py-11'>
             <Tiptap value={contents} readOnly />
         </SectionWrapper>
     );

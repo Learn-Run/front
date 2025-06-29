@@ -14,3 +14,9 @@ export interface ReviewType {
         alt: string;
     }[];
 }
+
+export interface ReviewAverageType {
+    ratingAvg: number;
+}
+
+export type ReviewAverageValue = number | ReviewAverageType | null;
