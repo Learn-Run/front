@@ -9,6 +9,7 @@ import ActiveHistorySection from '@/views/profile/ui/ActiveHistorySection';
 import { getBookMarkList } from '@/entities/bookMark/api';
 import { MyActivePostListType } from '@/entities/activeHistory/api/types';
 import { BookMarkListType } from '@/entities/bookMark/api/types';
+import { getReviewAverage } from '@/entities/review/api';
 
 export type MyActivePageProps = {
     searchParams: Promise<{ type?: string; page?: number; size?: number }>;
@@ -44,12 +45,14 @@ export default async function ProfilePage({
     const session = await getServerSession(options);
     const myMemberUuid = session?.user?.memberUuid;
     const isMyProfile = myMemberUuid === memberUuid;
+    const reviewAverage = await getReviewAverage(memberUuid);
 
     return (
         <MainWrapper className='bg-gradient-to-b from-secondary-100 to-[#f7f2f3] pt-40'>
             <ProfileInfoSection
                 myProfile={myProfile}
                 isMyProfile={isMyProfile}
+                reviewAverage={reviewAverage || 0}
             />
             <ActiveHistorySection
                 paginationParams={paginationParams}
