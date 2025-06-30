@@ -1,4 +1,4 @@
-import { CHAT_LIST_MOCK } from '@/entities/chatRoom/model/constants';
+import { getChatRoomList } from '@/entities/chatRoom/api';
 import ChatRoomItem from '@/entities/chatRoom/ui/ChatRoomItem';
 import { cn } from '@repo/ui/lib/utils';
 
@@ -7,7 +7,7 @@ export default async function ChatRoomListSection({
 }: {
     className?: string;
 }) {
-    const chatList = CHAT_LIST_MOCK;
+    const chatRoomList = await getChatRoomList();
 
     return (
         <section
@@ -17,7 +17,7 @@ export default async function ChatRoomListSection({
                 최근 메세지 목록
             </h3>
             <ul>
-                {chatList.map((chatList) => (
+                {chatRoomList.content.map((chatList) => (
                     <li
                         key={chatList.chatRoomUuid}
                         className={cn(

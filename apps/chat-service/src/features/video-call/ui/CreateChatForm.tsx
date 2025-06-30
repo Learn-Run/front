@@ -3,14 +3,32 @@ import { useState } from 'react';
 
 import { Button } from '@repo/ui/components/base/Button';
 
-export default function CreateChatForm() {
+export default function CreateChatForm({
+    handleSend,
+}: {
+    handleSend: (input: string) => void;
+}) {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         setLoading(false);
+
+        handleSend(message);
+
         setMessage('');
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            if (message !== '' && !loading) {
+                handleSend(message);
+                setMessage('');
+            }
+        }
     };
 
     return (
@@ -21,6 +39,7 @@ export default function CreateChatForm() {
                     value={message}
                     rows={1}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className='mix-h-20 p-3 w-full grow border border-gray-300 focus:border-primary-100 outline-none rounded-md transition-all'
                 />
                 <Button
