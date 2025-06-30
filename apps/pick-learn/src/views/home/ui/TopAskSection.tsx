@@ -9,7 +9,7 @@ import { getBookMarkStatus } from '@/features/BookMark/api';
 
 export default async function TopAskSection({
     page,
-    size,
+    size = 8,
     mainCategoryId,
 }: {
     page?: number;

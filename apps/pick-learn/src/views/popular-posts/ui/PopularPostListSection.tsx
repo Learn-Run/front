@@ -2,15 +2,15 @@ import {
     CategoryListType,
     MainCategoryType,
 } from '@/entities/category/api/types';
-import CategoryListItem from '@/entities/category/ui/CategoryListItem';
-import CategoryMobileList from '@/entities/category/ui/CategoryMobileList';
+import PopularCategoryListItem from '@/entities/category/ui/PopularCategoryListItem';
+import PopularCategoryMobileList from '@/entities/category/ui/PopularCategoryMobileList';
 import { AskListType } from '@/entities/post/api/types';
 import { BookMarkType } from '@/features/BookMark/api/types';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
 import { cn } from '@repo/ui/lib/utils';
 
-export interface postListSectionProps {
+export interface popularPostListSectionProps {
     searchParams: {
         mainCategoryId: number;
         subCategoryId: number;
@@ -23,24 +23,24 @@ export interface postListSectionProps {
     className?: string;
 }
 
-export default async function PostListSection({
+export default async function PopularPostListSection({
     searchParams,
     categoryList,
     mainCategories,
     postList,
     bookMarkStatus,
     className,
-}: postListSectionProps) {
+}: popularPostListSectionProps) {
     return (
         <SectionWrapper
             className={cn('flex flex-col md:flex-row gap-10', className)}
         >
-            <CategoryListItem
+            <PopularCategoryListItem
                 searchParams={searchParams}
                 categoryList={categoryList}
                 mainCategories={mainCategories}
             />
-            <CategoryMobileList
+            <PopularCategoryMobileList
                 searchParams={searchParams}
                 categoryList={categoryList}
                 mainCategories={mainCategories}

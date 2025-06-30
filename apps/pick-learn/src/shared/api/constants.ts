@@ -5,6 +5,7 @@ export const services = {
     community: '/community-service',
     comment: '/comment-service',
     post: '/post-service',
+    point: '/point-service',
     postRead: '/post-read-service',
     activeHistory: '/active-history-service',
     review: '/review-service',
