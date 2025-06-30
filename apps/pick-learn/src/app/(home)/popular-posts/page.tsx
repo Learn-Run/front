@@ -14,7 +14,7 @@ type SearchParams = {
     size?: number;
 };
 
-export default async function page({
+export default async function PopularPostsPage({
     searchParams,
 }: {
     searchParams: Promise<SearchParams>;
