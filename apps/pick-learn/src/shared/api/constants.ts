@@ -2,6 +2,7 @@ export const services = {
     member: '/member-service',
     bookMark: '/bookmark-service',
     profile: '/profile-service',
+    payment: '/payment-service',
     community: '/community-service',
     comment: '/comment-service',
     post: '/post-service',
