@@ -74,7 +74,7 @@ export const options: NextAuthOptions = {
                     return true;
                 } catch (error) {
                     console.error('error', error);
-                    return `?error=${error}`;
+                    return `/chat?error=${error}`;
                 }
             }
             return true;

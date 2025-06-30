@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+
 import { cn } from '@repo/ui/lib/utils';
 import LogOutButton from './LogOutButton';
 import Nav from './Nav';
@@ -22,7 +23,7 @@ export default function Header({ className }: { className?: string }) {
                 </h1>
             </Link>
 
-            <Nav className='mx-auto fixed bottom-0 z-50 sm:static shadow-primary-100 sm:shadow-none bg-white' />
+            <Nav className='mx-auto fixed bottom-0 z-30 sm:static shadow-primary-100 sm:shadow-none bg-white' />
 
             <LogOutButton
                 className={cn(
