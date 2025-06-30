@@ -34,7 +34,7 @@ export default function PostListBookMarkButton({
 
     if (isBookmarked) {
         return (
-            <button onClick={handleCancelBookMark}>
+            <button onClick={handleCancelBookMark} className='cursor-pointer'>
                 <BookMarkFill />
             </button>
         );

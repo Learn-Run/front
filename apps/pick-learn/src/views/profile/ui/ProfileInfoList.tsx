@@ -23,12 +23,10 @@ export default function ProfileInfoList({
                 className,
             )}
         >
-            {reviewAverage && (
-                <p className='flex items-center gap-1'>
-                    <StarFilled />
-                    {reviewAverage}
-                </p>
-            )}
+            <p className='flex items-center gap-1'>
+                <StarFilled />
+                {reviewAverage || 0}
+            </p>
             <div className='flex items-center justify-between'>
                 <h3 className='text-xl font-bold'>카테고리</h3>
                 {isMyProfile && (

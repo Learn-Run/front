@@ -1,8 +1,9 @@
 import { MyActivePostListType } from '@/entities/activeHistory/api/types';
 import { MyQuestionList, MyReviewList } from '@/entities/activeHistory/ui';
-import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import MyBookmarkList from './MyBookmarkList';
 import { BookMarkListType } from '@/entities/bookMark/api/types';
+import { EmptySection } from '@/features/profile/ui';
+import MyCommentList from '@/entities/activeHistory/ui/MyCommentList';
 
 type ActivityTabWrapperProps = {
     myActiveHistoryList?: MyActivePostListType;
@@ -27,8 +28,8 @@ export default function ActivityTabWrapper({
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
     }
 
-    if (paginationParams.type === 'COMMENT' && !myActiveHistoryList) {
-        return <div>comment</div>;
+    if (paginationParams.type === 'COMMENT') {
+        return <MyCommentList myActiveHistoryList={myActiveHistoryList} />;
     }
 
     if (
@@ -42,9 +43,5 @@ export default function ActivityTabWrapper({
         return <MyBookmarkList bookMarkList={bookMarkList} />;
     }
 
-    return (
-        <SectionWrapper className='flex items-center justify-center '>
-            <p className='text-gray-700'>게시물이 없습니다</p>
-        </SectionWrapper>
-    );
+    return <EmptySection />;
 }

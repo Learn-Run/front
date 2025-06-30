@@ -6,7 +6,6 @@ import { AskDetailType } from '@/entities/post/api/types';
 import { BreadCrumb } from '@/shared/assets/icons';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import PostDetailEditButton from './PostDetailEditButton';
-import PostDetailDeleteButton from './PostDetailDeleteButton';
 
 export default async function BreadCrumbSection({
     postDetail,
@@ -43,7 +42,6 @@ export default async function BreadCrumbSection({
                 {isMyProfile && (
                     <div className='flex  gap-x-2'>
                         <PostDetailEditButton postUuid={postDetail.postUuid} />
-                        <PostDetailDeleteButton />
                     </div>
                 )}
             </div>

@@ -8,4 +8,5 @@ export const services = {
     postRead: '/post-read-service',
     activeHistory: '/active-history-service',
     review: '/review-service',
+    chat: '/chat-service',
 };

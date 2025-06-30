@@ -14,6 +14,7 @@ export default function ProfileInfoSection({
     reviewAverage: number;
 }) {
     if (!myProfile) return;
+
     return (
         <SectionWrapper className='flex flex-col items-center w-full md:flex-row md:items-start md:gap-5 mb-10'>
             <div className='flex-shrink-0'>
