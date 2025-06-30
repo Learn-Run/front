@@ -37,4 +37,5 @@ export type CategoryItemProps = {
     };
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
+    currentPage?: 'popular-posts' | 'post';
 };

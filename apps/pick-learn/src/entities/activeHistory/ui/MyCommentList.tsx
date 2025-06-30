@@ -30,11 +30,7 @@ export default async function MyCommentList({
     );
 
     return (
-        <ul
-            className={cn(
-                'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 container mx-auto md:px-0 items-center justify-center xl:max-w-[1262px] mb-10 w-full',
-            )}
-        >
+        <ul className={cn('w-full')}>
             {myActiveCommentList.map((item) => (
                 <CommentList
                     key={item.commentUuid}
