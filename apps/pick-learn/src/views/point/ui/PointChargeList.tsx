@@ -3,6 +3,7 @@ import { getPointList } from '@/entities/point/api';
 
 export default async function PointChargeList() {
     const pointList = await getPointList();
+
     return (
         <div className='flex flex-col gap-y-4 w-full'>
             <ul className='bg-point-blue-100 rounded-lg p-4 w-full flex flex-col gap-y-2'>
