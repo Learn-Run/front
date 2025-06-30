@@ -10,7 +10,6 @@ import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import Profile from '@/entities/member/ui/Profile';
 import PostEmptySection from '@/shared/ui/PostEmptySection';
 import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
-
 export default async function AskItemCardList({
     className,
     postList,

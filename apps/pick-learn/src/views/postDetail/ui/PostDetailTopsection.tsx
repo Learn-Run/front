@@ -19,7 +19,7 @@ export default function PostDetailTopsection({
             <ul className='flex items-center gap-x-4 whitespace-nowrap text-gray-600 text-sm'>
                 <li className='flex items-center gap-x-1'>
                     <Clock />
-                    <p>{dateFormat(postDetail.createdAt)}</p>
+                    <p>{dateFormat(postDetail.updatedAt)}</p>
                 </li>
                 <li className='flex items-center gap-x-1'>
                     <Eye />

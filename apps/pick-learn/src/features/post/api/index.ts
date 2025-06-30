@@ -17,6 +17,7 @@ export const updatePost = async (
     postUuid: string,
     postFormData: PostFormData,
 ) => {
+    console.log('🚀 ~ postFormData:', postFormData);
     const result = await fetchData.patch(
         `${services.post}/api/v1/post/${postUuid}`,
         {
