@@ -1,5 +1,10 @@
-import React from 'react';
+import { MainWrapper } from '@/shared/ui';
+import PaymentFailView from '@/views/payment/ui/PaymentFailView';
 
 export default function Failpage() {
-    return <div>Fail</div>;
+    return (
+        <MainWrapper className='pt-40'>
+            <PaymentFailView />
+        </MainWrapper>
+    );
 }

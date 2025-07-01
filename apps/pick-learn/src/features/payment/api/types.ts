@@ -5,3 +5,9 @@ export interface RequestPaymentType {
     paymentAmount: number;
     paymentMethod: string;
 }
+
+export interface PaymentConfirmType {
+    orderId: string;
+    amount: number;
+    paymentKey: string;
+}

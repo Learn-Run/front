@@ -8,9 +8,6 @@ export const getBookMarkList = async (
 ): Promise<BookMarkListType> => {
     const response = await fetchData.get<BookMarkListType>(
         `${services.bookMark}/api/v1/bookmark/list?page=${page}`,
-        {
-            requireAuth: true,
-        },
     );
 
     return response.result;
