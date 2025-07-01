@@ -1,21 +1,27 @@
-import Link from 'next/link';
-import { htmlToText } from 'html-to-text';
-
-import { routes } from '@/shared/model/constants/routes';
-import { AskDetailType } from '../api/types';
-import { Shared } from '@/shared/assets/icons';
-import Profile from '@/entities/member/ui/Profile';
 import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
-import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
+import Profile from '@/entities/member/ui/Profile';
+import { AskListType } from '@/entities/post/api/types';
 import { getBookMarkStatus } from '@/features/BookMark/api';
+import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
+import { Shared } from '@/shared/assets/icons';
+import { routes } from '@/shared/model/constants/routes';
+import { htmlToText } from 'html-to-text';
+import { getServerSession } from 'next-auth';
+import Link from 'next/link';
 
-export default async function PostCard({ item }: { item: AskDetailType }) {
-    const bookMarkStatus = await getBookMarkStatus(item.postUuid);
-
+export default async function PostListCard({
+    item,
+}: {
+    item: AskListType['posts'][number];
+}) {
+    const session = await getServerSession();
+    const bookMarkStatus = session
+        ? await getBookMarkStatus(item.postUuid)
+        : null;
     return (
         <li
             key={item.postUuid}
-            className='flex flex-col items-start justify-between border bg-white border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
+            className='flex flex-col items-start justify-between border border-gray-400 rounded-2xl h-50 w-full px-5 py-6'
         >
             <div className='flex justify-between w-full'>
                 <Profile memberUuid={item.memberUuid} />

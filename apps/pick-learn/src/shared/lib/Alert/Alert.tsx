@@ -13,7 +13,7 @@ const alertTypeConfig: Record<string, { className: string; position: string }> =
         },
         error: {
             className:
-                'toast-error animate-headShake text-red bg-white p-3 rounded-lg shadow-lg',
+                'toast-error animate-headShake text-error bg-white p-3 rounded-lg shadow-lg',
             position: 'bottom-[3vh] left-1/2 translate-x-[-50%]',
         },
         heartBeat: {
