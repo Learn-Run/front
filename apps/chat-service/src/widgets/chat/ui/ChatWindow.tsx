@@ -44,6 +44,21 @@ export default function ChatWindow({
         endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [newSocketMessages]);
 
+    useEffect(() => {
+        const scrollToBottom = () => {
+            if (scrollContainerRef.current) {
+                scrollContainerRef.current.scrollTop =
+                    scrollContainerRef.current.scrollHeight;
+            }
+        };
+
+        scrollToBottom();
+
+        const timeoutId = setTimeout(scrollToBottom, 100);
+
+        return () => clearTimeout(timeoutId);
+    }, [pastMessages, newSocketMessages]);
+
     if (!chatRoomUuid || !memberUuid) return null;
 
     return (
@@ -54,6 +69,7 @@ export default function ChatWindow({
             )}
         >
             <div className='flex items-center justify-between px-4 py-3 border-b border-gray-300 flex-shrink-0'>
+                <h3 className='text-gray-800 font-semibold'>채팅방</h3>
                 <StartVideoButton sessionId={chatRoomUuid} />
             </div>
 
@@ -67,6 +83,7 @@ export default function ChatWindow({
                     </li>
                 )}
                 <ChatGroup chatDatas={pastMessages} memberUuid={memberUuid} />
+
                 <ChatRoomMessages
                     newSocketMessages={newSocketMessages}
                     memberUuid={memberUuid}

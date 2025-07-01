@@ -1,19 +1,32 @@
+'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { formatSmartDate } from '@/shared/utils/dateFormat';
 import { routes } from '@/shared/model/constants/routes';
 import { Avatar } from '@/entities/profile/ui';
 import { getMemberProfile } from '@/entities/profile/api';
 import type { ChatRoomListContentType } from '../api/types';
+import { ProfileType } from '@/entities/profile/model/types';
 
-export default async function ChatRoomItem({
+export default function ChatRoomItem({
     chatRoom,
 }: {
     chatRoom: ChatRoomListContentType;
 }) {
-    const profile = await getMemberProfile(chatRoom.receiverUuid);
+    const [profile, setProfile] = useState<ProfileType | null>(null);
 
-    if (!profile) return;
+    useEffect(() => {
+        let mounted = true;
+        getMemberProfile(chatRoom.receiverUuid).then((data) => {
+            if (mounted) setProfile(data);
+        });
+        return () => {
+            mounted = false;
+        };
+    }, [chatRoom.receiverUuid]);
+
+    if (!profile) return null;
 
     return (
         <Link
@@ -43,11 +56,11 @@ export default async function ChatRoomItem({
                     </p>
                 </div>
 
-                {chatRoom.unreadMessageCount !== 0 ? (
+                {/* {chatRoom.unreadMessageCount !== 0 ? (
                     <p className='text-xs text-gray-600 flex justify-center items-center w-6 h-6 aspect-square rounded-full bg-secondary-100'>
                         {chatRoom.unreadMessageCount}
                     </p>
-                ) : null}
+                ) : null} */}
             </div>
         </Link>
     );

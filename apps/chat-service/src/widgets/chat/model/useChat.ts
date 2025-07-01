@@ -64,7 +64,9 @@ export const useChat = (chatRoomUuid?: string, memberUuid?: string) => {
         });
         if (!res) return;
 
-        setPastMessages((prev) => [...res.content, ...prev]);
+        const morePastMessages = res.content;
+
+        setPastMessages((prev) => [...morePastMessages, ...prev]);
         setCursor(res.nextCursor || null);
         setHasMore(res.hasNext || false);
     };

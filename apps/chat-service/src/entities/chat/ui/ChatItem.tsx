@@ -64,14 +64,14 @@ export default function ChatItem({
                         {chat.content}
                     </p>
                     <div className='space-y-1 text-xs text-gray-500 flex-shrink-0'>
-                        <p
+                        {/* <p
                             className={cn(
                                 isMyMessage || chat.read ? 'hidden' : '',
                             )}
                         >
                             안 읽음
-                        </p>
-                        <p>{formatDate(chat.sentAt, 'HH:mm')}</p>
+                        </p> */}
+                        <p>{formatDate(chat.sentAt, 'MM-DD HH:mm')}</p>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,20 @@ import { fetchData } from '@/shared/api/instance';
 import type { ChatRoomListType, ChatRoomType } from './types';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 
-export const getChatRoomList = async () => {
+export const getChatRoomList = async ({
+    cursor,
+    size = 10,
+}: {
+    cursor: string | null;
+    size?: number;
+}) => {
+    const params = new URLSearchParams();
+
+    if (cursor) params.set('cursor', cursor);
+    if (size) params.set('size', size.toString());
+
     const { result } = await fetchData.get<ChatRoomListType>(
-        `${services.chat}/api/v1/chat-room/list`,
+        `${services.chat}/api/v1/chat-room/list?${params.toString()}`,
         {
             requireAuth: true,
         },

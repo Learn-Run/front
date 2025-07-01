@@ -2,20 +2,24 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
 
 dayjs.extend(utc);
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
+dayjs.extend(timezone);
 dayjs.locale('ko');
 
+const KST = 'Asia/Seoul';
+
 export const formatRelative = (date: string | Date | number) => {
-    return dayjs(date).fromNow();
+    return dayjs(date).tz(KST).fromNow();
 };
 
 export const formatSmartDate = (date: string | Date | number): string => {
-    const now = dayjs();
-    const target = dayjs(date);
+    const now = dayjs().tz(KST);
+    const target = dayjs(date).tz(KST);
 
     const diffInDays = now.diff(target, 'day');
 
@@ -30,46 +34,15 @@ export const formatDate = (
     date: string | Date | number,
     formatStr = 'YYYY년 M월 D일',
 ) => {
-    return dayjs(date).format(formatStr);
+    return dayjs(date).tz(KST).format(formatStr);
 };
 
 function formatDateLong(initDate: Date | string): string {
-    const date = new Date(initDate);
-
-    const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;
-
-    const pad = (n: number) => (n < 10 ? `0${n}` : n);
-
-    return `${month} ${day}th, ${year} | ${hours}:${pad(minutes)} ${ampm}`;
+    return dayjs(initDate).tz(KST).format('MMMM Do, YYYY | HH:mm');
 }
 
 function formatDateYMD(initDate: Date | string): string {
-    const date = new Date(initDate);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return dayjs(initDate).tz(KST).format('YYYY-MM-DD');
 }
 
 export type DateFormatType = 'long' | 'ymd';
