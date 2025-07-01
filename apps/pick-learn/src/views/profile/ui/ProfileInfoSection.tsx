@@ -3,15 +3,18 @@ import ProfileImage from './ProfileImage';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import ProfileNickNameGrade from './ProfileNickNameGrade';
 import ProfileInfoList from './ProfileInfoList';
+import ChatButton from '@/views/commemt/ui/ChatButton';
 
 export default function ProfileInfoSection({
     myProfile,
     isMyProfile,
     reviewAverage,
+    memberUuid,
 }: {
     myProfile: ProfileType;
     isMyProfile: boolean;
     reviewAverage: number;
+    memberUuid: string;
 }) {
     if (!myProfile) return;
 
@@ -26,6 +29,7 @@ export default function ProfileInfoSection({
                     myProfile={myProfile}
                     isMyProfile={isMyProfile}
                 />
+                <ChatButton memberUuid={memberUuid} className=' w-full' />
             </div>
             <ProfileInfoList
                 myProfile={myProfile}
