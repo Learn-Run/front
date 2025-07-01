@@ -2,29 +2,31 @@ import { getServerSession } from 'next-auth';
 
 import CommentDeleteButton from '@/features/comment/ui/CommentDeleteButton';
 import CommentEditButton from '@/features/comment/ui/CommentEditButton';
-import {
-    CommentLikeCountType,
-    CommentLikeStatusType,
-    CommentType,
-} from '@/entities/comment/api/types';
+import { CommentType } from '@/entities/comment/api/types';
 import ChatButton from './ChatButton';
 import CommentLikeButton from '@/features/comment/ui/CommentLikeButton';
 import { dateFormat } from '@/shared/utils/dateFormat';
 import Profile from '@/entities/member/ui/Profile';
 import { options } from '@/app/api/auth/[...nextauth]/options';
+import {
+    getCommentLikeCount,
+    getCommentLikeStatus,
+} from '@/entities/comment/api';
 
 export default async function CommentList({
     comment,
-    commentLikeStatus,
-    commentLikeCount: commentLikeCount,
 }: {
     comment: CommentType;
-    commentLikeStatus: CommentLikeStatusType[];
-    commentLikeCount: CommentLikeCountType[];
 }) {
     const session = await getServerSession(options);
     const myMemberUuid = session?.user?.memberUuid;
     const isMyProfile = myMemberUuid === comment.memberUuid;
+
+    const commentLikeStatus = session
+        ? await getCommentLikeStatus(comment.commentUuid)
+        : null;
+
+    const commentLikeCount = await getCommentLikeCount(comment.commentUuid);
 
     return (
         <li key={comment.commentUuid} className='py-3 border-b border-gray-400'>
@@ -53,14 +55,7 @@ export default async function CommentList({
                         commentUuid={comment.commentUuid}
                         likeStatus={commentLikeStatus}
                     />
-                    <p>
-                        {
-                            commentLikeCount.find(
-                                (item) =>
-                                    item.commentUuid === comment.commentUuid,
-                            )?.likeCount
-                        }
-                    </p>
+                    <p>{commentLikeCount.likeCount}</p>
                 </div>
             </div>
             <p className='text-xs text-gray-500 pt-3'>

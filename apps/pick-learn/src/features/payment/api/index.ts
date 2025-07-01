@@ -15,20 +15,12 @@ export const createPayment = async (paymentInfo: RequestPaymentType) => {
 };
 
 export const getPaymentConfirm = async (paymentInfo: PaymentConfirmType) => {
-
-    console.log('🚀 ~ getPaymentConfirm ~ paymentInfo:', paymentInfo);
-
     const response = await fetchData.post(
         `${services.payment}/api/v1/payment/confirm`,
         {
             requireAuth: true,
             body: JSON.stringify(paymentInfo),
         },
-    );
-
-    console.log(
-        '🚀 ~ getPaymentConfirm ~ response.isSuccess:',
-        response.isSuccess,
     );
 
     return response.isSuccess;

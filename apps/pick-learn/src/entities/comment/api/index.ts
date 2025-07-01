@@ -28,11 +28,7 @@ export const getComment = async (commentUuid: string) => {
     return response.result;
 };
 
-export const getCommentLikeCount = async ({
-    commentUuid,
-}: {
-    commentUuid: string;
-}) => {
+export const getCommentLikeCount = async (commentUuid: string) => {
     const response = await fetchData.get<CommentLikeCountType>(
         `${services.comment}/api/v1/comment-like/${commentUuid}`,
     );

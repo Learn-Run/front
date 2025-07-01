@@ -12,13 +12,13 @@ export default function SuccessInfo({
     amount: number;
 }) {
     return (
-        <SectionWrapper className='flex flex-col items-center justify-center border border-gray-400 rounded-xl p-10 max-w-[500px]'>
+        <SectionWrapper className='flex flex-col items-center justify-center border border-gray-400 rounded-xl p-10 max-w-[550px]'>
             <PaymentSuccessMonster />
-            <h3 className='text-2xl font-bold pb-10'>
+            <h3 className='text-2xl font-bold pb-10 whitespace-nowrap'>
                 결제가 완료되었습니다 !
             </h3>
 
-            <p>주문번호: {orderId}21354561320</p>
+            <p>주문번호: {orderId}</p>
             <p className='flex gap-2 pt-4'>
                 <span>결제금액:</span>
                 <span className='text-xl'>{amount.toLocaleString()}</span>
@@ -32,7 +32,7 @@ export default function SuccessInfo({
                     Home
                 </Link>
                 <Link
-                    href={routes.point}
+                    href={`${routes.point}?type=payment`}
                     className='text-sm text-white rounded-xl bg-primary-100 px-4 py-2'
                 >
                     결제내역
