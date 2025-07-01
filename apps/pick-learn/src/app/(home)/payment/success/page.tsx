@@ -17,6 +17,7 @@ export default async function SuccessPage({
         amount,
         paymentKey,
     });
+    console.log('🚀 ~ SuccessPage ~ paymentConfirm:', paymentConfirm);
     if (paymentConfirm === false) return;
     return (
         <MainWrapper className='pt-40'>
