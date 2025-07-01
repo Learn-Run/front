@@ -9,7 +9,7 @@ RUN npm install -g pnpm turbo
 RUN pnpm install
 
 # 앱들 빌드
-RUN turbo run build --filter=pick-learn --filter=chat-service
+RUN turbo run build --filter=pick-learn-front --filter=chat-service
 
 # 2. 실행 단계
 FROM node:18-slim
