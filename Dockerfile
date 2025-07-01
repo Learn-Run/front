@@ -24,5 +24,5 @@ RUN npm install -g pnpm concurrently
 EXPOSE 3000 3001
 
 CMD ["concurrently", "--kill-others", "--names", "pick,chat", \
-     "pnpm --filter pick-learn run start", \
+     "pnpm --filter pick-learn-front run start", \
      "pnpm --filter chat-service run start"]
