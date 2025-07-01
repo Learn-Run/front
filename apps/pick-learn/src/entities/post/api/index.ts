@@ -43,7 +43,6 @@ export const getPostDetail = async ({ postUuid }: { postUuid: string }) => {
     const response = await fetchData.get<AskDetailType>(
         `${services.postRead}/api/v1/post-read/${postUuid}`,
         {
-            requireAuth: true,
             tags: [POST_TAG.postDetail, POST_TAG.bookMark],
         },
     );

@@ -53,6 +53,7 @@ export default async function ProfilePage({
                 myProfile={myProfile}
                 isMyProfile={isMyProfile}
                 reviewAverage={reviewAverage || 0}
+                memberUuid={memberUuid}
             />
             <ActiveHistorySection
                 paginationParams={paginationParams}
