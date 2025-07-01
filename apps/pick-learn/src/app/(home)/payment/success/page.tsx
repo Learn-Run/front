@@ -14,7 +14,7 @@ export default async function SuccessPage({
     const { orderId, amount, paymentKey } = await searchParams;
     const paymentConfirm = await getPaymentConfirm({
         orderId,
-        amount,
+        amount: Number(amount),
         paymentKey,
     });
 
