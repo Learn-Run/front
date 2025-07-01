@@ -1,0 +1,47 @@
+import { ProfileType } from '@/entities/profile/api/types';
+import SelfIntroduction from '@/features/profile/ui/SelfIntroduction';
+import MyCategoryList from './MyCategoryList';
+import EditButton from '@/shared/ui/EditButton';
+import { cn } from '@repo/ui/lib/utils';
+import StarFilled from '@/shared/assets/icons/StarFilled';
+
+export default function ProfileInfoList({
+    myProfile,
+    isMyProfile,
+    className,
+    reviewAverage,
+}: {
+    myProfile: ProfileType;
+    isMyProfile: boolean;
+    className?: string;
+    reviewAverage: number;
+}) {
+    return (
+        <div
+            className={cn(
+                'flex flex-col w-full border-2 rounded-xl bg-white p-5 gap-x-5 space-y-4',
+                className,
+            )}
+        >
+            <p className='flex items-center gap-1'>
+                <StarFilled />
+                {reviewAverage || 0}
+            </p>
+            <div className='flex items-center justify-between'>
+                <h3 className='text-xl font-bold'>카테고리</h3>
+                {isMyProfile && (
+                    <EditButton
+                        selfintroduction={myProfile.selfIntroduction}
+                        categoryList={myProfile.categoryList}
+                    />
+                )}
+            </div>
+            <MyCategoryList categoryList={myProfile.categoryList} />
+
+            <SelfIntroduction
+                selfIntroduction={myProfile.selfIntroduction}
+                isMyProfile={isMyProfile}
+            />
+        </div>
+    );
+}

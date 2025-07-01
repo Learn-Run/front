@@ -6,28 +6,15 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
-import {
-    CategoryListType,
-    MainCategoryType,
-} from '@/entities/category/api/types';
+import { CategoryItemProps } from '@/entities/category/api/types';
 import SubCategoryItem from './SubCategoryItem';
-
-type CategoryListItemProps = {
-    searchParams: {
-        mainCategoryId: number;
-        subCategoryId: number;
-        categoryListId: number;
-        sort?: string;
-    };
-    categoryList: CategoryListType[][];
-    mainCategories: MainCategoryType[];
-};
+import { routes } from '@/shared/model/constants/routes';
 
 export default async function CategoryListItem({
     searchParams,
     categoryList,
     mainCategories,
-}: CategoryListItemProps) {
+}: CategoryItemProps) {
     return (
         <nav
             className={cn(
@@ -38,7 +25,7 @@ export default async function CategoryListItem({
                 카테고리
             </h3>
             <Link
-                href={`/post`}
+                href={routes.post}
                 replace
                 scroll={false}
                 className={cn(
@@ -62,8 +49,7 @@ export default async function CategoryListItem({
                         </AccordionTrigger>
 
                         <SubCategoryItem
-                            mainCategoryId={searchParams.mainCategoryId}
-                            subCategoryId={searchParams.subCategoryId}
+                            searchParams={searchParams}
                             mainCategories={item.id}
                             categoryList={categoryList}
                         />

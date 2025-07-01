@@ -1,35 +1,54 @@
 import Link from 'next/link';
 
-import { CategoryProps } from '../api/types';
+import { SubCategoryItemProps } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
-type SubCategoryItemProps = Omit<CategoryProps, 'mainCategories'> & {
-    mainCategories: number;
-};
+import { routes } from '@/shared/model/constants/routes';
 
 export default function SubCategoryMobileList({
+    searchParams,
     categoryList,
-    mainCategoryId,
-    subCategoryId,
     mainCategories,
 }: SubCategoryItemProps) {
     return (
-        <ul className='absolute left-0 flex items-start justify-start overflow-x-auto'>
+        <ul className='absolute left-0 flex items-start justify-center '>
+            {Number(searchParams.mainCategoryId) === mainCategories && (
+                <li
+                    className={cn(
+                        'inline-block text-sm font-medium text-gray-600',
+                        !searchParams.subCategoryId
+                            ? 'text-primary-100 font-bold'
+                            : '',
+                    )}
+                >
+                    <Link
+                        href={`${routes.post}?mainCategoryId=${mainCategories}`}
+                        scroll={false}
+                        replace
+                        className='whitespace-nowrap block px-2'
+                    >
+                        전체
+                    </Link>
+                </li>
+            )}
             {categoryList[mainCategories - 1]?.map((detailItem) => {
-                if (detailItem.mainCategoryId !== Number(mainCategoryId))
-                    return;
-
+                if (
+                    detailItem.mainCategoryId !==
+                    Number(searchParams.mainCategoryId)
+                )
+                    return null;
                 return (
                     <li
                         key={detailItem.subCategoryId}
                         className={cn(
                             'inline-block font-medium text-gray-600',
-                            detailItem.subCategoryId === Number(subCategoryId)
+                            detailItem.subCategoryId ===
+                                Number(searchParams.subCategoryId)
                                 ? 'text-primary-100 font-bold'
                                 : '',
                         )}
                     >
                         <Link
-                            href={`/post?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}&categoryListId=${detailItem.id}`}
+                            href={`${routes.post}?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}`}
                             scroll={false}
                             replace={true}
                             className='whitespace-nowrap block px-2'

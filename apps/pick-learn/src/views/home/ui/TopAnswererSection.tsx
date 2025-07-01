@@ -1,6 +1,6 @@
+import { StepWrapper } from '@/shared/ui';
 import Heading from '@/widgets/home/ui/Heading';
 import TopAnswererCardList from './TopAnswererCardList';
-import StepWrapper from '@/shared/ui/Wrapper/StepWrapper';
 
 export default function TopAnswererSection() {
     return (

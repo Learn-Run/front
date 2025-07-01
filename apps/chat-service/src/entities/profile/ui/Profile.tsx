@@ -1,4 +1,4 @@
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 import { Avatar } from '@/entities/profile/ui';
 import { poppins } from '@/shared/assets/fonts';
 import { ProfileType } from '../model/types';
@@ -41,7 +41,7 @@ export default function Profile({
                         'text-gray-500 font-medium text-xs',
                     )}
                 >
-                    {profile.gradeName}
+                    {profile.grade.name}
                 </p>
             </div>
             {children}

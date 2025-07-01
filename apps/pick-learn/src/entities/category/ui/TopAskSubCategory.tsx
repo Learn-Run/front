@@ -1,18 +1,23 @@
-import { getCategoryListByCategoryListId } from '@/entities/category/api';
+import { getSubCategory } from '@/entities/category/api';
 
-export default async function TopAskSubCategory({ item }: { item: number }) {
-    const categoryList = await getCategoryListByCategoryListId(item);
-    if (!categoryList) return;
+export default async function TopAskSubCategory({
+    subCategoryId,
+}: {
+    subCategoryId: number;
+}) {
+    const subCategory = await getSubCategory(subCategoryId);
+
+    if (!subCategory) return;
 
     return (
         <p
             style={{
-                backgroundColor: `${categoryList.subCategoryColor}20`,
-                color: categoryList.subCategoryColor,
+                backgroundColor: `${subCategory.color}20`,
+                color: subCategory.color,
             }}
             className='text-sm rounded-full w-fit py-1 px-1.5 my-5'
         >
-            {categoryList.subCategoryName}
+            {subCategory.name}
         </p>
     );
 }

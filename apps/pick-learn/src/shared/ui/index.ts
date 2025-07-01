@@ -1,17 +1,19 @@
 import Label from './Label';
 import Tag from './Tag';
-import MainWrapper from './Wrapper/MainWrapper';
-import StepWrapper from './Wrapper/StepWrapper';
 import StatusCheckIcon from './StatusCheckIcon';
 import PasswordInput from './PasswordInput';
 import Pagination from './Pagination';
+import MainWrapper from './wrapper/MainWrapper';
+import StepWrapper from './wrapper/StepWrapper';
+import PostEmptySection from './PostEmptySection';
 
 export {
     Label,
     Tag,
-    MainWrapper,
-    StepWrapper,
     StatusCheckIcon,
     PasswordInput,
     Pagination,
+    MainWrapper,
+    StepWrapper,
+    PostEmptySection,
 };

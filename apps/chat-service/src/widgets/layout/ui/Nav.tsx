@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@repo/ui/src/lib/utils';
+import { cn } from '@repo/ui/lib/utils';
 import { NAVIGATION_ITEMS } from '../model/constants';
 
 export default function Nav({ className }: { className?: string }) {
@@ -20,23 +20,29 @@ export default function Nav({ className }: { className?: string }) {
                             <Link
                                 href={href}
                                 className={cn(
-                                    'px-4 py-4 sm:py-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-gray-500 hover:text-gray-900 group transition-colors sm:border-l-6 border-transparent',
+                                    'p-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-0 xl:gap-3 justify-center xl:justify-start text-gray-500 hover:text-gray-900 group transition-colors sm:border-l-6 border-transparent',
                                     {
-                                        'text-primary-100  border-primary-100 hover:text-primary-100':
-                                            pathname === href,
+                                        'text-primary-100 border-primary-100 hover:text-primary-100':
+                                            href === '/'
+                                                ? pathname === '/'
+                                                : pathname.startsWith(href),
                                     },
                                 )}
                             >
                                 <Icon
                                     className={cn(
-                                        'text-gray-500 group-hover:text-gray-900 transition-colors w-6 h-6',
+                                        'text-gray-500 group-hover:text-gray-900 transition-colors min-w-6 min-h-6',
                                         {
                                             'text-primary-100 group-hover:text-primary-100':
-                                                pathname === href,
+                                                href === '/'
+                                                    ? pathname === '/'
+                                                    : pathname.startsWith(href),
                                         },
                                     )}
                                 />
-                                {label}
+                                <span className='block sm:hidden xl:block'>
+                                    {label}
+                                </span>
                             </Link>
                         </li>
                     ),

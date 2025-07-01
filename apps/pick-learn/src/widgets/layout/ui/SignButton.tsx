@@ -7,6 +7,7 @@ import { options } from '@/app/api/auth/[...nextauth]/options';
 import LogIn from '@/shared/assets/icons/LogIn';
 import LogOutButton from './LogOutButton';
 import ProfileButton from './ProfileButton';
+import PointButton from './PointButton';
 
 export default async function SignButton() {
     const session = await getServerSession(options);
@@ -16,6 +17,7 @@ export default async function SignButton() {
         <div className='col-span-6 md:col-span-2 xl:col-span-3 flex justify-end items-center gap-2'>
             {isSignedIn ? (
                 <>
+                    <PointButton />
                     <ProfileButton />
                     <LogOutButton />
                 </>

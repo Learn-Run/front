@@ -1,6 +1,6 @@
 {
     "name": "chat-service",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "type": "module",
     "private": true,
     "scripts": {
@@ -11,10 +11,26 @@
         "check-types": "tsc --noEmit"
     },
     "dependencies": {
+        "@hookform/resolvers": "^5.0.1",
         "@repo/ui": "workspace:*",
+        "dayjs": "^1.11.13",
+        "next": "15.3.3",
+        "next-auth": "^4.24.11",
+        "openvidu-browser": "^2.31.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "next": "15.3.3"
+        "react-hook-form": "^7.56.4",
+        "zod": "^3.25.42",
+        "@eslint/eslintrc": "^3",
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "eslint": "^9",
+        "tailwindcss": "^4",
+        "typescript": "^5"
     },
     "devDependencies": {
         "@repo/eslint-config": "workspace:*",

@@ -12,10 +12,9 @@ export default async function Home({
         mainCategoryId: number;
         page?: number;
         size?: number;
-        categoryListId?: number;
     }>;
 }) {
-    const { mainCategoryId, page, size, categoryListId } = await searchParams;
+    const { mainCategoryId, page, size } = await searchParams;
 
     return (
         <MainWrapper>
@@ -26,7 +25,6 @@ export default async function Home({
                 mainCategoryId={mainCategoryId}
                 page={page}
                 size={size}
-                categoryListId={categoryListId}
             />
             <TopAnswererSection />
         </MainWrapper>

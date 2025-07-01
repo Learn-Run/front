@@ -18,9 +18,24 @@ export interface CategoryListType {
     subCategoryColor: string;
 }
 
-export interface CategoryProps {
-    mainCategoryId: number;
-    subCategoryId: number;
+export type SubCategoryItemProps = {
+    searchParams: {
+        mainCategoryId?: number;
+        subCategoryId?: number;
+        categoryListId?: number;
+        sort?: string;
+    };
+    categoryList: CategoryListType[][];
+    mainCategories: number;
+};
+
+export type CategoryItemProps = {
+    searchParams: {
+        mainCategoryId: number;
+        subCategoryId: number;
+        sort?: string;
+    };
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
-}
+    currentPage?: 'popular-posts' | 'post';
+};

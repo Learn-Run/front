@@ -3,10 +3,13 @@ export const routes = {
     signIn: '/sign-in',
     signUp: '/sign-up',
     post: '/post',
+    postCreate: '/post/create',
     popularPosts: '/popular-posts',
     searchPosts: '/search-posts',
     profile: '/profile',
+
     chat: '/chat',
+    point: '/point',
     categoryAll: '/post?category=all',
     categoryArticle: '/post?category=article',
     categoryHarbit: '/post?category=harbit',
