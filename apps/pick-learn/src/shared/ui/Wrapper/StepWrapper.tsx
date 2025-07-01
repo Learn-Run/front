@@ -1,7 +1,6 @@
 import { cn } from '@repo/ui/lib/utils';
-import React from 'react';
 
-export default function MainWrapper({
+export default function StepWrapper({
     children,
     className,
 }: {
@@ -9,8 +8,10 @@ export default function MainWrapper({
     className?: string;
 }) {
     return (
-        <main className={cn('min-h-[calc(100vh-104px)]', className)}>
+        <section
+            className={cn('w-full py-[5rem] bg-primary-50 md:px-0', className)}
+        >
             {children}
-        </main>
+        </section>
     );
 }

@@ -16,7 +16,6 @@ export default function Header() {
                     <Logo />
                 </Link>
                 <Nav className='hidden md:block col-span-6 md:col-span-8 xl:col-span-6' />
-
                 <SignButton />
             </div>
         </header>

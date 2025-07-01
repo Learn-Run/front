@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  front-main:
+    image: 009160040466.dkr.ecr.ap-northeast-2.amazonaws.com/learn-run/turbo-multi-app:latest
+    ports:
+      - "3000:3000"
+    restart: always
+
+  front-chat:
+    image: 009160040466.dkr.ecr.ap-northeast-2.amazonaws.com/learn-run/turbo-multi-app:latest
+    ports:
+      - "3001:3001"
+    restart: always

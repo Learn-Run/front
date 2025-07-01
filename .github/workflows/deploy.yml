@@ -1,0 +1,102 @@
+name: Frontend Deploy to ECR and EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Generate .env.production for Pick Learn and Chat Service
+        run: |
+          mkdir -p apps/pick-learn apps/chat-service
+
+          echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" > apps/pick-learn/.env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> apps/pick-learn/.env.production
+          echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> apps/pick-learn/.env.production
+          echo "BASE_FRONT_URL=${{ secrets.BASE_FRONT_URL }}" >> apps/pick-learn/.env.production
+          echo "KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}" >> apps/pick-learn/.env.production
+          echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}" >> apps/pick-learn/.env.production
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_S3_ACCESS_KEY_ID }}" >> apps/pick-learn/.env.production
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}" >> apps/pick-learn/.env.production
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> apps/pick-learn/.env.production
+          echo "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" >> apps/pick-learn/.env.production
+          echo "NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}" >> apps/pick-learn/.env.production
+
+          echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" > apps/chat-service/.env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> apps/chat-service/.env.production
+          echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> apps/chat-service/.env.production
+          echo "BASE_FRONT_URL=${{ secrets.BASE_FRONT_URL }}" >> apps/chat-service/.env.production
+          echo "KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}" >> apps/chat-service/.env.production
+          echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}" >> apps/chat-service/.env.production
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_S3_ACCESS_KEY_ID }}" >> apps/chat-service/.env.production
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}" >> apps/chat-service/.env.production
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> apps/chat-service/.env.production
+          echo "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" >> apps/chat-service/.env.production
+          echo "NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}" >> apps/chat-service/.env.production
+
+      - name: Build and Push Multi-App
+        run: |
+          docker build -t turbo-multi-app:latest .
+          docker tag turbo-multi-app:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
+
+
+      - name: Copy docker-compose and .env to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          source: |
+            docker-compose-front.yml
+          target: "~/"
+
+      - name: Deploy on EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            mkdir -p ~/env
+            echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" > ~/env/.env.front
+            echo "BASE_FRONT_URL=${{ secrets.BASE_FRONT_URL }}" >> ~/env/.env.front
+            echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> ~/env/.env.front
+            echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> ~/env/.env.front
+            echo "KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}" >> ~/env/.env.front
+            echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}" >> ~/env/.env.front
+            echo "AWS_S3_ACCESS_KEY_ID=${{ secrets.AWS_S3_ACCESS_KEY_ID }}" >> ~/env/.env.front
+            echo "AWS_S3_SECRET_ACCESS_KEY=${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}" >> ~/env/.env.front
+            echo "AWS_S3_REGION=${{ secrets.AWS_S3_REGION }}" >> ~/env/.env.front
+            echo "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" >> ~/env/.env.front
+            echo "AWS_S3_BUCKET_IMAGE_NAME=${{ secrets.AWS_S3_BUCKET_IMAGE_NAME }}" >> ~/env/.env.front
+            echo "NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}" >> ~/env/.env.front
+            echo "AWS_CLOUDFRONT_DOMAIN=${{ secrets.AWS_CLOUDFRONT_DOMAIN }}" >> ~/env/.env.front
+
+            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/turbo-multi-app:latest
+            docker-compose -f docker-compose-front.yml down
+            docker-compose -f docker-compose-front.yml up -d
+            docker image prune -f
