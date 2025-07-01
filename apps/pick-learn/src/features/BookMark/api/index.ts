@@ -12,6 +12,7 @@ export const getBookMarkStatus = async (
     const response = await fetchData.get<BookMarkType>(
         `${services.bookMark}/api/v1/bookmark/${postUuid}`,
         {
+            requireAuth: true,
             tags: [POST_TAG.bookMark],
         },
     );

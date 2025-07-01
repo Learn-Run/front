@@ -1,6 +1,5 @@
 import { cn } from '@repo/ui/lib/utils';
 import { getPostDetail } from '@/entities/post/api';
-import { getBookMarkStatus } from '@/features/BookMark/api';
 import { BookMarkListType } from '@/entities/bookMark/api/types';
 import PostCard from '@/entities/post/ui/PostCard';
 
@@ -17,12 +16,6 @@ export default async function MyBookmarkList({
         ),
     );
 
-    const bookMarkStatus = await Promise.all(
-        myBookMarkList.map(
-            async (item) => await getBookMarkStatus(item.postUuid),
-        ),
-    );
-
     return (
         <ul
             className={cn(
@@ -30,11 +23,7 @@ export default async function MyBookmarkList({
             )}
         >
             {myBookMarkList.map((item) => (
-                <PostCard
-                    key={item.postUuid}
-                    item={item}
-                    bookMarkStatus={bookMarkStatus}
-                />
+                <PostCard key={item.postUuid} item={item} />
             ))}
         </ul>
     );

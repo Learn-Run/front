@@ -1,6 +1,5 @@
 import { getCategoryList, getMainCategories } from '@/entities/category/api';
 import { getPostList } from '@/entities/post/api';
-import { getBookMarkStatus } from '@/features/BookMark/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import PopularPostListSection from '@/views/popular-posts/ui/PopularPostListSection';
 import PopularPostTopSection from '@/views/popular-posts/ui/PopularPostTopSection';
@@ -33,12 +32,6 @@ export default async function PopularPostsPage({
         page: zeroPage,
     });
 
-    const bookMarkStatus = await Promise.all(
-        postList.posts.map(
-            async (item) => await getBookMarkStatus(item.postUuid),
-        ),
-    );
-
     return (
         <MainWrapper>
             <PopularPostTopSection />
@@ -48,7 +41,6 @@ export default async function PopularPostsPage({
                 categoryList={categoryList}
                 mainCategories={mainCategories}
                 postList={postList}
-                bookMarkStatus={bookMarkStatus}
                 className='pt-20'
             />
             <Pagination totalPage={postList.totalPages} />

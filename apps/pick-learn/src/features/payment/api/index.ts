@@ -26,10 +26,5 @@ export const getPaymentConfirm = async (paymentInfo: PaymentConfirmType) => {
         },
     );
 
-    console.log(
-        '🚀 ~ getPaymentConfirm ~ response.isSuccess:',
-        response.isSuccess,
-    );
-
     return response.isSuccess;
 };

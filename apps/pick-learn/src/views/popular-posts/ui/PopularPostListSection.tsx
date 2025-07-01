@@ -5,7 +5,6 @@ import {
 import PopularCategoryListItem from '@/entities/category/ui/PopularCategoryListItem';
 import PopularCategoryMobileList from '@/entities/category/ui/PopularCategoryMobileList';
 import { AskListType } from '@/entities/post/api/types';
-import { BookMarkType } from '@/features/BookMark/api/types';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
 import { cn } from '@repo/ui/lib/utils';
@@ -19,7 +18,6 @@ export interface popularPostListSectionProps {
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
     postList: AskListType;
-    bookMarkStatus: BookMarkType[];
     className?: string;
 }
 
@@ -28,7 +26,6 @@ export default async function PopularPostListSection({
     categoryList,
     mainCategories,
     postList,
-    bookMarkStatus,
     className,
 }: popularPostListSectionProps) {
     return (
@@ -49,7 +46,6 @@ export default async function PopularPostListSection({
             <AskItemCardList
                 className='grid grid-cols-1 xl:grid-cols-3 sm:gird-cols-1'
                 postList={postList}
-                bookMarkStatus={bookMarkStatus}
             />
         </SectionWrapper>
     );
