@@ -6,6 +6,8 @@ export default async function MyCategoryList({
 }: {
     categoryList: ProfileCategoryListType[];
 }) {
+    if (!categoryList)
+        return <p className='text-gray-600'> 카테고리를 선택해주세요</p>;
     const subCategory = await Promise.all(
         categoryList.map((subCategory) =>
             getSubCategory(subCategory.subCategoryId),

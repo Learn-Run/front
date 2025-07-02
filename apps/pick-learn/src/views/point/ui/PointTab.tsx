@@ -1,6 +1,6 @@
-import { cn } from '@repo/ui/lib/utils';
 import Link from 'next/link';
-import React from 'react';
+
+import { cn } from '@repo/ui/lib/utils';
 import { pointMenuItems } from './constants';
 
 export default function PointTab({ type }: { type: string }) {
@@ -8,23 +8,24 @@ export default function PointTab({ type }: { type: string }) {
         <>
             <nav
                 className={cn(
-                    'bg-white shadow-md w-full max-w-[230px] h-full min-h-[388px] flex-col p-4 hidden md:block',
+                    'bg-white shadow-md w-full max-w-[230px] h-full flex-col p-4 hidden md:block',
                 )}
             >
                 <h2 className='text-2xl font-bold text-point-blue-200'>
                     포인트
                 </h2>
-                <div className='flex flex-col gap-2 mt-4 py-4 font-medium text-sm hover:no-underline cursor-pointer'>
+                <div className='flex flex-col gap-2 py-4 font-medium text-sm hover:no-underline cursor-pointer'>
                     {pointMenuItems.map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
                             className={cn(
                                 'text-sm font-medium text-gray-500',
-                                item.href === `/point?type=${type}` &&
+                                (item.href === `/point?type=${type}` ||
+                                    (item.href === '/point?type=CHARGE' &&
+                                        !type)) &&
                                     'font-bold text-gray-900',
                             )}
-                            defaultValue={!type ? 'CHARGE' : ''}
                         >
                             {item.title}
                         </Link>

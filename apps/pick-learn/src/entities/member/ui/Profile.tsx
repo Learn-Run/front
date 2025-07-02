@@ -20,7 +20,6 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
     const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
     const alt = member?.profileImage?.alt || member?.nickname + '프로필 이미지';
 
-    if (!member?.grade?.color) return;
     if (!member) return;
 
     return (

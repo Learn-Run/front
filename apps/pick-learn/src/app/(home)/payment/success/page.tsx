@@ -1,7 +1,8 @@
-import { getPaymentConfirm } from '@/features/payment/api';
-import { MainWrapper } from '@/shared/ui';
-import SuccessInfo from '@/views/payment/ui/SuccessInfo';
 import { XCircle } from 'lucide-react';
+
+import { MainWrapper } from '@/shared/ui';
+import { getPaymentConfirm } from '@/features/payment/api';
+import SuccessInfo from '@/views/payment/ui/SuccessInfo';
 
 export default async function SuccessPage({
     searchParams,
@@ -21,6 +22,7 @@ export default async function SuccessPage({
               paymentKey,
           })
         : null;
+
     if (!paymentKey)
         return (
             <MainWrapper className='pt-40'>
