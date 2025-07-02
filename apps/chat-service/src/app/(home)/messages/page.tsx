@@ -1,5 +1,6 @@
-// import { getChatRoom } from '@/entities/chatRoom/api';
-import { CHAT_LIST_MOCK } from '@/entities/chatRoom/model/constants';
+import { getServerSession } from 'next-auth';
+
+import { options } from '@/app/api/auth/[...nextauth]/options';
 import ChatRoomListSection from '@/views/chatList/ui/ChatRoomListSection';
 import ChatRoomSection from '@/views/chatList/ui/ChatRoomSection';
 import { cn } from '@repo/ui/lib/utils';
@@ -7,15 +8,14 @@ import { cn } from '@repo/ui/lib/utils';
 export default async function ChatRoomPage({
     searchParams,
 }: {
-    searchParams: Promise<{ chatRoomUuid?: string; isOnSession?: boolean }>;
+    searchParams: Promise<{
+        chatRoomUuid?: string;
+        isOnSession?: boolean;
+    }>;
 }) {
-    const { chatRoomUuid, isOnSession } = await searchParams;
+    const memberUuid = (await getServerSession(options))?.user.memberUuid;
 
-    // FIXME: 이후 서버 개발이 끝나면 연결할 api
-    // const chatRoom = await getChatRoom(chatRoomUuid);
-    const chatRoom = CHAT_LIST_MOCK.find(
-        (item) => item.chatRoomUuid === chatRoomUuid,
-    );
+    const { chatRoomUuid, isOnSession } = await searchParams;
 
     return (
         <main className='bg-gray-100 w-full h-dvh'>
@@ -34,9 +34,9 @@ export default async function ChatRoomPage({
                     )}
                 >
                     <ChatRoomSection
-                        chatRoom={chatRoom}
+                        chatRoomUuid={chatRoomUuid}
                         isOnSession={isOnSession}
-                        className=''
+                        memberUuid={memberUuid}
                     />
                 </div>
             </div>

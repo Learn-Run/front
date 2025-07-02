@@ -3,22 +3,21 @@ import { useEffect, useState } from 'react';
 
 import { cn } from '@repo/ui/lib/utils';
 import { Avatar } from '@/entities/profile/ui';
-import { formatDate } from '@/shared/utils/dateFormat';
-import { ChatRoomContentType } from '@/entities/chatRoom/api/types';
 import { getMemberProfile } from '@/entities/profile/api';
-import { ProfileType } from '@/entities/profile/model/types';
+import type { ProfileType } from '@/entities/profile/model/types';
+import type { ChatMessageType } from '../model/types';
 
-export default function ChatItem({
+export default function SocketChatItem({
     chat,
     isMyMessage,
 }: {
-    chat: ChatRoomContentType;
+    chat: ChatMessageType;
     isMyMessage: boolean;
 }) {
     const [sender, setSender] = useState<ProfileType | null>(null);
 
     useEffect(() => {
-        if (!isMyMessage) {
+        if (isMyMessage) {
             const getSenderProfile = async () => {
                 const profile = await getMemberProfile(chat.senderUuid);
                 setSender(profile);
@@ -26,7 +25,7 @@ export default function ChatItem({
 
             getSenderProfile();
         }
-    }, [isMyMessage, chat.senderUuid]);
+    }, [isMyMessage, setSender, chat.senderUuid]);
 
     if (!isMyMessage && !sender) {
         return null;
@@ -63,16 +62,6 @@ export default function ChatItem({
                     >
                         {chat.content}
                     </p>
-                    <div className='space-y-1 text-xs text-gray-500 flex-shrink-0'>
-                        {/* <p
-                            className={cn(
-                                isMyMessage || chat.read ? 'hidden' : '',
-                            )}
-                        >
-                            안 읽음
-                        </p> */}
-                        <p>{formatDate(chat.sentAt, 'MM-DD HH:mm')}</p>
-                    </div>
                 </div>
             </div>
         </div>

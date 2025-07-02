@@ -1,9 +1,6 @@
-export interface ChatType {
-    chatId: string;
-    chatRoomUuid: string;
+export interface ChatMessageType {
     senderUuid: string;
-    receiverUuid: string;
+    chatRoomUuid: string;
     content: string;
     sentAt: string;
-    read: boolean;
 }

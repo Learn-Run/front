@@ -9,15 +9,17 @@ export function Modal({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [mounted, setMounted] = useState(false);
+    const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
 
     useEffect(() => {
         setMounted(true);
+        setModalRoot(document.getElementById('modal-root'));
+
         if (!dialogRef.current?.open) {
             dialogRef.current?.showModal();
         }
 
         document.body.style.overflow = 'hidden';
-
         return () => {
             document.body.style.overflow = 'unset';
         };
@@ -27,7 +29,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
         router.back();
     }
 
-    if (!mounted) return null;
+    // 아직 DOM 준비 안 됐으면 아무것도 렌더링 안 함
+    if (!mounted || !modalRoot) return null;
 
     return createPortal(
         <div
@@ -49,6 +52,6 @@ export function Modal({ children }: { children: React.ReactNode }) {
                 {children}
             </dialog>
         </div>,
-        document.getElementById('modal-root')!,
+        modalRoot,
     );
 }

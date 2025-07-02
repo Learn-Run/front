@@ -1,14 +1,54 @@
 'use server';
+import { getServerSession } from 'next-auth';
+
 import { services } from '@/shared/api/constants';
 import { fetchData } from '@/shared/api/instance';
-import { ChatRoomType } from '../model/types';
+import type { ChatRoomListType, ChatRoomType } from './types';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 
-// FIXME: 해당 api는 실제 서버 배포 후에 다시 수정 필요
-export const getChatRoom = async (chatRoomUuid?: number) => {
+export const getChatRoomList = async ({
+    cursor,
+    size = 10,
+}: {
+    cursor: string | null;
+    size?: number;
+}) => {
+    const params = new URLSearchParams();
+
+    if (cursor) params.set('cursor', cursor);
+    if (size) params.set('size', size.toString());
+
+    const { result } = await fetchData.get<ChatRoomListType>(
+        `${services.chat}/api/v1/chat-room/list?${params.toString()}`,
+        {
+            requireAuth: true,
+        },
+    );
+
+    return result;
+};
+
+export const getChatRoom = async ({
+    chatRoomUuid,
+    cursor,
+    size = 10,
+}: {
+    chatRoomUuid?: string;
+    cursor: string | null;
+    size?: number;
+}) => {
     if (!chatRoomUuid) return;
 
+    const session = await getServerSession(options);
+    const memberUuid = session?.user.memberUuid;
+
+    const params = new URLSearchParams();
+    if (cursor) params.set('cursor', cursor);
+    if (size) params.set('size', size.toString());
+    if (memberUuid) params.set('senderUuid', memberUuid);
+
     const { result } = await fetchData.get<ChatRoomType>(
-        `${services.chat}/api/v1/chat/${chatRoomUuid}`,
+        `${services.chat}/api/v1/chat-room/${chatRoomUuid}/message?${params.toString()}`,
         {
             requireAuth: true,
         },
