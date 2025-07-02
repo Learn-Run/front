@@ -1,40 +1,25 @@
 'use server';
+import { getServerSession } from 'next-auth';
 
-import { services } from '@/shared/api/constants';
-import { fetchData } from '@/shared/api/instance';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 
 export const getVideoToken = async (sessionId: string) => {
-    const { result } = await fetchData.post<{ sessionToken: string }>(
-        `${services.chat}/api/v1/token`,
-        {
-            body: JSON.stringify({ sessionId }),
-            requireAuth: true,
-        },
-    );
+    const memberUuid = (await getServerSession(options))?.user.memberUuid;
 
-    return result.sessionToken;
-};
+    if (!memberUuid) return;
 
-export const getToken = async (sessionId: string) => {
-    await fetch('http://localhost:4443/api/sessions', {
+    const res = await fetch('http://ov.pickandlearn.shop:9999/token', {
         method: 'POST',
         headers: {
-            Authorization: 'Basic ' + btoa('OPENVIDUAPP:MY_SECRET'),
             'Content-Type': 'application/json',
+            'X-Member-UUID': memberUuid,
         },
-        body: JSON.stringify({ customSessionId: sessionId }),
+        body: JSON.stringify({
+            chatRoomUuid: sessionId,
+        }),
     });
 
-    const tokenRes = await fetch('http://localhost:4443/api/tokens', {
-        method: 'POST',
-        headers: {
-            Authorization: 'Basic ' + btoa('OPENVIDUAPP:MY_SECRET'),
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ session: sessionId }),
-    });
-
-    const { token } = await tokenRes.json();
+    const { token } = await res.json();
 
     return token;
 };
