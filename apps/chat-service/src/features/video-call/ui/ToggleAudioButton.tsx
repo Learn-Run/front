@@ -5,11 +5,12 @@ import { toggleAudio } from '../libs/toggleAudio';
 
 export default function ToggleAudioButton() {
     const { session, publisher, updateVideoCallState } = useVideoCallContext();
-    const audioEnabled = publisher?.stream?.audioActive ?? true;
+
+    const isMicrophoneEnabled = publisher?.isMicrophoneEnabled ?? false;
 
     const handleClick = () => {
         if (!publisher || !session) return;
-        toggleAudio(publisher, audioEnabled);
+        toggleAudio(publisher);
         updateVideoCallState({ publisher });
     };
 
@@ -17,7 +18,7 @@ export default function ToggleAudioButton() {
 
     return (
         <button onClick={handleClick}>
-            {audioEnabled ? <MicOff /> : <Mic />}
+            {isMicrophoneEnabled ? <MicOff /> : <Mic />}
         </button>
     );
 }

@@ -6,11 +6,11 @@ import { toggleVideo } from '../libs/toggleVideo';
 export default function ToggleVideoButton() {
     const { session, publisher, updateVideoCallState } = useVideoCallContext();
 
-    const videoEnabled = publisher?.stream?.videoActive ?? true;
+    const videoEnabled = publisher?.isCameraEnabled ?? false;
 
     const handleClick = () => {
         if (!publisher || !session) return;
-        toggleVideo(publisher, videoEnabled);
+        toggleVideo(publisher);
         updateVideoCallState({ publisher });
     };
 
