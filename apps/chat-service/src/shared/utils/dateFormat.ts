@@ -6,20 +6,24 @@ import timezone from 'dayjs/plugin/timezone';
 import 'dayjs/locale/ko';
 
 dayjs.extend(utc);
+dayjs.extend(timezone);
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
-dayjs.extend(timezone);
 dayjs.locale('ko');
 
 const KST = 'Asia/Seoul';
 
+const convertToKST = (date: string | Date | number) => {
+    return dayjs.utc(date).tz(KST);
+};
+
 export const formatRelative = (date: string | Date | number) => {
-    return dayjs(date).tz(KST).fromNow();
+    return convertToKST(date).fromNow();
 };
 
 export const formatSmartDate = (date: string | Date | number): string => {
     const now = dayjs().tz(KST);
-    const target = dayjs(date).tz(KST);
+    const target = convertToKST(date);
 
     const diffInDays = now.diff(target, 'day');
 
@@ -34,15 +38,15 @@ export const formatDate = (
     date: string | Date | number,
     formatStr = 'YYYY년 M월 D일',
 ) => {
-    return dayjs(date).tz(KST).format(formatStr);
+    return convertToKST(date).format(formatStr);
 };
 
 function formatDateLong(initDate: Date | string): string {
-    return dayjs(initDate).tz(KST).format('MMMM Do, YYYY | HH:mm');
+    return convertToKST(initDate).format('MMMM Do, YYYY | HH:mm');
 }
 
 function formatDateYMD(initDate: Date | string): string {
-    return dayjs(initDate).tz(KST).format('YYYY-MM-DD');
+    return convertToKST(initDate).format('YYYY-MM-DD');
 }
 
 export type DateFormatType = 'long' | 'ymd';
