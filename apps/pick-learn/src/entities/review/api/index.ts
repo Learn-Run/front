@@ -16,6 +16,5 @@ export const getReviewAverage = async (memberUuid: string) => {
         `${services.review}/api/v1/member-review/${memberUuid}/rating/average`,
     );
 
-    if (!response.result) return 0;
     return response.result.ratingAvg;
 };

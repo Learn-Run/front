@@ -1,4 +1,6 @@
+import PaymentHistory from '@/entities/point/ui/PaymentHistory';
 import PointChargeList from './PointChargeList';
+import PointHistoryList from './PointHistoryList';
 
 export default function PointWrapper({ type }: { type: string }) {
     if (!type) {
@@ -10,10 +12,10 @@ export default function PointWrapper({ type }: { type: string }) {
     }
 
     if (type === 'HISTORY') {
-        return <div>PointWrapper</div>;
+        return <PointHistoryList />;
     }
 
     if (type === 'PAYMENT') {
-        return <div>PointWrapper</div>;
+        return <PaymentHistory />;
     }
 }

@@ -1,6 +1,6 @@
-import { cn } from '@repo/ui/lib/utils';
 import Link from 'next/link';
-import React from 'react';
+
+import { cn } from '@repo/ui/lib/utils';
 import { pointMenuItems } from './constants';
 
 export default function PointTab({ type }: { type: string }) {
@@ -21,10 +21,11 @@ export default function PointTab({ type }: { type: string }) {
                             href={item.href}
                             className={cn(
                                 'text-sm font-medium text-gray-500',
-                                item.href === `/point?type=${type}` &&
+                                (item.href === `/point?type=${type}` ||
+                                    (item.href === '/point?type=CHARGE' &&
+                                        !type)) &&
                                     'font-bold text-gray-900',
                             )}
-                            defaultValue={!type ? 'CHARGE' : ''}
                         >
                             {item.title}
                         </Link>

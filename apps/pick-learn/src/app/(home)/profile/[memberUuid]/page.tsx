@@ -52,7 +52,7 @@ export default async function ProfilePage({
             <ProfileInfoSection
                 myProfile={myProfile}
                 isMyProfile={isMyProfile}
-                reviewAverage={reviewAverage || 0}
+                reviewAverage={reviewAverage}
                 memberUuid={memberUuid}
             />
             <ActiveHistorySection

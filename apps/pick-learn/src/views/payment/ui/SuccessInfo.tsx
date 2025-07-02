@@ -32,7 +32,7 @@ export default function SuccessInfo({
                     Home
                 </Link>
                 <Link
-                    href={`${routes.point}?type=payment`}
+                    href={`${routes.point}?type=PAYMENT`}
                     className='text-sm text-white rounded-xl bg-primary-100 px-4 py-2'
                 >
                     결제내역
