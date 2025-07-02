@@ -4,13 +4,20 @@ import { signOut } from 'next-auth/react';
 import { Close } from '@/shared/assets/icons';
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import { Button } from '@repo/ui/components/base/Button';
+import { useRouter } from 'next/router';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function LogOutConfirmModal() {
     const { closeModal } = useModalContext();
-
+    const router = useRouter();
     const handleLogOut = async () => {
-        await signOut();
-        closeModal();
+        try {
+            await signOut();
+            closeModal();
+            router.push(routes.home);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
