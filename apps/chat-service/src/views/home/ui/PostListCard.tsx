@@ -4,7 +4,7 @@ import { AskListType } from '@/entities/post/api/types';
 import { getBookMarkStatus } from '@/features/BookMark/api';
 import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
 import { getServerSession } from 'next-auth';
-// import { htmlToText } from 'html-to-text';
+import { htmlToText } from 'html-to-text';
 
 export default async function PostListCard({
     item,
@@ -35,12 +35,12 @@ export default async function PostListCard({
                 {item.title}
             </h3>
 
-            {/* <p className='text-sm text-gray-700 w-full truncate'>
+            <p className='text-sm text-gray-700 w-full truncate'>
                 {htmlToText(item.contents, {
                     wordwrap: false,
                     selectors: [{ selector: 'img', format: 'skip' }],
                 })}
-            </p> */}
+            </p>
         </li>
     );
 }

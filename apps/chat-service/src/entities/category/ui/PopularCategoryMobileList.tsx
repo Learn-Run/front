@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { cn } from '@repo/ui/lib/utils';
-import { routes } from '@/shared/model/constants/routes';
 import { CategoryItemProps } from '../api/types';
 import PopularSubCategoryMobileList from './PopularSubCategoryMobileList';
 
@@ -15,7 +14,7 @@ export default function PopularCategoryMobileList({
             <ul className='flex justify-center items-center w-full gap-x-3 relative'>
                 <li>
                     <Link
-                        href={`${routes.popularPosts}`}
+                        href={`${process.env.BASE_FRONT_URL}/popularPosts`}
                         replace
                         scroll={false}
                         className={cn(
@@ -32,7 +31,7 @@ export default function PopularCategoryMobileList({
                     <li key={item.id}>
                         <div>
                             <Link
-                                href={`${routes.popularPosts}?mainCategoryId=${item.id}`}
+                                href={`${process.env.BASE_FRONT_URL}/popularPosts?mainCategoryId=${item.id}`}
                                 replace
                                 scroll={false}
                                 className={cn(
