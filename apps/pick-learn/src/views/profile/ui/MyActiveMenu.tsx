@@ -9,21 +9,18 @@ import { AccordionMenu, MenuItem } from '@/entities/activeHistory/ui';
 import MobileActiveMenu from './MobileActiveMenu';
 
 type MyActiveMenuProps = {
-    paginationParams: {
-        type?: string;
-        page?: number;
-        size?: number;
-    };
+    type?: string;
+
     memberUuid: string;
     isMyProfile: boolean;
 };
 
 export default async function MyActiveMenu({
-    paginationParams,
+    type,
     memberUuid,
     isMyProfile,
 }: MyActiveMenuProps) {
-    const currentType = paginationParams.type || 'REVIEW_RECEIVED';
+    const currentType = type || 'REVIEW_RECEIVED';
     const menuItemList = menuItems(memberUuid);
 
     const activeHistoryCount = await getActiveHistoryCount({

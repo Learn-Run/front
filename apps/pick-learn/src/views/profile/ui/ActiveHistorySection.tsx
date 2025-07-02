@@ -19,7 +19,7 @@ export default function ActiveHistorySection({
     return (
         <SectionWrapper className='flex flex-col px-4 gap-x-5 md:flex-row border-t-2 border-gray-400 pt-10'>
             <MyActiveMenu
-                paginationParams={paginationParams}
+                type={paginationParams.type}
                 memberUuid={memberUuid}
                 isMyProfile={isMyProfile}
             />
