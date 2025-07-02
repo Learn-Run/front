@@ -6,6 +6,7 @@ import { Avatar } from '@/entities/profile/ui';
 import { getMemberProfile } from '@/entities/profile/api';
 import type { ProfileType } from '@/entities/profile/model/types';
 import type { ChatMessageType } from '../model/types';
+import { S3_BASE_URL } from '@/shared/model/constants/s3';
 
 export default function SocketChatItem({
     chat,
@@ -15,6 +16,10 @@ export default function SocketChatItem({
     isMyMessage: boolean;
 }) {
     const [sender, setSender] = useState<ProfileType | null>(null);
+
+    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const imageUrl = sender?.profileImage?.imageUrl || fallbackImage;
+    const alt = sender?.profileImage?.alt || sender?.nickname + '프로필 이미지';
 
     useEffect(() => {
         if (isMyMessage) {
@@ -39,10 +44,10 @@ export default function SocketChatItem({
             })}
         >
             <div className={cn('flex gap-x-3 items-start')}>
-                {!isMyMessage && sender && (
+                {!isMyMessage && sender && sender.profileImage?.imageUrl && (
                     <Avatar
-                        src={sender.profileImage.imageUrl}
-                        alt={sender.nickname}
+                        src={imageUrl}
+                        alt={alt}
                         className='flex-shrink-0'
                     />
                 )}

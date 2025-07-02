@@ -1,11 +1,22 @@
 'use client';
+import { signOut } from 'next-auth/react';
+
 import LogOut from '@/shared/assets/icons/LogOut';
 import { cn } from '@repo/ui/lib/utils';
+import { useAlert } from '@/shared/model/hooks/useAlert';
 
 export default function LogOutButton({ className }: { className?: string }) {
-    const handleClickLogOut = () => {
-        // Add your logout logic here
-        console.log('Logging out...');
+    const alert = useAlert();
+
+    const handleClickLogOut = async () => {
+        try {
+            await signOut();
+        } catch (error) {
+            console.log('🚀 ~ handleClickLogOut ~ error:', error);
+            alert.error(
+                '로그아웃 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요',
+            );
+        }
     };
 
     return (
