@@ -2,8 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
     /* config options here */
-    basePath: '/chat',
-    assetPrefix: '/chat',
+    // basePath: '/chat',
+    // assetPrefix: '/chat',
     images: {
         remotePatterns: [
             new URL('https://picsum.photos/**'),

@@ -48,7 +48,6 @@ export default function ChatRoomListSection({
     );
 
     useEffect(() => {
-        console.log('123');
         fetchChatRooms(null);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

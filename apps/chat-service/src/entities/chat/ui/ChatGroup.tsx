@@ -10,7 +10,7 @@ export default function ChatGroup({
     chatDatas: ChatRoomContentType[];
     memberUuid?: string;
 }) {
-    if (!chatDatas?.length) return <ChatGroupEmpty />;
+    if (chatDatas?.length === 0) return <ChatGroupEmpty />;
 
     return (
         <>
