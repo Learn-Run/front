@@ -1,9 +1,11 @@
 'use client';
-import { PostDetailBookMark } from '@/shared/assets/icons';
+import {
+    PostDetailBookMark,
+    PostDetailBookMarkFill,
+} from '@/shared/assets/icons';
 import { cancelBookMark, createBookMark } from '../api';
 import { BookMarkType } from '../api/types';
-import { useAlert } from '@/features/post/model/hooks/useAlert';
-import PostDetailBookMarkFill from '@/shared/assets/icons/PostDetailBookMarkFill';
+import { useAlert } from '@/shared/model/hooks/useAlert';
 import { useSpharosSession } from '@/shared/model/sessionContext';
 
 export default function BookMarkButton({

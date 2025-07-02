@@ -12,12 +12,16 @@ import Message from './Message';
 import Overview from './Overview';
 import Setting from './Setting';
 import VerticalEllipsis from './VerticalEllipsis';
+import PostDetailBookMark from './PostDetailBookMark';
+import PostDetailBookMarkFill from './PostDetailBookMarkFill';
 
 export {
     Askers,
     Back,
     BookMark,
     BookMarkFill,
+    PostDetailBookMark,
+    PostDetailBookMarkFill,
     Check,
     Close,
     Eye,
