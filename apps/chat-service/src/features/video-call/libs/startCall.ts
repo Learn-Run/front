@@ -1,36 +1,27 @@
-import { OpenVidu, StreamManager } from 'openvidu-browser';
-
 import { attachSessionListeners } from './attachSessionListeners';
 import { VideoCallStateType } from '../model/types';
-import { getToken } from '../api';
+import { getVideoToken } from '../api';
+import createVideoSession from './createVideoSession';
 
 export const startCall = async (
     id: string,
-    getSubscribers: () => StreamManager[],
     updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
 ) => {
-    const token = await getToken(id);
+    const token = await getVideoToken(id);
+    const LIVEKIT_URL = process.env.NEXT_PUBLIC_LIVEKIT_URL as string;
 
-    const OV = new OpenVidu();
-    const session = OV.initSession();
-
-    attachSessionListeners(session, getSubscribers, updateVideoCallState);
-
-    await session.connect(token);
+    const { session } = createVideoSession();
+    attachSessionListeners(session, updateVideoCallState);
 
     try {
-        const publisher = await OV.initPublisherAsync(undefined, {
-            videoSource: undefined,
-            publishAudio: true,
-            publishVideo: true,
-        });
+        await session.connect(`wss://${LIVEKIT_URL}`, token);
 
-        await session.publish(publisher);
+        await session.localParticipant.enableCameraAndMicrophone();
 
         updateVideoCallState({
-            OV,
-            session,
-            publisher,
+            session: session,
+            publisher: session.localParticipant,
+            subscribers: Array.from(session.remoteParticipants.values()),
         });
     } catch (error) {
         console.log('🚀 ~ error:', error);
