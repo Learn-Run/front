@@ -7,6 +7,7 @@ import { formatDate } from '@/shared/utils/dateFormat';
 import { ChatRoomContentType } from '@/entities/chatRoom/api/types';
 import { getMemberProfile } from '@/entities/profile/api';
 import { ProfileType } from '@/entities/profile/model/types';
+import { S3_BASE_URL } from '@/shared/model/constants/s3';
 
 export default function ChatItem({
     chat,
@@ -17,10 +18,15 @@ export default function ChatItem({
 }) {
     const [sender, setSender] = useState<ProfileType | null>(null);
 
+    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const imageUrl = sender?.profileImage?.imageUrl || fallbackImage;
+    const alt = sender?.profileImage?.alt || sender?.nickname + '프로필 이미지';
+
     useEffect(() => {
         if (!isMyMessage) {
             const getSenderProfile = async () => {
                 const profile = await getMemberProfile(chat.senderUuid);
+
                 setSender(profile);
             };
 
@@ -40,10 +46,10 @@ export default function ChatItem({
             })}
         >
             <div className={cn('flex gap-x-3 items-start')}>
-                {!isMyMessage && sender && (
+                {!isMyMessage && sender && sender.profileImage?.imageUrl && (
                     <Avatar
-                        src={sender.profileImage.imageUrl}
-                        alt={sender.nickname}
+                        src={imageUrl}
+                        alt={alt}
                         className='flex-shrink-0'
                     />
                 )}

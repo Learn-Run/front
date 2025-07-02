@@ -6,6 +6,7 @@ import { dmSans } from '@/shared/assets/fonts';
 import Header from '@/widgets/layout/ui/Header';
 import { ModalProvider } from '@/shared/model/modal/ModalContext';
 import { options } from './api/auth/[...nextauth]/options';
+import AlertProvider from '@/shared/model/context/AlertProvider';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -57,12 +58,14 @@ export default async function RootLayout({
             <body className={`${dmSans.className} antialiased`}>
                 <div id='modal-root' />
                 <ModalProvider>
-                    <div className='grid grid-rows-[auto_1fr] sm:grid-rows-1 sm:grid-cols-12 h-dvh w-full min-w-svw'>
-                        <Header className='col-span-1 xl:col-span-2' />
-                        <div className='row-span-1 sm:col-span-11 xl:col-span-10'>
-                            {children}
+                    <AlertProvider>
+                        <div className='grid grid-rows-[auto_1fr] sm:grid-rows-1 sm:grid-cols-12 h-dvh w-full min-w-svw'>
+                            <Header className='col-span-1 xl:col-span-2' />
+                            <div className='row-span-1 sm:col-span-11 xl:col-span-10'>
+                                {children}
+                            </div>
                         </div>
-                    </div>
+                    </AlertProvider>
                 </ModalProvider>
             </body>
         </html>

@@ -16,11 +16,9 @@ export const VideoCallContext = createContext<VideoCallStateType | undefined>(
 export function VideoCallProvider({
     children,
     sessionId,
-    isOnSession,
 }: {
     children: React.ReactNode;
-    sessionId: string;
-    isOnSession: boolean;
+    sessionId?: string;
 }) {
     const [state, setState] = useState<
         Omit<VideoCallStateType, 'updateVideoCallState'>
@@ -33,7 +31,7 @@ export function VideoCallProvider({
     });
 
     useEffect(() => {
-        if (state.session && !isOnSession) {
+        if (state.session) {
             state.session.disconnect();
 
             setState({
@@ -44,7 +42,7 @@ export function VideoCallProvider({
                 isScreenSharing: false,
             });
         }
-    }, [sessionId, state.session, isOnSession]);
+    }, [sessionId, state.session]);
 
     const updateVideoCallState = useCallback(
         (partial: Partial<VideoCallStateType>) =>

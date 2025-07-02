@@ -1,6 +1,7 @@
 import type { ChatRoomContentType } from '@/entities/chatRoom/api/types';
 import ChatItem from './ChatItem';
 import { cn } from '@repo/ui/lib/utils';
+import ChatGroupEmpty from './ChatGroupEmpty';
 
 export default function ChatGroup({
     chatDatas,
@@ -9,6 +10,8 @@ export default function ChatGroup({
     chatDatas: ChatRoomContentType[];
     memberUuid?: string;
 }) {
+    if (chatDatas?.length === 0) return <ChatGroupEmpty />;
+
     return (
         <>
             {chatDatas?.map((chat) => (

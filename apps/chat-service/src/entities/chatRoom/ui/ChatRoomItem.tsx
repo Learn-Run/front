@@ -8,6 +8,7 @@ import { Avatar } from '@/entities/profile/ui';
 import { getMemberProfile } from '@/entities/profile/api';
 import type { ChatRoomListContentType } from '../api/types';
 import { ProfileType } from '@/entities/profile/model/types';
+import { S3_BASE_URL } from '@/shared/model/constants/s3';
 
 export default function ChatRoomItem({
     chatRoom,
@@ -15,6 +16,11 @@ export default function ChatRoomItem({
     chatRoom: ChatRoomListContentType;
 }) {
     const [profile, setProfile] = useState<ProfileType | null>(null);
+
+    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const imageUrl = profile?.profileImage?.imageUrl || fallbackImage;
+    const alt =
+        profile?.profileImage?.alt || profile?.nickname + '프로필 이미지';
 
     useEffect(() => {
         let mounted = true;
@@ -36,10 +42,7 @@ export default function ChatRoomItem({
             scroll={false}
         >
             <div className='flex gap-3 items-center'>
-                <Avatar
-                    src={profile.profileImage.imageUrl}
-                    alt={profile.profileImage.alt}
-                />
+                <Avatar src={imageUrl} alt={alt} />
 
                 <div className='py-4 text-sm grow min-w-0'>
                     <p className='font-semibold truncate text-gray-800'>
