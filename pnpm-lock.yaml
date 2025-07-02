@@ -83,6 +83,10 @@ importers:
       eslint:
         specifier: ^9
         version: 9.27.0(jiti@2.4.2)
+
+      html-to-text:
+        specifier: ^9.0.5
+        version: 9.0.5
       livekit-client:
         specifier: ^2.14.0
         version: 2.14.0(@types/dom-mediacapture-record@1.0.22)
@@ -114,6 +118,9 @@ importers:
         specifier: ^3.25.42
         version: 3.25.51
     devDependencies:
+      '@types/html-to-text':
+        specifier: ^9.0.4
+        version: 9.0.4
       eslint-config-next:
         specifier: 15.3.3
         version: 15.3.3(eslint@9.27.0(jiti@2.4.2))(typescript@5.7.3)
