@@ -37,6 +37,7 @@
         "AWS_BUCKET_IMAGE_NAME",
         "AWS_BUCKET_NAME",
         "AWS_S3_BUCKET_NAME",
-        "NEXT_PUBLIC_S3_BASE_URL"
+        "NEXT_PUBLIC_S3_BASE_URL",
+        "NEXT_PUBLIC_SOCKET_URL"
     ]
 }

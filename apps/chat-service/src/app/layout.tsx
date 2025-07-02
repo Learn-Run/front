@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
 
 import './globals.css';
 import { dmSans } from '@/shared/assets/fonts';
 import Header from '@/widgets/layout/ui/Header';
 import { ModalProvider } from '@/shared/model/modal/ModalContext';
+import { options } from './api/auth/[...nextauth]/options';
 
 export const metadata: Metadata = {
     title: { default: 'Pick & Learn', template: '%s | Pick & Learn' },
@@ -47,9 +49,13 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await getServerSession(options);
+    console.log('🚀 ~ session:', session);
+
     return (
         <html lang='ko-KR'>
             <body className={`${dmSans.className} antialiased`}>
+                <div id='modal-root' />
                 <ModalProvider>
                     <div className='grid grid-rows-[auto_1fr] sm:grid-rows-1 sm:grid-cols-12 h-dvh w-full min-w-svw'>
                         <Header className='col-span-1 xl:col-span-2' />

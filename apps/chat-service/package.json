@@ -13,6 +13,7 @@
     "dependencies": {
         "@hookform/resolvers": "^5.0.1",
         "@repo/ui": "workspace:*",
+        "@stomp/stompjs": "^7.1.1",
         "dayjs": "^1.11.13",
         "next": "15.3.3",
         "next-auth": "^4.24.11",

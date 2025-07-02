@@ -8,11 +8,15 @@ export default function Profile({
     className,
     children,
 }: {
-    profile?: ProfileType;
+    profile: ProfileType;
     className?: string;
     children?: React.ReactNode;
 }) {
-    if (!profile) return;
+    const fallbackImage =
+        process.env.NEXT_PUBLIC_S3_BASE_URL + 'baseprofile.webp';
+    const imageUrl = profile.profileImage.imageUrl || fallbackImage;
+    const alt =
+        profile.profileImage.alt || profile.profileImage.alt + '프로필 이미지';
 
     return (
         <div
@@ -21,10 +25,7 @@ export default function Profile({
                 className,
             )}
         >
-            <Avatar
-                src={profile.profileImage.imageUrl}
-                alt={`${profile.nickname} 프로필 이미지`}
-            />
+            <Avatar src={imageUrl} alt={`${alt} 프로필 이미지`} />
 
             <div className='space-y-1 flex-grow'>
                 <p
