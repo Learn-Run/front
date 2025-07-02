@@ -25,7 +25,7 @@ export default function SocketChatItem({
 
             getSenderProfile();
         }
-    }, [isMyMessage, setSender]);
+    }, [isMyMessage, setSender, chat.senderUuid]);
 
     if (!isMyMessage && !sender) {
         return null;

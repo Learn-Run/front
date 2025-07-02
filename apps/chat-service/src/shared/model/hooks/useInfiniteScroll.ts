@@ -38,7 +38,7 @@ export function useInfiniteScroll(
             observerRef.current?.disconnect();
         };
     }, [
-        targetRef.current,
+        onIntersect,
         options.root,
         options.rootMargin,
         options.threshold,

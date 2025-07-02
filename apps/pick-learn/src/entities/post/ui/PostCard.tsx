@@ -7,15 +7,11 @@ import { Shared } from '@/shared/assets/icons';
 import Profile from '@/entities/member/ui/Profile';
 import TopAskSubCategory from '@/entities/category/ui/TopAskSubCategory';
 import PostListBookMarkButton from '@/features/BookMark/ui/PostListBookMarkButton';
-import { BookMarkType } from '@/features/BookMark/api/types';
+import { getBookMarkStatus } from '@/features/BookMark/api';
 
-export default async function PostCard({
-    item,
-    bookMarkStatus,
-}: {
-    item: AskDetailType;
-    bookMarkStatus: BookMarkType[];
-}) {
+export default async function PostCard({ item }: { item: AskDetailType }) {
+    const bookMarkStatus = await getBookMarkStatus(item.postUuid);
+
     return (
         <li
             key={item.postUuid}

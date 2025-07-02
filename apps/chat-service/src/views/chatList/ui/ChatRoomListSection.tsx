@@ -50,12 +50,12 @@ export default function ChatRoomListSection({
         if (cursor === null && chatRooms.length === 0) {
             fetchChatRooms(null);
         }
-    }, []);
+    }, [chatRooms.length, cursor, fetchChatRooms]);
 
     const loadMore = useCallback(() => {
         if (loading || !hasMore || !cursor) return;
         fetchChatRooms(cursor);
-    }, [loading, hasMore, cursor]);
+    }, [loading, hasMore, cursor, fetchChatRooms]);
 
     const targetRef = useInfiniteScroll(loadMore, {
         enabled: hasMore && !loading,
