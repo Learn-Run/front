@@ -1,15 +1,9 @@
-import type {
-    OpenVidu,
-    Publisher,
-    Session,
-    StreamManager,
-} from 'openvidu-browser';
+import type { Room, LocalParticipant, RemoteParticipant } from 'livekit-client';
 
 export interface VideoCallStateType {
-    OV: OpenVidu | null;
-    session: Session | null;
-    publisher: Publisher | null;
-    subscribers: StreamManager[];
+    session: Room | null;
+    publisher: LocalParticipant | null;
+    subscribers: RemoteParticipant[];
     isScreenSharing: boolean;
     updateVideoCallState: (partial: Partial<VideoCallStateType>) => void;
 }

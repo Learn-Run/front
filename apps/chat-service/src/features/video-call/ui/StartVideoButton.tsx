@@ -1,11 +1,12 @@
 'use client';
+import { useRouter } from 'next/navigation';
+
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import { useVideoCallContext } from '../model/context';
 import VideoCallErrorModal from './VideoCallErrorModal';
 import { startCall } from '../libs/startCall';
 import { cn } from '@repo/ui/lib/utils';
 import Video from '@/shared/assets/icons/Video';
-import { useRouter } from 'next/navigation';
 import { routes } from '@/shared/model/constants/routes';
 
 export default function StartVideoButton({ sessionId }: { sessionId: string }) {

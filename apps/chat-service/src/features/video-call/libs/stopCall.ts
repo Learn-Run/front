@@ -1,15 +1,14 @@
-import { Session } from 'openvidu-browser';
+import type { Room } from 'livekit-client';
 
 import { VideoCallStateType } from '../model/types';
 
 export function stopCall(
-    session: Session,
+    session: Room,
     updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
 ) {
     session.disconnect();
 
     updateVideoCallState({
-        OV: null,
         session: null,
         publisher: null,
         subscribers: [],
