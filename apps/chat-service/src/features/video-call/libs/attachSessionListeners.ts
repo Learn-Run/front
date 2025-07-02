@@ -1,28 +1,52 @@
-import { Session, StreamEvent, StreamManager } from 'openvidu-browser';
+import type {
+    Room,
+    RemoteParticipant,
+    RemoteTrack,
+    RemoteTrackPublication,
+} from 'livekit-client';
 
 import type { VideoCallStateType } from '../model/types';
 
 export const attachSessionListeners = (
-    session: Session,
-    getSubscribers: () => StreamManager[],
+    room: Room,
     updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
 ) => {
-    session.on('streamCreated', (event: StreamEvent) => {
-        const subscriber = session.subscribe(event.stream, undefined);
-        const prev = getSubscribers();
-        updateVideoCallState({ subscribers: [...prev, subscriber] });
-    });
-
-    session.on('streamDestroyed', (event: StreamEvent) => {
-        const prev = getSubscribers();
+    room.on('participantConnected', () => {
         updateVideoCallState({
-            subscribers: prev.filter((s) => s !== event.stream.streamManager),
+            subscribers: Array.from(room.remoteParticipants.values()),
         });
     });
 
-    session.on('sessionDisconnected', () => {
+    room.on('participantDisconnected', () => {
         updateVideoCallState({
-            OV: null,
+            subscribers: Array.from(room.remoteParticipants.values()),
+        });
+    });
+
+    room.on(
+        'trackSubscribed',
+        (
+            track: RemoteTrack,
+            _publication: RemoteTrackPublication,
+            participant: RemoteParticipant,
+        ) => {
+            console.log('트랙 구독:', participant.identity, track.kind);
+        },
+    );
+
+    room.on(
+        'trackUnsubscribed',
+        (
+            track: RemoteTrack,
+            _publication: RemoteTrackPublication,
+            participant: RemoteParticipant,
+        ) => {
+            console.log('트랙 구독 해제:', participant.identity, track.kind);
+        },
+    );
+
+    room.on('disconnected', () => {
+        updateVideoCallState({
             session: null,
             publisher: null,
             subscribers: [],

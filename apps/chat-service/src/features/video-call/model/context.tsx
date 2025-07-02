@@ -23,7 +23,6 @@ export function VideoCallProvider({
     const [state, setState] = useState<
         Omit<VideoCallStateType, 'updateVideoCallState'>
     >({
-        OV: null,
         session: null,
         publisher: null,
         subscribers: [],
@@ -35,7 +34,6 @@ export function VideoCallProvider({
             state.session.disconnect();
 
             setState({
-                OV: null,
                 session: null,
                 publisher: null,
                 subscribers: [],
