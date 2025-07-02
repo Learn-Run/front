@@ -28,7 +28,7 @@ export default function ChatItem({
         }
     }, [isMyMessage, chat.senderUuid]);
 
-    if (!isMyMessage && !sender) {
+    if (!isMyMessage || !sender) {
         return null;
     }
 
