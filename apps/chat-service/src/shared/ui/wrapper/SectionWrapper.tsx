@@ -8,7 +8,7 @@ export default function SectionWrapper({
     className?: string;
 }) {
     return (
-        <section className={cn('container mx-auto', className)}>
+        <section className={cn('container mx-auto p-4', className)}>
             {children}
         </section>
     );

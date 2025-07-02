@@ -1,5 +1,7 @@
 import Askers from './Askers';
 import Back from './Back';
+import BookMark from './BookMark';
+import BookMarkFill from './BookMarkFill';
 import Check from './Check';
 import Close from './Close';
 import Eye from './Eye';
@@ -14,6 +16,8 @@ import VerticalEllipsis from './VerticalEllipsis';
 export {
     Askers,
     Back,
+    BookMark,
+    BookMarkFill,
     Check,
     Close,
     Eye,

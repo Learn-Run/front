@@ -1,3 +1,5 @@
+import { MainWrapper } from '@/shared/ui';
+
 export default function Home() {
-    return <main className='w-full h-full'>Home</main>;
+    return <MainWrapper>home</MainWrapper>;
 }
