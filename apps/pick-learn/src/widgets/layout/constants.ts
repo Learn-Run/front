@@ -1,4 +1,4 @@
-import { Home, PopularPost, Post, Search } from '@/shared/assets/icons';
+import { Home, PopularPost, Post } from '@/shared/assets/icons';
 import { routes } from '@/shared/model/constants/routes';
 
 export const navList = [
@@ -16,12 +16,5 @@ export const navList = [
         href: routes.popularPosts,
         isAuth: false,
         icon: PopularPost,
-    },
-    {
-        id: 4,
-        name: '질문찾기',
-        href: routes.searchPosts,
-        isAuth: false,
-        icon: Search,
     },
 ];

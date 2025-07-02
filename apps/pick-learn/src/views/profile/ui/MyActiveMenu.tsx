@@ -85,6 +85,7 @@ export default async function MyActiveMenu({
                                     ? 'text-primary-100 font-bold'
                                     : 'text-gray-700',
                             )}
+                            scroll={false}
                         >
                             <p>북마크 내역</p>
                         </Link>

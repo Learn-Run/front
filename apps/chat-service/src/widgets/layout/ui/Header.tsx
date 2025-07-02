@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { cn } from '@repo/ui/lib/utils';
 import LogOutButton from './LogOutButton';
 import Nav from './Nav';

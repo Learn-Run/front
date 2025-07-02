@@ -1,5 +1,4 @@
 'use client';
-
 import LogOut from '@/shared/assets/icons/LogOut';
 import { cn } from '@repo/ui/lib/utils';
 

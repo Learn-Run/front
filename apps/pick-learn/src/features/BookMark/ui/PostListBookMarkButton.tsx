@@ -1,19 +1,20 @@
 'use client';
-import { useMemo } from 'react';
 
 import { BookMark, BookMarkFill } from '@/shared/assets/icons';
 import { useAlert } from '@/features/post/model/hooks/useAlert';
 import { BookMarkType } from '../api/types';
 import { cancelBookMark, createBookMark } from '../api';
+import { useSpharosSession } from '@/shared/model/sessionContext';
 
 export default function PostListBookMarkButton({
     postUuid,
     bookMarkStatus,
 }: {
     postUuid: string;
-    bookMarkStatus: BookMarkType[];
+    bookMarkStatus: BookMarkType | null;
 }) {
     const alert = useAlert();
+    const isAuth = useSpharosSession();
 
     const handleBookMark = async () => {
         await createBookMark(postUuid);
@@ -25,16 +26,18 @@ export default function PostListBookMarkButton({
         alert.basic('북마크에서 제거 되었습니다 ');
     };
 
-    const isBookmarked = useMemo(
-        () =>
-            bookMarkStatus?.find((item) => item.postUuid === postUuid)
-                ?.bookmarked === true,
-        [bookMarkStatus, postUuid],
-    );
-
-    if (isBookmarked) {
+    if (!isAuth)
         return (
-            <button onClick={handleCancelBookMark}>
+            <button onClick={() => alert.error('로그인 후 이용해주세요.')}>
+                <BookMark />
+            </button>
+        );
+
+    if (!bookMarkStatus) return;
+
+    if (bookMarkStatus.bookmarked === true) {
+        return (
+            <button onClick={handleCancelBookMark} className='cursor-pointer'>
                 <BookMarkFill />
             </button>
         );

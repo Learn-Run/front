@@ -5,9 +5,9 @@ import {
 import CategoryListItem from '@/entities/category/ui/CategoryListItem';
 import CategoryMobileList from '@/entities/category/ui/CategoryMobileList';
 import { AskListType } from '@/entities/post/api/types';
-import { BookMarkType } from '@/features/BookMark/api/types';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
+import { cn } from '@repo/ui/lib/utils';
 
 export interface postListSectionProps {
     searchParams: {
@@ -18,7 +18,7 @@ export interface postListSectionProps {
     categoryList: CategoryListType[][];
     mainCategories: MainCategoryType[];
     postList: AskListType;
-    bookMarkStatus: BookMarkType[];
+    className?: string;
 }
 
 export default async function PostListSection({
@@ -26,10 +26,13 @@ export default async function PostListSection({
     categoryList,
     mainCategories,
     postList,
-    bookMarkStatus,
+
+    className,
 }: postListSectionProps) {
     return (
-        <SectionWrapper className='flex flex-col md:flex-row gap-10'>
+        <SectionWrapper
+            className={cn('flex flex-col md:flex-row gap-10', className)}
+        >
             <CategoryListItem
                 searchParams={searchParams}
                 categoryList={categoryList}
@@ -44,7 +47,6 @@ export default async function PostListSection({
             <AskItemCardList
                 className='grid grid-cols-1 xl:grid-cols-3 sm:gird-cols-1'
                 postList={postList}
-                bookMarkStatus={bookMarkStatus}
             />
         </SectionWrapper>
     );

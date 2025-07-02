@@ -5,11 +5,10 @@ import Heading from '@/widgets/home/ui/Heading';
 import TypingWrapper from '@repo/ui/components/wrapper/TypingWrapper';
 import AskItemCardList from './AskItemCardList';
 import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
-import { getBookMarkStatus } from '@/features/BookMark/api';
 
 export default async function TopAskSection({
     page,
-    size,
+    size = 8,
     mainCategoryId,
 }: {
     page?: number;
@@ -25,12 +24,6 @@ export default async function TopAskSection({
         sort: 'popular',
     });
 
-    const bookMarkStatus = await Promise.all(
-        popularPostList.posts.map(
-            async (item) => await getBookMarkStatus(item.postUuid),
-        ),
-    );
-
     return (
         <SectionWrapper className='space-y-10 my-25'>
             <Heading align='center'>
@@ -45,10 +38,7 @@ export default async function TopAskSection({
                 </Heading.SubTitle>
             </Heading>
             <AskAtCategoryList mainCategoryId={mainCategoryId} />
-            <AskItemCardList
-                postList={popularPostList}
-                bookMarkStatus={bookMarkStatus}
-            />
+            <AskItemCardList postList={popularPostList} />
             <Pagination totalPage={popularPostList.totalPages} />
         </SectionWrapper>
     );
