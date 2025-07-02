@@ -8,12 +8,10 @@ import ChatButton from '@/views/commemt/ui/ChatButton';
 export default function ProfileInfoSection({
     myProfile,
     isMyProfile,
-    reviewAverage,
     memberUuid,
 }: {
     myProfile: ProfileType;
     isMyProfile: boolean;
-    reviewAverage: number;
     memberUuid: string;
 }) {
     if (!myProfile) return;
@@ -31,11 +29,7 @@ export default function ProfileInfoSection({
                 />
                 <ChatButton memberUuid={memberUuid} className=' w-full' />
             </div>
-            <ProfileInfoList
-                myProfile={myProfile}
-                isMyProfile={isMyProfile}
-                reviewAverage={reviewAverage}
-            />
+            <ProfileInfoList myProfile={myProfile} isMyProfile={isMyProfile} />
         </SectionWrapper>
     );
 }
