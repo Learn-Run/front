@@ -28,9 +28,7 @@ export default function ChatWindow({
     } = useChat(chatRoomUuid, memberUuid);
 
     const scrollContainerRef = useRef<HTMLUListElement | null>(null);
-
     const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
-
     const loaderRef = useInfiniteScroll(
         () => {
             if (hasMore) {

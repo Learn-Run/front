@@ -28,6 +28,7 @@ export default function ChatRoomSection({
                 )}
             >
                 <VideoRoom />
+
                 <ChatWindow
                     isOnSession={isOnSession}
                     className={className}

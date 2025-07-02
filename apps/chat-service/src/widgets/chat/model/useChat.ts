@@ -27,7 +27,15 @@ export const useChat = (chatRoomUuid?: string, memberUuid?: string) => {
                 });
                 if (!res) return;
 
-                setPastMessages(res.content);
+                setPastMessages((prev) => {
+                    const all = [...prev, ...res.content];
+                    const unique = Array.from(
+                        new Map(
+                            all.map((item) => [item.messageUuid, item]),
+                        ).values(),
+                    );
+                    return unique;
+                });
                 setCursor(res.nextCursor || null);
                 setHasMore(res.hasNext || false);
             };
@@ -66,7 +74,13 @@ export const useChat = (chatRoomUuid?: string, memberUuid?: string) => {
 
         const morePastMessages = res.content;
 
-        setPastMessages((prev) => [...morePastMessages, ...prev]);
+        setPastMessages((prev) => {
+            const all = [...morePastMessages, ...prev];
+            const unique = Array.from(
+                new Map(all.map((item) => [item.messageUuid, item])).values(),
+            );
+            return unique;
+        });
         setCursor(res.nextCursor || null);
         setHasMore(res.hasNext || false);
     };
