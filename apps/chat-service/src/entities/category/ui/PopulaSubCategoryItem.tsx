@@ -5,7 +5,6 @@ import { cn } from '@repo/ui/lib/utils';
 import { SubCategoryItemProps } from '../api/types';
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
 import { categorySearchParams } from '../utils/categorySearchParams';
-import { routes } from '@/shared/model/constants/routes';
 
 export default function PopularSubCategoryItem({
     searchParams,
@@ -29,7 +28,7 @@ export default function PopularSubCategoryItem({
                     )}
                 >
                     <Link
-                        href={`${routes.popularPosts}?mainCategoryId=${mainCategories}`}
+                        href={`${process.env.BASE_FRONT_URL}/popularPosts?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                     >
@@ -48,7 +47,7 @@ export default function PopularSubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`${routes.popularPosts}?${categorySearchParams(
+                            href={`${process.env.BASE_FRONT_URL}/popularPosts?${categorySearchParams(
                                 {
                                     mainCategoryId: mainCategories,
                                     subCategoryId: detailItem.subCategoryId,

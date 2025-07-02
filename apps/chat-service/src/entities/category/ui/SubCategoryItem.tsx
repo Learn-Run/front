@@ -5,7 +5,6 @@ import { cn } from '@repo/ui/lib/utils';
 import { SubCategoryItemProps } from '../api/types';
 import { AccordionContent } from '@repo/ui/components/base/Accordion';
 import { categorySearchParams } from '../utils/categorySearchParams';
-import { routes } from '@/shared/model/constants/routes';
 
 export default function SubCategoryItem({
     searchParams,
@@ -29,7 +28,7 @@ export default function SubCategoryItem({
                     )}
                 >
                     <Link
-                        href={`${routes.post}?mainCategoryId=${mainCategories}`}
+                        href={`${process.env.BASE_FRONT_URL}/post?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                     >
@@ -48,11 +47,13 @@ export default function SubCategoryItem({
                         )}
                     >
                         <Link
-                            href={`${routes.post}?${categorySearchParams({
-                                mainCategoryId: mainCategories,
-                                subCategoryId: detailItem.subCategoryId,
-                                sort: searchParams.sort,
-                            })}`}
+                            href={`${process.env.BASE_FRONT_URL}/post?${categorySearchParams(
+                                {
+                                    mainCategoryId: mainCategories,
+                                    subCategoryId: detailItem.subCategoryId,
+                                    sort: searchParams.sort,
+                                },
+                            )}`}
                             scroll={false}
                             replace={true}
                             className='block w-full text-left'

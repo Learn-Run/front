@@ -7,7 +7,6 @@ import {
     AccordionTrigger,
 } from '@repo/ui/components/base/Accordion';
 import { CategoryItemProps } from '@/entities/category/api/types';
-import { routes } from '@/shared/model/constants/routes';
 import PopularSubCategoryItem from './PopulaSubCategoryItem';
 
 export default async function PopularCategoryListItem({
@@ -25,7 +24,7 @@ export default async function PopularCategoryListItem({
                 카테고리
             </h3>
             <Link
-                href={routes.popularPosts}
+                href={`${process.env.BASE_FRONT_URL}/popularPosts`}
                 replace
                 scroll={false}
                 className={cn(

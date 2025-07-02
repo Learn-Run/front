@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import { SubCategoryItemProps } from '../api/types';
 import { cn } from '@repo/ui/lib/utils';
-import { routes } from '@/shared/model/constants/routes';
 
 export default function PopularSubCategoryMobileList({
     searchParams,
@@ -21,7 +20,7 @@ export default function PopularSubCategoryMobileList({
                     )}
                 >
                     <Link
-                        href={`${routes.post}?mainCategoryId=${mainCategories}`}
+                        href={`${process.env.BASE_FRONT_URL}/popularPosts?mainCategoryId=${mainCategories}`}
                         scroll={false}
                         replace
                         className='whitespace-nowrap block px-2'
@@ -48,7 +47,7 @@ export default function PopularSubCategoryMobileList({
                         )}
                     >
                         <Link
-                            href={`${routes.popularPosts}?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}`}
+                            href={`${process.env.BASE_FRONT_URL}/popularPosts?mainCategoryId=${mainCategories}&subCategoryId=${detailItem.subCategoryId}`}
                             scroll={false}
                             replace={true}
                             className='whitespace-nowrap block px-2'
