@@ -14,7 +14,7 @@ export const startCall = async (
     attachSessionListeners(session, updateVideoCallState);
 
     try {
-        await session.connect(`ws://${LIVEKIT_URL}`, token);
+        await session.connect(`wss://${LIVEKIT_URL}`, token);
 
         await session.localParticipant.enableCameraAndMicrophone();
 
