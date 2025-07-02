@@ -14,11 +14,11 @@ export default function StartVideoButton({ sessionId }: { sessionId: string }) {
 
     const { openModal } = useModalContext();
 
-    const { updateVideoCallState, subscribers } = useVideoCallContext();
+    const { updateVideoCallState } = useVideoCallContext();
 
     const handleClick = async () => {
         try {
-            await startCall(sessionId, () => subscribers, updateVideoCallState);
+            await startCall(sessionId, updateVideoCallState);
 
             const params = new URLSearchParams(window.location.search);
             params.set('isOnSession', 'true');
