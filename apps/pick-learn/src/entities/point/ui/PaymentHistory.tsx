@@ -71,7 +71,7 @@ export default function PaymentHistory({ className }: { className?: string }) {
 
     return (
         <div className='w-full pb-10'>
-            <li className='flex items-center px-4 py-3'>
+            <li className='flex items-center px-4 pb-4'>
                 <p className='text-lg font-bold'>결제 내역</p>
             </li>
             <PaymentHistoryFilter

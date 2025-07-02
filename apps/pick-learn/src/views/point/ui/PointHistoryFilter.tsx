@@ -17,7 +17,7 @@ export default function PointHistoryFilter({
     onSearch,
 }: PointHistoryFilterProps) {
     return (
-        <div className='px-4 border-b pb-4 border-gray-200'>
+        <div className='px-4 pb-4'>
             <div className='flex items-center gap-4'>
                 <div className='flex-1'>
                     <DatePicker
