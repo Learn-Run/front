@@ -21,6 +21,8 @@ export default function ActivityTabWrapper({
     paginationParams,
     bookMarkList,
 }: ActivityTabWrapperProps) {
+    if (myActiveHistoryList?.posts.length === 0) return <EmptySection />;
+
     if (!paginationParams.type)
         return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
 
