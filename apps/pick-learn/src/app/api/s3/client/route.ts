@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         const command = new PutObjectCommand(params);
         await s3Client.send(command);
 
-        const imageUrl = `${process.env.AWS_CLOUDFRONT_DOMAIN}/${params.Key}`;
+        const imageUrl = `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${params.Key}`;
         console.log('File uploaded successfully:', imageUrl);
         return NextResponse.json({ imageUrl });
     } catch (error) {
