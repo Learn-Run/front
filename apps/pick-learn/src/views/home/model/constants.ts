@@ -9,4 +9,4 @@ export const iconMapById: Record<number, React.FC<{ className?: string }>> = {
     6: Fashion,
 };
 
-export const videoUrlList = ['videos/v001.mp4', 'videos/v002.mp4'];
+export const videoUrlList = ['/videos/v001.mp4', '/videos/v002.mp4'];
