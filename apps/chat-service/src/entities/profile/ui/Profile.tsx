@@ -13,7 +13,7 @@ export default function Profile({
     children?: React.ReactNode;
 }) {
     const fallbackImage =
-        process.env.NEXT_PUBLIC_S3_BASE_URL + 'baseprofile.webp';
+        process.env.NEXT_PUBLIC_S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = profile.profileImage.imageUrl || fallbackImage;
     const alt =
         profile.profileImage.alt || profile.profileImage.alt + '프로필 이미지';

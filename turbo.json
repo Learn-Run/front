@@ -33,7 +33,6 @@
         "AWS_SECRET_ACCESS_KEY",
         "AWS_REGION",
         "NEXT_PUBLIC_S3_BASE_URL",
-        "AWS_CLOUDFRONT_DOMAIN",
         "AWS_BUCKET_IMAGE_NAME",
         "AWS_BUCKET_NAME",
         "AWS_S3_BUCKET_NAME",
