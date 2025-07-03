@@ -18,7 +18,7 @@ export default function ChatItem({
 }) {
     const [sender, setSender] = useState<ProfileType | null>(null);
 
-    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = sender?.profileImage?.imageUrl || fallbackImage;
     const alt = sender?.profileImage?.alt || sender?.nickname + '프로필 이미지';
 
