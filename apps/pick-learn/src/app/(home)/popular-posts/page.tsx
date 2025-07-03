@@ -3,6 +3,7 @@ import { getPostList } from '@/entities/post/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import PopularPostListSection from '@/views/popular-posts/ui/PopularPostListSection';
 import PopularPostTopSection from '@/views/popular-posts/ui/PopularPostTopSection';
+import FloatingWriteButton from '@/views/post/ui/FloatingWriteButton';
 
 type SearchParams = {
     mainCategoryId: number;
@@ -44,6 +45,7 @@ export default async function PopularPostsPage({
                 className='pt-20'
             />
             <Pagination totalPage={postList.totalPages} />
+            <FloatingWriteButton />
         </MainWrapper>
     );
 }

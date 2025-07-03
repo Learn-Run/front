@@ -4,6 +4,7 @@ import HeroSection from '@/views/home/ui/HeroSection';
 import StepSection from '@/views/home/ui/StepSection';
 import TopAnswererSection from '@/views/home/ui/TopAnswererSection';
 import TopAskSection from '@/views/home/ui/TopAskSection';
+import FloatingWriteButton from '@/views/post/ui/FloatingWriteButton';
 
 export default async function Home({
     searchParams,
@@ -27,6 +28,7 @@ export default async function Home({
                 size={size}
             />
             <TopAnswererSection />
+            <FloatingWriteButton />
         </MainWrapper>
     );
 }

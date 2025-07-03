@@ -1,6 +1,5 @@
 import SearchButton from '@/features/search/ui/SearchButton';
 import Heading from '@/widgets/home/ui/Heading';
-import React from 'react';
 
 export default function PostTopSection() {
     return (

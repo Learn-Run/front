@@ -18,7 +18,6 @@ export default async function Home({
         <MainWrapper className='bg-gray-50'>
             <MainHeader />
             <MainTopSection />
-
             <TopAskSection
                 mainCategoryId={mainCategoryId}
                 page={page}
