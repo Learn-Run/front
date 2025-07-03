@@ -6,6 +6,7 @@ import {
     PostListSection,
     PostTopSection,
 } from '@/views/post/ui';
+import FloatingWriteButton from '@/views/post/ui/FloatingWriteButton';
 
 type SearchParams = {
     mainCategoryId: number;
@@ -46,6 +47,7 @@ export default async function page({
                 postList={postList}
             />
             <Pagination totalPage={postList.totalPages} />
+            <FloatingWriteButton />
         </MainWrapper>
     );
 }
