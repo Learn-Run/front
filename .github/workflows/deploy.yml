@@ -44,6 +44,7 @@ jobs:
                   echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> apps/pick-learn/.env.production
                   echo "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" >> apps/pick-learn/.env.production
                   echo "NEXT_PUBLIC_S3_BASE_URL=${{ secrets.NEXT_PUBLIC_S3_BASE_URL }}" >> apps/pick-learn/.env.production
+                  echo "AWS_CLOUDFRONT_DOMAIN=${{ secrets.AWS_CLOUDFRONT_DOMAIN }}" >> apps/pick-learn/.env.production
 
                   echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" > apps/chat-service/.env.production
                   echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> apps/chat-service/.env.production
