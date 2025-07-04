@@ -8,16 +8,21 @@ import { useInfiniteScroll } from '@/shared/model/hooks/useInfiniteScroll';
 import { ChatRoomListContentType } from '@/entities/chatRoom/api/types';
 import ChatRoomListSkeleton from '@/entities/chatRoom/ui/ChatRoomListSkeleton';
 import ChatRoomListEmpty from '@/entities/chatRoom/ui/ChatRoomListEmpty';
+import { useVideoCallContext } from '@/features/video-call/model/context';
 
 export default function ChatRoomListSection({
     className,
+    chatRoomUuid,
 }: {
     className?: string;
+    chatRoomUuid?: string;
 }) {
     const [chatRooms, setChatRooms] = useState<ChatRoomListContentType[]>([]);
     const [cursor, setCursor] = useState<string | null>(null);
     const [hasMore, setHasMore] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const { isConnected } = useVideoCallContext();
 
     const fetchChatRooms = useCallback(
         async (nextCursor: string | null = null) => {
@@ -61,6 +66,8 @@ export default function ChatRoomListSection({
         enabled: hasMore && !loading,
     });
 
+    if (isConnected) return null;
+
     if (chatRooms.length === 0 && loading) {
         return (
             <ChatRoomListSkeleton
@@ -88,12 +95,16 @@ export default function ChatRoomListSection({
             <h3 className='px-4 text-gray-800 font-semibold'>
                 최근 메세지 목록
             </h3>
-            <ul className='h-full overflow-y-scroll scrollbar-hidden'>
+
+            <ul className='h-full overflow-y-scroll scrollbar-hidden py-5'>
                 {chatRooms.map((chatList, idx) => (
                     <li
                         key={chatList.chatRoomUuid}
                         className={cn(
-                            'border-b border-gray-300 last:border-b-[0] px-4 block',
+                            'border-b border-gray-300 last:border-b-[0] px-4 transition-all min-h-24 flex items-center',
+                            chatRoomUuid === chatList.chatRoomUuid
+                                ? 'bg-gray-100'
+                                : 'bg-white',
                         )}
                     >
                         <ChatRoomItem chatRoom={chatList} />
@@ -103,6 +114,7 @@ export default function ChatRoomListSection({
                     </li>
                 ))}
             </ul>
+
             {loading && (
                 <div className='text-center py-2 text-gray-400'>
                     불러오는 중...

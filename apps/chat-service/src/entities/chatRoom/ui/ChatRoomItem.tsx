@@ -17,7 +17,7 @@ export default function ChatRoomItem({
 }) {
     const [profile, setProfile] = useState<ProfileType | null>(null);
 
-    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = profile?.profileImage?.imageUrl || fallbackImage;
     const alt =
         profile?.profileImage?.alt || profile?.nickname + '프로필 이미지';
@@ -37,7 +37,7 @@ export default function ChatRoomItem({
     return (
         <Link
             href={`${routes.messages}?chatRoomUuid=${chatRoom.chatRoomUuid}`}
-            className='space-x-1 block py-3'
+            className='space-x-1 block py-3 w-full h-full'
             replace
             scroll={false}
         >

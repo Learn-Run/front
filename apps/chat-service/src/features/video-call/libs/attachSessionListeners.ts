@@ -1,56 +1,55 @@
-import type {
-    Room,
-    RemoteParticipant,
-    RemoteTrack,
-    RemoteTrackPublication,
-} from 'livekit-client';
+import { type Room, RoomEvent } from 'livekit-client';
 
 import type { VideoCallStateType } from '../model/types';
 
+type StateType = Omit<VideoCallStateType, 'updateVideoCallState'>;
+
 export const attachSessionListeners = (
     room: Room,
-    updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
+    updateVideoCallState: (
+        s: Partial<StateType> | ((prev: StateType) => Partial<StateType>),
+    ) => void,
 ) => {
-    room.on('participantConnected', () => {
+    room.on(RoomEvent.TrackSubscribed, (_track, publication, participant) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: [
+                ...prev.remoteTracks,
+                {
+                    trackPublication: publication,
+                    participantIdentity: participant.identity,
+                },
+            ],
+        }));
+    });
+
+    room.on(RoomEvent.TrackUnsubscribed, (_track, publication) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: prev.remoteTracks.filter(
+                (track) =>
+                    track.trackPublication.trackSid !== publication.trackSid,
+            ),
+        }));
+    });
+
+    room.on(RoomEvent.ParticipantDisconnected, (participant) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: prev.remoteTracks.filter(
+                (track) => track.participantIdentity !== participant.identity,
+            ),
+        }));
+    });
+
+    room.on(RoomEvent.Connected, () => {
         updateVideoCallState({
-            subscribers: Array.from(room.remoteParticipants.values()),
+            isConnected: true,
         });
     });
 
-    room.on('participantDisconnected', () => {
+    room.on(RoomEvent.Disconnected, () => {
         updateVideoCallState({
-            subscribers: Array.from(room.remoteParticipants.values()),
-        });
-    });
-
-    room.on(
-        'trackSubscribed',
-        (
-            track: RemoteTrack,
-            _publication: RemoteTrackPublication,
-            participant: RemoteParticipant,
-        ) => {
-            console.log('트랙 구독:', participant.identity, track.kind);
-        },
-    );
-
-    room.on(
-        'trackUnsubscribed',
-        (
-            track: RemoteTrack,
-            _publication: RemoteTrackPublication,
-            participant: RemoteParticipant,
-        ) => {
-            console.log('트랙 구독 해제:', participant.identity, track.kind);
-        },
-    );
-
-    room.on('disconnected', () => {
-        updateVideoCallState({
-            session: null,
-            publisher: null,
-            subscribers: [],
-            isScreenSharing: false,
+            isConnected: false,
+            localTrack: null,
+            remoteTracks: [],
         });
     });
 };

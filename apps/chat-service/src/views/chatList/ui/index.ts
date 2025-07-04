@@ -1,5 +1,5 @@
 import ChatRoomListSection from './ChatRoomListSection';
-import ChatRoomMessages from './ChatRoomMessages';
-import ChatRoomSection from './ChatRoomSection';
+import ChatRoomMessages from './ChatSocketMessage';
+import ChatRoomContainer from './ChatRoomContainer';
 
-export { ChatRoomListSection, ChatRoomMessages, ChatRoomSection };
+export { ChatRoomListSection, ChatRoomMessages, ChatRoomContainer };

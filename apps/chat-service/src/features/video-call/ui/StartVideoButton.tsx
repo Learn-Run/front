@@ -1,17 +1,12 @@
 'use client';
-import { useRouter } from 'next/navigation';
-
 import { useModalContext } from '@/shared/model/modal/ModalContext';
 import { useVideoCallContext } from '../model/context';
 import VideoCallErrorModal from './VideoCallErrorModal';
 import { startCall } from '../libs/startCall';
 import { cn } from '@repo/ui/lib/utils';
 import Video from '@/shared/assets/icons/Video';
-import { routes } from '@/shared/model/constants/routes';
 
 export default function StartVideoButton({ sessionId }: { sessionId: string }) {
-    const router = useRouter();
-
     const { openModal } = useModalContext();
 
     const { updateVideoCallState } = useVideoCallContext();
@@ -19,12 +14,6 @@ export default function StartVideoButton({ sessionId }: { sessionId: string }) {
     const handleClick = async () => {
         try {
             await startCall(sessionId, updateVideoCallState);
-
-            const params = new URLSearchParams(window.location.search);
-            params.set('isOnSession', 'true');
-            router.replace(`${routes.messages}?${params.toString()}`, {
-                scroll: false,
-            });
         } catch (error) {
             console.log('🚀 ~ handleClick ~ error:', error);
             openModal(<VideoCallErrorModal />);

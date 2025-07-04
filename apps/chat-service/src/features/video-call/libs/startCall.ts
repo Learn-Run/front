@@ -3,14 +3,24 @@ import { VideoCallStateType } from '../model/types';
 import { getVideoToken } from '../api';
 import createVideoSession from './createVideoSession';
 
+type StateType = Omit<VideoCallStateType, 'updateVideoCallState'>;
+
 export const startCall = async (
     id: string,
-    updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
+    updateVideoCallState: (
+        s: Partial<StateType> | ((prev: StateType) => Partial<StateType>),
+    ) => void,
 ) => {
     const token = await getVideoToken(id);
-    const LIVEKIT_URL = process.env.NEXT_PUBLIC_LIVEKIT_URL as string;
 
     const { session } = createVideoSession();
+
+    const LIVEKIT_URL = process.env.NEXT_PUBLIC_LIVEKIT_URL as string;
+
+    updateVideoCallState({
+        session,
+    });
+
     attachSessionListeners(session, updateVideoCallState);
 
     try {
@@ -18,13 +28,18 @@ export const startCall = async (
 
         await session.localParticipant.enableCameraAndMicrophone();
 
-        updateVideoCallState({
-            session: session,
-            publisher: session.localParticipant,
-            subscribers: Array.from(session.remoteParticipants.values()),
-        });
+        const videoTrackPublication =
+            session.localParticipant.videoTrackPublications
+                .values()
+                .next().value;
+        if (videoTrackPublication?.videoTrack) {
+            updateVideoCallState({
+                localTrack: videoTrackPublication.videoTrack,
+            });
+        }
     } catch (error) {
-        console.log('🚀 ~ error:', error);
-        alert('카메라/마이크 권한이 필요합니다.');
+        console.error('🚀 ~ error:', error);
+        // alert('카메라/마이크 권한이 필요합니다.');
+        throw error;
     }
 };

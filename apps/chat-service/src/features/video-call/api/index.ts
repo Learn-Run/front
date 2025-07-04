@@ -2,11 +2,16 @@
 import { getServerSession } from 'next-auth';
 
 import { options } from '@/app/api/auth/[...nextauth]/options';
+import { getMemberProfile } from '@/entities/profile/api';
 
 export const getVideoToken = async (sessionId: string) => {
     const memberUuid = (await getServerSession(options))?.user.memberUuid;
 
     if (!memberUuid) return;
+
+    const profile = await getMemberProfile(memberUuid);
+
+    if (!profile) return;
 
     const res = await fetch('http://ov.pickandlearn.shop:9999/token', {
         method: 'POST',
@@ -16,6 +21,7 @@ export const getVideoToken = async (sessionId: string) => {
         },
         body: JSON.stringify({
             chatRoomUuid: sessionId,
+            nickname: profile.nickname,
         }),
     });
 
