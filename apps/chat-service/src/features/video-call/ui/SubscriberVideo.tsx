@@ -10,8 +10,6 @@ export default function SubscriberVideo() {
 
     useEffect(() => {
         if (!session) return;
-
-        // ref 값을 effect 내부에서 복사
         const currentVideoRefs = videoRefs.current;
 
         Object.values(currentVideoRefs).forEach((videoElement) => {
@@ -58,7 +56,7 @@ export default function SubscriberVideo() {
     if (remoteTracks.length === 0) return null;
 
     return (
-        <div className='grid grid-cols-2 gap-4'>
+        <div className=''>
             {remoteTracks
                 .filter(
                     (trackInfo) => trackInfo.trackPublication.kind === 'video',
@@ -66,7 +64,7 @@ export default function SubscriberVideo() {
                 .map((trackInfo) => (
                     <div
                         key={trackInfo.trackPublication.trackSid}
-                        className='border border-primary-100 rounded-xl overflow-hidden'
+                        className='border border-secondary-200 rounded-xl overflow-hidden relative'
                     >
                         <video
                             ref={(el) => {
@@ -76,10 +74,11 @@ export default function SubscriberVideo() {
                             }}
                             autoPlay
                             playsInline
+                            className='w-full'
                         />
-                        <div className='p-2 text-sm text-gray-600'>
-                            {trackInfo.participantIdentity}
-                        </div>
+                        <p className='py-1 px-4 text-xs text-gray-700 absolute left-3 top-3 bg-white/60 rounded-full z-10'>
+                            {trackInfo.name}
+                        </p>
                     </div>
                 ))}
         </div>

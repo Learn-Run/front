@@ -30,28 +30,30 @@ export default function ChatWindow({
     if (!chatRoomUuid || !memberUuid || isConnected) return null;
 
     return (
-        <div
-            className={cn(
-                'bg-white border border-gray-300 rounded-md overflow-hidden h-full flex flex-col',
-                'col-span-1',
-                className,
-            )}
-        >
-            <ChatWindowHeader chatRoomUuid={chatRoomUuid} />
+        <div className='p-6 w-full'>
+            <div
+                className={cn(
+                    'bg-white border border-gray-300 rounded-md overflow-hidden h-full flex flex-col',
+                    'col-span-1',
+                    className,
+                )}
+            >
+                <ChatWindowHeader chatRoomUuid={chatRoomUuid} />
 
-            <ChatWindowMessagesList
-                hasMore={hasMore}
-                pastMessages={pastMessages}
-                newSocketMessages={newSocketMessages}
-                memberUuid={memberUuid}
-                loadMorePastMessages={loadMorePastMessages}
-            />
+                <ChatWindowMessagesList
+                    hasMore={hasMore}
+                    pastMessages={pastMessages}
+                    newSocketMessages={newSocketMessages}
+                    memberUuid={memberUuid}
+                    loadMorePastMessages={loadMorePastMessages}
+                />
 
-            <ChatWindowInputSection
-                handleSend={handleSend}
-                chatRoomUuid={chatRoomUuid}
-                isConnected={isConnected}
-            />
+                <ChatWindowInputSection
+                    handleSend={handleSend}
+                    chatRoomUuid={chatRoomUuid}
+                    isConnected={isConnected}
+                />
+            </div>
         </div>
     );
 }

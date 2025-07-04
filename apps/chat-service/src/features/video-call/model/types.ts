@@ -7,6 +7,7 @@ import type {
 export interface TrackInfo {
     trackPublication: RemoteTrackPublication;
     participantIdentity: string;
+    name: string;
 }
 
 type StateType = {

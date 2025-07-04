@@ -1,15 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import ChatWindowMessagesList from '@/widgets/chat/ui/ChatWindowMessagesList';
 import { useChat } from '@/widgets/chat/model/useChat';
 import ChatWindowInputSection from '@/widgets/chat/ui/ChatWindowInputSection';
 import { cn } from '@repo/ui/lib/utils';
-import { ChatRoomListSection } from '@/views/chatList/ui';
-import { routes } from '@/shared/model/constants/routes';
 import { useVideoCallContext } from '../model/context';
 import ChatMobileMessageHeader from './ChatMobileMessageHeader';
+import ChatRoomListInfinite from '@/views/chatList/ui/ChatRoomListInfinite';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/shared/model/constants/routes';
 
 export default function ChatMobileMessage({
     chatRoomUuid,
@@ -35,8 +35,8 @@ export default function ChatMobileMessage({
     } = useChat(chatRoomUuid, memberUuid);
 
     const handlePrevStep = () => {
-        router.replace(routes.messages);
         setType((prev) => (prev === 'message' ? 'chatRoomList' : 'message'));
+        router.replace(routes.messages);
     };
 
     useEffect(() => {
@@ -45,18 +45,18 @@ export default function ChatMobileMessage({
         }
     }, [chatRoomUuid]);
 
+    if (!isConnected) return null;
+
     return (
         <div className={cn('p-6', className)}>
             <div className='bg-white border border-gray-300 rounded-md h-full overflow-hidden flex flex-col'>
                 <ChatMobileMessageHeader
-                    handlePrevStep={handlePrevStep}
                     type={type}
                     chatRoomUuid={chatRoomUuid}
+                    handlePrevStep={handlePrevStep}
                 />
 
-                {type !== 'message' && !chatRoomUuid ? (
-                    <ChatRoomListSection chatRoomUuid={chatRoomUuid} />
-                ) : (
+                {type === 'message' && chatRoomUuid ? (
                     <>
                         <ChatWindowMessagesList
                             hasMore={hasMore}
@@ -73,6 +73,8 @@ export default function ChatMobileMessage({
                             />
                         )}
                     </>
+                ) : (
+                    <ChatRoomListInfinite chatRoomUuid={chatRoomUuid} />
                 )}
             </div>
         </div>

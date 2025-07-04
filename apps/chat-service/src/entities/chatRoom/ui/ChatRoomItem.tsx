@@ -1,6 +1,6 @@
 'use client';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import { formatSmartDate } from '@/shared/utils/dateFormat';
 import { routes } from '@/shared/model/constants/routes';

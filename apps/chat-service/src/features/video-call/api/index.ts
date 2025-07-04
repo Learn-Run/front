@@ -13,17 +13,20 @@ export const getVideoToken = async (sessionId: string) => {
 
     if (!profile) return;
 
-    const res = await fetch('http://ov.pickandlearn.shop:9999/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Member-UUID': memberUuid,
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_LIVEKIT_TOKEN_URL}/token`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Member-UUID': memberUuid,
+            },
+            body: JSON.stringify({
+                chatRoomUuid: sessionId,
+                nickname: profile.nickname,
+            }),
         },
-        body: JSON.stringify({
-            chatRoomUuid: sessionId,
-            nickname: profile.nickname,
-        }),
-    });
+    );
 
     const { token } = await res.json();
 

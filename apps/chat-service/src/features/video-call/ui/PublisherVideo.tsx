@@ -63,13 +63,16 @@ export default function PublisherVideo() {
     }
 
     return (
-        <div className='border border-primary-100 rounded-xl overflow-hidden'>
+        <div className='border border-primary-100 rounded-xl overflow-hidden relative'>
             <video
                 ref={videoRef}
                 autoPlay
                 muted={!session?.localParticipant.isMicrophoneEnabled}
                 playsInline
             />
+            <p className='py-1 px-4 text-xs text-gray-700 absolute left-3 top-3 bg-white/60 rounded-full z-10'>
+                {session?.localParticipant.name || 'Anonymous'}
+            </p>
         </div>
     );
 }

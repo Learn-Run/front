@@ -18,22 +18,20 @@ export default function ChatRoomContainer({
                 <ChatRoomListSection
                     chatRoomUuid={chatRoomUuid}
                     className={cn(
-                        'max-w-[300px] w-full bg-white border-r border-gray-300 h-full lg:block hidden',
+                        'max-w-[300px] w-full bg-white border-r border-gray-300 h-full hidden md:block',
                     )}
                 />
 
                 <VideoRoom />
 
-                <div className='p-6 w-full hidden lg:block'>
-                    <ChatWindow
-                        chatRoomUuid={chatRoomUuid}
-                        memberUuid={memberUuid}
-                        className='h-full overflow-y-scroll scrollbar-hidden w-full'
-                    />
-                </div>
+                <ChatWindow
+                    chatRoomUuid={chatRoomUuid}
+                    memberUuid={memberUuid}
+                    className='h-full overflow-y-scroll scrollbar-hidden w-full'
+                />
 
                 <ChatMobileMessage
-                    className='w-full h-full lg:hidden'
+                    className='w-full h-full'
                     chatRoomUuid={chatRoomUuid}
                     memberUuid={memberUuid}
                 />
