@@ -16,7 +16,7 @@ interface RequestOptions extends RequestInit {
     revalidate?: number | false;
 }
 
-const BASE_URL = process.env.BASE_API_URL || 'http://localhost:8080';
+const BASE_URL = process.env.BASE_API_URL || 'http://localhost:8000';
 
 const fetchInstance = async <T = undefined>(
     url: string,

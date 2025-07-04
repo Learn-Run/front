@@ -1,22 +1,35 @@
+'use client';
+import { useCallback, useState } from 'react';
 import { Video, VideoOff } from 'lucide-react';
 
 import { useVideoCallContext } from '../model/context';
-import { toggleVideo } from '../libs/toggleVideo';
 
 export default function ToggleVideoButton() {
-    const { session, publisher, updateVideoCallState } = useVideoCallContext();
+    const [isCameraEnabled, setIsCameraEnabled] = useState(true);
 
-    const videoEnabled = publisher?.isCameraEnabled ?? false;
+    const { session } = useVideoCallContext();
 
-    const handleClick = () => {
-        if (!publisher || !session) return;
-        toggleVideo(publisher);
-        updateVideoCallState({ publisher });
-    };
+    const handleClick = useCallback(async () => {
+        if (!session) return;
+
+        try {
+            setIsCameraEnabled((prev) => !prev);
+            await session.localParticipant.setCameraEnabled(!isCameraEnabled);
+        } catch (error) {
+            console.error('Failed to toggle camera:', error);
+        }
+    }, [session, isCameraEnabled]);
 
     return (
-        <button onClick={handleClick}>
-            {videoEnabled ? <VideoOff /> : <Video />}
+        <button
+            onClick={handleClick}
+            className='w-12 h-12 bg-secondary-100 rounded-full flex justify-center items-center cursor-pointer hover:opacity-80 active:opacity-80 transition-opacity ease-in-out'
+        >
+            {isCameraEnabled ? (
+                <Video className='text-secondary-200' />
+            ) : (
+                <VideoOff className='text-secondary-200' />
+            )}
         </button>
     );
 }

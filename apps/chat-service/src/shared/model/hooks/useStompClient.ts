@@ -21,7 +21,7 @@ export const useStompClient = () => {
         const client = new Client({
             brokerURL: `wss://${SOCKET_URL}/ws-chat`,
             connectHeaders: { 'X-Member-UUID': senderUuid },
-            debug: (str) => console.log('🟡 [STOMP]', str),
+            // debug: (str) => console.log('🟡 [STOMP]', str),
             onConnect: () => {
                 const destination = `/queue/messages/${chatRoomUuid}`;
                 console.log('📩 [SUBSCRIBING TO]', destination);

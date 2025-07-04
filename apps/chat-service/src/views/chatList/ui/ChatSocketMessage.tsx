@@ -3,15 +3,15 @@ import { cn } from '@repo/ui/lib/utils';
 import SocketChatItem from '../../../entities/chat/ui/SocketChatItem';
 import type { ChatMessageType } from '@/entities/chat/model/types';
 
-interface ChatRoomMessagesProps {
+interface ChatSocketMessageProps {
     newSocketMessages: ChatMessageType[];
     memberUuid: string;
 }
 
-export default function ChatRoomMessages({
+export default function ChatSocketMessage({
     newSocketMessages,
     memberUuid,
-}: ChatRoomMessagesProps) {
+}: ChatSocketMessageProps) {
     return (
         <>
             {newSocketMessages.map((msg) => (

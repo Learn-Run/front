@@ -13,7 +13,7 @@ export default async function ChatRoomPage({
     const memberUuid = (await getServerSession(options))?.user.memberUuid;
 
     return (
-        <main className='bg-gray-100 w-full h-dvh'>
+        <main className='bg-gray-100 w-full h-dvh overflow-y-scroll scrollbar-hidden'>
             <ChatRoomContainer
                 memberUuid={memberUuid}
                 chatRoomUuid={chatRoomUuid}
