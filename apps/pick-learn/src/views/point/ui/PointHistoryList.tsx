@@ -39,19 +39,35 @@ export default function PointHistoryList({
                         : undefined,
                     endDate: endDate ? formatDateToKST(endDate) : undefined,
                 });
-                setPointHistory((prev) => {
-                    const all = [...prev, ...response.content];
-                    const unique = Array.from(
-                        new Map(
-                            all.map((item) => [item.memberPointUuid, item]),
-                        ).values(),
+
+                if (response && response.content) {
+                    setPointHistory((prev) => {
+                        const all = [...prev, ...response.content];
+                        const unique = Array.from(
+                            new Map(
+                                all.map((item) => [item.memberPointUuid, item]),
+                            ).values(),
+                        );
+                        return unique;
+                    });
+                    setHasNext(response.hasNext ?? false);
+                    setCursor(response.nextCursor);
+                } else {
+                    console.warn(
+                        '포인트 히스토리 응답이 올바르지 않습니다:',
+                        response,
                     );
-                    return unique;
-                });
-                setHasNext(response.hasNext);
-                setCursor(response.nextCursor);
+                    if (nextCursor === null) {
+                        setPointHistory([]);
+                    }
+                    setHasNext(false);
+                }
             } catch (error) {
                 console.error('포인트 히스토리 조회 실패:', error);
+                if (nextCursor === null) {
+                    setPointHistory([]);
+                }
+                setHasNext(false);
             } finally {
                 setIsLoading(false);
             }

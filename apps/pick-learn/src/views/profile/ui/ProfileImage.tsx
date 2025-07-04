@@ -17,7 +17,7 @@ export default function ProfileImage({
     isMyProfile: boolean;
 }) {
     const alert = useAlert();
-    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = profileImage?.imageUrl || fallbackImage;
     const alt = profileImage?.alt || profileImage?.alt + '프로필 이미지';
 
