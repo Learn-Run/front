@@ -3,6 +3,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { VideoCallProvider } from '@/features/video-call/model/context';
 import { VideoRoom } from '@/features/video-call/ui';
 import { ChatWindow } from '@/widgets/chat/ui';
+import ChatMobileMessage from '@/features/video-call/ui/ChatMobileMessage';
 
 export default function ChatRoomContainer({
     chatRoomUuid,
@@ -12,29 +13,29 @@ export default function ChatRoomContainer({
     memberUuid?: string;
 }) {
     return (
-        <div className='flex gap-4 h-full'>
-            <ChatRoomListSection
-                className={cn(
-                    'max-w-[300px] w-full bg-white border-r border-gray-300 h-full',
-                )}
-            />
+        <VideoCallProvider sessionId={chatRoomUuid}>
+            <div className='flex h-full '>
+                <ChatRoomListSection
+                    chatRoomUuid={chatRoomUuid}
+                    className={cn(
+                        'max-w-[300px] w-full bg-white border-r border-gray-300 h-full hidden md:block',
+                    )}
+                />
 
-            <VideoCallProvider sessionId={chatRoomUuid}>
-                <section className={cn('h-full w-full')}>
-                    <VideoRoom />
+                <VideoRoom />
 
-                    <div
-                        className={cn(
-                            'h-full overflow-y-scroll scrollbar-hidden p-6',
-                        )}
-                    >
-                        <ChatWindow
-                            chatRoomUuid={chatRoomUuid}
-                            memberUuid={memberUuid}
-                        />
-                    </div>
-                </section>
-            </VideoCallProvider>
-        </div>
+                <ChatWindow
+                    chatRoomUuid={chatRoomUuid}
+                    memberUuid={memberUuid}
+                    className='h-full overflow-y-scroll scrollbar-hidden w-full'
+                />
+
+                <ChatMobileMessage
+                    className='w-full h-full'
+                    chatRoomUuid={chatRoomUuid}
+                    memberUuid={memberUuid}
+                />
+            </div>
+        </VideoCallProvider>
     );
 }

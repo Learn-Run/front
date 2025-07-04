@@ -1,56 +1,77 @@
-import type {
-    Room,
-    RemoteParticipant,
-    RemoteTrack,
-    RemoteTrackPublication,
-} from 'livekit-client';
+import { type Room, RoomEvent } from 'livekit-client';
 
 import type { VideoCallStateType } from '../model/types';
+import type { TrackInfo } from '../model/types';
+
+type StateType = Omit<VideoCallStateType, 'updateVideoCallState'>;
 
 export const attachSessionListeners = (
     room: Room,
-    updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
+    updateVideoCallState: (
+        s: Partial<StateType> | ((prev: StateType) => Partial<StateType>),
+    ) => void,
 ) => {
-    room.on('participantConnected', () => {
-        updateVideoCallState({
-            subscribers: Array.from(room.remoteParticipants.values()),
-        });
+    room.on(RoomEvent.TrackSubscribed, (_track, publication, participant) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: [
+                ...prev.remoteTracks,
+                {
+                    trackPublication: publication,
+                    participantIdentity: participant.identity,
+                    name: participant?.name || 'Anonymous',
+                },
+            ],
+        }));
     });
 
-    room.on('participantDisconnected', () => {
-        updateVideoCallState({
-            subscribers: Array.from(room.remoteParticipants.values()),
-        });
+    room.on(RoomEvent.TrackUnsubscribed, (_track, publication) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: prev.remoteTracks.filter(
+                (track) =>
+                    track.trackPublication.trackSid !== publication.trackSid,
+            ),
+        }));
     });
 
-    room.on(
-        'trackSubscribed',
-        (
-            track: RemoteTrack,
-            _publication: RemoteTrackPublication,
-            participant: RemoteParticipant,
-        ) => {
-            console.log('트랙 구독:', participant.identity, track.kind);
-        },
-    );
+    room.on(RoomEvent.ParticipantDisconnected, (participant) => {
+        updateVideoCallState((prev) => ({
+            remoteTracks: prev.remoteTracks.filter(
+                (track) => track.participantIdentity !== participant.identity,
+            ),
+        }));
+    });
 
-    room.on(
-        'trackUnsubscribed',
-        (
-            track: RemoteTrack,
-            _publication: RemoteTrackPublication,
-            participant: RemoteParticipant,
-        ) => {
-            console.log('트랙 구독 해제:', participant.identity, track.kind);
-        },
-    );
-
-    room.on('disconnected', () => {
+    room.on(RoomEvent.Connected, () => {
         updateVideoCallState({
-            session: null,
-            publisher: null,
-            subscribers: [],
-            isScreenSharing: false,
+            isConnected: true,
+        });
+
+        const initialRemoteTracks: TrackInfo[] = [];
+
+        room.remoteParticipants.forEach((participant) => {
+            participant.trackPublications.forEach((publication) => {
+                if (publication.isSubscribed && publication.kind === 'video') {
+                    initialRemoteTracks.push({
+                        trackPublication: publication,
+                        participantIdentity: participant.identity,
+                        name: participant.name || 'Anonymous',
+                    });
+                }
+            });
+        });
+
+        if (initialRemoteTracks.length > 0) {
+            updateVideoCallState((prev) => ({
+                remoteTracks: [...prev.remoteTracks, ...initialRemoteTracks],
+            }));
+        }
+    });
+
+    room.on(RoomEvent.Disconnected, () => {
+        updateVideoCallState({
+            isConnected: false,
+            localTrack: null,
+            remoteTracks: [],
         });
     });
 };

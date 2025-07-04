@@ -5,9 +5,12 @@ import {
     useState,
     useCallback,
     useEffect,
+    useRef,
 } from 'react';
 
 import type { VideoCallStateType } from './types';
+
+type StateType = Omit<VideoCallStateType, 'updateVideoCallState'>;
 
 export const VideoCallContext = createContext<VideoCallStateType | undefined>(
     undefined,
@@ -20,31 +23,43 @@ export function VideoCallProvider({
     children: React.ReactNode;
     sessionId?: string;
 }) {
-    const [state, setState] = useState<
-        Omit<VideoCallStateType, 'updateVideoCallState'>
-    >({
+    const [state, setState] = useState<StateType>({
         session: null,
-        publisher: null,
-        subscribers: [],
+        localTrack: null,
+        remoteTracks: [],
         isScreenSharing: false,
+        isConnected: false,
     });
 
+    const prevSessionIdRef = useRef<string | undefined>(sessionId);
+
     useEffect(() => {
-        if (state.session) {
+        if (prevSessionIdRef.current !== sessionId && state.session) {
             state.session.disconnect();
 
             setState({
                 session: null,
-                publisher: null,
-                subscribers: [],
+                localTrack: null,
+                remoteTracks: [],
                 isScreenSharing: false,
+                isConnected: false,
             });
         }
+
+        prevSessionIdRef.current = sessionId;
     }, [sessionId, state.session]);
 
     const updateVideoCallState = useCallback(
-        (partial: Partial<VideoCallStateType>) =>
-            setState((prev) => ({ ...prev, ...partial })),
+        (
+            partial:
+                | Partial<StateType>
+                | ((prev: StateType) => Partial<StateType>),
+        ) =>
+            setState((prev) => {
+                const newPartial =
+                    typeof partial === 'function' ? partial(prev) : partial;
+                return { ...prev, ...newPartial };
+            }),
         [],
     );
 

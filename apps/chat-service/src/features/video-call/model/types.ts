@@ -1,9 +1,25 @@
-import type { Room, LocalParticipant, RemoteParticipant } from 'livekit-client';
+import type {
+    Room,
+    RemoteTrackPublication,
+    LocalVideoTrack,
+} from 'livekit-client';
 
-export interface VideoCallStateType {
+export interface TrackInfo {
+    trackPublication: RemoteTrackPublication;
+    participantIdentity: string;
+    name: string;
+}
+
+type StateType = {
     session: Room | null;
-    publisher: LocalParticipant | null;
-    subscribers: RemoteParticipant[];
+    localTrack: LocalVideoTrack | null;
+    remoteTracks: TrackInfo[];
     isScreenSharing: boolean;
-    updateVideoCallState: (partial: Partial<VideoCallStateType>) => void;
+    isConnected: boolean;
+};
+
+export interface VideoCallStateType extends StateType {
+    updateVideoCallState: (
+        partial: Partial<StateType> | ((prev: StateType) => Partial<StateType>),
+    ) => void;
 }

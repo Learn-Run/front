@@ -18,6 +18,12 @@ export const useChat = (chatRoomUuid?: string, memberUuid?: string) => {
     const { connect, sendMessage, disconnect } = useStompClient();
 
     useEffect(() => {
+        setPastMessages([]);
+        setCursor(null);
+        setHasMore(true);
+    }, [chatRoomUuid]);
+
+    useEffect(() => {
         if (chatRoomUuid) {
             const getInitialMessages = async () => {
                 const res = await getChatRoom({
@@ -27,15 +33,7 @@ export const useChat = (chatRoomUuid?: string, memberUuid?: string) => {
                 });
                 if (!res) return;
 
-                setPastMessages((prev) => {
-                    const all = [...prev, ...res.content];
-                    const unique = Array.from(
-                        new Map(
-                            all.map((item) => [item.messageUuid, item]),
-                        ).values(),
-                    );
-                    return unique;
-                });
+                setPastMessages(res.content);
                 setCursor(res.nextCursor || null);
                 setHasMore(res.hasNext || false);
             };

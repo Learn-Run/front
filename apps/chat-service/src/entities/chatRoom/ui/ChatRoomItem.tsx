@@ -1,6 +1,6 @@
 'use client';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import { formatSmartDate } from '@/shared/utils/dateFormat';
 import { routes } from '@/shared/model/constants/routes';
@@ -37,7 +37,7 @@ export default function ChatRoomItem({
     return (
         <Link
             href={`${routes.messages}?chatRoomUuid=${chatRoom.chatRoomUuid}`}
-            className='space-x-1 block py-3'
+            className='space-x-1 block py-3 w-full h-full'
             replace
             scroll={false}
         >

@@ -34,5 +34,8 @@
             "eslint --fix",
             "prettier --write"
         ]
+    },
+    "dependencies": {
+        "pnpm": "^10.6.3"
     }
 }

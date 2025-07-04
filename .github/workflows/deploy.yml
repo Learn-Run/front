@@ -44,6 +44,7 @@ jobs:
                   echo "KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }}" >> apps/chat-service/.env.production
                   echo "NEXT_PUBLIC_SOCKET_URL=${{ secrets.NEXT_PUBLIC_SOCKET_URL }}" >> apps/chat-service/.env.production
                   echo "NEXT_PUBLIC_LIVEKIT_URL=${{ secrets.NEXT_PUBLIC_LIVEKIT_URL }}" >> apps/chat-service/.env.production
+                  echo "NEXT_PUBLIC_LIVEKIT_TOKEN_URL=${{ secrets.NEXT_PUBLIC_LIVEKIT_TOKEN_URL }}" >> apps/chat-service/.env.production
 
             - name: Build and Push Multi-App
               run: |

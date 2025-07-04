@@ -1,17 +1,23 @@
-import type { Room } from 'livekit-client';
-
 import { VideoCallStateType } from '../model/types';
 
-export function stopCall(
-    session: Room,
-    updateVideoCallState: (s: Partial<VideoCallStateType>) => void,
-) {
-    session.disconnect();
+type StateType = Omit<VideoCallStateType, 'updateVideoCallState'>;
 
-    updateVideoCallState({
-        session: null,
-        publisher: null,
-        subscribers: [],
-        isScreenSharing: false,
+export const stopCall = async (
+    updateVideoCallState: (
+        s: Partial<StateType> | ((prev: StateType) => Partial<StateType>),
+    ) => void,
+) => {
+    updateVideoCallState((prev) => {
+        if (prev.session) {
+            prev.session.disconnect();
+        }
+
+        return {
+            session: null,
+            localTrack: null,
+            remoteTracks: [],
+            isScreenSharing: false,
+            isConnected: false,
+        };
     });
-}
+};
