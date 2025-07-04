@@ -17,7 +17,7 @@ export default function ChatRoomItem({
 }) {
     const [profile, setProfile] = useState<ProfileType | null>(null);
 
-    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = profile?.profileImage?.imageUrl || fallbackImage;
     const alt =
         profile?.profileImage?.alt || profile?.nickname + '프로필 이미지';
