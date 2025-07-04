@@ -5,7 +5,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { getPaymentHistory } from '@/entities/payment/api';
 import { PaymentHistoryContentType } from '@/entities/payment/api/types';
 import { useInfiniteScroll } from '@/shared/model/hooks/useInfiniteScroll';
-import SectionWrapper from '@/shared/ui/wrapper/SectionWrapper';
 import PaymentHistoryFilter from '@/views/point/ui/PaymentHistoryFilter';
 import {
     formatDateToKST,
@@ -35,19 +34,34 @@ export default function PaymentHistory({ className }: { className?: string }) {
                     nextCursor || cursor,
                 );
 
-                setPaymentHistory((prev) => {
-                    const all = [...prev, ...response.content];
-                    const unique = Array.from(
-                        new Map(
-                            all.map((item) => [item.orderId, item]),
-                        ).values(),
+                if (response && response.content) {
+                    setPaymentHistory((prev) => {
+                        const all = [...prev, ...response.content];
+                        const unique = Array.from(
+                            new Map(
+                                all.map((item) => [item.orderId, item]),
+                            ).values(),
+                        );
+                        return unique;
+                    });
+                    setHasNext(response.hasNext ?? false);
+                    setCursor(response.nextCursor);
+                } else {
+                    console.warn(
+                        '결제 히스토리 응답이 올바르지 않습니다:',
+                        response,
                     );
-                    return unique;
-                });
-                setHasNext(response.hasNext);
-                setCursor(response.nextCursor);
+                    if (nextCursor === null) {
+                        setPaymentHistory([]);
+                    }
+                    setHasNext(false);
+                }
             } catch (error) {
                 console.error('결제 히스토리 조회 실패:', error);
+                if (nextCursor === null) {
+                    setPaymentHistory([]);
+                }
+                setHasNext(false);
             } finally {
                 setIsLoading(false);
             }
@@ -88,9 +102,15 @@ export default function PaymentHistory({ className }: { className?: string }) {
             />
 
             {paymentHistory.length === 0 && !isLoading ? (
-                <SectionWrapper className='flex flex-col items-center justify-center'>
-                    데이터가 없습니다
-                </SectionWrapper>
+                <div className='flex flex-col items-center justify-center py-16 px-4'>
+                    <CreditCard className='w-16 h-16 text-gray-300 mb-4' />
+                    <p className='text-gray-500 text-lg font-medium'>
+                        데이터가 없습니다
+                    </p>
+                    <p className='text-gray-400 text-sm mt-1'>
+                        선택한 기간에 결제 내역이 없습니다.
+                    </p>
+                </div>
             ) : (
                 <>
                     <ul className={cn('w-full', className)}>

@@ -7,7 +7,7 @@ import SearchButton from '@/features/search/ui/SearchButton';
 
 export default function HeroSection() {
     const randomIndex = Math.floor(Math.random() * videoUrlList.length);
-    const videoUrl = S3_BASE_URL + videoUrlList[randomIndex];
+    const videoUrl = S3_BASE_URL + '/' + videoUrlList[randomIndex];
 
     return (
         <section className='w-full h-full flex flex-col items-center justify-center bg-black relative overflow-hidden px-5 min-h-screen md:min-h-screen'>

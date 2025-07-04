@@ -16,7 +16,7 @@ export default async function Profile({ memberUuid, className }: ProfileProps) {
     if (!memberUuid) return;
 
     const member = await getWrtierProfileByMemberUuid(memberUuid);
-    const fallbackImage = S3_BASE_URL + 'baseprofile.webp';
+    const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
     const imageUrl = member?.profileImage?.imageUrl || fallbackImage;
     const alt = member?.profileImage?.alt || member?.nickname + '프로필 이미지';
 
