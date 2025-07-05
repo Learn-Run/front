@@ -16,7 +16,7 @@ export default function VideoRoom({ className }: { className?: string }) {
     return (
         <div
             className={cn(
-                'flex flex-col flex-wrap gap-4 h-full w-full p-6 pr-0',
+                'space-y-4 h-full w-full p-6 pr-0 overflow-y-scroll scrollbar-hidden',
                 className,
             )}
         >

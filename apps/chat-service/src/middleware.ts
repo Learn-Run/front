@@ -50,15 +50,8 @@ export default async function middleware(req: NextRequest) {
     if (isWithAuth) return withAuth(req, !!accessToken);
     else if (isWithOutAuth) return withOutAuth(req, !!accessToken, callbackUrl);
 
-    if (pathname === '/chat') {
+    if (pathname === '/chat/') {
         return NextResponse.redirect(new URL('/home', req.url));
-    }
-
-    if (!pathname.startsWith('/chat')) {
-        const url = req.nextUrl.clone();
-        url.pathname = `/chat${pathname}`;
-
-        return NextResponse.redirect(url);
     }
 
     return NextResponse.next();
