@@ -56,7 +56,7 @@ export default function SubscriberVideo() {
     if (remoteTracks.length === 0) return null;
 
     return (
-        <div className=''>
+        <>
             {remoteTracks
                 .filter(
                     (trackInfo) => trackInfo.trackPublication.kind === 'video',
@@ -64,23 +64,25 @@ export default function SubscriberVideo() {
                 .map((trackInfo) => (
                     <div
                         key={trackInfo.trackPublication.trackSid}
-                        className='border border-secondary-200 rounded-xl overflow-hidden relative'
+                        className='space-y-2'
                     >
-                        <video
-                            ref={(el) => {
-                                videoRefs.current[
-                                    trackInfo.trackPublication.trackSid
-                                ] = el;
-                            }}
-                            autoPlay
-                            playsInline
-                            className='w-full'
-                        />
-                        <p className='py-1 px-4 text-xs text-gray-700 absolute left-3 top-3 bg-white/60 rounded-full z-10'>
+                        <p className='py-1 px-4 text-xs text-gray-100 bg-gray-700 rounded-full w-fix'>
                             {trackInfo.name}
                         </p>
+                        <div className='border border-secondary-200 rounded-xl overflow-hidden'>
+                            <video
+                                ref={(el) => {
+                                    videoRefs.current[
+                                        trackInfo.trackPublication.trackSid
+                                    ] = el;
+                                }}
+                                autoPlay
+                                playsInline
+                                className='w-full'
+                            />
+                        </div>
                     </div>
                 ))}
-        </div>
+        </>
     );
 }

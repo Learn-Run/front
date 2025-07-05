@@ -6,7 +6,7 @@ import StopVideoButton from './StopVideoButton';
 
 export default function VideoControls() {
     return (
-        <div className='w-full flex gap-4 p-4 justify-center items-center bg-gray-100 rounded-lg'>
+        <div className='w-full flex gap-4 p-4 justify-center items-center'>
             <ToggleVideoButton />
             <StopVideoButton />
             <ToggleAudioButton />
