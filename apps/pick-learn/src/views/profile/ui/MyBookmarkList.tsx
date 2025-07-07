@@ -2,13 +2,14 @@ import { cn } from '@repo/ui/lib/utils';
 import { getPostDetail } from '@/entities/post/api';
 import { BookMarkListType } from '@/entities/bookMark/api/types';
 import PostCard from '@/entities/post/ui/PostCard';
+import { EmptySection } from '@/features/profile/ui';
 
 export default async function MyBookmarkList({
     bookMarkList,
 }: {
     bookMarkList?: BookMarkListType;
 }) {
-    if (!bookMarkList) return;
+    if (!bookMarkList) return <EmptySection />;
 
     const myBookMarkList = await Promise.all(
         bookMarkList.postUuid.map(
