@@ -25,22 +25,22 @@ export const metadata: Metadata = {
         '스파로스',
         '스파로스아카데미',
     ],
-    // icons: {
-    //     icon: '/assets/images/icons/icon.png',
-    // },
+    icons: {
+        icon: '/icon.png',
+    },
     openGraph: {
         title: 'Pick & Learn',
         description:
             'Spharos Academy 6th 2차 프로젝트 - 실시간 지식 공유 플랫폼 Pick & Learn',
-        // url: 'https://pickandlearn.vercel.app/',
+        url: 'https://pickandlearn.shop',
         siteName: 'Pick & Learn',
-        // images: [
-        //     {
-        //         url: '/og-image.png',
-        //         width: 1200,
-        //         height: 630,
-        //     },
-        // ],
+        images: [
+            {
+                url: '/og-image.png',
+                width: 1200,
+                height: 630,
+            },
+        ],
         locale: 'ko-KR',
         type: 'website',
     },
