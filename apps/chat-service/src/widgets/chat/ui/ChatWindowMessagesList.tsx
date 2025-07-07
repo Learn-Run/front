@@ -64,11 +64,13 @@ export default function ChatWindowMessagesList({
                     <div ref={loaderRef} className='h-1' />
                 </li>
             )}
+
             {pastMessages.length <= 0 && newSocketMessages.length <= 0 ? (
                 <ChatGroupEmpty />
             ) : (
                 <ChatGroup chatDatas={pastMessages} memberUuid={memberUuid} />
             )}
+
             <ChatSocketMessage
                 newSocketMessages={newSocketMessages}
                 memberUuid={memberUuid || ''}
