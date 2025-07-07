@@ -5,7 +5,7 @@ import { routes } from '@/shared/model/constants/routes';
 import { menuItems } from './constants';
 import { getCountForType } from '@/entities/activeHistory/utils/countUtils';
 import { getActiveHistoryCount } from '@/entities/activeHistory/api';
-import { AccordionMenu, MenuItem } from '@/entities/activeHistory/ui';
+import { MenuItem } from '@/entities/activeHistory/ui';
 import MobileActiveMenu from './MobileActiveMenu';
 
 type MyActiveMenuProps = {
@@ -20,7 +20,7 @@ export default async function MyActiveMenu({
     memberUuid,
     isMyProfile,
 }: MyActiveMenuProps) {
-    const currentType = type || 'REVIEW_RECEIVED';
+    const currentType = type || 'POST';
     const menuItemList = menuItems(memberUuid);
 
     const activeHistoryCount = await getActiveHistoryCount({
@@ -44,24 +44,6 @@ export default async function MyActiveMenu({
 
                 <div>
                     {menuItemList.map((item, index) => {
-                        if (item.subItems) {
-                            const isReviewActive = item.subItems.some(
-                                (sub) => sub.type === currentType,
-                            );
-
-                            return (
-                                <AccordionMenu
-                                    key={item.type}
-                                    title={item.title}
-                                    type={item.type}
-                                    subItems={item.subItems}
-                                    currentType={currentType}
-                                    isActive={isReviewActive}
-                                    getCountForType={countForType}
-                                />
-                            );
-                        }
-
                         return (
                             <MenuItem
                                 key={index}

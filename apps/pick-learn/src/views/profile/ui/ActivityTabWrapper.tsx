@@ -24,7 +24,7 @@ export default function ActivityTabWrapper({
     if (myActiveHistoryList?.posts.length === 0) return <EmptySection />;
 
     if (!paginationParams.type)
-        return <MyReviewList myActiveHistoryList={myActiveHistoryList} />;
+        return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
 
     if (paginationParams.type === 'POST') {
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
