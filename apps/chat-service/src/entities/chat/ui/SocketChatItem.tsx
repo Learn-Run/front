@@ -7,6 +7,7 @@ import { getMemberProfile } from '@/entities/profile/api';
 import type { ProfileType } from '@/entities/profile/model/types';
 import type { ChatMessageType } from '../model/types';
 import { S3_BASE_URL } from '@/shared/model/constants/s3';
+import { formatDate } from '@/shared/utils/dateFormat';
 
 export default function SocketChatItem({
     chat,
@@ -22,7 +23,7 @@ export default function SocketChatItem({
     const alt = sender?.profileImage?.alt || sender?.nickname + '프로필 이미지';
 
     useEffect(() => {
-        if (isMyMessage) {
+        if (!isMyMessage) {
             const getSenderProfile = async () => {
                 const profile = await getMemberProfile(chat.senderUuid);
                 setSender(profile);
@@ -32,7 +33,7 @@ export default function SocketChatItem({
         }
     }, [isMyMessage, setSender, chat.senderUuid]);
 
-    if (!isMyMessage && !sender) {
+    if (!sender) {
         return null;
     }
 
@@ -67,6 +68,16 @@ export default function SocketChatItem({
                     >
                         {chat.content}
                     </p>
+                    <div className='space-y-1 text-xs text-gray-500 flex-shrink-0'>
+                        {/* <p
+                            className={cn(
+                                isMyMessage || chat.read ? 'hidden' : '',
+                            )}
+                        >
+                            안 읽음
+                        </p> */}
+                        <p>{formatDate(chat.sentAt, 'MM-DD HH:mm')}</p>
+                    </div>
                 </div>
             </div>
         </div>
