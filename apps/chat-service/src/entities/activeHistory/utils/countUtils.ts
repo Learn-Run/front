@@ -9,10 +9,6 @@ export const getCountForType = (
             return activeHistoryCount.postCount;
         case 'COMMENT':
             return activeHistoryCount.commentCount;
-        case 'REVIEW_WRITE':
-            return activeHistoryCount.reviewWriteCount;
-        case 'REVIEW_RECEIVED':
-            return activeHistoryCount.reviewReceivedCount;
         default:
             return 0;
     }

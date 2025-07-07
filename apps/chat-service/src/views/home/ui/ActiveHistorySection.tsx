@@ -33,7 +33,7 @@ export default async function ActiveHistorySection() {
                             {item.title}
                         </span>
                         <span className='font-semibold text-primary-100'>
-                            {countForType(item.title)} 개
+                            {countForType(item.type)} 개
                         </span>
                     </li>
                 ))}

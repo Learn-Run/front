@@ -28,7 +28,7 @@ export default function PostFilterSection({
                     variant='outline'
                     className={cn(
                         'px-4 py-2 text-regular',
-                        searchParams.sort === 'recent' &&
+                        searchParams.sort === 'RECENT' &&
                             'bg-primary-100 text-white font-semibold hover:bg-primary-100',
                     )}
                     asChild
@@ -36,7 +36,7 @@ export default function PostFilterSection({
                     <Link
                         href={`${routes.post}?${categorySearchParams({
                             ...searchParams,
-                            sort: 'recent',
+                            sort: 'RECENT',
                         })}`}
                         replace
                         scroll={false}
@@ -48,7 +48,7 @@ export default function PostFilterSection({
                     variant='outline'
                     className={cn(
                         'px-4 py-2 text-regular',
-                        searchParams.sort === 'popular' &&
+                        searchParams.sort === 'POPULAR' &&
                             'bg-primary-100 text-white font-semibold hover:bg-primary-100',
                     )}
                     asChild
@@ -56,8 +56,10 @@ export default function PostFilterSection({
                     <Link
                         href={`${routes.post}?${categorySearchParams({
                             ...searchParams,
-                            sort: 'popular',
+                            sort: 'POPULAR',
                         })}`}
+                        replace
+                        scroll={false}
                     >
                         인기순
                     </Link>
