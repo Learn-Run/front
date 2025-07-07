@@ -11,11 +11,12 @@ export default async function page({
 
     const result = await getSearchPost({
         keyword,
-        page: Number(page),
+        page: page ? Number(page) : 0,
         size: 8,
     });
 
-    if (!result.posts) return <div>검색 결과가 없습니다.</div>;
+    if (!result || result?.posts.length === 0)
+        return <div>검색 결과가 없습니다.</div>;
 
     return (
         <MainWrapper className='pt-40'>
