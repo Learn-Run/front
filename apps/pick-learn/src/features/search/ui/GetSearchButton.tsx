@@ -1,13 +1,16 @@
 'use client';
 import { Button } from '@repo/ui/components/base/Button';
 
-export default function GetSearchButton() {
-    const handleSearch = () => {
-        console.log('검색');
-    };
+interface GetSearchButtonProps {
+    onSearch: () => void;
+}
+
+export default function GetSearchButton({ onSearch }: GetSearchButtonProps) {
     return (
-        <Button className='w-fit' onClick={handleSearch}>
+        <Button className='w-fit' type='submit' onClick={onSearch}>
             검색
         </Button>
     );
 }
+
+GetSearchButton.displayName = 'GetSearchButton';
