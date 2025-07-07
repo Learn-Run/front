@@ -6,7 +6,7 @@ export default function ActiveHistoryTop({
     return (
         <div className='flex justify-between items-center pb-8'>
             <h3 className='text-xl font-medium'>활동내역</h3>
-            <span className='text-sm text-gray-500'>{totalCount}</span>
+            <span className='text-sm text-gray-500'>총 {totalCount} 개</span>
         </div>
     );
 }
