@@ -12,7 +12,6 @@ export default function ChatSocketMessage({
     newSocketMessages,
     memberUuid,
 }: ChatSocketMessageProps) {
-    console.log('🚀 ~ newSocketMessages:', newSocketMessages);
     return (
         <>
             {newSocketMessages.map((msg) => (
