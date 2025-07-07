@@ -21,16 +21,21 @@ export const getBookMarkStatus = async (
 };
 
 export const createBookMark = async (postUuid: string) => {
-    const response = await fetchData.post(
-        `${services.bookMark}/api/v1/bookmark/${postUuid}`,
-        {
-            requireAuth: true,
-        },
-    );
+    try {
+        const response = await fetchData.post(
+            `${services.bookMark}/api/v1/bookmark/${postUuid}`,
+            {
+                requireAuth: true,
+            },
+        );
 
-    revalidateTag(POST_TAG.bookMark);
+        revalidateTag(POST_TAG.bookMark);
 
-    return response;
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw new Error('북마크 추가에 실패했습니다.');
+    }
 };
 
 export const cancelBookMark = async (postUuid: string) => {

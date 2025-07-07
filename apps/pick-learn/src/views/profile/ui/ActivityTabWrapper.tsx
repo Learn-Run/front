@@ -42,6 +42,7 @@ export default function ActivityTabWrapper({
     }
 
     if (paginationParams.type === 'BOOKMARK') {
+        if (bookMarkList?.postUuid.length === 0) return <EmptySection />;
         return <MyBookmarkList bookMarkList={bookMarkList} />;
     }
 

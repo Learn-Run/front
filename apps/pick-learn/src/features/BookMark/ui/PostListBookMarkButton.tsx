@@ -17,8 +17,13 @@ export default function PostListBookMarkButton({
     const isAuth = useSpharosSession();
 
     const handleBookMark = async () => {
-        await createBookMark(postUuid);
-        alert.basic('북마크에 추가 되었습니다 ');
+        try {
+            await createBookMark(postUuid);
+            alert.basic('북마크에 추가 되었습니다.');
+        } catch (error) {
+            console.error(error);
+            alert.error('북마크에 추가에 실패했습니다.');
+        }
     };
 
     const handleCancelBookMark = async () => {
@@ -33,7 +38,12 @@ export default function PostListBookMarkButton({
             </button>
         );
 
-    if (!bookMarkStatus) return;
+    if (!bookMarkStatus)
+        return (
+            <button onClick={handleBookMark} className='cursor-pointer'>
+                <BookMark />
+            </button>
+        );
 
     if (bookMarkStatus.bookmarked === true) {
         return (
@@ -42,10 +52,4 @@ export default function PostListBookMarkButton({
             </button>
         );
     }
-
-    return (
-        <button onClick={handleBookMark} className='cursor-pointer'>
-            <BookMark />
-        </button>
-    );
 }
