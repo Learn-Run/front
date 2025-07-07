@@ -33,7 +33,7 @@ export default function SocketChatItem({
         }
     }, [isMyMessage, setSender, chat.senderUuid]);
 
-    if (!sender) {
+    if (!isMyMessage && sender === null) {
         return null;
     }
 
