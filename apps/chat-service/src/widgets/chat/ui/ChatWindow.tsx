@@ -27,7 +27,7 @@ export default function ChatWindow({
 
     const { isConnected } = useVideoCallContext();
 
-    if (!chatRoomUuid || !memberUuid || isConnected) return null;
+    if (!chatRoomUuid || !memberUuid) return null;
 
     return (
         <div className='p-6 w-full'>
