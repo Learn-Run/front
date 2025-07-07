@@ -16,7 +16,7 @@ export default function ChatButton({
 
     const handleChat = async () => {
         const response = await createChatRoom(memberUuid);
-        router.push(`/chat/${response.chatRoomUuid}`);
+        router.push(`/chat/messages?chatRoomUuid=${response.chatRoomUuid}`);
     };
 
     return (
