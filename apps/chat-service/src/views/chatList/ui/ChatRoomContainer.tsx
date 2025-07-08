@@ -32,7 +32,7 @@ export default function ChatRoomContainer({
 
                 <ChatMobileMessage
                     className='w-full h-full'
-                    chatRoomUuid={chatRoomUuid}
+                    initChatRoomUuid={chatRoomUuid}
                     memberUuid={memberUuid}
                 />
             </div>
