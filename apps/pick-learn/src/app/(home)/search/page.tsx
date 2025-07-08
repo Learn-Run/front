@@ -1,6 +1,8 @@
 import { getSearchPost } from '@/features/search/api';
 import { MainWrapper, Pagination } from '@/shared/ui';
 import AskItemCardList from '@/views/home/ui/AskItemCardList';
+import SearchEmptySection from '@/views/search/ui/SearchEmptySection';
+import SearchTopSection from '@/views/search/ui/SearchTopSection';
 
 export default async function page({
     searchParams,
@@ -16,11 +18,16 @@ export default async function page({
     });
 
     if (!result || result?.posts.length === 0)
-        return <div>검색 결과가 없습니다.</div>;
+        return (
+            <MainWrapper className='pt-40'>
+                <SearchEmptySection />
+            </MainWrapper>
+        );
 
     return (
-        <MainWrapper className='pt-40'>
-            <AskItemCardList postList={result} />
+        <MainWrapper>
+            <SearchTopSection />
+            <AskItemCardList postList={result} className='mt-10' />
             <Pagination totalPage={result.totalPages} />
         </MainWrapper>
     );
