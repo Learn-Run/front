@@ -8,21 +8,18 @@ import { cn } from '@repo/ui/lib/utils';
 import { useVideoCallContext } from '../model/context';
 import ChatMobileMessageHeader from './ChatMobileMessageHeader';
 import ChatRoomListInfinite from '@/views/chatList/ui/ChatRoomListInfinite';
-import { useRouter } from 'next/navigation';
-import { routes } from '@/shared/model/constants/routes';
 
 export default function ChatMobileMessage({
-    chatRoomUuid,
+    initChatRoomUuid,
     className,
     memberUuid,
 }: {
-    chatRoomUuid?: string;
+    initChatRoomUuid?: string;
     memberUuid?: string;
     className?: string;
 }) {
-    const router = useRouter();
-
     const [type, setType] = useState('message');
+    const [chatRoomUuid, setChatRoomUuid] = useState(initChatRoomUuid);
 
     const { isConnected } = useVideoCallContext();
 
@@ -36,7 +33,7 @@ export default function ChatMobileMessage({
 
     const handlePrevStep = () => {
         setType((prev) => (prev === 'message' ? 'chatRoomList' : 'message'));
-        router.replace(routes.messages);
+        setChatRoomUuid(undefined);
     };
 
     useEffect(() => {
