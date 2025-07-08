@@ -23,9 +23,6 @@ export default function ActivityTabWrapper({
 }: ActivityTabWrapperProps) {
     if (myActiveHistoryList?.posts.length === 0) return <EmptySection />;
 
-    if (!paginationParams.type)
-        return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
-
     if (paginationParams.type === 'POST') {
         return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
     }
@@ -46,5 +43,5 @@ export default function ActivityTabWrapper({
         return <MyBookmarkList bookMarkList={bookMarkList} />;
     }
 
-    return <EmptySection />;
+    return <MyQuestionList myActiveHistoryList={myActiveHistoryList} />;
 }
