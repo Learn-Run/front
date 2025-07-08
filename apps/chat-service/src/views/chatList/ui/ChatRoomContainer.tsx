@@ -14,7 +14,7 @@ export default function ChatRoomContainer({
 }) {
     return (
         <VideoCallProvider sessionId={chatRoomUuid}>
-            <div className='flex h-full '>
+            <div className='flex h-full overflow-y-hidden'>
                 <ChatRoomListSection
                     chatRoomUuid={chatRoomUuid}
                     className={cn(
@@ -22,7 +22,7 @@ export default function ChatRoomContainer({
                     )}
                 />
 
-                <VideoRoom />
+                <VideoRoom className='hidden md:block' />
 
                 <ChatWindow
                     chatRoomUuid={chatRoomUuid}
@@ -31,7 +31,7 @@ export default function ChatRoomContainer({
                 />
 
                 <ChatMobileMessage
-                    className='w-full h-full'
+                    className=''
                     initChatRoomUuid={chatRoomUuid}
                     memberUuid={memberUuid}
                 />

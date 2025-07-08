@@ -8,6 +8,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { useVideoCallContext } from '../model/context';
 import ChatMobileMessageHeader from './ChatMobileMessageHeader';
 import ChatRoomListInfinite from '@/views/chatList/ui/ChatRoomListInfinite';
+import VideoRoom from './VideoRoom';
 
 export default function ChatMobileMessage({
     initChatRoomUuid,
@@ -19,6 +20,7 @@ export default function ChatMobileMessage({
     className?: string;
 }) {
     const [type, setType] = useState('message');
+    const [tab, setTab] = useState('video');
     const [chatRoomUuid, setChatRoomUuid] = useState(initChatRoomUuid);
 
     const { isConnected } = useVideoCallContext();
@@ -36,17 +38,73 @@ export default function ChatMobileMessage({
         setChatRoomUuid(undefined);
     };
 
+    const handleClickChatRoom = (chatRoomUuid: string) => {
+        setType((prev) => (prev === 'message' ? 'chatRoomList' : 'message'));
+        setChatRoomUuid(chatRoomUuid);
+    };
+
     useEffect(() => {
         if (chatRoomUuid) {
             setType('message');
         }
     }, [chatRoomUuid]);
 
-    if (!isConnected) return null;
-
     return (
-        <div className={cn('p-6', className)}>
-            <div className='bg-white border border-gray-300 rounded-md h-full overflow-hidden flex flex-col'>
+        <div
+            className={cn(
+                'w-full h-full p-6 overflow-y-scroll scrollbar-hidden',
+                !isConnected ? 'md:hidden' : '',
+                className,
+            )}
+        >
+            <ul
+                className={cn(
+                    'max-w-[300px] w-full p-2 flex bg-white rounded-full border border-gray-300 mx-auto mb-6',
+                    isConnected ? 'md:hidden' : 'hidden',
+                )}
+            >
+                <li className='w-1/2'>
+                    <button
+                        onClick={() => setTab('video')}
+                        className={cn(
+                            'text-center w-full p-3 cursor-pointer rounded-full hover:text-primary-200 active:text-primary-200 transition-all',
+                            {
+                                'text-primary-200 bg-primary-50':
+                                    tab === 'video',
+                            },
+                        )}
+                    >
+                        화상 채팅
+                    </button>
+                </li>
+                <li className='w-1/2'>
+                    <button
+                        onClick={() => setTab('chat')}
+                        className={cn(
+                            'text-center w-full p-3 cursor-pointer rounded-full hover:text-primary-200 active:text-primary-200 transition-all',
+                            {
+                                'text-primary-200 bg-primary-50':
+                                    tab === 'chat',
+                            },
+                        )}
+                    >
+                        채팅
+                    </button>
+                </li>
+            </ul>
+
+            <VideoRoom
+                className={cn(tab === 'video' ? 'md:hidden' : 'hidden', 'p-0')}
+            />
+
+            <div
+                className={cn(
+                    'bg-white border border-gray-300 rounded-md flex flex-col',
+                    'h-full w-full',
+                    isConnected ? 'block md:block' : 'block md:hidden',
+                    isConnected && tab !== 'chat' ? 'hidden' : 'block',
+                )}
+            >
                 <ChatMobileMessageHeader
                     type={type}
                     chatRoomUuid={chatRoomUuid}
@@ -55,13 +113,15 @@ export default function ChatMobileMessage({
 
                 {type === 'message' && chatRoomUuid ? (
                     <>
-                        <ChatWindowMessagesList
-                            hasMore={hasMore}
-                            loadMorePastMessages={loadMorePastMessages}
-                            newSocketMessages={newSocketMessages}
-                            pastMessages={pastMessages}
-                            memberUuid={memberUuid}
-                        />
+                        <div className='h-[calc(100%-161px)]'>
+                            <ChatWindowMessagesList
+                                hasMore={hasMore}
+                                loadMorePastMessages={loadMorePastMessages}
+                                newSocketMessages={newSocketMessages}
+                                pastMessages={pastMessages}
+                                memberUuid={memberUuid}
+                            />
+                        </div>
                         {chatRoomUuid && (
                             <ChatWindowInputSection
                                 handleSend={handleSend}
@@ -71,7 +131,10 @@ export default function ChatMobileMessage({
                         )}
                     </>
                 ) : (
-                    <ChatRoomListInfinite chatRoomUuid={chatRoomUuid} />
+                    <ChatRoomListInfinite
+                        chatRoomUuid={chatRoomUuid}
+                        handleClickChatRoom={handleClickChatRoom}
+                    />
                 )}
             </div>
         </div>

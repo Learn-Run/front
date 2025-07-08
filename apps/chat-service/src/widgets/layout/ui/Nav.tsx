@@ -10,7 +10,7 @@ export default function Nav({ className }: { className?: string }) {
 
     return (
         <nav className={cn('w-full sm:h-full', className)}>
-            <ul className='flex sm:flex-col justify-between sm:justify-start h-full text-xs sm:text-base px-4 sm:px-0'>
+            <ul className='flex sm:flex-col justify-center gap-12 sm:gap-0 sm:justify-start h-full text-xs sm:text-base px-4 sm:px-0'>
                 {NAVIGATION_ITEMS.map(
                     ({ id, icon: Icon, label, href, mobileHidden }) => (
                         <li

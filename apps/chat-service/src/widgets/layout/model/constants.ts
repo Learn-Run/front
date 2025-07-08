@@ -30,6 +30,6 @@ export const NAVIGATION_ITEMS = [
         label: 'Profile',
         icon: Askers,
         href: routes.profile,
-        mobileHidden: true,
+        mobileHidden: false,
     },
 ];

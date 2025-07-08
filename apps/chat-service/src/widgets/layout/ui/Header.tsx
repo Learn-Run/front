@@ -22,7 +22,7 @@ export default function Header({ className }: { className?: string }) {
                 </h1>
             </Link>
 
-            <Nav className='mx-auto fixed bottom-0 z-30 sm:static shadow-primary-100 sm:shadow-none bg-white' />
+            <Nav className='mx-auto fixed bottom-0 z-30 sm:static shadow-primary-100 sm:shadow-none bg-white border-t border-gray-300 sm:border-none' />
 
             <LogOutButton
                 className={cn(
