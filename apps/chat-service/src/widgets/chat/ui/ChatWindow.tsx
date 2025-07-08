@@ -27,10 +27,15 @@ export default function ChatWindow({
 
     const { isConnected } = useVideoCallContext();
 
-    if (!chatRoomUuid || !memberUuid || isConnected) return null;
+    if (!chatRoomUuid || !memberUuid) return null;
 
     return (
-        <div className='p-6 w-full'>
+        <div
+            className={cn(
+                'p-6 w-full',
+                isConnected ? 'hidden' : 'hidden md:flex',
+            )}
+        >
             <div
                 className={cn(
                     'bg-white border border-gray-300 rounded-md overflow-hidden h-full flex flex-col',

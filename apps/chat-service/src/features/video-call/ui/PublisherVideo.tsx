@@ -73,6 +73,7 @@ export default function PublisherVideo() {
                     autoPlay
                     muted={!session?.localParticipant.isMicrophoneEnabled}
                     playsInline
+                    className='w-full h-auto'
                 />
             </div>
         </div>

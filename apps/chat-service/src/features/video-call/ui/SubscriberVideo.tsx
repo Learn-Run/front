@@ -66,7 +66,7 @@ export default function SubscriberVideo() {
                         key={trackInfo.trackPublication.trackSid}
                         className='space-y-2'
                     >
-                        <p className='py-1 px-4 text-xs text-gray-100 bg-gray-700 rounded-full w-fix'>
+                        <p className='py-1 px-4 text-xs text-gray-100 bg-gray-700 rounded-full w-fit'>
                             {trackInfo.name}
                         </p>
                         <div className='border border-secondary-200 rounded-xl overflow-hidden'>
@@ -78,7 +78,7 @@ export default function SubscriberVideo() {
                                 }}
                                 autoPlay
                                 playsInline
-                                className='w-full'
+                                className='w-full h-auto'
                             />
                         </div>
                     </div>

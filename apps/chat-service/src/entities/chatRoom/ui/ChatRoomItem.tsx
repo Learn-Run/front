@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { formatSmartDate } from '@/shared/utils/dateFormat';
 import { routes } from '@/shared/model/constants/routes';
@@ -12,9 +12,13 @@ import { S3_BASE_URL } from '@/shared/model/constants/s3';
 
 export default function ChatRoomItem({
     chatRoom,
+    handleClickChatRoom,
 }: {
     chatRoom: ChatRoomListContentType;
+    handleClickChatRoom?: (chatRoomUuid: string) => void;
 }) {
+    const router = useRouter();
+
     const [profile, setProfile] = useState<ProfileType | null>(null);
 
     const fallbackImage = S3_BASE_URL + '/baseprofile.webp';
@@ -32,19 +36,28 @@ export default function ChatRoomItem({
         };
     }, [chatRoom.receiverUuid]);
 
+    const handleClickChatRoomItem = (chatRoomUuid: string) => {
+        if (handleClickChatRoom) {
+            handleClickChatRoom(chatRoomUuid);
+        } else {
+            router.replace(
+                `${routes.messages}?chatRoomUuid=${chatRoom.chatRoomUuid}`,
+                { scroll: false },
+            );
+        }
+    };
+
     if (!profile) return null;
 
     return (
-        <Link
-            href={`${routes.messages}?chatRoomUuid=${chatRoom.chatRoomUuid}`}
-            className='space-x-1 block py-3 w-full h-full'
-            replace
-            scroll={false}
+        <button
+            onClick={() => handleClickChatRoomItem(chatRoom.chatRoomUuid)}
+            className='block py-3 w-full h-full'
         >
             <div className='flex gap-3 items-center'>
                 <Avatar src={imageUrl} alt={alt} />
 
-                <div className='py-4 text-sm grow min-w-0'>
+                <div className='py-4 text-sm grow min-w-0 text-left'>
                     <p className='font-semibold truncate text-gray-800'>
                         {profile.nickname}
                         {chatRoom.lastMessageTime !== null ? (
@@ -58,13 +71,7 @@ export default function ChatRoomItem({
                         {chatRoom.lastMessage}
                     </p>
                 </div>
-
-                {/* {chatRoom.unreadMessageCount !== 0 ? (
-                    <p className='text-xs text-gray-600 flex justify-center items-center w-6 h-6 aspect-square rounded-full bg-secondary-100'>
-                        {chatRoom.unreadMessageCount}
-                    </p>
-                ) : null} */}
             </div>
-        </Link>
+        </button>
     );
 }
