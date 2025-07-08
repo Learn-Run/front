@@ -1,9 +1,8 @@
-# 1. 빌드 단계
-FROM node:18 AS builder
+# 1. 빌드 단계 버전 변경
+FROM node:22 AS builder
 
 WORKDIR /app
 COPY . .
-
 
 RUN npm install -g pnpm turbo
 RUN pnpm install
@@ -12,15 +11,17 @@ RUN pnpm install
 RUN turbo run build --filter=pick-learn-front --filter=chat-service
 
 # 2. 실행 단계
-FROM node:18-slim
+FROM node:22-slim
 
 WORKDIR /app
 COPY --from=builder /app .
 
-RUN npm install -g pnpm concurrently
+# ps 명령어(procps) 설치 + pnpm 깨짐 방지
+RUN apt-get update && apt-get install -y procps && \
+    corepack disable && npm install -g pnpm concurrently && \
+    rm -rf /var/lib/apt/lists/*
 
 # 필요한 환경변수는 .env 파일로 EC2에 mount 또는 --env로 넘겨야 함
-
 EXPOSE 3000 3001
 
 CMD ["concurrently", "--kill-others", "--names", "pick,chat", \
