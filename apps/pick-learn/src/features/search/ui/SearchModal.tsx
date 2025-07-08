@@ -4,15 +4,17 @@ import { Close } from '@/shared/assets/icons';
 import GetSearchButton from './GetSearchButton';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAlert } from '@/features/post/model/hooks/useAlert';
 
 export default function SearchModal() {
     const { closeModal } = useModalContext();
     const [searchKeyword, setSearchKeyword] = useState('');
     const router = useRouter();
+    const alert = useAlert();
 
     const handleSearch = async () => {
         if (!searchKeyword.trim()) {
-            alert('검색어를 입력해주세요.');
+            alert.error('검색어를 입력해주세요.');
             return;
         }
         closeModal();
@@ -20,7 +22,8 @@ export default function SearchModal() {
     };
     return (
         <div className='p-4'>
-            <div className='flex justify-end w-full pb-4'>
+            <div className='flex justify-between w-full pb-4'>
+                <p className='text-lg font-semibold'>질문 검색</p>
                 <button onClick={closeModal}>
                     <Close />
                 </button>
