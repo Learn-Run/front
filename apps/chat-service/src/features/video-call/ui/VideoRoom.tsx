@@ -6,7 +6,6 @@ import {
     VideoControls,
 } from '@/features/video-call/ui';
 import { cn } from '@repo/ui/lib/utils';
-// import SharedScreen from './SharedScreen';
 
 export default function VideoRoom({ className }: { className?: string }) {
     const { isConnected } = useVideoCallContext();
@@ -16,13 +15,13 @@ export default function VideoRoom({ className }: { className?: string }) {
     return (
         <div
             className={cn(
-                'space-y-4 h-full w-full p-6 pr-0 overflow-y-scroll scrollbar-hidden',
+                'space-y-4 h-full w-full p-6 overflow-y-scroll scrollbar-hidden',
+                isConnected ? '' : 'pr-0',
                 className,
             )}
         >
             <PublisherVideo />
             <SubscriberVideo />
-            {/* <SharedScreen /> */}
 
             <VideoControls />
         </div>

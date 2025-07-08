@@ -11,10 +11,12 @@ import ChatRoomListEmpty from '@/entities/chatRoom/ui/ChatRoomListEmpty';
 
 interface ChatRoomListInfiniteProps {
     chatRoomUuid?: string;
+    handleClickChatRoom?: (chatRoomUuid: string) => void;
 }
 
 export default function ChatRoomListInfinite({
     chatRoomUuid,
+    handleClickChatRoom,
 }: ChatRoomListInfiniteProps) {
     const [chatRooms, setChatRooms] = useState<ChatRoomListContentType[]>([]);
     const [cursor, setCursor] = useState<string | null>(null);
@@ -84,7 +86,10 @@ export default function ChatRoomListInfinite({
                                 : 'bg-white',
                         )}
                     >
-                        <ChatRoomItem chatRoom={chatList} />
+                        <ChatRoomItem
+                            chatRoom={chatList}
+                            handleClickChatRoom={handleClickChatRoom}
+                        />
                         {idx === chatRooms.length - 1 && (
                             <div ref={targetRef} style={{ height: 1 }} />
                         )}
