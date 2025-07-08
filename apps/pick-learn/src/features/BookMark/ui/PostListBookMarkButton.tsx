@@ -38,14 +38,14 @@ export default function PostListBookMarkButton({
             </button>
         );
 
-    if (!bookMarkStatus)
+    if (bookMarkStatus?.bookmarked === false)
         return (
             <button onClick={handleBookMark} className='cursor-pointer'>
                 <BookMark />
             </button>
         );
 
-    if (bookMarkStatus.bookmarked === true) {
+    if (bookMarkStatus?.bookmarked === true) {
         return (
             <button onClick={handleCancelBookMark} className='cursor-pointer'>
                 <BookMarkFill />
