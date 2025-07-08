@@ -5,7 +5,7 @@ import { services } from '@/shared/api/constants';
 import { PROFILE_TAG } from '@/entities/profile/api/constants';
 
 export const getMyActivePostList = async ({
-    type = 'REVIEW_RECEIVED',
+    type = 'POST',
     page = 0,
     size = 9,
     memberUuid,
