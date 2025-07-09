@@ -32,31 +32,54 @@ Use this button:
 
 [<img width="170" alt="img" src="https://github.com/user-attachments/assets/28541bbe-2c49-4c8e-8d09-84ff13c29a54" />](https://github.com/new?template_name=turborepo-shadcn-tailwind-v4&template_owner=bytaesu)
 
-## Structure
+### 📁 프로젝트 구조
 
+[FRONT]
+
+```bash
+📦learn-run-front
+ ┣ 📂apps
+ ┃ ┣ 📂pick-learn               # 학습 플랫폼 애플리케이션
+ ┃ ┃ ┣ 📂src
+ ┃ ┃ ┃ ┣ 📂app
+ ┃ ┃ ┃ ┃ ┣ 📂(home)            # 홈 레이아웃
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂sign-up         # 회원가입
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂sign-in         # 로그인
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂post            # 게시글 관리
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂profile         # 프로필 관리
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂payment         # 결제 시스템
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂search          # 검색 기능
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂@modal          # 모달 컴포넌트
+ ┃ ┃ ┃ ┗ 📂components           # 공통 컴포넌트
+ ┃ ┃ ┗ 📂public                 # 정적 파일
+ ┃ ┗ 📂chat-service             # 채팅 서비스 애플리케이션
+ ┃   ┣ 📂src
+ ┃   ┃ ┣ 📂app
+ ┃   ┃ ┃ ┣ 📂(home)            # 홈 레이아웃
+ ┃   ┃ ┃ ┃ ┣ 📂home            # 홈 페이지
+ ┃   ┃ ┃ ┃ ┣ 📂messages        # 메시지 관리
+ ┃   ┃ ┃ ┃ ┣ 📂profile         # 프로필 관리
+ ┃   ┃ ┃ ┃ ┗ 📂@modal          # 모달 컴포넌트
+ ┃   ┃ ┃ ┗ 📂api               # API 라우트
+ ┃   ┃ ┗ 📂features            # 기능별 컴포넌트
+ ┃   ┗ 📂public                 # 정적 파일
+ ┣ 📂packages
+ ┃ ┣ 📂ui                        # 공유 UI 컴포넌트 (Shadcn/ui)
+ ┃ ┃ ┣ 📂src
+ ┃ ┃ ┃ ┣ 📂components           # UI 컴포넌트
+ ┃ ┃ ┃ ┃ ┣ 📂base              # 기본 컴포넌트
+ ┃ ┃ ┃ ┃ ┗ 📂wrapper           # 래퍼 컴포넌트
+ ┃ ┃ ┃ ┣ 📂styles              # 스타일 정의
+ ┃ ┃ ┃ ┣ 📂lib                 # 유틸리티
+ ┃ ┃ ┃ ┗ 📂assets              # 아이콘 및 이미지
+ ┃ ┃ ┗ 📂components.json        # Shadcn/ui 설정
+ ┃ ┣ 📂eslint-config            # ESLint 설정
+ ┃ ┗ 📂typescript-config        # TypeScript 설정
+ ┣ 📂.github                     # GitHub Actions 및 템플릿
+ ┣ 📂.husky                      # Git hooks 설정
+ ┗ 📂turbo.json                  # Turborepo 설정
 ```
-.
-├── apps
-│   └── nextjs                # Next.js application
-│       ├── src
-│       │   ├── app
-│       │   │   └── globals.css # Critical configuration here
-│       │   └── ...
-│       └── ...
-├── packages
-│   ├── eslint-config         # ESLint configuration
-│   ├── typescript-config     # TypeScript configuration
-│   ├── ui                    # Internal UI package (including shadcn)
-│       ├── src
-│       │    ├── components
-│       │    ├── hooks
-│       │    ├── lib
-│       │    └── styles
-│       │── components.json  # Shadcn CLI configuration
-│       └── ...
-│   └── ...
-└── ...
-```
+
 
 ## Critical Configuration
 
