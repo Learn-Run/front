@@ -247,18 +247,5 @@ docker run -p 3000:3000 learn-run-front
 
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
----
 
-## 📞 문의
 
-- **프로젝트 관리자**: [이메일 주소]
-- **기술 문의**: [이메일 주소]
-- **버그 리포트**: [GitHub Issues](https://github.com/your-username/learn-run-front/issues)
-
----
-
-<div align="center">
-
-**⭐ 이 프로젝트가 도움이 되었다면 스타를 눌러주세요!**
-
-</div>
