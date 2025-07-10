@@ -42,32 +42,34 @@
 
 <div align="center">
 
-| 팀원 | 역할 | 담당 영역 | 기술 스택 | 소개 |
-|------|------|-----------|-----------|------|
-| **박수현** | 팀장 & 프론트엔드 개발자 | 전체 아키텍처 설계, Pick-Learn 개발 | Next.js, TypeScript, React, Tailwind CSS | 풀스택 개발 경험 3년, 모노레포 아키텍처 전문가 |
-| **박수아** | 프론트엔드 개발자 | Chat-Service 개발, UI/UX 설계 | React, Next.js, WebSocket, Shadcn/ui | 프론트엔드 개발 경험 2년, 실시간 통신 기술 전문가 |
+| 팀원 | 역할 | 담당 영역 | 기술 스택 |
+|------|------|-----------|-----------|
+| **박수현** | 팀장 & 프론트엔드 개발자 | 전체 아키텍처 설계, Pick-Learn 개발 | Next.js, TypeScript, React, Tailwind CSS, Shadcn/ui, Html-to-text, TipTap | 
+| **박수아** | 프론트엔드 개발자 | Chat-Service 개발, UI/UX 설계 | React, Next.js, Tailwind CSS, WebSocket, Shadcn/ui, NextAuth, LiveKit, Stomp | 
+
 
 </div>
 
 ###  팀원별 주요 성과
 
-#### 박수현 (팀장 & 프론트엔드 개발자)
+#### 박수현 (프론트엔드 개발자)
 - **주요 기여**: 
-  - 모노레포 아키텍처 설계 및 구축
   - Pick-Learn 학습 플랫폼 전체 개발
-  - 프로젝트 관리 및 팀 리딩
-- **핵심 기술**: Next.js, TypeScript, Turborepo, React, Tailwind CSS
+  - UI/UX 디자인 및 컴포넌트 설계
+  - 사용자 경험 최적화
+- **핵심 기술**:Next.js, TypeScript, React, Tailwind CSS, Shadcn/ui, Html-to-text, TipTap
 - **성과**: 
   - 개발 환경 구축 및 최적화
   - 학습 플랫폼 핵심 기능 구현 (게시글, 검색, 결제 시스템)
   - 코드 품질 및 성능 최적화
 
-#### 박수아 (프론트엔드 개발자)
+#### 박수아 (프론트엔드 리드 개발자)
 - **주요 기여**: 
+  - 모노레포 아키텍처 설계 및 구축
   - Chat-Service 실시간 채팅 서비스 개발
   - UI/UX 디자인 및 컴포넌트 설계
   - 사용자 경험 최적화
-- **핵심 기술**: React, Next.js, WebSocket, LiveKit, Shadcn/ui
+- **핵심 기술**: React, Next.js, WebSocket, LiveKit, Shadcn/ui, NextAuth, LiveKit, Stomp
 - **성과**: 
   - 실시간 메시징 시스템 구축
   - 화상 통화 기능 구현
@@ -115,16 +117,6 @@
 - **참여**: 박수현 ↔ 박수아 상호 리뷰
 - **목표**: 코드 품질 향상 및 지식 공유
 
-###  팀 성과 지표
-
-| 지표 | 목표 | 현재 달성도 |
-|------|------|-------------|
-| **코드 커버리지** | 80% 이상 | 85% ✅ |
-| **빌드 성공률** | 95% 이상 | 98% ✅ |
-| **버그 발생률** | 5% 이하 | 3% ✅ |
-| **개발 속도** | 스프린트 완료율 90% | 92% ✅ |
-| **팀 협업 만족도** | 90% 이상 | 95% ✅ |
-
 ### 개발 일정
 
 | 단계 | 기간 | 담당자 | 주요 작업 |
@@ -134,17 +126,8 @@
 | **3단계** | 4주 | 박수현 | Pick-Learn 플랫폼 핵심 기능 개발 |
 | **4단계** | 3주 | 박수아 | Chat-Service 실시간 기능 개발 |
 
-
 ---
 
-###  개발 일정
-- **1단계 (2주)**: 프로젝트 설정 및 기본 아키텍처 구축
-- **2단계 (3주)**: 공통 UI 컴포넌트 및 디자인 시스템 개발
-- **3단계 (4주)**: Pick-Learn 플랫폼 핵심 기능 개발
-- **4단계 (3주)**: Chat-Service 실시간 기능 개발
-- **5단계 (2주)**: 통합 테스트 및 최적화
-
----
 
 ## ️ 프로젝트 구조
 
@@ -326,20 +309,6 @@ docker run -p 3000:3000 learn-run-front
 - [테스트 가이드](./docs/testing.md)
 
 ---
-
-## 🤝 기여하기
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 
 
