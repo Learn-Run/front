@@ -10,7 +10,7 @@ export default function Header({ className }: { className?: string }) {
     return (
         <header
             className={cn(
-                'w-full h-14 sm:h-full flex justify-between sm:justify-center xl:justify-start sm:flex-col items-center xl:items-start gap-6 sm:py-6',
+                'sticky top-0 left-0 right-0 w-full h-14 sm:h-full flex justify-between sm:justify-center xl:justify-start sm:flex-col items-center xl:items-start gap-6 sm:py-6',
                 'border-b sm:border-b-0 sm:border-r border-gray-300',
                 'bg-white',
                 className,
