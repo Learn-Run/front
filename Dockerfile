@@ -4,7 +4,7 @@ FROM node:22 AS builder
 WORKDIR /app
 COPY . .
 
-RUN npm install -g pnpm@9.12.2 turbo
+RUN npm install -g pnpm@9.15.5 turbo
 RUN pnpm install
 
 # 앱들 빌드
