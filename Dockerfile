@@ -1,10 +1,10 @@
-# 1. 빌드 단계 버전 변경
+# 1. 빌드 단계
 FROM node:22 AS builder
 
 WORKDIR /app
 COPY . .
 
-RUN npm install -g pnpm turbo
+RUN npm install -g pnpm@9.12.2 turbo
 RUN pnpm install
 
 # 앱들 빌드
