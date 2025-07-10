@@ -47,6 +47,7 @@
 | **박수현** | 팀장 & 프론트엔드 개발자 | 전체 아키텍처 설계, Pick-Learn 개발 | Next.js, TypeScript, React, Tailwind CSS, Shadcn/ui, Html-to-text, TipTap | 
 | **박수아** | 프론트엔드 개발자 | Chat-Service 개발, UI/UX 설계 | React, Next.js, Tailwind CSS, WebSocket, Shadcn/ui, NextAuth, LiveKit, Stomp | 
 
+
 </div>
 
 ###  팀원별 주요 성과
@@ -116,7 +117,6 @@
 - **참여**: 박수현 ↔ 박수아 상호 리뷰
 - **목표**: 코드 품질 향상 및 지식 공유
 
-
 ### 개발 일정
 
 | 단계 | 기간 | 담당자 | 주요 작업 |
@@ -125,7 +125,6 @@
 | **2단계** | 3주 | 박수현, 박수아 | 공통 UI 컴포넌트 및 디자인 시스템 개발 |
 | **3단계** | 4주 | 박수현 | Pick-Learn 플랫폼 핵심 기능 개발 |
 | **4단계** | 3주 | 박수아 | Chat-Service 실시간 기능 개발 |
-
 
 ---
 

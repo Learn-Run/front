@@ -20,7 +20,7 @@ export default function Nav({ className }: { className?: string }) {
                             <Link
                                 href={href}
                                 className={cn(
-                                    'p-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-0 xl:gap-3 justify-center xl:justify-start text-gray-500 hover:text-gray-900 group transition-colors sm:border-l-6 border-transparent',
+                                    ' p-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-0 xl:gap-3 justify-center xl:justify-start text-gray-500 hover:text-gray-900 group transition-colors sm:border-l-6 border-transparent',
                                     {
                                         'text-primary-100 border-primary-100 hover:text-primary-100':
                                             href === '/home'
